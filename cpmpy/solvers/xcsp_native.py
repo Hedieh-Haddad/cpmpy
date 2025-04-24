@@ -192,7 +192,6 @@ class ACESolver(JavaJar):
 
         for line in stdout:
             if line.startswith(ANSWER_PREFIX):
-                print(line[len(ANSWER_PREFIX):].strip())
                 answer = line[len(SOLUTION_PREFIX):].strip()
             if line.startswith(OBJECTIVE_PREFIX):
                 try:
@@ -204,6 +203,8 @@ class ACESolver(JavaJar):
 
         if answer == "SATISFIABLE":
             self._exit_status = ExitStatus.FEASIBLE
+        elif answer == "OPTIMUM FOUND":
+            self._exit_status = ExitStatus.OPTIMAL
         elif answer == "UNSATISFIABLE":
             self._exit_status = ExitStatus.UNSATISFIABLE
         else:
