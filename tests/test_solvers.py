@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 import time
@@ -876,19 +877,31 @@ class TestACESolver:
         [os.path.join("xcsp3/cop/SAT", instance) for instance in os.listdir("xcsp3/cop/SAT/") if instance.endswith(".xml")]
     )
     def test_ace_with_xcsp_file_sat(self,instance):
-        print(f"Test of ace with input {instance}",file=sys.stderr)
-        parse_start = time.time()
-        parser = ParserXCSP3(instance)
-        callbacks = CallbacksCPMPy()
-        callbacks.force_exit = True
-        callbacker = CallbackerXCSP3(parser, callbacks)
-        callbacker.load_instance()
-        print(f"took {(time.time() - parse_start):.4f} seconds to parse XCSP3 model [{instance}]", file=sys.stderr)
-        solver = SolverLookup.get("ace",callbacker.cb.cpm_model,xpath=instance)
-        solver.solve(solution_limit=1)
-        assert solver.objective_value() is not None
-        assert solver.objective_value() == 0
-        assert solver.status().exitstatus == ExitStatus.FEASIBLE
+
+        with open("xcsp3/cop/SAT/solutions.json") as f:
+            solutions = json.load(f)
+            solution_for_current_instance = solutions[instance.split("/")[-1]]
+            print(f"Test of ace with input {instance}",file=sys.stderr)
+            parse_start = time.time()
+            parser = ParserXCSP3(instance)
+            callbacks = CallbacksCPMPy()
+            callbacks.force_exit = True
+            callbacker = CallbackerXCSP3(parser, callbacks)
+            callbacker.load_instance()
+            print(f"took {(time.time() - parse_start):.4f} seconds to parse XCSP3 model [{instance}]", file=sys.stderr)
+            for index, o in enumerate(solution_for_current_instance["solutions"]):
+                solver = SolverLookup.get("ace",callbacker.cb.cpm_model,xpath=instance)
+                solver.solve(solution_limit=index+1)
+                assert solver.objective_value() is not None
+                assert solver.objective_value() == o
+                assert solver.status().exitstatus == ExitStatus.FEASIBLE
+            if solution_for_current_instance["last_is_optimum"]:
+                solver = SolverLookup.get("ace", callbacker.cb.cpm_model, xpath=instance)
+                solver.solve(solution_limit=-1)
+                assert solver.objective_value() is not None
+                assert solver.objective_value() == o
+                assert solver.status().exitstatus == ExitStatus.OPTIMAL
+
 
     @pytest.mark.parametrize(
         "instance",
