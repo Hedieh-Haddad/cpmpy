@@ -22,6 +22,7 @@ from .gurobi import CPM_gurobi
 from .ortools import CPM_ortools
 from .minizinc import CPM_minizinc
 from .pysat import CPM_pysat
+from .xcsp_native import CPM_ace
 from .z3 import CPM_z3
 from .gcs import CPM_gcs
 from .pysdd import CPM_pysdd
@@ -79,6 +80,7 @@ class SolverLookup():
                 ("exact", CPM_exact),
                 ("choco", CPM_choco),
                 ("cpo", CPM_cpo),
+                ("ace", CPM_ace),
                ]
 
     @classmethod

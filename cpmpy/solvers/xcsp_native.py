@@ -38,14 +38,17 @@ List of classes
 """
 
 import subprocess
+import sys
 from abc import ABC, abstractmethod
 import psutil
+
+import cpmpy
 from .solver_interface import SolverInterface, SolverStatus, ExitStatus
 from timeit import default_timer as timer
 
-ANSWER_PREFIX = "s "
-OBJECTIVE_PREFIX = "o "
-SOLUTION_PREFIX = "v "
+ANSWER_PREFIX = "s" + chr(32)
+OBJECTIVE_PREFIX = "o" + chr(32)
+SOLUTION_PREFIX = "v" + chr(32)
 
 class ProcessNativeSolver(ABC):
     """
@@ -96,7 +99,7 @@ class ProcessNativeSolver(ABC):
 
     def kill(self):
         """Forcefully kill the subprocess."""
-        if self._process:
+        if self._process and self._process.returncode is None:
             self._process.kill()
 
     def wait(self):
@@ -158,6 +161,8 @@ class ACESolver(JavaJar):
         from pycsp3.solvers.ace.ace import ACE_CP
         super().__init__(ACE_CP)
         self._exit_status = ExitStatus.UNKNOWN
+        self.add_argument("-npc")
+        self.add_argument("-sh=false")
 
     def set_instance(self, instance):
         """Prepend the instance file path to the command.
@@ -186,10 +191,16 @@ class ACESolver(JavaJar):
         obj = None
 
         for line in stdout:
-            if line.startswith(SOLUTION_PREFIX):
+            if line.startswith(ANSWER_PREFIX):
+                print(line[len(ANSWER_PREFIX):].strip())
                 answer = line[len(SOLUTION_PREFIX):].strip()
             if line.startswith(OBJECTIVE_PREFIX):
-                obj = int(line[len(OBJECTIVE_PREFIX):].strip())
+                try:
+                    objective = line[len(OBJECTIVE_PREFIX):].split()[0]
+                    obj = int(objective)
+                except ValueError as e:
+                    print(f"Impossible to transform '{line[len(OBJECTIVE_PREFIX):].split()[0]}' to a valid objective value",file=sys.stderr)
+                    raise e
 
         if answer == "SATISFIABLE":
             self._exit_status = ExitStatus.FEASIBLE
@@ -198,7 +209,7 @@ class ACESolver(JavaJar):
         else:
             self._exit_status = ExitStatus.UNKNOWN
 
-        return self._exit_status, obj
+        return self._exit_status, obj, 0
 
     def solve(self):
         """Execute the solver process and parse its output.
@@ -209,10 +220,15 @@ class ACESolver(JavaJar):
         self.start()
         try:
             self.wait()
+            if self._process.returncode != 0:
+                return ExitStatus.UNKNOWN, None, self._process.returncode
             return self._process_stdout()
         except Exception as e:
             self.kill()
             raise e
+
+    def set_limit_solution(self, solution_limit):
+        self.add_argument(f"-s={solution_limit}")
 
 
 class CPM_ace(SolverInterface):
@@ -245,18 +261,19 @@ class CPM_ace(SolverInterface):
             raise Exception("CPM_ace: Install the python package 'pycsp3' to use this solver interface.")
 
         assert subsolver is None
-
+        assert xpath is not None
         self._xcsp_solver = ACESolver()
         self._xcsp_model = xpath
         self._xcsp_solver.set_instance(xpath)
         super().__init__(name="ace", cpm_model=cpm_model)
         self.cpm_status = SolverStatus(self.name)
+        self._cpm_model:cpmpy.Model|None = cpm_model
+        self._objective_min = False
 
-    def solve(self, model, time_limit=None):
+    def solve(self, time_limit=None, solution_limit=None):
         """Solve the problem with optional time limit.
 
         Args:
-            model (Model): The CPMpy model (unused).
             time_limit (int, optional): Timeout in seconds.
 
         Returns:
@@ -264,10 +281,23 @@ class CPM_ace(SolverInterface):
         """
         if time_limit is not None:
             self._xcsp_solver.set_timelimit_seconds(time_limit)
-
+        if solution_limit is not None:
+            self._xcsp_solver.set_limit_solution(solution_limit)
         start = timer()
-        self.cpm_status.exitstatus, obj = self._xcsp_solver.solve()
+        self.cpm_status.exitstatus, self.objective_value_, return_code = self._xcsp_solver.solve()
+        if return_code != 0:
+            print(f"Solver failed with return code : {return_code}",file=sys.stderr)
+            return False
         end = timer()
         self.cpm_status.runtime = end - start
         has_sol = self._solve_return(self.cpm_status)
         return has_sol
+
+    def objective(self, expr, minimize):
+        self._objective_min = minimize
+
+    def add(self, cpm_expr):
+        return self
+
+    def has_objective(self):
+        return self._cpm_model is not None and self._cpm_model.has_objective()
