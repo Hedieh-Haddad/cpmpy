@@ -1,12 +1,20 @@
+import os
+import sys
+import time
 import unittest
 import tempfile
 import pytest
 import numpy as np
+from fontTools.subset.svg import xpath
+from pycsp3.parser.xparser import ParserXCSP3, CallbackerXCSP3
+
 import cpmpy as cp
 from cpmpy.expressions.core import Operator
 from cpmpy.expressions.utils import argvals
 
 from cpmpy.solvers.pysat import CPM_pysat
+from cpmpy.solvers.solver_interface import ExitStatus
+from cpmpy.solvers.xcsp_native import CPM_ace
 from cpmpy.solvers.z3 import CPM_z3
 from cpmpy.solvers.minizinc import CPM_minizinc
 from cpmpy.solvers.gurobi import CPM_gurobi
@@ -14,6 +22,8 @@ from cpmpy.solvers.exact import CPM_exact
 from cpmpy.solvers.choco import CPM_choco
 from cpmpy import SolverLookup
 from cpmpy.exceptions import MinizincNameException, NotSupportedError
+from cpmpy.tools.xcsp3.parser_callbacks import CallbacksCPMPy
+
 
 class TestSolvers(unittest.TestCase):
 
@@ -858,3 +868,60 @@ class TestSupportedSolvers:
         s = cp.SolverLookup().get(solver, m)
         assert len(s.user_vars) == 1 # check if var captured as a user_var
         assert s.solveAll() == 4     # check if still correct number of solutions, even though empty model
+
+
+class TestACESolver:
+    @pytest.mark.parametrize(
+        "instance",
+        [os.path.join("xcsp3/cop/SAT", instance) for instance in os.listdir("xcsp3/cop/SAT/") if instance.endswith(".xml")]
+    )
+    def test_ace_with_xcsp_file_sat(self,instance):
+        print(f"Test of ace with input {instance}",file=sys.stderr)
+        parse_start = time.time()
+        parser = ParserXCSP3(instance)
+        callbacks = CallbacksCPMPy()
+        callbacks.force_exit = True
+        callbacker = CallbackerXCSP3(parser, callbacks)
+        callbacker.load_instance()
+        print(f"took {(time.time() - parse_start):.4f} seconds to parse XCSP3 model [{instance}]", file=sys.stderr)
+        solver = SolverLookup.get("ace",callbacker.cb.cpm_model,xpath=instance)
+        solver.solve(solution_limit=1)
+        assert solver.objective_value() is not None
+        assert solver.objective_value() == 0
+        assert solver.status().exitstatus == ExitStatus.FEASIBLE
+
+    @pytest.mark.parametrize(
+        "instance",
+        [os.path.join("xcsp3/cop/UNSAT", instance) for instance in os.listdir("xcsp3/cop/UNSAT/") if instance.endswith(".xml")]
+    )
+    def test_ace_with_xcsp_file_unsat(self, instance):
+        print(f"Test of ace with input {instance}", file=sys.stderr)
+        parse_start = time.time()
+        parser = ParserXCSP3(instance)
+        callbacks = CallbacksCPMPy()
+        callbacks.force_exit = True
+        callbacker = CallbackerXCSP3(parser, callbacks)
+        callbacker.load_instance()
+        print(f"took {(time.time() - parse_start):.4f} seconds to parse XCSP3 model [{instance}]", file=sys.stderr)
+        solver = SolverLookup.get("ace", callbacker.cb.cpm_model, xpath=instance)
+        solver.solve(solution_limit=1)
+        assert solver.objective_value() is None
+        assert solver.status().exitstatus == ExitStatus.UNSATISFIABLE
+
+    @pytest.mark.parametrize(
+        "instance",
+        [os.path.join("xcsp3/cop/UNKNOWN", instance) for instance in os.listdir("xcsp3/cop/UNKNOWN/") if
+         instance.endswith(".xml")]
+    )
+    def test_ace_with_xcsp_file_unknown(self, instance):
+        print(f"Test of ace with input {instance}", file=sys.stderr)
+        parse_start = time.time()
+        parser = ParserXCSP3(instance)
+        callbacks = CallbacksCPMPy()
+        callbacks.force_exit = True
+        callbacker = CallbackerXCSP3(parser, callbacks)
+        callbacker.load_instance()
+        print(f"took {(time.time() - parse_start):.4f} seconds to parse XCSP3 model [{instance}]", file=sys.stderr)
+        solver = SolverLookup.get("ace", callbacker.cb.cpm_model, xpath=instance)
+        solver.solve(time_limit=10)
+        assert solver.status().exitstatus == ExitStatus.UNKNOWN
