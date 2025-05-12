@@ -36,11 +36,13 @@ List of classes
     JavaJar
     ProcessNativeSolver
 """
-
+import shutil
 import subprocess
 import sys
+import warnings
 from abc import ABC, abstractmethod
 import psutil
+from xcsp.solver.solver import ResultStatusEnum
 
 import cpmpy
 from .solver_interface import SolverInterface, SolverStatus, ExitStatus
@@ -232,9 +234,9 @@ class ACESolver(JavaJar):
         self.add_argument(f"-s={solution_limit}")
 
 
-class CPM_ace(SolverInterface):
+class CPM_xcsp(SolverInterface):
     """
-    CPMpy interface for the ACE solver (native executable).
+    CPMpy interface for native XCSP solver.
 
     Args:
         cpm_model (Model): Optional CPMpy model.
@@ -243,31 +245,52 @@ class CPM_ace(SolverInterface):
     """
 
     @staticmethod
-    def supported():
+    def installed():
         """Check if the solver is available and pycsp3 is installed.
 
         Returns:
             bool: True if supported, else False
         """
         try:
-            import pycsp3
+            import xcsp
             return True
         except ModuleNotFoundError:
             return False
         except Exception as e:
             raise e
 
-    def __init__(self, cpm_model=None, subsolver=None, xpath=None):
-        if not self.supported():
-            raise Exception("CPM_ace: Install the python package 'pycsp3' to use this solver interface.")
+    @staticmethod
+    def supported():
+        return CPM_xcsp.installed() and CPM_xcsp.executable_installed()
 
-        assert subsolver is None
+    @staticmethod
+    def executable_installed():
+        # check if XCSP executable is installed
+        if shutil.which("xcsp") is None:
+            warnings.warn("XCSP Python is installed, but the XCSP executable is missing in path.")
+            return False
+        return True
+
+    def __init__(self, cpm_model=None, subsolver=None, xpath=None):
+        if not self.installed():
+            raise Exception("CPM_xcsp: Install the python package 'xcsp' to use this solver interface.")
+        elif not self.executable_installed():
+            raise Exception("CPM_xcsp: Install the xcsp executable and make it available in path.")
+
+        from xcsp.solver.solver import Solver
+
         assert xpath is not None
-        self._xcsp_solver = ACESolver()
+
+        if subsolver is None or subsolver == 'xcsp':
+            # default solver
+            subsolver = "ace"
+        elif subsolver.startswith('xcsp:'):
+            subsolver = subsolver[5:]  # strip 'xcsp:'
+
+
+        self._xcsp_solver:Solver = Solver.lookup(subsolver)
         self._xcsp_model = xpath
-        self._xcsp_solver.set_instance(xpath)
-        super().__init__(name="ace", cpm_model=cpm_model)
-        self.cpm_status = SolverStatus(self.name)
+        super().__init__(name=f"xcsp:{subsolver}", cpm_model=cpm_model)
         self._cpm_model:cpmpy.Model|None = cpm_model
         self._objective_min = False
 
@@ -281,15 +304,14 @@ class CPM_ace(SolverInterface):
             bool: True if a solution is found, False otherwise.
         """
         if time_limit is not None:
-            self._xcsp_solver.set_timelimit_seconds(time_limit)
+            self._xcsp_solver.set_time_limit(time_limit)
         if solution_limit is not None:
-            self._xcsp_solver.set_limit_solution(solution_limit)
+            self._xcsp_solver.set_limit_number_of_solutions(solution_limit)
         start = timer()
-        self.cpm_status.exitstatus, self.objective_value_, return_code = self._xcsp_solver.solve()
-        if return_code != 0:
-            print(f"Solver failed with return code : {return_code}",file=sys.stderr)
-            return False
+        results = self._xcsp_solver.solve(self._xcsp_model)
+        self.objective_value_ = self._xcsp_solver.objective_value()
         end = timer()
+        self.cpm_status.exitstatus = self._transform_status_to_cpmpy(results["status"])
         self.cpm_status.runtime = end - start
         has_sol = self._solve_return(self.cpm_status)
         return has_sol
@@ -302,3 +324,17 @@ class CPM_ace(SolverInterface):
 
     def has_objective(self):
         return self._cpm_model is not None and self._cpm_model.has_objective()
+    @staticmethod
+    def _transform_status_to_cpmpy(param:ResultStatusEnum)->ExitStatus:
+        if param == ResultStatusEnum.UNSATISFIABLE:
+            return ExitStatus.UNSATISFIABLE
+        if param == ResultStatusEnum.SATISFIABLE:
+            return ExitStatus.FEASIBLE
+        if param == ResultStatusEnum.UNKNOWN:
+            return ExitStatus.UNKNOWN
+        if param == ResultStatusEnum.OPTIMUM:
+            return ExitStatus.OPTIMAL
+        if param == ResultStatusEnum.ERROR or param == ResultStatusEnum.MEMOUT:
+            return ExitStatus.ERROR
+        return ExitStatus.UNKNOWN
+
