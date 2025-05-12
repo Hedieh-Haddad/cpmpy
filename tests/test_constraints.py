@@ -11,7 +11,7 @@ import pytest
 # CHANGE THIS if you want test a different solver
 #   make sure that `SolverLookup.get(solver)` works
 # also add exclusions to the 3 EXCLUDE_* below as needed
-SOLVERNAMES = [name for name, solver in SolverLookup.base_solvers() if name!="ace" and solver.supported() ]
+SOLVERNAMES = [name for name, solver in SolverLookup.base_solvers() if name!="xcsp" and solver.supported() ]
 ALL_SOLS = False # test wheter all solutions returned by the solver satisfy the constraint
 
 # Exclude some global constraints for solvers
