@@ -684,7 +684,7 @@ class TestSolvers(unittest.TestCase):
 
 @pytest.mark.parametrize(
         "solver",
-        [name for name, solver in SolverLookup.base_solvers() if solver.supported() and name!="ace"] # TODO: ACE solver currently does not support models written using CPMpy, so we ignore it for now
+        [name for name, solver in SolverLookup.base_solvers() if solver.supported() and name!="xcsp"] # TODO: ACE solver currently does not support models written using CPMpy, so we ignore it for now
 )
 class TestSupportedSolvers:
     def test_installed_solvers(self, solver):
