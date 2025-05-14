@@ -23,5 +23,5 @@ def log(msg, level="info"):
             "warning": "[WARNING]",
             "error": "[ERROR]",
             "debug": "[DEBUG]"
-        }.get(level, "[INFO]")
+        }.get(level.lower(), "[INFO]")
         print(f"{prefix} {msg}", file=sys.stderr)

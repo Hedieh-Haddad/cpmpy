@@ -38,6 +38,7 @@ if __name__ == "__main__":
     parser.add_argument("--stop-strategy", choices=StopCondition,
                         help="The strategy used for stopping the probing phase", default=StopCondition.TIMEOUT,
                         type=StopCondition)
+    parser.add_argument("--tuning-file",required=False, help="A json file with the hyperparameters.")
 
     args = parser.parse_args()
     start_time = timer()
@@ -59,4 +60,6 @@ if __name__ == "__main__":
 
     cb = callbacker.cb
     psa = PSAFactory.create_psa_from_cli(args, cb.cpm_model)
-    psa.tune(args.global_time_limit, args.max_tries)
+    best_params = psa.tune(args.global_time_limit, args.max_tries)
+
+    print(best_params)
