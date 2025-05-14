@@ -42,7 +42,7 @@ import sys
 import warnings
 from abc import ABC, abstractmethod
 import psutil
-from xcsp.solver.solver import ResultStatusEnum, Solver
+from xcsp.solver.solver import ResultStatusEnum, Solver, CheckStatus
 
 import cpmpy
 from .solver_interface import SolverInterface, SolverStatus, ExitStatus
@@ -322,10 +322,13 @@ class CPM_xcsp(SolverInterface):
         for key,value in kwargs.items():
             options.append(f"-{key}={value}")
         self._xcsp_solver.add_complementary_options(options)
-        results = self._xcsp_solver.solve(self._xcsp_model, keep_solver_output=True)
+        check = kwargs.get("check",False)
+        results = self._xcsp_solver.solve(self._xcsp_model, keep_solver_output=True, check=check)
         self.objective_value_ = self._xcsp_solver.objective_value()
         end = timer()
         self.cpm_status.exitstatus = self._transform_status_to_cpmpy(results["status"])
+        if check and results["assignments"][-1]["status_check"] == CheckStatus.INVALID:
+            self.cpm_status.exitstatus = ExitStatus.ERROR
         self.cpm_status.runtime = end - start
         has_sol = self._solve_return(self.cpm_status)
         return has_sol

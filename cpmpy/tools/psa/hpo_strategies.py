@@ -1,6 +1,7 @@
 import sys
 from abc import ABC, abstractmethod
 
+from ortools.sat.python.cp_model import FEASIBLE, OPTIMAL
 from pycsp3 import solver
 from skopt import Optimizer
 from skopt.utils import dimensions_aslist, point_asdict
@@ -75,23 +76,25 @@ class HPOStrategy(ABC):
         pass
 
     def _register_better_result_if_needed(self, solver, parameters):
-        have_best_obj = solver.objective_value() < self._best_obj if self._cpm_model.objective_is_min else solver.objective_value > self._best_obj
-        same_obj = self._best_obj == solver.objective_value()
-        better_runtime = self._best_runtime is None or solver.status().runtime < self._best_runtime
+        if solver.status().exitstatus == FEASIBLE or solver.status().exitstatus == OPTIMAL:
+            have_best_obj = solver.objective_value() < self._best_obj if self._cpm_model.objective_is_min else solver.objective_value > self._best_obj
+            same_obj = self._best_obj == solver.objective_value()
+            better_runtime = self._best_runtime is None or solver.status().runtime < self._best_runtime
 
-        if have_best_obj or (same_obj and better_runtime):
-            log(f"Better obj or better runtime : {solver.objective_value()} in {solver.status().runtime}", "debug")
-            self._best_obj = solver.objective_value()
-            self._best_params = parameters
-            self._best_runtime = round(solver.status().runtime, 3)
+            if have_best_obj or (same_obj and better_runtime):
+                log(f"Better obj or better runtime : {solver.objective_value()} in {solver.status().runtime}", "debug")
+                self._best_obj = solver.objective_value()
+                self._best_params = parameters
+                self._best_runtime = round(solver.status().runtime, 3)
 
     def _register_solution(self, solver: SolverInterface, parameters):
-        self._solution_list.append({
-            'params': dict(parameters),
-            'objective': self._best_obj,
-            'runtime': solver.status().runtime,
-            'status': solver.status().exitstatus
-        })
+        if solver.status().exitstatus == FEASIBLE or solver.status().exitstatus == OPTIMAL:
+            self._solution_list.append({
+                'params': dict(parameters),
+                'objective': self._best_obj,
+                'runtime': solver.status().runtime,
+                'status': solver.status().exitstatus
+            })
 
 
 class BayesianOptimizationStrategy(HPOStrategy):
@@ -139,6 +142,7 @@ class BayesianOptimizationStrategy(HPOStrategy):
             return
 
         parameters = {k: self._transformers(v) for k, v in parameters.items()}
+        parameters["check"]=True
         log(f"New probing phase {parameters}","debug")
         solver.solve(time_limit=self._current_timeout, **parameters)
         return parameters
