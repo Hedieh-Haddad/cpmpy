@@ -36,6 +36,7 @@ List of classes
 from abc import ABC, abstractmethod
 
 from cpmpy.tools.psa.enum import TimeType, TimeoutEvolution, RoundTimeType
+from cpmpy.tools.psa.log import log
 from cpmpy.tools.psa.utils import geometric_sequence, luby_sequence
 from timeit import default_timer as timer
 
@@ -217,6 +218,8 @@ class TuningGlobalTimeoutStrategy(ABC):
         self._round_counter += 1
 
     def probe_phase_must_finish(self, current_timeout: int):
+        result = self.elapsed_time + current_timeout >= self.probe_timeout
+        log(str(result),"debug")
         return self.elapsed_time + current_timeout >= self.probe_timeout
 
     @property

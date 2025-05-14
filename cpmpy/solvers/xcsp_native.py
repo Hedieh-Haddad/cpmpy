@@ -42,7 +42,7 @@ import sys
 import warnings
 from abc import ABC, abstractmethod
 import psutil
-from xcsp.solver.solver import ResultStatusEnum
+from xcsp.solver.solver import ResultStatusEnum, Solver
 
 import cpmpy
 from .solver_interface import SolverInterface, SolverStatus, ExitStatus
@@ -51,6 +51,7 @@ from timeit import default_timer as timer
 ANSWER_PREFIX = "s" + chr(32)
 OBJECTIVE_PREFIX = "o" + chr(32)
 SOLUTION_PREFIX = "v" + chr(32)
+
 
 class ProcessNativeSolver(ABC):
     """
@@ -133,6 +134,7 @@ class ProcessNativeSolver(ABC):
             return [line.strip() for line in self._process.stderr.readlines()]
         return []
 
+
 class JavaJar(ProcessNativeSolver):
     """
     Specialization of ProcessNativeSolver for launching Java .jar solvers.
@@ -140,6 +142,7 @@ class JavaJar(ProcessNativeSolver):
     Args:
         jar_path (str): Path to the .jar file.
     """
+
     def __init__(self, jar_path):
         super().__init__()
         self.jar_path = jar_path
@@ -159,6 +162,7 @@ class ACESolver(JavaJar):
 
     Parses the output to extract satisfiability status and objective value.
     """
+
     def __init__(self):
         from pycsp3.solvers.ace.ace import ACE_CP
         super().__init__(ACE_CP)
@@ -200,7 +204,9 @@ class ACESolver(JavaJar):
                     objective = line[len(OBJECTIVE_PREFIX):].split()[0]
                     obj = int(objective)
                 except ValueError as e:
-                    print(f"Impossible to transform '{line[len(OBJECTIVE_PREFIX):].split()[0]}' to a valid objective value",file=sys.stderr)
+                    print(
+                        f"Impossible to transform '{line[len(OBJECTIVE_PREFIX):].split()[0]}' to a valid objective value",
+                        file=sys.stderr)
                     raise e
 
         if answer == "SATISFIABLE":
@@ -271,7 +277,11 @@ class CPM_xcsp(SolverInterface):
             return False
         return True
 
-    def __init__(self, cpm_model=None, subsolver=None, xpath=None):
+    @staticmethod
+    def solvernames():
+        return Solver.available_solvers().keys()
+
+    def __init__(self, cpm_model=None, subsolver=None, **kwargs):
         if not self.installed():
             raise Exception("CPM_xcsp: Install the python package 'xcsp' to use this solver interface.")
         elif not self.executable_installed():
@@ -279,6 +289,7 @@ class CPM_xcsp(SolverInterface):
 
         from xcsp.solver.solver import Solver
 
+        xpath = kwargs.pop("xpath", None)
         assert xpath is not None
 
         if subsolver is None or subsolver == 'xcsp':
@@ -287,14 +298,13 @@ class CPM_xcsp(SolverInterface):
         elif subsolver.startswith('xcsp:'):
             subsolver = subsolver[5:]  # strip 'xcsp:'
 
-
-        self._xcsp_solver:Solver = Solver.lookup(subsolver)
+        self._xcsp_solver: Solver = Solver.lookup(subsolver)
         self._xcsp_model = xpath
         super().__init__(name=f"xcsp:{subsolver}", cpm_model=cpm_model)
-        self._cpm_model:cpmpy.Model|None = cpm_model
+        self._cpm_model: cpmpy.Model | None = cpm_model
         self._objective_min = False
 
-    def solve(self, time_limit=None, solution_limit=None):
+    def solve(self, time_limit=None, solution_limit=None, **kwargs):
         """Solve the problem with optional time limit.
 
         Args:
@@ -308,7 +318,11 @@ class CPM_xcsp(SolverInterface):
         if solution_limit is not None:
             self._xcsp_solver.set_limit_number_of_solutions(solution_limit)
         start = timer()
-        results = self._xcsp_solver.solve(self._xcsp_model)
+        options = []
+        for key,value in kwargs.items():
+            options.append(f"-{key}={value}")
+        self._xcsp_solver.add_complementary_options(options)
+        results = self._xcsp_solver.solve(self._xcsp_model, keep_solver_output=True)
         self.objective_value_ = self._xcsp_solver.objective_value()
         end = timer()
         self.cpm_status.exitstatus = self._transform_status_to_cpmpy(results["status"])
@@ -324,8 +338,9 @@ class CPM_xcsp(SolverInterface):
 
     def has_objective(self):
         return self._cpm_model is not None and self._cpm_model.has_objective()
+
     @staticmethod
-    def _transform_status_to_cpmpy(param:ResultStatusEnum)->ExitStatus:
+    def _transform_status_to_cpmpy(param: ResultStatusEnum) -> ExitStatus:
         if param == ResultStatusEnum.UNSATISFIABLE:
             return ExitStatus.UNSATISFIABLE
         if param == ResultStatusEnum.SATISFIABLE:
@@ -337,4 +352,3 @@ class CPM_xcsp(SolverInterface):
         if param == ResultStatusEnum.ERROR or param == ResultStatusEnum.MEMOUT:
             return ExitStatus.ERROR
         return ExitStatus.UNKNOWN
-

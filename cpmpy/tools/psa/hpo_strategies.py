@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 from pycsp3 import solver
 from skopt import Optimizer
 from skopt.utils import dimensions_aslist, point_asdict
+from xcsp.solver.solver import Solver
 
 import cpmpy
 from cpmpy import SolverLookup
@@ -15,7 +16,7 @@ from cpmpy.tools.psa.time_strategies import RoundTimeStrategy, TimeoutEvolutionS
 class HPOStrategy(ABC):
     def __init__(self, solver_name, cpm_model, max_tries, round_type_strategy: RoundTimeStrategy,
                  global_time_splitting_strategy: TuningGlobalTimeoutStrategy,
-                 timeout_evolution_strategy: TimeoutEvolutionStrategy, all_configs, defaults, transformers=lambda x: x):
+                 timeout_evolution_strategy: TimeoutEvolutionStrategy, all_configs, defaults,xpath=None, transformers=lambda x: x):
         self._solver_name = solver_name
         self._cpm_model: cpmpy.Model = cpm_model
         self._max_tries = max_tries
@@ -31,6 +32,8 @@ class HPOStrategy(ABC):
         self._solution_list = []
         self._seen_counter = 0
         self._transformers = transformers
+        self._xpath = xpath
+        self._solver:SolverInterface|None = None
 
     @abstractmethod
     def initialize(self, time_limit=None, max_tries=None):
@@ -40,14 +43,17 @@ class HPOStrategy(ABC):
         """
         Check if the probing phase should continue based on the elapsed time and the probe timeout.
         """
-        return self._global_time_splitting_strategy.probe_phase_must_finish(self._current_timeout)
+        return not self._global_time_splitting_strategy.probe_phase_must_finish(self._current_timeout)
 
     def probing_phase(self):
-        solver = SolverLookup.get(self._solver_name, self._cpm_model)
-        parameters = self._internal_probing_phase(solver)
-        if solver.objective_value() is not None:
-            self._register_better_result_if_needed(solver, parameters)
-        self._register_solution(solver, parameters)
+        init_kwargs = dict()
+        if "xcsp" in self._solver_name:
+            init_kwargs["xpath"] = self._xpath
+        self._solver = SolverLookup.get(self._solver_name, self._cpm_model, **init_kwargs)
+        parameters = self._internal_probing_phase(self._solver)
+        if self._solver.objective_value() is not None:
+            self._register_better_result_if_needed(self._solver, parameters)
+        self._register_solution(self._solver, parameters)
         self._global_time_splitting_strategy.update_probe_phase()
 
     @abstractmethod
@@ -95,9 +101,10 @@ class BayesianOptimizationStrategy(HPOStrategy):
 
     def __init__(self, solver_name, cpm_model, max_tries, round_type_strategy: RoundTimeStrategy,
                  global_time_splitting_strategy, timeout_evolution_strategy: TimeoutEvolutionStrategy, all_configs,
-                 defaults):
+                 defaults, xpath=None, transformers=lambda x: x):
         super().__init__(solver_name, cpm_model, max_tries, round_type_strategy,
-                         global_time_splitting_strategy, timeout_evolution_strategy, all_configs, defaults)
+                         global_time_splitting_strategy, timeout_evolution_strategy, all_configs, defaults,
+                         xpath, transformers)
         self._opt = Optimizer(dimensions=dimensions_aslist(self._all_configs), base_estimator="GP", acq_func="EI")
 
     def initialize(self, time_limit=None, max_tries=None):
@@ -112,7 +119,11 @@ class BayesianOptimizationStrategy(HPOStrategy):
         self._global_time_splitting_strategy.update_probe_timeout(
             self._global_time_splitting_strategy.probe_timeout - self._round_type_strategy.runtime)  # we update the PT by subtracting the time used by the runtime take by the first round (maybe 0 if the sub-strategy is Static for example)
 
+        log(str(self._global_time_splitting_strategy.probe_timeout), "debug")
+
         self._current_timeout = self._round_type_strategy.round_timeout
+        assert self._current_timeout > 0
+        log(str(self._current_timeout), "debug")
         self._global_time_splitting_strategy.start_probe_phase()
 
     def _internal_probing_phase(self, solver: SolverInterface):
@@ -128,11 +139,13 @@ class BayesianOptimizationStrategy(HPOStrategy):
             return
 
         parameters = {k: self._transformers(v) for k, v in parameters.items()}
+        log(f"New probing phase {parameters}","debug")
         solver.solve(time_limit=self._current_timeout, **parameters)
         return parameters
 
     def solving_phase(self):
-        pass
+        log(f"Starting solving phase with {self._best_params} and {self._global_time_splitting_strategy.solving_timeout} seconds", "Info")
+        self._solver.solve(time_limit=self._global_time_splitting_strategy.solving_timeout, **self._best_params)
 
     def finalize(self):
-        return self._best_params, self._best_runtime
+        return self._best_params
