@@ -7,7 +7,7 @@ import tempfile
 import pytest
 import numpy as np
 # from fontTools.subset.svg import xpath
-from pycsp3.parser.xparser import ParserXCSP3, CallbackerXCSP3
+# from pycsp3.parser.xparser import ParserXCSP3, CallbackerXCSP3
 
 import cpmpy as cp
 from cpmpy.expressions.core import Operator
