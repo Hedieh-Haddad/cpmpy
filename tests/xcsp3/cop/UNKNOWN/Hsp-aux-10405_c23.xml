@@ -1,0 +1,125 @@
+<instance format="XCSP3" type="COP">
+  <variables>
+    <array id="t" note="t[i] is the time when the product is picked from the ith tank" size="[6]"> 0..398 </array>
+    <array id="o" note="o[i] is the order in which the picking operation of the ith tank is executed" size="[6]"> 0..5 </array>
+    <array id="d" note="d[i] is the dip duration in the ith tank (plus ld)" size="[6]">
+      <domain for="d[0]"> 0 </domain>
+      <domain for="d[1]"> 62..126 </domain>
+      <domain for="d[2]"> 92..196 </domain>
+      <domain for="d[3]"> 72..157 </domain>
+      <domain for="d[4]"> 92..203 </domain>
+      <domain for="d[5]"> 40..79 </domain>
+    </array>
+    <var id="z" note="time of the cycle"> 120..418 </var>
+    <array id="g" note="g[i] is the gap (distance) between t[i] and t[i+1]" size="[5]"> -419..418 </array>
+  </variables>
+  <constraints>
+    <instantiation note="the first operation corresponds to starting the cycle by putting a product in the first tank">
+      <list> t[0] o[0] </list>
+      <values> 0 0 </values>
+    </instantiation>
+    <group note="taking into account the time of going back to tank 0">
+      <intension> le(%0,%1) </intension>
+      <args> t[1] 391 </args>
+      <args> t[2] 383 </args>
+      <args> t[3] 375 </args>
+      <args> t[4] 367 </args>
+      <args> t[5] 359 </args>
+    </group>
+    <allDifferent note="operations are executed in some order"> o[] </allDifferent>
+    <group note="order of picking operations must be compatible with their picking times">
+      <intension> iff(lt(%0,%1),lt(%2,%3)) </intension>
+      <args> o[0] o[1] t[0] t[1] </args>
+      <args> o[0] o[2] t[0] t[2] </args>
+      <args> o[0] o[3] t[0] t[3] </args>
+      <args> o[0] o[4] t[0] t[4] </args>
+      <args> o[0] o[5] t[0] t[5] </args>
+      <args> o[1] o[2] t[1] t[2] </args>
+      <args> o[1] o[3] t[1] t[3] </args>
+      <args> o[1] o[4] t[1] t[4] </args>
+      <args> o[1] o[5] t[1] t[5] </args>
+      <args> o[2] o[3] t[2] t[3] </args>
+      <args> o[2] o[4] t[2] t[4] </args>
+      <args> o[2] o[5] t[2] t[5] </args>
+      <args> o[3] o[4] t[3] t[4] </args>
+      <args> o[3] o[5] t[3] t[5] </args>
+      <args> o[4] o[5] t[4] t[5] </args>
+    </group>
+    <noOverlap note="ensuring a minimal duration between any two tanks">
+      <origins> t[] </origins>
+      <lengths> 20x6 </lengths>
+    </noOverlap>
+    <maximum note="computing the time of the cycle">
+      <list> add(t[1],28) add(t[2],36) add(t[3],44) add(t[4],52) add(t[5],60) </list>
+      <condition> (eq,z) </condition>
+    </maximum>
+    <group note="ensuring a duration limit between any two tanks">
+      <intension> imp(eq(sub(%0,%1),1),ge(sub(%2,%3),%4)) </intension>
+      <args> o[1] o[0] t[1] t[0] 12 </args>
+      <args> o[2] o[0] t[2] t[0] 20 </args>
+      <args> o[3] o[0] t[3] t[0] 28 </args>
+      <args> o[4] o[0] t[4] t[0] 36 </args>
+      <args> o[5] o[0] t[5] t[0] 44 </args>
+      <args> o[2] o[1] t[2] t[1] 12 </args>
+      <args> o[3] o[1] t[3] t[1] 20 </args>
+      <args> o[4] o[1] t[4] t[1] 28 </args>
+      <args> o[5] o[1] t[5] t[1] 36 </args>
+      <args> o[3] o[2] t[3] t[2] 12 </args>
+      <args> o[4] o[2] t[4] t[2] 20 </args>
+      <args> o[5] o[2] t[5] t[2] 28 </args>
+      <args> o[4] o[3] t[4] t[3] 12 </args>
+      <args> o[5] o[3] t[5] t[3] 20 </args>
+      <args> o[5] o[4] t[5] t[4] 12 </args>
+      <args> o[0] o[1] t[0] t[1] 28 </args>
+      <args> o[0] o[2] t[0] t[2] 36 </args>
+      <args> o[0] o[3] t[0] t[3] 44 </args>
+      <args> o[0] o[4] t[0] t[4] 52 </args>
+      <args> o[0] o[5] t[0] t[5] 60 </args>
+      <args> o[1] o[2] t[1] t[2] 28 </args>
+      <args> o[1] o[3] t[1] t[3] 36 </args>
+      <args> o[1] o[4] t[1] t[4] 44 </args>
+      <args> o[1] o[5] t[1] t[5] 52 </args>
+      <args> o[2] o[3] t[2] t[3] 28 </args>
+      <args> o[2] o[4] t[2] t[4] 36 </args>
+      <args> o[2] o[5] t[2] t[5] 44 </args>
+      <args> o[3] o[4] t[3] t[4] 28 </args>
+      <args> o[3] o[5] t[3] t[5] 36 </args>
+      <args> o[4] o[5] t[4] t[5] 28 </args>
+    </group>
+    <block note="reducing the domain of auxiliary variables">
+      <group>
+        <intension> lt(%0,%1) </intension>
+        <args> g[1] 383 </args>
+        <args> g[2] 375 </args>
+        <args> g[3] 367 </args>
+        <args> g[4] 359 </args>
+      </group>
+      <group>
+        <intension> gt(%0,%1) </intension>
+        <args> g[1] -383 </args>
+        <args> g[2] -375 </args>
+        <args> g[3] -367 </args>
+        <args> g[4] -359 </args>
+      </group>
+    </block>
+    <group note="computing the gap/distance between the picking time concerning two successive tanks">
+      <intension> eq(%0,sub(%1,%2)) </intension>
+      <args> g[0] t[1] t[0] </args>
+      <args> g[1] t[2] t[1] </args>
+      <args> g[2] t[3] t[2] </args>
+      <args> g[3] t[4] t[3] </args>
+      <args> g[4] t[5] t[4] </args>
+    </group>
+    <group note="computing the dip duration of each product">
+      <intension> eq(%0,if(lt(%1,0),add(z,%1),%1)) </intension>
+      <args> d[1] g[0] </args>
+      <args> d[2] g[1] </args>
+      <args> d[3] g[2] </args>
+      <args> d[4] g[3] </args>
+      <args> d[5] g[4] </args>
+    </group>
+  </constraints>
+  <objectives>
+    <minimize note="minimizing the time of the cycle"> z </minimize>
+  </objectives>
+</instance>

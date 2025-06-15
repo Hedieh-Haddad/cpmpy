@@ -1,0 +1,203 @@
+<instance format="XCSP3" type="COP">
+  <variables>
+    <array id="s" note="s[i] is the starting time of the ith task" size="[60]"> 0..75 </array>
+    <array id="u" note="u[k] is the maximal usage (at any time) of the kth resource" size="[4]">
+      <domain for="u[0]"> 10..90 </domain>
+      <domain for="u[1]"> 10..76 </domain>
+      <domain for="u[2]"> 10..77 </domain>
+      <domain for="u[3]"> 10..97 </domain>
+    </array>
+  </variables>
+  <constraints>
+    <group note="ending tasks before the given horizon">
+      <intension> le(add(%0,%1),75) </intension>
+      <args> s[0] 5 </args>
+      <args> s[1] 5 </args>
+      <args> s[2] 10 </args>
+      <args> s[3] 1 </args>
+      <args> s[4] 6 </args>
+      <args> s[5] 3 </args>
+      <args> s[6] 8 </args>
+      <args> s[7] 10 </args>
+      <args> s[8] 6 </args>
+      <args> s[9] 4 </args>
+      <args> s[10] 1 </args>
+      <args> s[11] 2 </args>
+      <args> s[12] 3 </args>
+      <args> s[13] 2 </args>
+      <args> s[14] 5 </args>
+      <args> s[15] 2 </args>
+      <args> s[16] 3 </args>
+      <args> s[17] 8 </args>
+      <args> s[18] 10 </args>
+      <args> s[19] 5 </args>
+      <args> s[20] 8 </args>
+      <args> s[21] 7 </args>
+      <args> s[22] 9 </args>
+      <args> s[23] 5 </args>
+      <args> s[24] 10 </args>
+      <args> s[25] 5 </args>
+      <args> s[26] 5 </args>
+      <args> s[27] 8 </args>
+      <args> s[28] 4 </args>
+      <args> s[29] 5 </args>
+      <args> s[30] 10 </args>
+      <args> s[31] 7 </args>
+      <args> s[32] 8 </args>
+      <args> s[33] 1 </args>
+      <args> s[34] 7 </args>
+      <args> s[35] 8 </args>
+      <args> s[36] 9 </args>
+      <args> s[37] 7 </args>
+      <args> s[38] 8 </args>
+      <args> s[39] 8 </args>
+      <args> s[40] 9 </args>
+      <args> s[41] 6 </args>
+      <args> s[42] 2 </args>
+      <args> s[43] 2 </args>
+      <args> s[44] 9 </args>
+      <args> s[45] 7 </args>
+      <args> s[46] 8 </args>
+      <args> s[47] 3 </args>
+      <args> s[48] 8 </args>
+      <args> s[49] 6 </args>
+      <args> s[50] 10 </args>
+      <args> s[51] 10 </args>
+      <args> s[52] 5 </args>
+      <args> s[53] 5 </args>
+      <args> s[54] 3 </args>
+      <args> s[55] 3 </args>
+      <args> s[56] 1 </args>
+      <args> s[57] 2 </args>
+      <args> s[58] 2 </args>
+      <args> s[59] 3 </args>
+    </group>
+    <group note="respecting precedence relations">
+      <intension> le(add(%0,%1),%2) </intension>
+      <args> s[0] 5 s[3] </args>
+      <args> s[0] 5 s[4] </args>
+      <args> s[0] 5 s[6] </args>
+      <args> s[1] 5 s[7] </args>
+      <args> s[1] 5 s[8] </args>
+      <args> s[1] 5 s[16] </args>
+      <args> s[2] 10 s[5] </args>
+      <args> s[2] 10 s[9] </args>
+      <args> s[3] 1 s[10] </args>
+      <args> s[3] 1 s[32] </args>
+      <args> s[3] 1 s[40] </args>
+      <args> s[4] 6 s[21] </args>
+      <args> s[4] 6 s[22] </args>
+      <args> s[4] 6 s[33] </args>
+      <args> s[5] 3 s[27] </args>
+      <args> s[5] 3 s[55] </args>
+      <args> s[6] 8 s[14] </args>
+      <args> s[6] 8 s[18] </args>
+      <args> s[6] 8 s[38] </args>
+      <args> s[7] 10 s[19] </args>
+      <args> s[8] 6 s[9] </args>
+      <args> s[8] 6 s[12] </args>
+      <args> s[8] 6 s[15] </args>
+      <args> s[9] 4 s[13] </args>
+      <args> s[9] 4 s[20] </args>
+      <args> s[9] 4 s[34] </args>
+      <args> s[10] 1 s[11] </args>
+      <args> s[10] 1 s[28] </args>
+      <args> s[10] 1 s[29] </args>
+      <args> s[11] 2 s[33] </args>
+      <args> s[11] 2 s[51] </args>
+      <args> s[12] 3 s[31] </args>
+      <args> s[13] 2 s[26] </args>
+      <args> s[13] 2 s[43] </args>
+      <args> s[13] 2 s[58] </args>
+      <args> s[14] 5 s[28] </args>
+      <args> s[14] 5 s[34] </args>
+      <args> s[14] 5 s[47] </args>
+      <args> s[15] 2 s[17] </args>
+      <args> s[15] 2 s[24] </args>
+      <args> s[15] 2 s[46] </args>
+      <args> s[16] 3 s[18] </args>
+      <args> s[17] 8 s[37] </args>
+      <args> s[18] 10 s[34] </args>
+      <args> s[18] 10 s[54] </args>
+      <args> s[19] 5 s[21] </args>
+      <args> s[19] 5 s[30] </args>
+      <args> s[19] 5 s[52] </args>
+      <args> s[20] 8 s[23] </args>
+      <args> s[20] 8 s[31] </args>
+      <args> s[21] 7 s[32] </args>
+      <args> s[21] 7 s[39] </args>
+      <args> s[22] 9 s[29] </args>
+      <args> s[22] 9 s[56] </args>
+      <args> s[23] 5 s[33] </args>
+      <args> s[24] 10 s[25] </args>
+      <args> s[25] 5 s[29] </args>
+      <args> s[26] 5 s[36] </args>
+      <args> s[26] 5 s[39] </args>
+      <args> s[26] 5 s[45] </args>
+      <args> s[27] 8 s[36] </args>
+      <args> s[27] 8 s[42] </args>
+      <args> s[28] 4 s[45] </args>
+      <args> s[29] 5 s[48] </args>
+      <args> s[30] 10 s[35] </args>
+      <args> s[31] 7 s[48] </args>
+      <args> s[32] 8 s[35] </args>
+      <args> s[32] 8 s[41] </args>
+      <args> s[32] 8 s[43] </args>
+      <args> s[33] 1 s[37] </args>
+      <args> s[33] 1 s[44] </args>
+      <args> s[33] 1 s[53] </args>
+      <args> s[34] 7 s[50] </args>
+      <args> s[34] 7 s[55] </args>
+      <args> s[35] 8 s[42] </args>
+      <args> s[35] 8 s[51] </args>
+      <args> s[36] 9 s[44] </args>
+      <args> s[36] 9 s[57] </args>
+      <args> s[37] 7 s[41] </args>
+      <args> s[37] 7 s[42] </args>
+      <args> s[37] 7 s[49] </args>
+      <args> s[38] 8 s[39] </args>
+      <args> s[38] 8 s[53] </args>
+      <args> s[38] 8 s[55] </args>
+      <args> s[39] 8 s[40] </args>
+      <args> s[40] 9 s[46] </args>
+      <args> s[41] 6 s[50] </args>
+      <args> s[41] 6 s[54] </args>
+      <args> s[42] 2 s[50] </args>
+      <args> s[43] 2 s[46] </args>
+      <args> s[44] 9 s[52] </args>
+      <args> s[45] 7 s[48] </args>
+      <args> s[45] 7 s[49] </args>
+      <args> s[46] 8 s[59] </args>
+      <args> s[47] 3 s[51] </args>
+      <args> s[48] 8 s[57] </args>
+      <args> s[49] 6 s[52] </args>
+      <args> s[49] 6 s[57] </args>
+      <args> s[50] 10 s[56] </args>
+      <args> s[50] 10 s[58] </args>
+      <args> s[51] 10 s[53] </args>
+      <args> s[52] 5 s[54] </args>
+      <args> s[53] 5 s[58] </args>
+      <args> s[54] 3 s[56] </args>
+      <args> s[55] 3 s[59] </args>
+      <args> s[56] 1 s[59] </args>
+    </group>
+    <group note="cumulative resource constraints">
+      <cumulative>
+        <origins> s[] </origins>
+        <lengths> 5 5 10 1 6 3 8 10 6 4 1 2 3 2 5 2 3 8 10 5 8 7 9 5 10 5 5 8 4 5 10 7 8 1 7 8 9 7 8 8 9 6 2 2 9 7 8 3 8 6 10 10 5 5 3 3 1 2 2 3 </lengths>
+        <heights> %... </heights>
+        <condition> (le,%0) </condition>
+      </cumulative>
+      <args> u[0] 3 0 0 0 0 8 0 6 0 4 0 0 0 0 9 0 0 1 0 0 0 1 0 6 8 0 0 0 0 9 8 0 3 0 0 0 0 0 0 0 0 0 0 0 10 0 8 0 0 0 0 0 0 0 0 0 0 6 0 0 </args>
+      <args> u[1] 0 0 0 1 0 0 4 0 0 0 6 0 3 10 0 7 0 0 8 0 0 0 4 0 0 0 1 0 0 0 0 0 0 0 0 9 0 0 10 0 0 0 0 0 0 0 0 0 0 3 1 5 0 4 0 0 0 0 0 0 </args>
+      <args> u[2] 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 5 0 0 10 0 0 0 0 0 0 0 9 7 0 0 0 0 7 7 0 0 0 0 0 0 0 4 3 0 2 0 0 5 0 0 0 3 0 4 0 0 0 0 9 </args>
+      <args> u[3] 0 8 6 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 0 0 0 0 3 0 0 0 0 0 9 0 0 0 0 3 6 0 4 9 8 0 0 0 0 0 4 0 0 0 0 0 0 0 7 10 0 9 0 </args>
+    </group>
+  </constraints>
+  <objectives>
+    <minimize note="minimizing weighted usage of resources" type="sum">
+      <list> u[] </list>
+      <coeffs> 1 2 2 6 </coeffs>
+    </minimize>
+  </objectives>
+</instance>

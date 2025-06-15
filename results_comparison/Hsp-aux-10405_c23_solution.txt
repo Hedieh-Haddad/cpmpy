@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: Hsp-aux-10405_c23.xml
+Status: ExitStatus.OPTIMAL
+Runtime: 0.5821825420134701
+Objective: 198
+Best Parameters: {
+  "varh": "Wdeg",
+  "valh": "First",
+  "saf": "True",
+  "pc1": "True",
+  "bdc": "1",
+  "toh": "False",
+  "ng": "NO",
+  "lc": "5",
+  "negative": "STR2N",
+  "generic2": "True"
+}

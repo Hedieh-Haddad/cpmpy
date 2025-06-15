@@ -320,6 +320,8 @@ class CPM_xcsp(SolverInterface):
         start = timer()
         options = []
         for key,value in kwargs.items():
+            if key == 'check':
+                continue
             options.append(f"-{key}={value}")
         self._xcsp_solver.add_complementary_options(options)
         check = kwargs.get("check",False)
@@ -327,7 +329,8 @@ class CPM_xcsp(SolverInterface):
         self.objective_value_ = self._xcsp_solver.objective_value()
         end = timer()
         self.cpm_status.exitstatus = self._transform_status_to_cpmpy(results["status"])
-        if check and results["assignments"][-1]["status_check"] == CheckStatus.INVALID:
+        if check and results.get("assignments") and len(results["assignments"]) > 0 and results["assignments"][-1].get(
+                "status_check") == CheckStatus.INVALID:
             self.cpm_status.exitstatus = ExitStatus.ERROR
         self.cpm_status.runtime = end - start
         has_sol = self._solve_return(self.cpm_status)

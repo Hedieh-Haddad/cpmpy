@@ -1,0 +1,1 @@
+timestamp,instance_name,cli_args,probe_round,hyperparameters,timeout_used,runtime_returned,objective_returned,status_returned,is_best_so_far_runtime,is_best_so_far_objective,bo_objective_reported
