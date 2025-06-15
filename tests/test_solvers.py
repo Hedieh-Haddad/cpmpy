@@ -4,7 +4,7 @@ import sys
 import time
 import unittest
 import tempfile
-import pytest
+# import pytest
 import numpy as np
 # from fontTools.subset.svg import xpath
 # from pycsp3.parser.xparser import ParserXCSP3, CallbackerXCSP3
@@ -23,7 +23,7 @@ from cpmpy.solvers.exact import CPM_exact
 from cpmpy.solvers.choco import CPM_choco
 from cpmpy import SolverLookup
 from cpmpy.exceptions import MinizincNameException, NotSupportedError
-from cpmpy.tools.xcsp3.parser_callbacks import CallbacksCPMPy
+# from cpmpy.tools.xcsp3.parser_callbacks import CallbacksCPMPy
 
 
 class TestSolvers(unittest.TestCase):
