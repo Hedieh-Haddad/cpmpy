@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: ProgressiveParty-rally-red12-05_c23.xml
+Status: ExitStatus.OPTIMAL
+Runtime: 1.1099124579923227
+Objective: 5
+Best Parameters: {
+  "varh": "PickOnDom",
+  "valh": "First",
+  "saf": "False",
+  "pc1": "True",
+  "bdc": "1",
+  "toh": "True",
+  "ng": "NO",
+  "lc": "2",
+  "negative": "V",
+  "generic2": "True"
+}

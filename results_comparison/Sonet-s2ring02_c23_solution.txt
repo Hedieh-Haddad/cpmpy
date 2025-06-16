@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: Sonet-s2ring02_c23.xml
+Status: ExitStatus.OPTIMAL
+Runtime: 5.650582749978639
+Objective: 14
+Best Parameters: {
+  "varh": "FrbaOnDom",
+  "valh": "OccsR",
+  "saf": "False",
+  "pc1": "True",
+  "bdc": "1",
+  "toh": "False",
+  "ng": "NO",
+  "lc": "2",
+  "negative": "V",
+  "generic2": "True"
+}

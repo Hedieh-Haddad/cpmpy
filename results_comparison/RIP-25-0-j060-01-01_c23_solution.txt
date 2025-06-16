@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: RIP-25-0-j060-01-01_c23.xml
+Status: ExitStatus.OPTIMAL
+Runtime: 0.9242089159961324
+Objective: 1099
+Best Parameters: {
+  "varh": "Wdeg",
+  "valh": "FlrsE",
+  "saf": "False",
+  "pc1": "True",
+  "bdc": "1",
+  "toh": "False",
+  "ng": "NO",
+  "lc": "5",
+  "negative": "V",
+  "generic2": "True"
+}

@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: Benzenoide-06_c23.xml
+Status: ExitStatus.OPTIMAL
+Runtime: 1.468116750009358
+Objective: None
+Best Parameters: {
+  "varh": "FrbaOnDom",
+  "valh": "First",
+  "saf": "False",
+  "pc1": "True",
+  "bdc": "1",
+  "toh": "True",
+  "ng": "NO",
+  "lc": "2",
+  "negative": "STR0",
+  "generic2": "True"
+}

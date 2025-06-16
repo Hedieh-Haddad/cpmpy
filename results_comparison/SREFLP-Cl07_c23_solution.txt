@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: SREFLP-Cl07_c23.xml
+Status: ExitStatus.FEASIBLE
+Runtime: 1.5502578339946922
+Objective: 1590
+Best Parameters: {
+  "varh": "RunRobin",
+  "valh": "First",
+  "saf": "False",
+  "pc1": "True",
+  "bdc": "1",
+  "toh": "False",
+  "ng": "NO",
+  "lc": "2",
+  "negative": "V",
+  "generic2": "True"
+}

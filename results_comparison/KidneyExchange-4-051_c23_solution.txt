@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: KidneyExchange-4-051_c23.xml
+Status: ExitStatus.FEASIBLE
+Runtime: 14.5470702079474
+Objective: 1
+Best Parameters: {
+  "varh": "Wdeg",
+  "valh": "Bivs3",
+  "saf": "False",
+  "pc1": "True",
+  "bdc": "1",
+  "toh": "False",
+  "ng": "NO",
+  "lc": "2",
+  "negative": "V",
+  "generic2": "True"
+}

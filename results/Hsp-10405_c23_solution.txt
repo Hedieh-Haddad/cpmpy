@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: Hsp-10405_c23.xml
+Status: ExitStatus.OPTIMAL
+Runtime: 2.7985620409963303
+Objective: 198
+Best Parameters: {
+  "bdc": 10,
+  "generic2": true,
+  "lc": 10,
+  "negative": "V",
+  "ng": "NO",
+  "pc1": false,
+  "saf": false,
+  "toh": false,
+  "valh": "OccsR",
+  "varh": "PickOnDom"
+}

@@ -1,0 +1,18 @@
+Solver: xcsp:ACE@2.4
+Instance: Sonet-s3ring09_c23.xml
+Status: ExitStatus.FEASIBLE
+Runtime: 600.5670505829621
+Objective: None
+Best Parameters: {
+  "varh": "Wdeg",
+  "valh": "First",
+  "saf": false,
+  "pc1": true,
+  "bdc": 1,
+  "toh": false,
+  "ng": "NO",
+  "lc": 2,
+  "negative": "V",
+  "generic2": true,
+  "sb": "NO"
+}

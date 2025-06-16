@@ -1,0 +1,17 @@
+Solver: xcsp:ACE@2.4
+Instance: ProgressiveParty-rally-red12-09_c23.xml
+Status: ExitStatus.OPTIMAL
+Runtime: 1.0930027500144206
+Objective: 9
+Best Parameters: {
+  "varh": "Wdeg",
+  "valh": "Vals",
+  "saf": "False",
+  "pc1": "True",
+  "bdc": "10",
+  "toh": "False",
+  "ng": "NO",
+  "lc": "2",
+  "negative": "V",
+  "generic2": "True"
+}
