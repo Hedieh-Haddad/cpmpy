@@ -25,10 +25,10 @@ class HPOStrategy(ABC):
         self._global_time_splitting_strategy: TuningGlobalTimeoutStrategy = global_time_splitting_strategy
         self._timeout_evolution_strategy: TimeoutEvolutionStrategy = timeout_evolution_strategy
         self._current_timeout = 0  # CT
-        self._best_params = None
         self._best_runtime = None
         self._all_configs = all_configs
         self._defaults = defaults
+        self._best_params = defaults
         self._best_obj = None
         self._solution_list = []
         self._seen_counter = 0
@@ -86,6 +86,8 @@ class HPOStrategy(ABC):
                 self._best_obj = solver.objective_value()
                 self._best_params = parameters
                 self._best_runtime = round(solver.status().runtime, 3)
+                log("Better obj or better runtime so we reset the counter", "debug")
+                self._global_time_splitting_strategy.reset_counter()
 
     def _register_solution(self, solver: SolverInterface, parameters):
         if solver.status().exitstatus == FEASIBLE or solver.status().exitstatus == OPTIMAL:
@@ -144,12 +146,16 @@ class BayesianOptimizationStrategy(HPOStrategy):
         parameters = {k: self._transformers(v) for k, v in parameters.items()}
         parameters["check"]=True
         log(f"New probing phase {parameters}","debug")
-        solver.solve(time_limit=self._current_timeout, **parameters)
+        solver.solve(time_limit=max(int(self._current_timeout),2), **parameters)
         return parameters
 
     def solving_phase(self):
+        self._global_time_splitting_strategy.update_solving_timeout()
         log(f"Starting solving phase with {self._best_params} and {self._global_time_splitting_strategy.solving_timeout} seconds", "Info")
-        self._solver.solve(time_limit=self._global_time_splitting_strategy.solving_timeout, **self._best_params)
+
+        log("Best parameters is same as defaults ? "+str(self._best_params == self._defaults), "debug")
+
+        self._solver.solve(time_limit=max(2,int(self._global_time_splitting_strategy.solving_timeout)), **self._best_params)
 
     def finalize(self):
         return self._best_params

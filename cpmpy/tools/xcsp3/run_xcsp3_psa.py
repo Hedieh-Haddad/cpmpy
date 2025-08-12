@@ -6,8 +6,8 @@ from timeit import default_timer as timer
 from pycsp3.parser.xparser import ParserXCSP3, CallbackerXCSP3
 
 from cpmpy import SolverLookup
-from cpmpy.tools.probing_solving import PSAFactory
-from cpmpy.tools.psa.enum import TimeType, TimeoutEvolution, StopCondition, RoundTimeType
+from cpmpy.tools.parameter_tuner import PSAFactory
+from cpmpy.tools.psa.enum import TimeType, TimeoutEvolution, StopCondition, RoundTimeType, HPOType
 from cpmpy.tools.xcsp3.parser_callbacks import CallbacksCPMPy
 
 if __name__ == "__main__":
@@ -16,9 +16,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="A python application for using `Probe and Solve Algorithm` (PSA) with XCSP3 files.")
     parser.add_argument("--input", help="The path to the input XCSP3 file", required=True, type=str)
-    parser.add_argument("--solver", help="The solver to use", required=True, type=str,  choices=available_solvers,
+    parser.add_argument("--solver", help="The solver to use", required=True, type=str, choices=available_solvers,
                         default=available_solvers[0])
     parser.add_argument("--output", help="The path to the output csv", required=False, type=str, default="output.csv")
+    parser.add_argument("--hpo", type=HPOType, default=HPOType.BAYESIAN_SEARCH, choices=HPOType)
     parser.add_argument("--global-time-limit", help="The global time limit for the solver", required=False, type=int,
                         default=1800)
     parser.add_argument("--global-time-strategy",
@@ -38,7 +39,7 @@ if __name__ == "__main__":
     parser.add_argument("--stop-strategy", choices=StopCondition,
                         help="The strategy used for stopping the probing phase", default=StopCondition.TIMEOUT,
                         type=StopCondition)
-    parser.add_argument("--tuning-file",required=False, help="A json file with the hyperparameters.")
+    parser.add_argument("--tuning-file", required=False, help="A json file with the hyperparameters.")
 
     args = parser.parse_args()
     start_time = timer()
@@ -47,7 +48,6 @@ if __name__ == "__main__":
     callbacks = CallbacksCPMPy()
     callbacks.force_exit = True
     callbacker = CallbackerXCSP3(parser, callbacks)
-
 
     try:
         start_time = timer()
