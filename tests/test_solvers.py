@@ -18,7 +18,6 @@ from cpmpy.expressions.utils import argvals
 from cpmpy.solvers.pysat import CPM_pysat
 from cpmpy.solvers.solver_interface import ExitStatus
 
-from cpmpy.solvers.xcsp_native import CPM_xcsp
 
 from cpmpy.solvers.z3 import CPM_z3
 from cpmpy.solvers.minizinc import CPM_minizinc
@@ -28,7 +27,6 @@ from cpmpy.solvers.choco import CPM_choco
 from cpmpy import SolverLookup
 from cpmpy.exceptions import MinizincNameException, NotSupportedError
 from cpmpy.tools.xcsp3.parser_callbacks import CallbacksCPMPy
-
 
 from utils import skip_on_missing_pblib
 
@@ -997,6 +995,28 @@ class TestSupportedSolvers:
         assert len(s.user_vars) == 1 # check if var captured as a user_var
 
         assert s.solveAll() == 4     # check if still correct number of solutions, even though empty model
+    def test_model_no_vars(self, solver):
+
+        if solver == "gurobi":
+            solution_limit = 10
+        else:
+            solution_limit = None
+
+        # empty model
+        num_sols = cp.Model().solveAll(solver=solver, solution_limit=solution_limit)
+        assert num_sols == 1
+
+        # model with one True constant
+        num_sols = cp.Model(cp.BoolVal(True)).solveAll(solver=solver, solution_limit=solution_limit)
+        assert num_sols == 1
+
+        # model with two True constants
+        num_sols = cp.Model(cp.BoolVal(True), cp.BoolVal(True)).solveAll(solver=solver, solution_limit=solution_limit)
+        assert num_sols == 1
+
+        # model with one False constant
+        num_sols = cp.Model(cp.BoolVal(False)).solveAll(solver=solver, solution_limit=solution_limit)
+        assert num_sols == 0
 
 
 class TestACESolver:
@@ -1068,28 +1088,7 @@ class TestACESolver:
         assert solver.status().exitstatus == ExitStatus.UNKNOWN
 
         solution_limit = 5 if solver == "gurobi" else None
-        assert s.solveAll(solution_limit=solution_limit) == 4     # check if still correct number of solutions, even though empty model
+        assert solver.solveAll(solution_limit=solution_limit) == 4     # check if still correct number of solutions, even though empty model
 
-    def test_model_no_vars(self, solver):
 
-        if solver == "gurobi":
-            solution_limit = 10
-        else:
-            solution_limit = None
-
-        # empty model
-        num_sols = cp.Model().solveAll(solver=solver, solution_limit=solution_limit)
-        assert num_sols == 1    
-
-        # model with one True constant
-        num_sols = cp.Model(cp.BoolVal(True)).solveAll(solver=solver, solution_limit=solution_limit)
-        assert num_sols == 1        
-
-        # model with two True constants
-        num_sols = cp.Model(cp.BoolVal(True), cp.BoolVal(True)).solveAll(solver=solver, solution_limit=solution_limit)
-        assert num_sols == 1
-
-        # model with one False constant
-        num_sols = cp.Model(cp.BoolVal(False)).solveAll(solver=solver, solution_limit=solution_limit)
-        assert num_sols == 0
         

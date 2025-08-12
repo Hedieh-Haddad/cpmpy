@@ -95,7 +95,7 @@ class FirstRuntimeRoundTimeStrategy(RoundTimeStrategy):
     """
 
     def init(self, time_limit=None):
-        self.solver.solve(time_limit=time_limit, **self.default_config)
+        self.solver.solve(time_limit=time_limit,solution_limit=1, **self.default_config)
         runtime = self.solver.status().runtime
         self._round_timeout = runtime
         self._runtime = runtime
@@ -200,6 +200,12 @@ class TuningGlobalTimeoutStrategy(ABC):
         self._probe_timeout = probe_timeout
         self._solving_timeout = self.global_timeout - self.probe_timeout
 
+    def update_solving_timeout(self):
+        """
+        Update the solving timeout based on the current probe timeout.
+        """
+        self._solving_timeout = self.global_timeout - self.elapsed_time
+
     def update_global_timeout(self, global_timeout):
         """
         Update the global timeout if needed.
@@ -219,7 +225,7 @@ class TuningGlobalTimeoutStrategy(ABC):
 
     def probe_phase_must_finish(self, current_timeout: int):
         result = self.elapsed_time + current_timeout >= self.probe_timeout
-        log(str(result),"debug")
+        log("Probe must finish ? " + str(result)+ " " +str(self.elapsed_time)+" "+str(current_timeout)+" "+str(self.probe_timeout),"debug")
         return self.elapsed_time + current_timeout >= self.probe_timeout
 
     @property
@@ -228,6 +234,10 @@ class TuningGlobalTimeoutStrategy(ABC):
     @property
     def round_counter(self):
         return self._round_counter
+
+    def reset_counter(self):
+        self._round_counter = 0
+
 
 class PercentageTuningGlobalTimeoutStrategy(TuningGlobalTimeoutStrategy):
     """
@@ -260,6 +270,7 @@ class NoLimitTuningGlobalTimeoutStrategy(TuningGlobalTimeoutStrategy):
         self._max_tries = max_tries
 
     def probe_phase_must_finish(self, current_timeout: int):
+        log("Round tries: " + str(self._round_counter) + " Max tries: " + str(self._max_tries), "debug")
         return super().probe_phase_must_finish(current_timeout) or self._round_counter >= self._max_tries
 
 
