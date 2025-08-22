@@ -9,15 +9,18 @@ from xcsp.solver.solver import Solver
 
 import cpmpy
 from cpmpy import SolverLookup
-from cpmpy.solvers.solver_interface import SolverInterface
+from cpmpy.solvers.solver_interface import SolverInterface, ExitStatus
 from cpmpy.tools.psa.log import log
 from cpmpy.tools.psa.time_strategies import RoundTimeStrategy, TimeoutEvolutionStrategy, TuningGlobalTimeoutStrategy
+from . import csv_logger
+from .enum import StopCondition
 
 
 class HPOStrategy(ABC):
     def __init__(self, solver_name, cpm_model, max_tries, round_type_strategy: RoundTimeStrategy,
                  global_time_splitting_strategy: TuningGlobalTimeoutStrategy,
-                 timeout_evolution_strategy: TimeoutEvolutionStrategy, all_configs, defaults,xpath=None, transformers=lambda x: x):
+                 timeout_evolution_strategy: TimeoutEvolutionStrategy, all_configs, defaults, xpath=None,
+                 transformers=lambda x: x, stop_condition=StopCondition.TIMEOUT, stagnation_limit=10):
         self._solver_name = solver_name
         self._cpm_model: cpmpy.Model = cpm_model
         self._max_tries = max_tries
@@ -34,7 +37,12 @@ class HPOStrategy(ABC):
         self._seen_counter = 0
         self._transformers = transformers
         self._xpath = xpath
-        self._solver:SolverInterface|None = None
+        self._solver: SolverInterface | None = None
+        self.stop_condition = stop_condition
+        self.stagnation_limit = stagnation_limit
+        self.stagnation_counter = 0
+        self.round_counter = 0
+        self._found_first_solution = False
 
     @abstractmethod
     def initialize(self, time_limit=None, max_tries=None):
@@ -44,18 +52,45 @@ class HPOStrategy(ABC):
         """
         Check if the probing phase should continue based on the elapsed time and the probe timeout.
         """
-        return not self._global_time_splitting_strategy.probe_phase_must_finish(self._current_timeout)
+        if self._global_time_splitting_strategy.probe_phase_must_finish(self._current_timeout):
+            return False
+        if self.stop_condition == StopCondition.FIRST_SOLUTION and self._found_first_solution:
+            log("Stopping early: First solution has been found.", "info")
+            return False
+
+            # Early Stopping Condition 2: Stagnation
+        if self.stop_condition == StopCondition.STAGNATION and self.stagnation_counter >= self.stagnation_limit:
+            log(f"Stopping early: Stagnation limit of {self.stagnation_limit} reached.", "info")
+            return False
+
+        return True
 
     def probing_phase(self):
         init_kwargs = dict()
         if "xcsp" in self._solver_name:
             init_kwargs["xpath"] = self._xpath
         self._solver = SolverLookup.get(self._solver_name, self._cpm_model, **init_kwargs)
+        objective_before_round = self._best_obj
         parameters = self._internal_probing_phase(self._solver)
+        self.round_counter += 1
         if self._solver.objective_value() is not None:
             self._register_better_result_if_needed(self._solver, parameters)
+
+        if self._best_obj == objective_before_round:
+            self.stagnation_counter += 1
+
         self._register_solution(self._solver, parameters)
         self._global_time_splitting_strategy.update_probe_phase()
+
+        csv_logger.log_round({
+            'round': self.round_counter,
+            'stagnation_round': self.stagnation_counter,
+            'phase': 'probing',
+            'runtime': self._solver.status().runtime,
+            'objective': self._solver.objective_value(),
+            'status': self._solver.status().exitstatus,
+            'params': parameters
+        })
 
     @abstractmethod
     def _internal_probing_phase(self, solver: SolverInterface):
@@ -76,7 +111,7 @@ class HPOStrategy(ABC):
         pass
 
     def _register_better_result_if_needed(self, solver, parameters):
-        if solver.status().exitstatus == FEASIBLE or solver.status().exitstatus == OPTIMAL:
+        if solver.status().exitstatus == ExitStatus.FEASIBLE or solver.status().exitstatus == ExitStatus.OPTIMAL:
             have_best_obj = solver.objective_value() < self._best_obj if self._cpm_model.objective_is_min else solver.objective_value > self._best_obj
             same_obj = self._best_obj == solver.objective_value()
             better_runtime = self._best_runtime is None or solver.status().runtime < self._best_runtime
@@ -87,10 +122,15 @@ class HPOStrategy(ABC):
                 self._best_params = parameters
                 self._best_runtime = round(solver.status().runtime, 3)
                 log("Better obj or better runtime so we reset the counter", "debug")
+                self.stagnation_counter = 1
                 self._global_time_splitting_strategy.reset_counter()
+        #         return True
+        # return False
 
     def _register_solution(self, solver: SolverInterface, parameters):
-        if solver.status().exitstatus == FEASIBLE or solver.status().exitstatus == OPTIMAL:
+        if solver.status().exitstatus == ExitStatus.FEASIBLE or solver.status().exitstatus == ExitStatus.OPTIMAL:
+            if not self._found_first_solution:
+                self._found_first_solution = True
             self._solution_list.append({
                 'params': dict(parameters),
                 'objective': self._best_obj,
@@ -106,10 +146,11 @@ class BayesianOptimizationStrategy(HPOStrategy):
 
     def __init__(self, solver_name, cpm_model, max_tries, round_type_strategy: RoundTimeStrategy,
                  global_time_splitting_strategy, timeout_evolution_strategy: TimeoutEvolutionStrategy, all_configs,
-                 defaults, xpath=None, transformers=lambda x: x):
+                 defaults, xpath=None, transformers=lambda x: x, stop_condition=StopCondition.TIMEOUT,
+                 stagnation_limit=10):
         super().__init__(solver_name, cpm_model, max_tries, round_type_strategy,
                          global_time_splitting_strategy, timeout_evolution_strategy, all_configs, defaults,
-                         xpath, transformers)
+                         xpath, transformers, stop_condition, stagnation_limit)
         self._opt = Optimizer(dimensions=dimensions_aslist(self._all_configs), base_estimator="GP", acq_func="EI")
 
     def initialize(self, time_limit=None, max_tries=None):
@@ -119,10 +160,10 @@ class BayesianOptimizationStrategy(HPOStrategy):
         self._global_time_splitting_strategy.init()
 
         self._round_type_strategy.init(
-            self._global_time_splitting_strategy.probe_timeout)  # maybe launch a solver with default configuration and take `runtime` seconds.
+            self._global_time_splitting_strategy.probe_timeout)
 
         self._global_time_splitting_strategy.update_probe_timeout(
-            self._global_time_splitting_strategy.probe_timeout - self._round_type_strategy.runtime)  # we update the PT by subtracting the time used by the runtime take by the first round (maybe 0 if the sub-strategy is Static for example)
+            self._global_time_splitting_strategy.probe_timeout - self._round_type_strategy.runtime)
 
         log(str(self._global_time_splitting_strategy.probe_timeout), "debug")
 
@@ -144,18 +185,30 @@ class BayesianOptimizationStrategy(HPOStrategy):
             return
 
         parameters = {k: self._transformers(v) for k, v in parameters.items()}
-        parameters["check"]=True
-        log(f"New probing phase {parameters}","debug")
-        solver.solve(time_limit=max(int(self._current_timeout),2), **parameters)
+        parameters["check"] = True
+        log(f"New probing phase {parameters}", "debug")
+        solver.solve(time_limit=max(int(self._current_timeout), 2), **parameters)
         return parameters
 
     def solving_phase(self):
         self._global_time_splitting_strategy.update_solving_timeout()
-        log(f"Starting solving phase with {self._best_params} and {self._global_time_splitting_strategy.solving_timeout} seconds", "Info")
+        log(
+            f"Starting solving phase with {self._best_params} and {self._global_time_splitting_strategy.solving_timeout} seconds",
+            "Info")
 
-        log("Best parameters is same as defaults ? "+str(self._best_params == self._defaults), "debug")
+        log("Best parameters is same as defaults ? " + str(self._best_params == self._defaults), "debug")
 
-        self._solver.solve(time_limit=max(2,int(self._global_time_splitting_strategy.solving_timeout)), **self._best_params)
+        self._solver.solve(time_limit=max(2, int(self._global_time_splitting_strategy.solving_timeout)),
+                           **self._best_params)
+        csv_logger.log_round({
+            'round': 'No Round',
+            'stagnation_round': "No Stagnation Round",
+            'phase': 'solving',
+            'runtime': self._solver.status().runtime,
+            'objective': self._solver.objective_value(),
+            'status': self._solver.status().exitstatus,
+            'params': self._best_params
+        })
 
     def finalize(self):
         return self._best_params

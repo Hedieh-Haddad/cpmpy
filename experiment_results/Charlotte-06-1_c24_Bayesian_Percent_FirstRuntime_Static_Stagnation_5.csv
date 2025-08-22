@@ -1,0 +1,11 @@
+round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
+1,1,probing,1.0513682909950148,5610,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
+2,2,probing,1.0436767079954734,5814,ExitStatus.FEASIBLE,100,False,5,STR2N,RST,AP,False,True,Matrix3D,TableHybrid,False,Vals,Activity
+3,3,probing,1.0296243329939898,5849,ExitStatus.FEASIBLE,100,True,2,STR2,NO,SAC3,False,False,Table,Table,True,RunRobin,Rand
+4,4,probing,1.0249862089985982,,ExitStatus.UNKNOWN,1,False,2,VA,NO,GT,False,True,Matrix3D,Matrix3D,False,OccsR,Impact
+5,1,probing,0.7071369170007529,0,ExitStatus.FEASIBLE,10,False,1,CT,RST,GT,False,False,Matrix3D,MDD,True,First,FrbaOnDom
+6,2,probing,1.0267064579966245,6137,ExitStatus.FEASIBLE,10,True,0,STR2,NO,SAC3,True,False,Matrix3D,MDD,False,First,Lexico
+7,3,probing,1.0300706670095678,5574,ExitStatus.FEASIBLE,100,False,2,STR3,RST,AC,True,True,MDD,Bits,False,Rand,Memory
+8,4,probing,1.0241128329944331,5816,ExitStatus.FEASIBLE,1,True,1,CMDDS,RST,SAC3,False,False,Tries,Table,True,OccsR,Lexico
+9,5,probing,1.0421721250022529,5625,ExitStatus.FEASIBLE,100,True,5,V,NO,AP,False,True,TableHybrid,Tries,False,Rand,PickOnDom
+No Round,No Stagnation Round,solving,0.8080063749948749,0,ExitStatus.FEASIBLE,10,False,1,CT,RST,GT,False,False,Matrix3D,MDD,True,First,FrbaOnDom

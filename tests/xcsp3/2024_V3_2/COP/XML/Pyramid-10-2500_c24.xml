@@ -1,0 +1,60 @@
+<instance format="XCSP3" type="COP">
+  <variables>
+    <array id="x" note="x[o,p] is the value of A(o,p)" size="[10][10]"> 0..2500 </array>
+  </variables>
+  <constraints>
+    <intension note="imposing a non-null root"> ne(x[0][0],0) </intension>
+    <allDifferent note="imposing different values"> x[0..1][0] x[1][1] x[2][0..2] x[3][0..3] x[4][0..4] x[5][0..5] x[6][0..6] x[7][0..7] x[8][0..8] x[9][] </allDifferent>
+    <group note="computing triangle sums">
+      <intension> eq(%0,add(%1,%2)) </intension>
+      <args> x[0..1][0] x[1][1] </args>
+      <args> x[1..2][0] x[2][1] </args>
+      <args> x[1..2][1] x[2][2] </args>
+      <args> x[2..3][0] x[3][1] </args>
+      <args> x[2..3][1] x[3][2] </args>
+      <args> x[2..3][2] x[3][3] </args>
+      <args> x[3..4][0] x[4][1] </args>
+      <args> x[3..4][1] x[4][2] </args>
+      <args> x[3..4][2] x[4][3] </args>
+      <args> x[3..4][3] x[4][4] </args>
+      <args> x[4..5][0] x[5][1] </args>
+      <args> x[4..5][1] x[5][2] </args>
+      <args> x[4..5][2] x[5][3] </args>
+      <args> x[4..5][3] x[5][4] </args>
+      <args> x[4..5][4] x[5][5] </args>
+      <args> x[5..6][0] x[6][1] </args>
+      <args> x[5..6][1] x[6][2] </args>
+      <args> x[5..6][2] x[6][3] </args>
+      <args> x[5..6][3] x[6][4] </args>
+      <args> x[5..6][4] x[6][5] </args>
+      <args> x[5..6][5] x[6][6] </args>
+      <args> x[6..7][0] x[7][1] </args>
+      <args> x[6..7][1] x[7][2] </args>
+      <args> x[6..7][2] x[7][3] </args>
+      <args> x[6..7][3] x[7][4] </args>
+      <args> x[6..7][4] x[7][5] </args>
+      <args> x[6..7][5] x[7][6] </args>
+      <args> x[6..7][6] x[7][7] </args>
+      <args> x[7..8][0] x[8][1] </args>
+      <args> x[7..8][1] x[8][2] </args>
+      <args> x[7..8][2] x[8][3] </args>
+      <args> x[7..8][3] x[8][4] </args>
+      <args> x[7..8][4] x[8][5] </args>
+      <args> x[7..8][5] x[8][6] </args>
+      <args> x[7..8][6] x[8][7] </args>
+      <args> x[7..8][7] x[8][8] </args>
+      <args> x[8..9][0] x[9][1] </args>
+      <args> x[8..9][1] x[9][2] </args>
+      <args> x[8..9][2] x[9][3] </args>
+      <args> x[8..9][3] x[9][4] </args>
+      <args> x[8..9][4] x[9][5] </args>
+      <args> x[8..9][5] x[9][6] </args>
+      <args> x[8..9][6] x[9][7] </args>
+      <args> x[8..9][7] x[9][8] </args>
+      <args> x[8..9][8] x[9][9] </args>
+    </group>
+  </constraints>
+  <objectives>
+    <minimize note="minimizing the root value of the triangle"> x[0][0] </minimize>
+  </objectives>
+</instance>

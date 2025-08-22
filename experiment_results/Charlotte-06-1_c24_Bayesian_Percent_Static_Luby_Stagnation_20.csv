@@ -1,0 +1,14 @@
+round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
+1,1,probing,4.035125750000589,5099,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
+2,2,probing,4.036339167010738,5099,ExitStatus.FEASIBLE,10,False,0,STR0,RST,AC,True,True,Table,Bits,False,OccsR,Impact
+3,3,probing,4.041991249992861,5121,ExitStatus.FEASIBLE,100,False,1,STR0,NO,AC,False,False,TableHybrid,Matrix2D,True,RunRobin,FrbaOnDom
+4,4,probing,9.015591374991345,6643,ExitStatus.FEASIBLE,100,True,0,STR0,NO,SAC3,False,True,TableHybrid,TableHybrid,False,First,RunRobin
+5,5,probing,4.0286491669976385,,ExitStatus.UNKNOWN,1000,True,10,CT,NO,GT,False,True,Table,Tries,False,Median,Memory
+6,6,probing,4.042360958002973,5941,ExitStatus.FEASIBLE,1000,False,0,V,RST,AC,False,True,Matrix2D,MDD,False,Last,Activity
+7,7,probing,9.025018290994922,5438,ExitStatus.FEASIBLE,10,True,1,CMDDS,RST,AP,False,False,Matrix3D,MDD,True,Vals,Wdeg
+8,8,probing,0.7392886250017909,7127,ExitStatus.FEASIBLE,10,False,5,STR1,RST,GT,True,False,TableHybrid,TableHybrid,True,OccsR,Wdeg
+9,9,probing,2.764652333004051,5989,ExitStatus.OPTIMAL,1000,False,1,STR1,RST,AC,True,True,Table,Matrix2D,False,Rand,RunRobin
+10,10,probing,4.051181750008254,5099,ExitStatus.FEASIBLE,1,False,1,STR2,RST,AC,True,False,Table,TableHybrid,False,OccsR,Impact
+11,11,probing,9.040841082998668,5437,ExitStatus.FEASIBLE,1,True,1,STR1,NO,AP,True,True,Tries,Table,True,First,Wdeg
+12,12,probing,4.0419672499992885,5875,ExitStatus.FEASIBLE,10,True,0,STR3,NO,AC,False,True,TableHybrid,MDD,False,First,Impact
+No Round,No Stagnation Round,solving,5.242890457986505,5099,ExitStatus.OPTIMAL,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg

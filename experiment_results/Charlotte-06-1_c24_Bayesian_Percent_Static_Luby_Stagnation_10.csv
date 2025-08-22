@@ -1,0 +1,10 @@
+round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
+1,1,probing,4.0465838340023765,5099,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
+2,2,probing,4.017738166003255,6089,ExitStatus.FEASIBLE,10,True,5,V,NO,SAC3,True,False,Table,MDD,False,Last,Lexico
+3,3,probing,4.019710082997335,,ExitStatus.UNKNOWN,1000,False,10,STR3,NO,GT,False,True,TableHybrid,Matrix2D,True,First,Lexico
+4,4,probing,9.031476291987929,,ExitStatus.UNKNOWN,1,False,5,CMDDS,RST,BT,False,True,TableHybrid,Bits,False,Last,Rand
+5,5,probing,4.011850625000079,6643,ExitStatus.FEASIBLE,1000,True,0,VA,NO,SAC3,False,False,Tries,Matrix2D,True,First,RunRobin
+6,6,probing,4.042576207997627,5470,ExitStatus.FEASIBLE,100,True,1,CMDDS,NO,AC,True,False,Tries,TableHybrid,False,Rand,Activity
+7,7,probing,9.016620541995508,5816,ExitStatus.FEASIBLE,100,False,5,STR1N,NO,SAC3,False,True,Bits,Tries,True,OccsR,Lexico
+8,8,probing,19.025503457989544,,ExitStatus.UNKNOWN,1,False,5,STR2N,RST,BT,True,True,Table,Table,True,Rand,Activity
+No Round,No Stagnation Round,solving,4.774287041000207,5099,ExitStatus.OPTIMAL,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
