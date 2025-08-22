@@ -1,0 +1,9 @@
+round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
+1,1,probing,4.050067874995875,5099,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
+2,2,probing,5.016961832996458,5834,ExitStatus.FEASIBLE,100,False,5,V,NO,SAC3,True,True,TableHybrid,Tries,True,Last,Memory
+3,3,probing,1.9126383749971865,6483,ExitStatus.FEASIBLE,10,True,1,STR1N,RST,BT,True,True,Bits,Table,False,First,Wdeg
+4,4,probing,6.590419333006139,5099,ExitStatus.OPTIMAL,1,True,10,STR3,RST,AP,True,True,MDD,Matrix3D,False,Vals,FrbaOnDom
+5,5,probing,3.7044304169976385,5184,ExitStatus.OPTIMAL,100,True,1,STR3,RST,AP,False,False,MDD,MDD,True,Rand,FrbaOnDom
+6,6,probing,11.017016957994201,,ExitStatus.UNKNOWN,100,True,1,CMDDS,NO,BT,True,True,TableHybrid,Tries,True,Rand,Rand
+7,7,probing,13.033214875002159,,ExitStatus.UNKNOWN,1,False,0,CMDDS,RST,SAC3,False,False,Tries,MDD,True,Conflicts,WdegOnDom
+No Round,No Stagnation Round,solving,5.335938416988938,5099,ExitStatus.OPTIMAL,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg

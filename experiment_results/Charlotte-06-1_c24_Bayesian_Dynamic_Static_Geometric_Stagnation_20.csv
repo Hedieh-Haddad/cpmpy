@@ -1,0 +1,19 @@
+round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
+1,1,probing,4.036999667005148,5099,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
+2,2,probing,3.61964249999437,5825,ExitStatus.FEASIBLE,100,True,10,CMDDS,RST,BT,True,True,Table,Bits,True,Last,WdegOnDom
+3,3,probing,0.7315367090050131,7127,ExitStatus.FEASIBLE,10,True,2,STR2N,NO,GT,False,False,TableHybrid,Matrix3D,False,OccsR,RunRobin
+4,4,probing,7.014475208998192,5834,ExitStatus.FEASIBLE,1,True,2,VA,RST,SAC3,True,True,MDD,TableHybrid,True,Last,WdegOnDom
+5,5,probing,7.155866667002556,6205,ExitStatus.FEASIBLE,1000,False,10,STR0,RST,BT,True,False,Table,Matrix3D,False,RunRobin,FrbaOnDom
+6,6,probing,7.455327207993832,5191,ExitStatus.OPTIMAL,100,False,1,STR1N,RST,AC,True,False,Matrix3D,Matrix3D,True,RunRobin,Memory
+7,7,probing,3.6285953339975094,5209,ExitStatus.OPTIMAL,1000,False,1,CT,NO,AP,True,True,Matrix3D,Matrix2D,False,Median,Wdeg
+8,8,probing,16.036109292006586,5099,ExitStatus.FEASIBLE,1,True,5,STR1N,NO,AC,False,True,TableHybrid,Matrix3D,False,Last,Memory
+9,9,probing,20.0281612079998,,ExitStatus.UNKNOWN,1000,False,0,STR1N,RST,BT,True,True,Matrix3D,Matrix3D,False,Conflicts,Activity
+10,10,probing,2.1352085410035215,5121,ExitStatus.OPTIMAL,1000,True,1,STR0,RST,AC,True,True,TableHybrid,Table,False,RunRobin,FrbaOnDom
+11,11,probing,29.023023582994938,5437,ExitStatus.FEASIBLE,1,True,0,STR2N,RST,AC,True,False,Tries,Matrix3D,False,RunRobin,Lexico
+12,12,probing,10.009564790991135,5139,ExitStatus.OPTIMAL,100,False,0,CT,RST,AC,True,False,Table,Tries,True,Vals,RunRobin
+13,13,probing,43.018900000010035,,ExitStatus.UNKNOWN,10,True,2,CMDDO,NO,GT,False,True,MDD,Bits,True,Rand,Activity
+14,14,probing,0.7211945419985568,6038,ExitStatus.FEASIBLE,1000,False,1,STR1,NO,BT,True,False,Table,Table,True,Rand,PickOnDom
+15,15,probing,0.8365007500106003,13572,ExitStatus.FEASIBLE,100,True,10,V,RST,GT,True,False,Tries,Matrix3D,True,RunRobin,FrbaOnDom
+16,16,probing,23.719120542009478,5099,ExitStatus.OPTIMAL,10,True,5,STR1N,NO,AP,False,True,MDD,Tries,True,Median,Wdeg
+17,17,probing,29.281714541997644,5154,ExitStatus.OPTIMAL,100,True,10,STR1N,RST,AP,True,True,TableHybrid,Tries,False,Median,PickOnDom
+No Round,No Stagnation Round,solving,4.782546750007896,5099,ExitStatus.OPTIMAL,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg

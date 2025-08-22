@@ -1,0 +1,468 @@
+<instance format="XCSP3" type="COP">
+  <variables>
+    <array id="s" note="s[i] is the starting time of the ith test" size="[30]"> 0..12543 </array>
+    <array id="m" note="m[i] is the machine used for the ith test" size="[30]">
+      <domain for="m[0..13] m[15] m[17..27] m[29]"> 0..9 </domain>
+      <domain for="m[14]"> 2 4 </domain>
+      <domain for="m[16]"> 0 3 4 7 </domain>
+      <domain for="m[28]"> 0 2 8 9 </domain>
+    </array>
+  </variables>
+  <constraints>
+    <group note="no overlapping on machines">
+      <intension> or(ne(%0,%1),le(add(%2,%3),%4),le(add(%4,%5),%2)) </intension>
+      <args> m[0] m[1] s[0] 383 s[1] 764 </args>
+      <args> m[0] m[2] s[0] 383 s[2] 650 </args>
+      <args> m[0] m[3] s[0] 383 s[3] 441 </args>
+      <args> m[0] m[4] s[0] 383 s[4] 710 </args>
+      <args> m[0] m[6] s[0] 383 s[6] 791 </args>
+      <args> m[0] m[9] s[0] 383 s[9] 123 </args>
+      <args> m[0] m[10] s[0] 383 s[10] 617 </args>
+      <args> m[0] m[11] s[0] 383 s[11] 215 </args>
+      <args> m[0] m[12] s[0] 383 s[12] 207 </args>
+      <args> m[0] m[14] s[0] 383 s[14] 602 </args>
+      <args> m[0] m[17] s[0] 383 s[17] 707 </args>
+      <args> m[0] m[18] s[0] 383 s[18] 468 </args>
+      <args> m[0] m[19] s[0] 383 s[19] 438 </args>
+      <args> m[0] m[20] s[0] 383 s[20] 116 </args>
+      <args> m[0] m[21] s[0] 383 s[21] 344 </args>
+      <args> m[0] m[22] s[0] 383 s[22] 776 </args>
+      <args> m[0] m[23] s[0] 383 s[23] 157 </args>
+      <args> m[0] m[24] s[0] 383 s[24] 287 </args>
+      <args> m[0] m[26] s[0] 383 s[26] 346 </args>
+      <args> m[0] m[27] s[0] 383 s[27] 112 </args>
+      <args> m[0] m[28] s[0] 383 s[28] 11 </args>
+      <args> m[0] m[29] s[0] 383 s[29] 317 </args>
+      <args> m[1] m[2] s[1] 764 s[2] 650 </args>
+      <args> m[1] m[3] s[1] 764 s[3] 441 </args>
+      <args> m[1] m[4] s[1] 764 s[4] 710 </args>
+      <args> m[1] m[5] s[1] 764 s[5] 773 </args>
+      <args> m[1] m[6] s[1] 764 s[6] 791 </args>
+      <args> m[1] m[7] s[1] 764 s[7] 101 </args>
+      <args> m[1] m[8] s[1] 764 s[8] 521 </args>
+      <args> m[1] m[9] s[1] 764 s[9] 123 </args>
+      <args> m[1] m[10] s[1] 764 s[10] 617 </args>
+      <args> m[1] m[11] s[1] 764 s[11] 215 </args>
+      <args> m[1] m[12] s[1] 764 s[12] 207 </args>
+      <args> m[1] m[13] s[1] 764 s[13] 97 </args>
+      <args> m[1] m[14] s[1] 764 s[14] 602 </args>
+      <args> m[1] m[15] s[1] 764 s[15] 668 </args>
+      <args> m[1] m[16] s[1] 764 s[16] 718 </args>
+      <args> m[1] m[17] s[1] 764 s[17] 707 </args>
+      <args> m[1] m[18] s[1] 764 s[18] 468 </args>
+      <args> m[1] m[19] s[1] 764 s[19] 438 </args>
+      <args> m[1] m[20] s[1] 764 s[20] 116 </args>
+      <args> m[1] m[21] s[1] 764 s[21] 344 </args>
+      <args> m[1] m[22] s[1] 764 s[22] 776 </args>
+      <args> m[1] m[23] s[1] 764 s[23] 157 </args>
+      <args> m[1] m[24] s[1] 764 s[24] 287 </args>
+      <args> m[1] m[25] s[1] 764 s[25] 83 </args>
+      <args> m[1] m[26] s[1] 764 s[26] 346 </args>
+      <args> m[1] m[27] s[1] 764 s[27] 112 </args>
+      <args> m[1] m[28] s[1] 764 s[28] 11 </args>
+      <args> m[1] m[29] s[1] 764 s[29] 317 </args>
+      <args> m[2] m[3] s[2] 650 s[3] 441 </args>
+      <args> m[2] m[4] s[2] 650 s[4] 710 </args>
+      <args> m[2] m[5] s[2] 650 s[5] 773 </args>
+      <args> m[2] m[6] s[2] 650 s[6] 791 </args>
+      <args> m[2] m[7] s[2] 650 s[7] 101 </args>
+      <args> m[2] m[8] s[2] 650 s[8] 521 </args>
+      <args> m[2] m[9] s[2] 650 s[9] 123 </args>
+      <args> m[2] m[10] s[2] 650 s[10] 617 </args>
+      <args> m[2] m[11] s[2] 650 s[11] 215 </args>
+      <args> m[2] m[12] s[2] 650 s[12] 207 </args>
+      <args> m[2] m[13] s[2] 650 s[13] 97 </args>
+      <args> m[2] m[14] s[2] 650 s[14] 602 </args>
+      <args> m[2] m[15] s[2] 650 s[15] 668 </args>
+      <args> m[2] m[16] s[2] 650 s[16] 718 </args>
+      <args> m[2] m[17] s[2] 650 s[17] 707 </args>
+      <args> m[2] m[18] s[2] 650 s[18] 468 </args>
+      <args> m[2] m[19] s[2] 650 s[19] 438 </args>
+      <args> m[2] m[20] s[2] 650 s[20] 116 </args>
+      <args> m[2] m[21] s[2] 650 s[21] 344 </args>
+      <args> m[2] m[22] s[2] 650 s[22] 776 </args>
+      <args> m[2] m[23] s[2] 650 s[23] 157 </args>
+      <args> m[2] m[24] s[2] 650 s[24] 287 </args>
+      <args> m[2] m[25] s[2] 650 s[25] 83 </args>
+      <args> m[2] m[26] s[2] 650 s[26] 346 </args>
+      <args> m[2] m[27] s[2] 650 s[27] 112 </args>
+      <args> m[2] m[28] s[2] 650 s[28] 11 </args>
+      <args> m[2] m[29] s[2] 650 s[29] 317 </args>
+      <args> m[3] m[4] s[3] 441 s[4] 710 </args>
+      <args> m[3] m[6] s[3] 441 s[6] 791 </args>
+      <args> m[3] m[9] s[3] 441 s[9] 123 </args>
+      <args> m[3] m[10] s[3] 441 s[10] 617 </args>
+      <args> m[3] m[11] s[3] 441 s[11] 215 </args>
+      <args> m[3] m[12] s[3] 441 s[12] 207 </args>
+      <args> m[3] m[14] s[3] 441 s[14] 602 </args>
+      <args> m[3] m[17] s[3] 441 s[17] 707 </args>
+      <args> m[3] m[18] s[3] 441 s[18] 468 </args>
+      <args> m[3] m[19] s[3] 441 s[19] 438 </args>
+      <args> m[3] m[20] s[3] 441 s[20] 116 </args>
+      <args> m[3] m[21] s[3] 441 s[21] 344 </args>
+      <args> m[3] m[22] s[3] 441 s[22] 776 </args>
+      <args> m[3] m[23] s[3] 441 s[23] 157 </args>
+      <args> m[3] m[24] s[3] 441 s[24] 287 </args>
+      <args> m[3] m[25] s[3] 441 s[25] 83 </args>
+      <args> m[3] m[26] s[3] 441 s[26] 346 </args>
+      <args> m[3] m[27] s[3] 441 s[27] 112 </args>
+      <args> m[3] m[28] s[3] 441 s[28] 11 </args>
+      <args> m[3] m[29] s[3] 441 s[29] 317 </args>
+      <args> m[4] m[5] s[4] 710 s[5] 773 </args>
+      <args> m[4] m[6] s[4] 710 s[6] 791 </args>
+      <args> m[4] m[7] s[4] 710 s[7] 101 </args>
+      <args> m[4] m[8] s[4] 710 s[8] 521 </args>
+      <args> m[4] m[9] s[4] 710 s[9] 123 </args>
+      <args> m[4] m[10] s[4] 710 s[10] 617 </args>
+      <args> m[4] m[11] s[4] 710 s[11] 215 </args>
+      <args> m[4] m[12] s[4] 710 s[12] 207 </args>
+      <args> m[4] m[13] s[4] 710 s[13] 97 </args>
+      <args> m[4] m[14] s[4] 710 s[14] 602 </args>
+      <args> m[4] m[15] s[4] 710 s[15] 668 </args>
+      <args> m[4] m[16] s[4] 710 s[16] 718 </args>
+      <args> m[4] m[17] s[4] 710 s[17] 707 </args>
+      <args> m[4] m[18] s[4] 710 s[18] 468 </args>
+      <args> m[4] m[19] s[4] 710 s[19] 438 </args>
+      <args> m[4] m[20] s[4] 710 s[20] 116 </args>
+      <args> m[4] m[21] s[4] 710 s[21] 344 </args>
+      <args> m[4] m[22] s[4] 710 s[22] 776 </args>
+      <args> m[4] m[23] s[4] 710 s[23] 157 </args>
+      <args> m[4] m[24] s[4] 710 s[24] 287 </args>
+      <args> m[4] m[25] s[4] 710 s[25] 83 </args>
+      <args> m[4] m[26] s[4] 710 s[26] 346 </args>
+      <args> m[4] m[27] s[4] 710 s[27] 112 </args>
+      <args> m[4] m[28] s[4] 710 s[28] 11 </args>
+      <args> m[4] m[29] s[4] 710 s[29] 317 </args>
+      <args> m[5] m[6] s[5] 773 s[6] 791 </args>
+      <args> m[5] m[9] s[5] 773 s[9] 123 </args>
+      <args> m[5] m[10] s[5] 773 s[10] 617 </args>
+      <args> m[5] m[11] s[5] 773 s[11] 215 </args>
+      <args> m[5] m[12] s[5] 773 s[12] 207 </args>
+      <args> m[5] m[14] s[5] 773 s[14] 602 </args>
+      <args> m[5] m[17] s[5] 773 s[17] 707 </args>
+      <args> m[5] m[18] s[5] 773 s[18] 468 </args>
+      <args> m[5] m[19] s[5] 773 s[19] 438 </args>
+      <args> m[5] m[20] s[5] 773 s[20] 116 </args>
+      <args> m[5] m[21] s[5] 773 s[21] 344 </args>
+      <args> m[5] m[22] s[5] 773 s[22] 776 </args>
+      <args> m[5] m[23] s[5] 773 s[23] 157 </args>
+      <args> m[5] m[24] s[5] 773 s[24] 287 </args>
+      <args> m[5] m[26] s[5] 773 s[26] 346 </args>
+      <args> m[5] m[27] s[5] 773 s[27] 112 </args>
+      <args> m[5] m[28] s[5] 773 s[28] 11 </args>
+      <args> m[5] m[29] s[5] 773 s[29] 317 </args>
+      <args> m[6] m[7] s[6] 791 s[7] 101 </args>
+      <args> m[6] m[8] s[6] 791 s[8] 521 </args>
+      <args> m[6] m[9] s[6] 791 s[9] 123 </args>
+      <args> m[6] m[10] s[6] 791 s[10] 617 </args>
+      <args> m[6] m[11] s[6] 791 s[11] 215 </args>
+      <args> m[6] m[12] s[6] 791 s[12] 207 </args>
+      <args> m[6] m[13] s[6] 791 s[13] 97 </args>
+      <args> m[6] m[14] s[6] 791 s[14] 602 </args>
+      <args> m[6] m[15] s[6] 791 s[15] 668 </args>
+      <args> m[6] m[16] s[6] 791 s[16] 718 </args>
+      <args> m[6] m[17] s[6] 791 s[17] 707 </args>
+      <args> m[6] m[18] s[6] 791 s[18] 468 </args>
+      <args> m[6] m[19] s[6] 791 s[19] 438 </args>
+      <args> m[6] m[20] s[6] 791 s[20] 116 </args>
+      <args> m[6] m[21] s[6] 791 s[21] 344 </args>
+      <args> m[6] m[22] s[6] 791 s[22] 776 </args>
+      <args> m[6] m[23] s[6] 791 s[23] 157 </args>
+      <args> m[6] m[24] s[6] 791 s[24] 287 </args>
+      <args> m[6] m[25] s[6] 791 s[25] 83 </args>
+      <args> m[6] m[26] s[6] 791 s[26] 346 </args>
+      <args> m[6] m[27] s[6] 791 s[27] 112 </args>
+      <args> m[6] m[28] s[6] 791 s[28] 11 </args>
+      <args> m[6] m[29] s[6] 791 s[29] 317 </args>
+      <args> m[7] m[9] s[7] 101 s[9] 123 </args>
+      <args> m[7] m[10] s[7] 101 s[10] 617 </args>
+      <args> m[7] m[11] s[7] 101 s[11] 215 </args>
+      <args> m[7] m[12] s[7] 101 s[12] 207 </args>
+      <args> m[7] m[14] s[7] 101 s[14] 602 </args>
+      <args> m[7] m[17] s[7] 101 s[17] 707 </args>
+      <args> m[7] m[18] s[7] 101 s[18] 468 </args>
+      <args> m[7] m[19] s[7] 101 s[19] 438 </args>
+      <args> m[7] m[20] s[7] 101 s[20] 116 </args>
+      <args> m[7] m[21] s[7] 101 s[21] 344 </args>
+      <args> m[7] m[22] s[7] 101 s[22] 776 </args>
+      <args> m[7] m[23] s[7] 101 s[23] 157 </args>
+      <args> m[7] m[24] s[7] 101 s[24] 287 </args>
+      <args> m[7] m[26] s[7] 101 s[26] 346 </args>
+      <args> m[7] m[27] s[7] 101 s[27] 112 </args>
+      <args> m[7] m[28] s[7] 101 s[28] 11 </args>
+      <args> m[7] m[29] s[7] 101 s[29] 317 </args>
+      <args> m[8] m[9] s[8] 521 s[9] 123 </args>
+      <args> m[8] m[10] s[8] 521 s[10] 617 </args>
+      <args> m[8] m[11] s[8] 521 s[11] 215 </args>
+      <args> m[8] m[12] s[8] 521 s[12] 207 </args>
+      <args> m[8] m[14] s[8] 521 s[14] 602 </args>
+      <args> m[8] m[17] s[8] 521 s[17] 707 </args>
+      <args> m[8] m[18] s[8] 521 s[18] 468 </args>
+      <args> m[8] m[19] s[8] 521 s[19] 438 </args>
+      <args> m[8] m[20] s[8] 521 s[20] 116 </args>
+      <args> m[8] m[21] s[8] 521 s[21] 344 </args>
+      <args> m[8] m[22] s[8] 521 s[22] 776 </args>
+      <args> m[8] m[23] s[8] 521 s[23] 157 </args>
+      <args> m[8] m[24] s[8] 521 s[24] 287 </args>
+      <args> m[8] m[26] s[8] 521 s[26] 346 </args>
+      <args> m[8] m[27] s[8] 521 s[27] 112 </args>
+      <args> m[8] m[28] s[8] 521 s[28] 11 </args>
+      <args> m[8] m[29] s[8] 521 s[29] 317 </args>
+      <args> m[9] m[10] s[9] 123 s[10] 617 </args>
+      <args> m[9] m[11] s[9] 123 s[11] 215 </args>
+      <args> m[9] m[12] s[9] 123 s[12] 207 </args>
+      <args> m[9] m[13] s[9] 123 s[13] 97 </args>
+      <args> m[9] m[14] s[9] 123 s[14] 602 </args>
+      <args> m[9] m[15] s[9] 123 s[15] 668 </args>
+      <args> m[9] m[16] s[9] 123 s[16] 718 </args>
+      <args> m[9] m[17] s[9] 123 s[17] 707 </args>
+      <args> m[9] m[18] s[9] 123 s[18] 468 </args>
+      <args> m[9] m[19] s[9] 123 s[19] 438 </args>
+      <args> m[9] m[20] s[9] 123 s[20] 116 </args>
+      <args> m[9] m[21] s[9] 123 s[21] 344 </args>
+      <args> m[9] m[22] s[9] 123 s[22] 776 </args>
+      <args> m[9] m[23] s[9] 123 s[23] 157 </args>
+      <args> m[9] m[24] s[9] 123 s[24] 287 </args>
+      <args> m[9] m[25] s[9] 123 s[25] 83 </args>
+      <args> m[9] m[26] s[9] 123 s[26] 346 </args>
+      <args> m[9] m[27] s[9] 123 s[27] 112 </args>
+      <args> m[9] m[28] s[9] 123 s[28] 11 </args>
+      <args> m[9] m[29] s[9] 123 s[29] 317 </args>
+      <args> m[10] m[11] s[10] 617 s[11] 215 </args>
+      <args> m[10] m[12] s[10] 617 s[12] 207 </args>
+      <args> m[10] m[13] s[10] 617 s[13] 97 </args>
+      <args> m[10] m[14] s[10] 617 s[14] 602 </args>
+      <args> m[10] m[15] s[10] 617 s[15] 668 </args>
+      <args> m[10] m[16] s[10] 617 s[16] 718 </args>
+      <args> m[10] m[17] s[10] 617 s[17] 707 </args>
+      <args> m[10] m[18] s[10] 617 s[18] 468 </args>
+      <args> m[10] m[19] s[10] 617 s[19] 438 </args>
+      <args> m[10] m[20] s[10] 617 s[20] 116 </args>
+      <args> m[10] m[21] s[10] 617 s[21] 344 </args>
+      <args> m[10] m[22] s[10] 617 s[22] 776 </args>
+      <args> m[10] m[23] s[10] 617 s[23] 157 </args>
+      <args> m[10] m[24] s[10] 617 s[24] 287 </args>
+      <args> m[10] m[25] s[10] 617 s[25] 83 </args>
+      <args> m[10] m[26] s[10] 617 s[26] 346 </args>
+      <args> m[10] m[27] s[10] 617 s[27] 112 </args>
+      <args> m[10] m[28] s[10] 617 s[28] 11 </args>
+      <args> m[10] m[29] s[10] 617 s[29] 317 </args>
+      <args> m[11] m[12] s[11] 215 s[12] 207 </args>
+      <args> m[11] m[13] s[11] 215 s[13] 97 </args>
+      <args> m[11] m[14] s[11] 215 s[14] 602 </args>
+      <args> m[11] m[15] s[11] 215 s[15] 668 </args>
+      <args> m[11] m[16] s[11] 215 s[16] 718 </args>
+      <args> m[11] m[17] s[11] 215 s[17] 707 </args>
+      <args> m[11] m[18] s[11] 215 s[18] 468 </args>
+      <args> m[11] m[19] s[11] 215 s[19] 438 </args>
+      <args> m[11] m[20] s[11] 215 s[20] 116 </args>
+      <args> m[11] m[21] s[11] 215 s[21] 344 </args>
+      <args> m[11] m[22] s[11] 215 s[22] 776 </args>
+      <args> m[11] m[23] s[11] 215 s[23] 157 </args>
+      <args> m[11] m[24] s[11] 215 s[24] 287 </args>
+      <args> m[11] m[25] s[11] 215 s[25] 83 </args>
+      <args> m[11] m[26] s[11] 215 s[26] 346 </args>
+      <args> m[11] m[27] s[11] 215 s[27] 112 </args>
+      <args> m[11] m[28] s[11] 215 s[28] 11 </args>
+      <args> m[11] m[29] s[11] 215 s[29] 317 </args>
+      <args> m[12] m[13] s[12] 207 s[13] 97 </args>
+      <args> m[12] m[14] s[12] 207 s[14] 602 </args>
+      <args> m[12] m[15] s[12] 207 s[15] 668 </args>
+      <args> m[12] m[16] s[12] 207 s[16] 718 </args>
+      <args> m[12] m[17] s[12] 207 s[17] 707 </args>
+      <args> m[12] m[18] s[12] 207 s[18] 468 </args>
+      <args> m[12] m[19] s[12] 207 s[19] 438 </args>
+      <args> m[12] m[20] s[12] 207 s[20] 116 </args>
+      <args> m[12] m[21] s[12] 207 s[21] 344 </args>
+      <args> m[12] m[22] s[12] 207 s[22] 776 </args>
+      <args> m[12] m[23] s[12] 207 s[23] 157 </args>
+      <args> m[12] m[24] s[12] 207 s[24] 287 </args>
+      <args> m[12] m[25] s[12] 207 s[25] 83 </args>
+      <args> m[12] m[26] s[12] 207 s[26] 346 </args>
+      <args> m[12] m[27] s[12] 207 s[27] 112 </args>
+      <args> m[12] m[28] s[12] 207 s[28] 11 </args>
+      <args> m[12] m[29] s[12] 207 s[29] 317 </args>
+      <args> m[13] m[14] s[13] 97 s[14] 602 </args>
+      <args> m[13] m[17] s[13] 97 s[17] 707 </args>
+      <args> m[13] m[18] s[13] 97 s[18] 468 </args>
+      <args> m[13] m[19] s[13] 97 s[19] 438 </args>
+      <args> m[13] m[20] s[13] 97 s[20] 116 </args>
+      <args> m[13] m[21] s[13] 97 s[21] 344 </args>
+      <args> m[13] m[22] s[13] 97 s[22] 776 </args>
+      <args> m[13] m[23] s[13] 97 s[23] 157 </args>
+      <args> m[13] m[24] s[13] 97 s[24] 287 </args>
+      <args> m[13] m[26] s[13] 97 s[26] 346 </args>
+      <args> m[13] m[27] s[13] 97 s[27] 112 </args>
+      <args> m[13] m[28] s[13] 97 s[28] 11 </args>
+      <args> m[13] m[29] s[13] 97 s[29] 317 </args>
+      <args> m[14] m[15] s[14] 602 s[15] 668 </args>
+      <args> m[14] m[16] s[14] 602 s[16] 718 </args>
+      <args> m[14] m[17] s[14] 602 s[17] 707 </args>
+      <args> m[14] m[18] s[14] 602 s[18] 468 </args>
+      <args> m[14] m[19] s[14] 602 s[19] 438 </args>
+      <args> m[14] m[20] s[14] 602 s[20] 116 </args>
+      <args> m[14] m[21] s[14] 602 s[21] 344 </args>
+      <args> m[14] m[22] s[14] 602 s[22] 776 </args>
+      <args> m[14] m[23] s[14] 602 s[23] 157 </args>
+      <args> m[14] m[24] s[14] 602 s[24] 287 </args>
+      <args> m[14] m[25] s[14] 602 s[25] 83 </args>
+      <args> m[14] m[26] s[14] 602 s[26] 346 </args>
+      <args> m[14] m[27] s[14] 602 s[27] 112 </args>
+      <args> m[14] m[28] s[14] 602 s[28] 11 </args>
+      <args> m[14] m[29] s[14] 602 s[29] 317 </args>
+      <args> m[15] m[17] s[15] 668 s[17] 707 </args>
+      <args> m[15] m[18] s[15] 668 s[18] 468 </args>
+      <args> m[15] m[19] s[15] 668 s[19] 438 </args>
+      <args> m[15] m[20] s[15] 668 s[20] 116 </args>
+      <args> m[15] m[21] s[15] 668 s[21] 344 </args>
+      <args> m[15] m[22] s[15] 668 s[22] 776 </args>
+      <args> m[15] m[23] s[15] 668 s[23] 157 </args>
+      <args> m[15] m[24] s[15] 668 s[24] 287 </args>
+      <args> m[15] m[26] s[15] 668 s[26] 346 </args>
+      <args> m[15] m[27] s[15] 668 s[27] 112 </args>
+      <args> m[15] m[28] s[15] 668 s[28] 11 </args>
+      <args> m[15] m[29] s[15] 668 s[29] 317 </args>
+      <args> m[16] m[17] s[16] 718 s[17] 707 </args>
+      <args> m[16] m[18] s[16] 718 s[18] 468 </args>
+      <args> m[16] m[19] s[16] 718 s[19] 438 </args>
+      <args> m[16] m[20] s[16] 718 s[20] 116 </args>
+      <args> m[16] m[21] s[16] 718 s[21] 344 </args>
+      <args> m[16] m[22] s[16] 718 s[22] 776 </args>
+      <args> m[16] m[23] s[16] 718 s[23] 157 </args>
+      <args> m[16] m[24] s[16] 718 s[24] 287 </args>
+      <args> m[16] m[26] s[16] 718 s[26] 346 </args>
+      <args> m[16] m[27] s[16] 718 s[27] 112 </args>
+      <args> m[16] m[28] s[16] 718 s[28] 11 </args>
+      <args> m[16] m[29] s[16] 718 s[29] 317 </args>
+      <args> m[17] m[18] s[17] 707 s[18] 468 </args>
+      <args> m[17] m[19] s[17] 707 s[19] 438 </args>
+      <args> m[17] m[20] s[17] 707 s[20] 116 </args>
+      <args> m[17] m[21] s[17] 707 s[21] 344 </args>
+      <args> m[17] m[22] s[17] 707 s[22] 776 </args>
+      <args> m[17] m[23] s[17] 707 s[23] 157 </args>
+      <args> m[17] m[24] s[17] 707 s[24] 287 </args>
+      <args> m[17] m[25] s[17] 707 s[25] 83 </args>
+      <args> m[17] m[26] s[17] 707 s[26] 346 </args>
+      <args> m[17] m[27] s[17] 707 s[27] 112 </args>
+      <args> m[17] m[28] s[17] 707 s[28] 11 </args>
+      <args> m[17] m[29] s[17] 707 s[29] 317 </args>
+      <args> m[18] m[19] s[18] 468 s[19] 438 </args>
+      <args> m[18] m[20] s[18] 468 s[20] 116 </args>
+      <args> m[18] m[21] s[18] 468 s[21] 344 </args>
+      <args> m[18] m[22] s[18] 468 s[22] 776 </args>
+      <args> m[18] m[23] s[18] 468 s[23] 157 </args>
+      <args> m[18] m[24] s[18] 468 s[24] 287 </args>
+      <args> m[18] m[25] s[18] 468 s[25] 83 </args>
+      <args> m[18] m[26] s[18] 468 s[26] 346 </args>
+      <args> m[18] m[27] s[18] 468 s[27] 112 </args>
+      <args> m[18] m[28] s[18] 468 s[28] 11 </args>
+      <args> m[18] m[29] s[18] 468 s[29] 317 </args>
+      <args> m[19] m[20] s[19] 438 s[20] 116 </args>
+      <args> m[19] m[21] s[19] 438 s[21] 344 </args>
+      <args> m[19] m[22] s[19] 438 s[22] 776 </args>
+      <args> m[19] m[23] s[19] 438 s[23] 157 </args>
+      <args> m[19] m[24] s[19] 438 s[24] 287 </args>
+      <args> m[19] m[25] s[19] 438 s[25] 83 </args>
+      <args> m[19] m[26] s[19] 438 s[26] 346 </args>
+      <args> m[19] m[27] s[19] 438 s[27] 112 </args>
+      <args> m[19] m[28] s[19] 438 s[28] 11 </args>
+      <args> m[19] m[29] s[19] 438 s[29] 317 </args>
+      <args> m[20] m[21] s[20] 116 s[21] 344 </args>
+      <args> m[20] m[22] s[20] 116 s[22] 776 </args>
+      <args> m[20] m[23] s[20] 116 s[23] 157 </args>
+      <args> m[20] m[24] s[20] 116 s[24] 287 </args>
+      <args> m[20] m[25] s[20] 116 s[25] 83 </args>
+      <args> m[20] m[26] s[20] 116 s[26] 346 </args>
+      <args> m[20] m[27] s[20] 116 s[27] 112 </args>
+      <args> m[20] m[28] s[20] 116 s[28] 11 </args>
+      <args> m[20] m[29] s[20] 116 s[29] 317 </args>
+      <args> m[21] m[22] s[21] 344 s[22] 776 </args>
+      <args> m[21] m[23] s[21] 344 s[23] 157 </args>
+      <args> m[21] m[24] s[21] 344 s[24] 287 </args>
+      <args> m[21] m[25] s[21] 344 s[25] 83 </args>
+      <args> m[21] m[26] s[21] 344 s[26] 346 </args>
+      <args> m[21] m[27] s[21] 344 s[27] 112 </args>
+      <args> m[21] m[28] s[21] 344 s[28] 11 </args>
+      <args> m[21] m[29] s[21] 344 s[29] 317 </args>
+      <args> m[22] m[23] s[22] 776 s[23] 157 </args>
+      <args> m[22] m[24] s[22] 776 s[24] 287 </args>
+      <args> m[22] m[25] s[22] 776 s[25] 83 </args>
+      <args> m[22] m[26] s[22] 776 s[26] 346 </args>
+      <args> m[22] m[27] s[22] 776 s[27] 112 </args>
+      <args> m[22] m[28] s[22] 776 s[28] 11 </args>
+      <args> m[22] m[29] s[22] 776 s[29] 317 </args>
+      <args> m[23] m[24] s[23] 157 s[24] 287 </args>
+      <args> m[23] m[25] s[23] 157 s[25] 83 </args>
+      <args> m[23] m[26] s[23] 157 s[26] 346 </args>
+      <args> m[23] m[27] s[23] 157 s[27] 112 </args>
+      <args> m[23] m[28] s[23] 157 s[28] 11 </args>
+      <args> m[23] m[29] s[23] 157 s[29] 317 </args>
+      <args> m[24] m[25] s[24] 287 s[25] 83 </args>
+      <args> m[24] m[26] s[24] 287 s[26] 346 </args>
+      <args> m[24] m[27] s[24] 287 s[27] 112 </args>
+      <args> m[24] m[28] s[24] 287 s[28] 11 </args>
+      <args> m[24] m[29] s[24] 287 s[29] 317 </args>
+      <args> m[25] m[26] s[25] 83 s[26] 346 </args>
+      <args> m[25] m[27] s[25] 83 s[27] 112 </args>
+      <args> m[25] m[28] s[25] 83 s[28] 11 </args>
+      <args> m[25] m[29] s[25] 83 s[29] 317 </args>
+      <args> m[26] m[27] s[26] 346 s[27] 112 </args>
+      <args> m[26] m[28] s[26] 346 s[28] 11 </args>
+      <args> m[26] m[29] s[26] 346 s[29] 317 </args>
+      <args> m[27] m[28] s[27] 112 s[28] 11 </args>
+      <args> m[27] m[29] s[27] 112 s[29] 317 </args>
+      <args> m[28] m[29] s[28] 11 s[29] 317 </args>
+    </group>
+    <block note="no overlapping on resources">
+      <noOverlap>
+        <origins> s[0] s[5] s[7] s[8] s[13] </origins>
+        <lengths> 383 773 101 521 97 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[5] s[7] s[8] s[13] s[15] s[25] </origins>
+        <lengths> 773 101 521 97 668 83 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[0] s[5] s[7] s[8] s[16] s[25] </origins>
+        <lengths> 383 773 101 521 718 83 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[3] s[5] s[7] s[8] s[13] s[15] </origins>
+        <lengths> 441 773 101 521 97 668 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[0] s[5] s[7] s[8] s[15] </origins>
+        <lengths> 383 773 101 521 668 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[0] s[5] s[15] s[25] </origins>
+        <lengths> 383 773 668 83 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[0] s[5] s[8] s[16] s[25] </origins>
+        <lengths> 383 773 521 718 83 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[7] s[13] s[15] s[16] </origins>
+        <lengths> 101 97 668 718 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[5] s[7] s[8] s[13] s[16] s[25] </origins>
+        <lengths> 773 101 521 97 718 83 </lengths>
+      </noOverlap>
+      <noOverlap>
+        <origins> s[3] s[7] s[8] s[13] s[16] </origins>
+        <lengths> 441 101 521 97 718 </lengths>
+      </noOverlap>
+    </block>
+    <cumulative class="redundant-constraints" note="no more than the available number of machines used at any time">
+      <origins> s[] </origins>
+      <lengths> 383 764 650 441 710 773 791 101 521 123 617 215 207 97 602 668 718 707 468 438 116 344 776 157 287 83 346 112 11 317 </lengths>
+      <heights> 1x30 </heights>
+      <condition> (le,10) </condition>
+    </cumulative>
+  </constraints>
+  <objectives>
+    <minimize note="minimizing the makespan" type="maximum"> add(s[0],383) add(s[1],764) add(s[2],650) add(s[3],441) add(s[4],710) add(s[5],773) add(s[6],791) add(s[7],101) add(s[8],521) add(s[9],123) add(s[10],617) add(s[11],215) add(s[12],207) add(s[13],97) add(s[14],602) add(s[15],668) add(s[16],718) add(s[17],707) add(s[18],468) add(s[19],438) add(s[20],116) add(s[21],344) add(s[22],776) add(s[23],157) add(s[24],287) add(s[25],83) add(s[26],346) add(s[27],112) add(s[28],11) add(s[29],317) </minimize>
+  </objectives>
+</instance>

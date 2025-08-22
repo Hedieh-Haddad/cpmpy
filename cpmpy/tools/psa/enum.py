@@ -13,6 +13,7 @@ class StopCondition(enum.Enum):
     """Stop conditions for hyperparameter optimization."""
     TIMEOUT = "Timeout"
     FIRST_SOLUTION = "FirstSolution"
+    STAGNATION = "Stagnation"
 
 class TimeoutEvolution(enum.Enum):
     """Timeout evolution strategies."""

@@ -9,6 +9,8 @@ from cpmpy import SolverLookup
 from cpmpy.tools.parameter_tuner import PSAFactory
 from cpmpy.tools.psa.enum import TimeType, TimeoutEvolution, StopCondition, RoundTimeType, HPOType
 from cpmpy.tools.xcsp3.parser_callbacks import CallbacksCPMPy
+from cpmpy.tools.psa import csv_logger
+import json
 
 if __name__ == "__main__":
     gc.disable()
@@ -19,12 +21,12 @@ if __name__ == "__main__":
     parser.add_argument("--solver", help="The solver to use", required=True, type=str, choices=available_solvers,
                         default=available_solvers[0])
     parser.add_argument("--output", help="The path to the output csv", required=False, type=str, default="output.csv")
-    parser.add_argument("--hpo", type=HPOType, default=HPOType.BAYESIAN_SEARCH, choices=HPOType)
+    parser.add_argument("--hpo", type=HPOType, default=HPOType.BAYESIAN_SEARCH, choices=list(HPOType))
     parser.add_argument("--global-time-limit", help="The global time limit for the solver", required=False, type=int,
                         default=1800)
     parser.add_argument("--global-time-strategy",
                         help="The strategy used for splitting the time budget between the probing and the solving phase",
-                        required=False, type=TimeType, choices=TimeType, default=TimeType.PERCENT)
+                        required=False, type=TimeType, choices=list(TimeType), default=TimeType.PERCENT)
     parser.add_argument("--percent",
                         help="Percentage of the global time limit to use for probing (0-1)",
                         required=False, type=float, default=0.2)
@@ -33,16 +35,27 @@ if __name__ == "__main__":
                         required=False, type=int, default=20)
     parser.add_argument("--round-time-strategy",
                         help="The strategy used for splitting the probing time budget between the configurations",
-                        choices=RoundTimeType, default=RoundTimeType.STATIC, type=RoundTimeType)
+                        choices=list(RoundTimeType), default=RoundTimeType.STATIC, type=RoundTimeType)
     parser.add_argument("--time-evolution", help="The strategy used for evolving the timeout during probing",
-                        choices=TimeoutEvolution, default=TimeoutEvolution.STATIC, type=TimeoutEvolution)
-    parser.add_argument("--stop-strategy", choices=StopCondition,
+                        choices=list(TimeoutEvolution), default=TimeoutEvolution.STATIC, type=TimeoutEvolution)
+    parser.add_argument("--stop-strategy", choices=list(StopCondition),
                         help="The strategy used for stopping the probing phase", default=StopCondition.TIMEOUT,
                         type=StopCondition)
+    parser.add_argument("--stagnation-limit", help="The number of rounds without improvement to stop probing",
+                        required=False, type=int, default=10)
+
     parser.add_argument("--tuning-file", required=False, help="A json file with the hyperparameters.")
 
     args = parser.parse_args()
     start_time = timer()
+
+    # Initialize CSV Logger
+    param_keys = []
+    if args.tuning_file:
+        with open(args.tuning_file) as f:
+            tuning_params = json.load(f)
+            param_keys = tuning_params.get("tunable_params", {}).keys()
+    csv_logger.init_logger(args.output, param_keys)
 
     parser = ParserXCSP3(args.input)
     callbacks = CallbacksCPMPy()
@@ -63,3 +76,6 @@ if __name__ == "__main__":
     best_params = psa.tune(args.global_time_limit, args.max_tries)
 
     print(best_params)
+
+    # Close the logger
+    csv_logger.close_logger()

@@ -95,7 +95,7 @@ class FirstRuntimeRoundTimeStrategy(RoundTimeStrategy):
     """
 
     def init(self, time_limit=None):
-        self.solver.solve(time_limit=time_limit,solution_limit=1, **self.default_config)
+        self.solver.solve(time_limit=int(time_limit), solution_limit=1, **self.default_config)
         runtime = self.solver.status().runtime
         self._round_timeout = runtime
         self._runtime = runtime
@@ -152,10 +152,12 @@ class DynamicLubyTimeoutEvolutionStrategy(TimeoutEvolutionStrategy):
     Uses the Luby sequence to determine the next timeout.
     Requires a list to track timeout history.
     """
+    def __init__(self):
+        self._timeout_history = []
 
     def evolve(self, current_time_limit, timeout_list=None):
-        index = len(timeout_list)
-        return luby_sequence(index, current_time_limit, timeout_list)
+        index = len(self._timeout_history)
+        return luby_sequence(index, current_time_limit, self._timeout_history)
 
 
 class TuningGlobalTimeoutStrategy(ABC):

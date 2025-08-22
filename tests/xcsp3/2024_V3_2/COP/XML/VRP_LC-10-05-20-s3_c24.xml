@@ -1,0 +1,1246 @@
+<instance format="XCSP3" type="COP">
+  <variables>
+    <array id="veh" note="veh[i] is the vehicle visiting the ith node" size="[80]"> 0..19 </array>
+    <array id="succ" note="succ[i] is the node that succeeds to the ith node" size="[80]"> 0..79 </array>
+    <array id="load" note="load[i] is the load after visiting the ith node" size="[80]"> 0..15 </array>
+    <array id="arr" note="arr[i] is the arrival time at the ith node" size="[80]"> 0..150 </array>
+    <array id="ser" note="ser[i] is the starting time of service at the ith node" size="[80]"> 0..150 </array>
+    <array id="dep" note="dep[i] is the departure time of the ith node" size="[80]"> 0..150 </array>
+    <array id="aux_gb" note="aux_gb[i] is the ith auxiliary variable having been automatically introduced" size="[240]">
+      <domain for="aux_gb[0] aux_gb[2] aux_gb[10] aux_gb[12] aux_gb[16] aux_gb[20] aux_gb[22] aux_gb[24] aux_gb[28] aux_gb[30] aux_gb[32] aux_gb[36] aux_gb[38] aux_gb[40] aux_gb[46] aux_gb[48] aux_gb[56] aux_gb[58] aux_gb[66] aux_gb[72] aux_gb[74] aux_gb[76] aux_gb[78]"> 0..20 </domain>
+      <domain for="aux_gb[1] aux_gb[3] aux_gb[5] aux_gb[7] aux_gb[9] aux_gb[11] aux_gb[13] aux_gb[15] aux_gb[17] aux_gb[19] aux_gb[21] aux_gb[23] aux_gb[25] aux_gb[27] aux_gb[29] aux_gb[31] aux_gb[33] aux_gb[35] aux_gb[37] aux_gb[39] aux_gb[41] aux_gb[43] aux_gb[45] aux_gb[47] aux_gb[49] aux_gb[51] aux_gb[53] aux_gb[55] aux_gb[57] aux_gb[59] aux_gb[61] aux_gb[63] aux_gb[65] aux_gb[67] aux_gb[69] aux_gb[71] aux_gb[73] aux_gb[75] aux_gb[77] aux_gb[79] aux_gb[81] aux_gb[83] aux_gb[85] aux_gb[87] aux_gb[89] aux_gb[91] aux_gb[93] aux_gb[95] aux_gb[97] aux_gb[99] aux_gb[101] aux_gb[103] aux_gb[105] aux_gb[107] aux_gb[109] aux_gb[111] aux_gb[113] aux_gb[115] aux_gb[117] aux_gb[119]"> 0..150 </domain>
+      <domain for="aux_gb[4] aux_gb[34] aux_gb[54] aux_gb[68]"> 0..17 </domain>
+      <domain for="aux_gb[6] aux_gb[8] aux_gb[14] aux_gb[18] aux_gb[26] aux_gb[42] aux_gb[44] aux_gb[50] aux_gb[52] aux_gb[60] aux_gb[62] aux_gb[64] aux_gb[70] aux_gb[121] aux_gb[123] aux_gb[125] aux_gb[127] aux_gb[129] aux_gb[131] aux_gb[133] aux_gb[135] aux_gb[137] aux_gb[139] aux_gb[141] aux_gb[143] aux_gb[145] aux_gb[147] aux_gb[149] aux_gb[151] aux_gb[153] aux_gb[155] aux_gb[157] aux_gb[159] aux_gb[161] aux_gb[163] aux_gb[165] aux_gb[167] aux_gb[169] aux_gb[171] aux_gb[173] aux_gb[175] aux_gb[177] aux_gb[179] aux_gb[181] aux_gb[183] aux_gb[185] aux_gb[187] aux_gb[189] aux_gb[191] aux_gb[193] aux_gb[195] aux_gb[197] aux_gb[199] aux_gb[201] aux_gb[203] aux_gb[205] aux_gb[207] aux_gb[209] aux_gb[211] aux_gb[213] aux_gb[215] aux_gb[217] aux_gb[219] aux_gb[221] aux_gb[223] aux_gb[225] aux_gb[227] aux_gb[229] aux_gb[231] aux_gb[233] aux_gb[235] aux_gb[237] aux_gb[239]"> 0..15 </domain>
+      <domain for="aux_gb[80] aux_gb[82] aux_gb[84] aux_gb[86] aux_gb[88] aux_gb[90] aux_gb[92] aux_gb[94] aux_gb[96] aux_gb[98] aux_gb[100] aux_gb[102] aux_gb[104] aux_gb[106] aux_gb[108] aux_gb[110] aux_gb[112] aux_gb[114] aux_gb[116] aux_gb[118]"> 0..13 </domain>
+      <domain for="aux_gb[120] aux_gb[122] aux_gb[124] aux_gb[126] aux_gb[128] aux_gb[130] aux_gb[132] aux_gb[134] aux_gb[136] aux_gb[138] aux_gb[140] aux_gb[142] aux_gb[144] aux_gb[146] aux_gb[148] aux_gb[150] aux_gb[152] aux_gb[154] aux_gb[156] aux_gb[158] aux_gb[160] aux_gb[162] aux_gb[164] aux_gb[166] aux_gb[168] aux_gb[170] aux_gb[172] aux_gb[174] aux_gb[176] aux_gb[178] aux_gb[180] aux_gb[182] aux_gb[184] aux_gb[186] aux_gb[188] aux_gb[190] aux_gb[192] aux_gb[194] aux_gb[196] aux_gb[198] aux_gb[200] aux_gb[202] aux_gb[204] aux_gb[206] aux_gb[208] aux_gb[210] aux_gb[212] aux_gb[214] aux_gb[216] aux_gb[218] aux_gb[220] aux_gb[222] aux_gb[224] aux_gb[226] aux_gb[228] aux_gb[230] aux_gb[232] aux_gb[234] aux_gb[236] aux_gb[238]"> -4..4 </domain>
+    </array>
+  </variables>
+  <constraints>
+    <circuit note="ensuring a circuit"> succ[] </circuit>
+    <instantiation note="giant tour representation of routes">
+      <list> succ[60..79] </list>
+      <values> 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 40 </values>
+    </instantiation>
+    <block note="tracking vehicle along route">
+      <group>
+        <element>
+          <list> veh[] </list>
+          <index> %0 </index>
+          <value> %1 </value>
+        </element>
+        <args> succ[0] veh[0] </args>
+        <args> succ[1] veh[1] </args>
+        <args> succ[2] veh[2] </args>
+        <args> succ[3] veh[3] </args>
+        <args> succ[4] veh[4] </args>
+        <args> succ[5] veh[5] </args>
+        <args> succ[6] veh[6] </args>
+        <args> succ[7] veh[7] </args>
+        <args> succ[8] veh[8] </args>
+        <args> succ[9] veh[9] </args>
+        <args> succ[10] veh[10] </args>
+        <args> succ[11] veh[11] </args>
+        <args> succ[12] veh[12] </args>
+        <args> succ[13] veh[13] </args>
+        <args> succ[14] veh[14] </args>
+        <args> succ[15] veh[15] </args>
+        <args> succ[16] veh[16] </args>
+        <args> succ[17] veh[17] </args>
+        <args> succ[18] veh[18] </args>
+        <args> succ[19] veh[19] </args>
+        <args> succ[20] veh[20] </args>
+        <args> succ[21] veh[21] </args>
+        <args> succ[22] veh[22] </args>
+        <args> succ[23] veh[23] </args>
+        <args> succ[24] veh[24] </args>
+        <args> succ[25] veh[25] </args>
+        <args> succ[26] veh[26] </args>
+        <args> succ[27] veh[27] </args>
+        <args> succ[28] veh[28] </args>
+        <args> succ[29] veh[29] </args>
+        <args> succ[30] veh[30] </args>
+        <args> succ[31] veh[31] </args>
+        <args> succ[32] veh[32] </args>
+        <args> succ[33] veh[33] </args>
+        <args> succ[34] veh[34] </args>
+        <args> succ[35] veh[35] </args>
+        <args> succ[36] veh[36] </args>
+        <args> succ[37] veh[37] </args>
+        <args> succ[38] veh[38] </args>
+        <args> succ[39] veh[39] </args>
+        <args> succ[40] veh[40] </args>
+        <args> succ[41] veh[41] </args>
+        <args> succ[42] veh[42] </args>
+        <args> succ[43] veh[43] </args>
+        <args> succ[44] veh[44] </args>
+        <args> succ[45] veh[45] </args>
+        <args> succ[46] veh[46] </args>
+        <args> succ[47] veh[47] </args>
+        <args> succ[48] veh[48] </args>
+        <args> succ[49] veh[49] </args>
+        <args> succ[50] veh[50] </args>
+        <args> succ[51] veh[51] </args>
+        <args> succ[52] veh[52] </args>
+        <args> succ[53] veh[53] </args>
+        <args> succ[54] veh[54] </args>
+        <args> succ[55] veh[55] </args>
+        <args> succ[56] veh[56] </args>
+        <args> succ[57] veh[57] </args>
+        <args> succ[58] veh[58] </args>
+        <args> succ[59] veh[59] </args>
+      </group>
+      <instantiation>
+        <list> veh[40..79] </list>
+        <values> 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 </values>
+      </instantiation>
+    </block>
+    <block note="ordering time-related variables">
+      <group>
+        <intension> le(%0,%1) </intension>
+        <args> arr[0] ser[0] </args>
+        <args> arr[1] ser[1] </args>
+        <args> arr[2] ser[2] </args>
+        <args> arr[3] ser[3] </args>
+        <args> arr[4] ser[4] </args>
+        <args> arr[5] ser[5] </args>
+        <args> arr[6] ser[6] </args>
+        <args> arr[7] ser[7] </args>
+        <args> arr[8] ser[8] </args>
+        <args> arr[9] ser[9] </args>
+        <args> arr[10] ser[10] </args>
+        <args> arr[11] ser[11] </args>
+        <args> arr[12] ser[12] </args>
+        <args> arr[13] ser[13] </args>
+        <args> arr[14] ser[14] </args>
+        <args> arr[15] ser[15] </args>
+        <args> arr[16] ser[16] </args>
+        <args> arr[17] ser[17] </args>
+        <args> arr[18] ser[18] </args>
+        <args> arr[19] ser[19] </args>
+        <args> arr[20] ser[20] </args>
+        <args> arr[21] ser[21] </args>
+        <args> arr[22] ser[22] </args>
+        <args> arr[23] ser[23] </args>
+        <args> arr[24] ser[24] </args>
+        <args> arr[25] ser[25] </args>
+        <args> arr[26] ser[26] </args>
+        <args> arr[27] ser[27] </args>
+        <args> arr[28] ser[28] </args>
+        <args> arr[29] ser[29] </args>
+        <args> arr[30] ser[30] </args>
+        <args> arr[31] ser[31] </args>
+        <args> arr[32] ser[32] </args>
+        <args> arr[33] ser[33] </args>
+        <args> arr[34] ser[34] </args>
+        <args> arr[35] ser[35] </args>
+        <args> arr[36] ser[36] </args>
+        <args> arr[37] ser[37] </args>
+        <args> arr[38] ser[38] </args>
+        <args> arr[39] ser[39] </args>
+        <args> ser[0] 34 </args>
+        <args> ser[1] 74 </args>
+        <args> ser[2] 30 </args>
+        <args> ser[3] 34 </args>
+        <args> ser[4] 63 </args>
+        <args> ser[5] 38 </args>
+        <args> ser[6] 72 </args>
+        <args> ser[7] 46 </args>
+        <args> ser[8] 42 </args>
+        <args> ser[9] 47 </args>
+        <args> ser[10] 48 </args>
+        <args> ser[11] 68 </args>
+        <args> ser[12] 88 </args>
+        <args> ser[13] 59 </args>
+        <args> ser[14] 81 </args>
+        <args> ser[15] 71 </args>
+        <args> ser[16] 49 </args>
+        <args> ser[17] 40 </args>
+        <args> ser[18] 34 </args>
+        <args> ser[19] 34 </args>
+        <args> ser[20] 103 </args>
+        <args> ser[21] 124 </args>
+        <args> ser[22] 115 </args>
+        <args> ser[23] 89 </args>
+        <args> ser[24] 119 </args>
+        <args> ser[25] 111 </args>
+        <args> ser[26] 123 </args>
+        <args> ser[27] 116 </args>
+        <args> ser[28] 109 </args>
+        <args> ser[29] 91 </args>
+        <args> ser[30] 108 </args>
+        <args> ser[31] 126 </args>
+        <args> ser[32] 122 </args>
+        <args> ser[33] 108 </args>
+        <args> ser[34] 123 </args>
+        <args> ser[35] 128 </args>
+        <args> ser[36] 96 </args>
+        <args> ser[37] 102 </args>
+        <args> ser[38] 97 </args>
+        <args> ser[39] 83 </args>
+      </group>
+      <group>
+        <intension> le(add(%0,%1),%2) </intension>
+        <args> ser[0] 18 dep[0] </args>
+        <args> ser[1] 11 dep[1] </args>
+        <args> ser[2] 18 dep[2] </args>
+        <args> ser[3] 18 dep[3] </args>
+        <args> ser[4] 13 dep[4] </args>
+        <args> ser[5] 19 dep[5] </args>
+        <args> ser[6] 18 dep[6] </args>
+        <args> ser[7] 17 dep[7] </args>
+        <args> ser[8] 11 dep[8] </args>
+        <args> ser[9] 11 dep[9] </args>
+        <args> ser[10] 14 dep[10] </args>
+        <args> ser[11] 15 dep[11] </args>
+        <args> ser[12] 15 dep[12] </args>
+        <args> ser[13] 10 dep[13] </args>
+        <args> ser[14] 17 dep[14] </args>
+        <args> ser[15] 11 dep[15] </args>
+        <args> ser[16] 11 dep[16] </args>
+        <args> ser[17] 15 dep[17] </args>
+        <args> ser[18] 12 dep[18] </args>
+        <args> ser[19] 13 dep[19] </args>
+        <args> ser[20] 18 dep[20] </args>
+        <args> ser[21] 11 dep[21] </args>
+        <args> ser[22] 18 dep[22] </args>
+        <args> ser[23] 18 dep[23] </args>
+        <args> ser[24] 13 dep[24] </args>
+        <args> ser[25] 19 dep[25] </args>
+        <args> ser[26] 18 dep[26] </args>
+        <args> ser[27] 17 dep[27] </args>
+        <args> ser[28] 11 dep[28] </args>
+        <args> ser[29] 11 dep[29] </args>
+        <args> ser[30] 14 dep[30] </args>
+        <args> ser[31] 15 dep[31] </args>
+        <args> ser[32] 15 dep[32] </args>
+        <args> ser[33] 10 dep[33] </args>
+        <args> ser[34] 17 dep[34] </args>
+        <args> ser[35] 11 dep[35] </args>
+        <args> ser[36] 11 dep[36] </args>
+        <args> ser[37] 15 dep[37] </args>
+        <args> ser[38] 12 dep[38] </args>
+        <args> ser[39] 13 dep[39] </args>
+      </group>
+      <group>
+        <intension> ge(%0,%1) </intension>
+        <args> ser[0] 11 </args>
+        <args> ser[1] 40 </args>
+        <args> ser[2] 13 </args>
+        <args> ser[3] 7 </args>
+        <args> ser[4] 45 </args>
+        <args> ser[5] 13 </args>
+        <args> ser[6] 36 </args>
+        <args> ser[7] 15 </args>
+        <args> ser[8] 15 </args>
+        <args> ser[9] 24 </args>
+        <args> ser[10] 19 </args>
+        <args> ser[11] 53 </args>
+        <args> ser[12] 49 </args>
+        <args> ser[13] 34 </args>
+        <args> ser[14] 48 </args>
+        <args> ser[15] 42 </args>
+        <args> ser[16] 29 </args>
+        <args> ser[17] 10 </args>
+        <args> ser[18] 11 </args>
+        <args> ser[19] 13 </args>
+        <args> ser[20] 34 </args>
+        <args> ser[21] 57 </args>
+        <args> ser[22] 46 </args>
+        <args> ser[23] 31 </args>
+        <args> ser[24] 64 </args>
+        <args> ser[25] 47 </args>
+        <args> ser[26] 69 </args>
+        <args> ser[27] 47 </args>
+        <args> ser[28] 46 </args>
+        <args> ser[29] 50 </args>
+        <args> ser[30] 48 </args>
+        <args> ser[31] 83 </args>
+        <args> ser[32] 79 </args>
+        <args> ser[33] 59 </args>
+        <args> ser[34] 82 </args>
+        <args> ser[35] 68 </args>
+        <args> ser[36] 45 </args>
+        <args> ser[37] 42 </args>
+        <args> ser[38] 28 </args>
+        <args> ser[39] 31 </args>
+      </group>
+    </block>
+    <group note="setting time at start and end nodes">
+      <intension> eq(%0,%1) </intension>
+      <args> arr[40] ser[40] </args>
+      <args> arr[41] ser[41] </args>
+      <args> arr[42] ser[42] </args>
+      <args> arr[43] ser[43] </args>
+      <args> arr[44] ser[44] </args>
+      <args> arr[45] ser[45] </args>
+      <args> arr[46] ser[46] </args>
+      <args> arr[47] ser[47] </args>
+      <args> arr[48] ser[48] </args>
+      <args> arr[49] ser[49] </args>
+      <args> arr[50] ser[50] </args>
+      <args> arr[51] ser[51] </args>
+      <args> arr[52] ser[52] </args>
+      <args> arr[53] ser[53] </args>
+      <args> arr[54] ser[54] </args>
+      <args> arr[55] ser[55] </args>
+      <args> arr[56] ser[56] </args>
+      <args> arr[57] ser[57] </args>
+      <args> arr[58] ser[58] </args>
+      <args> arr[59] ser[59] </args>
+      <args> arr[60] ser[60] </args>
+      <args> arr[61] ser[61] </args>
+      <args> arr[62] ser[62] </args>
+      <args> arr[63] ser[63] </args>
+      <args> arr[64] ser[64] </args>
+      <args> arr[65] ser[65] </args>
+      <args> arr[66] ser[66] </args>
+      <args> arr[67] ser[67] </args>
+      <args> arr[68] ser[68] </args>
+      <args> arr[69] ser[69] </args>
+      <args> arr[70] ser[70] </args>
+      <args> arr[71] ser[71] </args>
+      <args> arr[72] ser[72] </args>
+      <args> arr[73] ser[73] </args>
+      <args> arr[74] ser[74] </args>
+      <args> arr[75] ser[75] </args>
+      <args> arr[76] ser[76] </args>
+      <args> arr[77] ser[77] </args>
+      <args> arr[78] ser[78] </args>
+      <args> arr[79] ser[79] </args>
+      <args> ser[40] dep[40] </args>
+      <args> ser[41] dep[41] </args>
+      <args> ser[42] dep[42] </args>
+      <args> ser[43] dep[43] </args>
+      <args> ser[44] dep[44] </args>
+      <args> ser[45] dep[45] </args>
+      <args> ser[46] dep[46] </args>
+      <args> ser[47] dep[47] </args>
+      <args> ser[48] dep[48] </args>
+      <args> ser[49] dep[49] </args>
+      <args> ser[50] dep[50] </args>
+      <args> ser[51] dep[51] </args>
+      <args> ser[52] dep[52] </args>
+      <args> ser[53] dep[53] </args>
+      <args> ser[54] dep[54] </args>
+      <args> ser[55] dep[55] </args>
+      <args> ser[56] dep[56] </args>
+      <args> ser[57] dep[57] </args>
+      <args> ser[58] dep[58] </args>
+      <args> ser[59] dep[59] </args>
+      <args> ser[60] dep[60] </args>
+      <args> ser[61] dep[61] </args>
+      <args> ser[62] dep[62] </args>
+      <args> ser[63] dep[63] </args>
+      <args> ser[64] dep[64] </args>
+      <args> ser[65] dep[65] </args>
+      <args> ser[66] dep[66] </args>
+      <args> ser[67] dep[67] </args>
+      <args> ser[68] dep[68] </args>
+      <args> ser[69] dep[69] </args>
+      <args> ser[70] dep[70] </args>
+      <args> ser[71] dep[71] </args>
+      <args> ser[72] dep[72] </args>
+      <args> ser[73] dep[73] </args>
+      <args> ser[74] dep[74] </args>
+      <args> ser[75] dep[75] </args>
+      <args> ser[76] dep[76] </args>
+      <args> ser[77] dep[77] </args>
+      <args> ser[78] dep[78] </args>
+      <args> ser[79] dep[79] </args>
+    </group>
+    <group note="accumulating time along route">
+      <intension> eq(add(%0,%1),%2) </intension>
+      <args> aux_gb[0] dep[0] aux_gb[1] </args>
+      <args> aux_gb[2] dep[1] aux_gb[3] </args>
+      <args> aux_gb[4] dep[2] aux_gb[5] </args>
+      <args> aux_gb[6] dep[3] aux_gb[7] </args>
+      <args> aux_gb[8] dep[4] aux_gb[9] </args>
+      <args> aux_gb[10] dep[5] aux_gb[11] </args>
+      <args> aux_gb[12] dep[6] aux_gb[13] </args>
+      <args> aux_gb[14] dep[7] aux_gb[15] </args>
+      <args> aux_gb[16] dep[8] aux_gb[17] </args>
+      <args> aux_gb[18] dep[9] aux_gb[19] </args>
+      <args> aux_gb[20] dep[10] aux_gb[21] </args>
+      <args> aux_gb[22] dep[11] aux_gb[23] </args>
+      <args> aux_gb[24] dep[12] aux_gb[25] </args>
+      <args> aux_gb[26] dep[13] aux_gb[27] </args>
+      <args> aux_gb[28] dep[14] aux_gb[29] </args>
+      <args> aux_gb[30] dep[15] aux_gb[31] </args>
+      <args> aux_gb[32] dep[16] aux_gb[33] </args>
+      <args> aux_gb[34] dep[17] aux_gb[35] </args>
+      <args> aux_gb[36] dep[18] aux_gb[37] </args>
+      <args> aux_gb[38] dep[19] aux_gb[39] </args>
+      <args> aux_gb[40] dep[20] aux_gb[41] </args>
+      <args> aux_gb[42] dep[21] aux_gb[43] </args>
+      <args> aux_gb[44] dep[22] aux_gb[45] </args>
+      <args> aux_gb[46] dep[23] aux_gb[47] </args>
+      <args> aux_gb[48] dep[24] aux_gb[49] </args>
+      <args> aux_gb[50] dep[25] aux_gb[51] </args>
+      <args> aux_gb[52] dep[26] aux_gb[53] </args>
+      <args> aux_gb[54] dep[27] aux_gb[55] </args>
+      <args> aux_gb[56] dep[28] aux_gb[57] </args>
+      <args> aux_gb[58] dep[29] aux_gb[59] </args>
+      <args> aux_gb[60] dep[30] aux_gb[61] </args>
+      <args> aux_gb[62] dep[31] aux_gb[63] </args>
+      <args> aux_gb[64] dep[32] aux_gb[65] </args>
+      <args> aux_gb[66] dep[33] aux_gb[67] </args>
+      <args> aux_gb[68] dep[34] aux_gb[69] </args>
+      <args> aux_gb[70] dep[35] aux_gb[71] </args>
+      <args> aux_gb[72] dep[36] aux_gb[73] </args>
+      <args> aux_gb[74] dep[37] aux_gb[75] </args>
+      <args> aux_gb[76] dep[38] aux_gb[77] </args>
+      <args> aux_gb[78] dep[39] aux_gb[79] </args>
+      <args> aux_gb[80] dep[40] aux_gb[81] </args>
+      <args> aux_gb[82] dep[41] aux_gb[83] </args>
+      <args> aux_gb[84] dep[42] aux_gb[85] </args>
+      <args> aux_gb[86] dep[43] aux_gb[87] </args>
+      <args> aux_gb[88] dep[44] aux_gb[89] </args>
+      <args> aux_gb[90] dep[45] aux_gb[91] </args>
+      <args> aux_gb[92] dep[46] aux_gb[93] </args>
+      <args> aux_gb[94] dep[47] aux_gb[95] </args>
+      <args> aux_gb[96] dep[48] aux_gb[97] </args>
+      <args> aux_gb[98] dep[49] aux_gb[99] </args>
+      <args> aux_gb[100] dep[50] aux_gb[101] </args>
+      <args> aux_gb[102] dep[51] aux_gb[103] </args>
+      <args> aux_gb[104] dep[52] aux_gb[105] </args>
+      <args> aux_gb[106] dep[53] aux_gb[107] </args>
+      <args> aux_gb[108] dep[54] aux_gb[109] </args>
+      <args> aux_gb[110] dep[55] aux_gb[111] </args>
+      <args> aux_gb[112] dep[56] aux_gb[113] </args>
+      <args> aux_gb[114] dep[57] aux_gb[115] </args>
+      <args> aux_gb[116] dep[58] aux_gb[117] </args>
+      <args> aux_gb[118] dep[59] aux_gb[119] </args>
+    </group>
+    <group note="accumulating load along route">
+      <intension> eq(add(%0,%1),%2) </intension>
+      <args> aux_gb[120] load[0] aux_gb[121] </args>
+      <args> aux_gb[122] load[1] aux_gb[123] </args>
+      <args> aux_gb[124] load[2] aux_gb[125] </args>
+      <args> aux_gb[126] load[3] aux_gb[127] </args>
+      <args> aux_gb[128] load[4] aux_gb[129] </args>
+      <args> aux_gb[130] load[5] aux_gb[131] </args>
+      <args> aux_gb[132] load[6] aux_gb[133] </args>
+      <args> aux_gb[134] load[7] aux_gb[135] </args>
+      <args> aux_gb[136] load[8] aux_gb[137] </args>
+      <args> aux_gb[138] load[9] aux_gb[139] </args>
+      <args> aux_gb[140] load[10] aux_gb[141] </args>
+      <args> aux_gb[142] load[11] aux_gb[143] </args>
+      <args> aux_gb[144] load[12] aux_gb[145] </args>
+      <args> aux_gb[146] load[13] aux_gb[147] </args>
+      <args> aux_gb[148] load[14] aux_gb[149] </args>
+      <args> aux_gb[150] load[15] aux_gb[151] </args>
+      <args> aux_gb[152] load[16] aux_gb[153] </args>
+      <args> aux_gb[154] load[17] aux_gb[155] </args>
+      <args> aux_gb[156] load[18] aux_gb[157] </args>
+      <args> aux_gb[158] load[19] aux_gb[159] </args>
+      <args> aux_gb[160] load[20] aux_gb[161] </args>
+      <args> aux_gb[162] load[21] aux_gb[163] </args>
+      <args> aux_gb[164] load[22] aux_gb[165] </args>
+      <args> aux_gb[166] load[23] aux_gb[167] </args>
+      <args> aux_gb[168] load[24] aux_gb[169] </args>
+      <args> aux_gb[170] load[25] aux_gb[171] </args>
+      <args> aux_gb[172] load[26] aux_gb[173] </args>
+      <args> aux_gb[174] load[27] aux_gb[175] </args>
+      <args> aux_gb[176] load[28] aux_gb[177] </args>
+      <args> aux_gb[178] load[29] aux_gb[179] </args>
+      <args> aux_gb[180] load[30] aux_gb[181] </args>
+      <args> aux_gb[182] load[31] aux_gb[183] </args>
+      <args> aux_gb[184] load[32] aux_gb[185] </args>
+      <args> aux_gb[186] load[33] aux_gb[187] </args>
+      <args> aux_gb[188] load[34] aux_gb[189] </args>
+      <args> aux_gb[190] load[35] aux_gb[191] </args>
+      <args> aux_gb[192] load[36] aux_gb[193] </args>
+      <args> aux_gb[194] load[37] aux_gb[195] </args>
+      <args> aux_gb[196] load[38] aux_gb[197] </args>
+      <args> aux_gb[198] load[39] aux_gb[199] </args>
+      <args> aux_gb[200] load[40] aux_gb[201] </args>
+      <args> aux_gb[202] load[41] aux_gb[203] </args>
+      <args> aux_gb[204] load[42] aux_gb[205] </args>
+      <args> aux_gb[206] load[43] aux_gb[207] </args>
+      <args> aux_gb[208] load[44] aux_gb[209] </args>
+      <args> aux_gb[210] load[45] aux_gb[211] </args>
+      <args> aux_gb[212] load[46] aux_gb[213] </args>
+      <args> aux_gb[214] load[47] aux_gb[215] </args>
+      <args> aux_gb[216] load[48] aux_gb[217] </args>
+      <args> aux_gb[218] load[49] aux_gb[219] </args>
+      <args> aux_gb[220] load[50] aux_gb[221] </args>
+      <args> aux_gb[222] load[51] aux_gb[223] </args>
+      <args> aux_gb[224] load[52] aux_gb[225] </args>
+      <args> aux_gb[226] load[53] aux_gb[227] </args>
+      <args> aux_gb[228] load[54] aux_gb[229] </args>
+      <args> aux_gb[230] load[55] aux_gb[231] </args>
+      <args> aux_gb[232] load[56] aux_gb[233] </args>
+      <args> aux_gb[234] load[57] aux_gb[235] </args>
+      <args> aux_gb[236] load[58] aux_gb[237] </args>
+      <args> aux_gb[238] load[59] aux_gb[239] </args>
+    </group>
+    <instantiation note="setting load at start and end nodes">
+      <list> load[40..79] </list>
+      <values> 0x40 </values>
+    </instantiation>
+    <group note="delivery after pickup">
+      <intension> le(add(%0,%1),%2) </intension>
+      <args> dep[0] 5 arr[20] </args>
+      <args> dep[1] 6 arr[21] </args>
+      <args> dep[2] 15 arr[22] </args>
+      <args> dep[3] 6 arr[23] </args>
+      <args> dep[4] 6 arr[24] </args>
+      <args> dep[5] 15 arr[25] </args>
+      <args> dep[6] 15 arr[26] </args>
+      <args> dep[7] 15 arr[27] </args>
+      <args> dep[8] 20 arr[28] </args>
+      <args> dep[9] 15 arr[29] </args>
+      <args> dep[10] 15 arr[30] </args>
+      <args> dep[11] 15 arr[31] </args>
+      <args> dep[12] 15 arr[32] </args>
+      <args> dep[13] 15 arr[33] </args>
+      <args> dep[14] 17 arr[34] </args>
+      <args> dep[15] 15 arr[35] </args>
+      <args> dep[16] 5 arr[36] </args>
+      <args> dep[17] 17 arr[37] </args>
+      <args> dep[18] 5 arr[38] </args>
+      <args> dep[19] 5 arr[39] </args>
+    </group>
+    <group note="delivery on same vehicle as pickup">
+      <intension> eq(%0,%1) </intension>
+      <args> veh[0] veh[20] </args>
+      <args> veh[1] veh[21] </args>
+      <args> veh[2] veh[22] </args>
+      <args> veh[3] veh[23] </args>
+      <args> veh[4] veh[24] </args>
+      <args> veh[5] veh[25] </args>
+      <args> veh[6] veh[26] </args>
+      <args> veh[7] veh[27] </args>
+      <args> veh[8] veh[28] </args>
+      <args> veh[9] veh[29] </args>
+      <args> veh[10] veh[30] </args>
+      <args> veh[11] veh[31] </args>
+      <args> veh[12] veh[32] </args>
+      <args> veh[13] veh[33] </args>
+      <args> veh[14] veh[34] </args>
+      <args> veh[15] veh[35] </args>
+      <args> veh[16] veh[36] </args>
+      <args> veh[17] veh[37] </args>
+      <args> veh[18] veh[38] </args>
+      <args> veh[19] veh[39] </args>
+    </group>
+    <block note="handling service resources">
+      <cumulative>
+        <origins> ser[0] ser[5] ser[16] ser[18] ser[39] </origins>
+        <lengths> 18 19 11 12 13 </lengths>
+        <heights> 1x5 </heights>
+        <condition> (le,3) </condition>
+      </cumulative>
+      <cumulative>
+        <origins> ser[3..4] ser[7] ser[9] ser[13] ser[21..22] ser[25..26] ser[30..32] ser[35] </origins>
+        <lengths> 18 13 17 11 10 11 18 19 18 14 15 15 11 </lengths>
+        <heights> 1x13 </heights>
+        <condition> (le,3) </condition>
+      </cumulative>
+      <group>
+        <cumulative>
+          <origins> %0 %1 %2 %3 </origins>
+          <lengths> %... </lengths>
+          <heights> 1x4 </heights>
+          <condition> (le,3) </condition>
+        </cumulative>
+        <args> ser[2] ser[17] ser[27] ser[34] 18 15 17 17 </args>
+        <args> ser[1] ser[8] ser[23..24] 11 11 18 13 </args>
+      </group>
+      <cumulative>
+        <origins> ser[6] ser[10..12] ser[14..15] ser[19..20] ser[28..29] ser[33] ser[36..38] </origins>
+        <lengths> 18 14 15 15 17 11 13 18 11 11 10 11 15 12 </lengths>
+        <heights> 1x14 </heights>
+        <condition> (le,3) </condition>
+      </cumulative>
+    </block>
+    <block class="symmetry-breaking">
+      <group>
+        <intension> imp(eq(%0,%1),eq(%2,%3)) </intension>
+        <args> succ[40] 60 succ[41] 61 </args>
+        <args> succ[41] 61 succ[42] 62 </args>
+        <args> succ[42] 62 succ[43] 63 </args>
+        <args> succ[43] 63 succ[44] 64 </args>
+        <args> succ[44] 64 succ[45] 65 </args>
+        <args> succ[45] 65 succ[46] 66 </args>
+        <args> succ[46] 66 succ[47] 67 </args>
+        <args> succ[47] 67 succ[48] 68 </args>
+        <args> succ[48] 68 succ[49] 69 </args>
+        <args> succ[49] 69 succ[50] 70 </args>
+        <args> succ[50] 70 succ[51] 71 </args>
+        <args> succ[51] 71 succ[52] 72 </args>
+        <args> succ[52] 72 succ[53] 73 </args>
+        <args> succ[53] 73 succ[54] 74 </args>
+        <args> succ[54] 74 succ[55] 75 </args>
+        <args> succ[55] 75 succ[56] 76 </args>
+        <args> succ[56] 76 succ[57] 77 </args>
+        <args> succ[57] 77 succ[58] 78 </args>
+        <args> succ[58] 78 succ[59] 79 </args>
+      </group>
+      <intension> eq(veh[0],0) </intension>
+    </block>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[0] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[0] 0 20 13 15 15 0 5 15 20 15 5 5 5 15 5 5 0 13 0 5 5 15 15 20 20 15 15 13 5 5 15 15 15 5 13 15 5 5 5 0 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 </args>
+      <args> aux_gb[1] arr[] </args>
+      <args> aux_gb[120] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[121] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[1] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[2] 20 0 17 6 6 20 20 6 0 6 20 20 20 6 20 20 20 17 20 20 20 6 6 0 0 6 6 17 20 20 6 6 6 20 17 6 20 20 20 20 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 </args>
+      <args> aux_gb[3] arr[] </args>
+      <args> aux_gb[122] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[123] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[2] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[4] 13 17 0 15 15 13 17 15 17 15 17 17 17 15 17 17 13 0 13 17 17 15 15 17 17 15 15 0 17 17 15 15 15 17 0 15 17 17 17 13 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 </args>
+      <args> aux_gb[5] arr[] </args>
+      <args> aux_gb[124] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[125] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[3] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[6] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[7] arr[] </args>
+      <args> aux_gb[126] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[127] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[4] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[8] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[9] arr[] </args>
+      <args> aux_gb[128] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[129] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[5] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[10] 0 20 13 15 15 0 5 15 20 15 5 5 5 15 5 5 0 13 0 5 5 15 15 20 20 15 15 13 5 5 15 15 15 5 13 15 5 5 5 0 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 </args>
+      <args> aux_gb[11] arr[] </args>
+      <args> aux_gb[130] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[131] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[6] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[12] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[13] arr[] </args>
+      <args> aux_gb[132] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[133] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[7] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[14] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[15] arr[] </args>
+      <args> aux_gb[134] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[135] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[8] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[16] 20 0 17 6 6 20 20 6 0 6 20 20 20 6 20 20 20 17 20 20 20 6 6 0 0 6 6 17 20 20 6 6 6 20 17 6 20 20 20 20 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 </args>
+      <args> aux_gb[17] arr[] </args>
+      <args> aux_gb[136] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[137] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[9] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[18] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[19] arr[] </args>
+      <args> aux_gb[138] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[139] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[10] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[20] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[21] arr[] </args>
+      <args> aux_gb[140] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[141] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[11] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[22] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[23] arr[] </args>
+      <args> aux_gb[142] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[143] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[12] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[24] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[25] arr[] </args>
+      <args> aux_gb[144] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[145] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[13] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[26] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[27] arr[] </args>
+      <args> aux_gb[146] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[147] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[14] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[28] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[29] arr[] </args>
+      <args> aux_gb[148] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[149] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[15] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[30] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[31] arr[] </args>
+      <args> aux_gb[150] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[151] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[16] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[32] 0 20 13 15 15 0 5 15 20 15 5 5 5 15 5 5 0 13 0 5 5 15 15 20 20 15 15 13 5 5 15 15 15 5 13 15 5 5 5 0 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 </args>
+      <args> aux_gb[33] arr[] </args>
+      <args> aux_gb[152] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[153] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[17] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[34] 13 17 0 15 15 13 17 15 17 15 17 17 17 15 17 17 13 0 13 17 17 15 15 17 17 15 15 0 17 17 15 15 15 17 0 15 17 17 17 13 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 </args>
+      <args> aux_gb[35] arr[] </args>
+      <args> aux_gb[154] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[155] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[18] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[36] 0 20 13 15 15 0 5 15 20 15 5 5 5 15 5 5 0 13 0 5 5 15 15 20 20 15 15 13 5 5 15 15 15 5 13 15 5 5 5 0 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 </args>
+      <args> aux_gb[37] arr[] </args>
+      <args> aux_gb[156] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[157] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[19] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[38] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[39] arr[] </args>
+      <args> aux_gb[158] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[159] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[20] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[40] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[41] arr[] </args>
+      <args> aux_gb[160] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[161] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[21] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[42] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[43] arr[] </args>
+      <args> aux_gb[162] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[163] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[22] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[44] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[45] arr[] </args>
+      <args> aux_gb[164] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[165] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[23] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[46] 20 0 17 6 6 20 20 6 0 6 20 20 20 6 20 20 20 17 20 20 20 6 6 0 0 6 6 17 20 20 6 6 6 20 17 6 20 20 20 20 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 </args>
+      <args> aux_gb[47] arr[] </args>
+      <args> aux_gb[166] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[167] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[24] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[48] 20 0 17 6 6 20 20 6 0 6 20 20 20 6 20 20 20 17 20 20 20 6 6 0 0 6 6 17 20 20 6 6 6 20 17 6 20 20 20 20 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 </args>
+      <args> aux_gb[49] arr[] </args>
+      <args> aux_gb[168] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[169] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[25] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[50] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[51] arr[] </args>
+      <args> aux_gb[170] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[171] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[26] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[52] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[53] arr[] </args>
+      <args> aux_gb[172] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[173] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[27] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[54] 13 17 0 15 15 13 17 15 17 15 17 17 17 15 17 17 13 0 13 17 17 15 15 17 17 15 15 0 17 17 15 15 15 17 0 15 17 17 17 13 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 </args>
+      <args> aux_gb[55] arr[] </args>
+      <args> aux_gb[174] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[175] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[28] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[56] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[57] arr[] </args>
+      <args> aux_gb[176] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[177] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[29] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[58] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[59] arr[] </args>
+      <args> aux_gb[178] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[179] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[30] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[60] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[61] arr[] </args>
+      <args> aux_gb[180] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[181] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[31] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[62] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[63] arr[] </args>
+      <args> aux_gb[182] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[183] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[32] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[64] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[65] arr[] </args>
+      <args> aux_gb[184] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[185] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[33] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[66] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[67] arr[] </args>
+      <args> aux_gb[186] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[187] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[34] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[68] 13 17 0 15 15 13 17 15 17 15 17 17 17 15 17 17 13 0 13 17 17 15 15 17 17 15 15 0 17 17 15 15 15 17 0 15 17 17 17 13 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 </args>
+      <args> aux_gb[69] arr[] </args>
+      <args> aux_gb[188] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[189] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[35] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[70] 15 6 15 0 0 15 15 0 6 0 15 15 15 0 15 15 15 15 15 15 15 0 0 6 6 0 0 15 15 15 0 0 0 15 15 0 15 15 15 15 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 </args>
+      <args> aux_gb[71] arr[] </args>
+      <args> aux_gb[190] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[191] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[36] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[72] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[73] arr[] </args>
+      <args> aux_gb[192] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[193] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[37] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[74] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[75] arr[] </args>
+      <args> aux_gb[194] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[195] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[38] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[76] 5 20 17 15 15 5 0 15 20 15 0 0 0 15 0 0 5 17 5 0 0 15 15 20 20 15 15 17 0 0 15 15 15 0 17 15 0 0 0 5 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 </args>
+      <args> aux_gb[77] arr[] </args>
+      <args> aux_gb[196] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[197] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[39] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[78] 0 20 13 15 15 0 5 15 20 15 5 5 5 15 5 5 0 13 0 5 5 15 15 20 20 15 15 13 5 5 15 15 15 5 13 15 5 5 5 0 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 11 </args>
+      <args> aux_gb[79] arr[] </args>
+      <args> aux_gb[198] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[199] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[40] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[80] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[81] arr[] </args>
+      <args> aux_gb[200] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[201] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[41] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[82] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[83] arr[] </args>
+      <args> aux_gb[202] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[203] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[42] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[84] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[85] arr[] </args>
+      <args> aux_gb[204] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[205] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[43] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[86] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[87] arr[] </args>
+      <args> aux_gb[206] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[207] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[44] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[88] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[89] arr[] </args>
+      <args> aux_gb[208] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[209] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[45] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[90] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[91] arr[] </args>
+      <args> aux_gb[210] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[211] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[46] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[92] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[93] arr[] </args>
+      <args> aux_gb[212] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[213] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[47] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[94] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[95] arr[] </args>
+      <args> aux_gb[214] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[215] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[48] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[96] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[97] arr[] </args>
+      <args> aux_gb[216] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[217] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[49] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[98] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[99] arr[] </args>
+      <args> aux_gb[218] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[219] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[50] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[100] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[101] arr[] </args>
+      <args> aux_gb[220] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[221] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[51] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[102] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[103] arr[] </args>
+      <args> aux_gb[222] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[223] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[52] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[104] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[105] arr[] </args>
+      <args> aux_gb[224] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[225] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[53] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[106] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[107] arr[] </args>
+      <args> aux_gb[226] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[227] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[54] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[108] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[109] arr[] </args>
+      <args> aux_gb[228] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[229] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[55] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[110] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[111] arr[] </args>
+      <args> aux_gb[230] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[231] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[56] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[112] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[113] arr[] </args>
+      <args> aux_gb[232] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[233] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[57] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[114] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[115] arr[] </args>
+      <args> aux_gb[234] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[235] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[58] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[116] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[117] arr[] </args>
+      <args> aux_gb[236] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[237] load[] </args>
+    </group>
+    <group>
+      <element>
+        <list> %... </list>
+        <index> succ[59] </index>
+        <value> %0 </value>
+      </element>
+      <args> aux_gb[118] 11 10 10 6 6 11 13 6 10 6 13 13 13 6 13 13 11 10 11 13 13 6 6 10 10 6 6 10 13 13 6 6 6 13 10 6 13 13 13 11 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[119] arr[] </args>
+      <args> aux_gb[238] 3 2 1 4 2 1 3 4 2 1 4 4 3 4 2 4 4 1 1 4 -3 -2 -1 -4 -2 -1 -3 -4 -2 -1 -4 -4 -3 -4 -2 -4 -4 -1 -1 -4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </args>
+      <args> aux_gb[239] load[] </args>
+    </group>
+  </constraints>
+  <objectives>
+    <minimize note="minimizing the total travel distance" type="sum"> aux_gb[0] aux_gb[2] aux_gb[4] aux_gb[6] aux_gb[8] aux_gb[10] aux_gb[12] aux_gb[14] aux_gb[16] aux_gb[18] aux_gb[20] aux_gb[22] aux_gb[24] aux_gb[26] aux_gb[28] aux_gb[30] aux_gb[32] aux_gb[34] aux_gb[36] aux_gb[38] aux_gb[40] aux_gb[42] aux_gb[44] aux_gb[46] aux_gb[48] aux_gb[50] aux_gb[52] aux_gb[54] aux_gb[56] aux_gb[58] aux_gb[60] aux_gb[62] aux_gb[64] aux_gb[66] aux_gb[68] aux_gb[70] aux_gb[72] aux_gb[74] aux_gb[76] aux_gb[78] aux_gb[80] aux_gb[82] aux_gb[84] aux_gb[86] aux_gb[88] aux_gb[90] aux_gb[92] aux_gb[94] aux_gb[96] aux_gb[98] aux_gb[100] aux_gb[102] aux_gb[104] aux_gb[106] aux_gb[108] aux_gb[110] aux_gb[112] aux_gb[114] aux_gb[116] aux_gb[118] </minimize>
+  </objectives>
+</instance>
