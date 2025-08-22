@@ -1,0 +1,944 @@
+<instance format="XCSP3" type="COP">
+  <variables>
+    <array id="x" note="x[i][j] indicates what is present in the cell with coordinates (i,j)" size="[15][15]"> 0 1 2 </array>
+    <var id="q" note="q is the number of queens"> 0..15 </var>
+    <var id="k" note="k is the number of knights"> 0..15 </var>
+    <array id="aux_gb" note="aux_gb[i] is the ith auxiliary variable having been automatically introduced" size="[450]">
+      <domain for="aux_gb[0] aux_gb[2] aux_gb[4] aux_gb[6] aux_gb[8] aux_gb[10] aux_gb[12] aux_gb[14] aux_gb[16] aux_gb[18] aux_gb[20] aux_gb[22] aux_gb[24] aux_gb[26] aux_gb[28] aux_gb[30] aux_gb[58] aux_gb[60] aux_gb[88] aux_gb[90] aux_gb[118] aux_gb[120] aux_gb[148] aux_gb[150] aux_gb[178] aux_gb[180] aux_gb[208] aux_gb[210] aux_gb[238] aux_gb[240] aux_gb[268] aux_gb[270] aux_gb[298] aux_gb[300] aux_gb[328] aux_gb[330] aux_gb[358] aux_gb[360] aux_gb[388] aux_gb[390] aux_gb[418] aux_gb[420] aux_gb[422] aux_gb[424] aux_gb[426] aux_gb[428] aux_gb[430] aux_gb[432] aux_gb[434] aux_gb[436] aux_gb[438] aux_gb[440] aux_gb[442] aux_gb[444] aux_gb[446] aux_gb[448]"> 0..84 </domain>
+      <domain for="aux_gb[1] aux_gb[29] aux_gb[421] aux_gb[449]"> 0..4 </domain>
+      <domain for="aux_gb[3] aux_gb[27] aux_gb[31] aux_gb[59] aux_gb[391] aux_gb[419] aux_gb[423] aux_gb[447]"> 0..6 </domain>
+      <domain for="aux_gb[5] aux_gb[7] aux_gb[9] aux_gb[11] aux_gb[13] aux_gb[15] aux_gb[17] aux_gb[19] aux_gb[21] aux_gb[23] aux_gb[25] aux_gb[33] aux_gb[57] aux_gb[61] aux_gb[89] aux_gb[91] aux_gb[119] aux_gb[121] aux_gb[149] aux_gb[151] aux_gb[179] aux_gb[181] aux_gb[209] aux_gb[211] aux_gb[239] aux_gb[241] aux_gb[269] aux_gb[271] aux_gb[299] aux_gb[301] aux_gb[329] aux_gb[331] aux_gb[359] aux_gb[361] aux_gb[389] aux_gb[393] aux_gb[417] aux_gb[425] aux_gb[427] aux_gb[429] aux_gb[431] aux_gb[433] aux_gb[435] aux_gb[437] aux_gb[439] aux_gb[441] aux_gb[443] aux_gb[445]"> 0..8 </domain>
+      <domain for="aux_gb[32] aux_gb[34] aux_gb[36] aux_gb[38] aux_gb[40] aux_gb[42] aux_gb[44] aux_gb[46] aux_gb[48] aux_gb[50] aux_gb[52] aux_gb[54] aux_gb[56] aux_gb[62] aux_gb[86] aux_gb[92] aux_gb[116] aux_gb[122] aux_gb[146] aux_gb[152] aux_gb[176] aux_gb[182] aux_gb[206] aux_gb[212] aux_gb[236] aux_gb[242] aux_gb[266] aux_gb[272] aux_gb[296] aux_gb[302] aux_gb[326] aux_gb[332] aux_gb[356] aux_gb[362] aux_gb[386] aux_gb[392] aux_gb[394] aux_gb[396] aux_gb[398] aux_gb[400] aux_gb[402] aux_gb[404] aux_gb[406] aux_gb[408] aux_gb[410] aux_gb[412] aux_gb[414] aux_gb[416]"> 0..88 </domain>
+      <domain for="aux_gb[35] aux_gb[37] aux_gb[39] aux_gb[41] aux_gb[43] aux_gb[45] aux_gb[47] aux_gb[49] aux_gb[51] aux_gb[53] aux_gb[55] aux_gb[63] aux_gb[87] aux_gb[93] aux_gb[117] aux_gb[123] aux_gb[147] aux_gb[153] aux_gb[177] aux_gb[183] aux_gb[207] aux_gb[213] aux_gb[237] aux_gb[243] aux_gb[267] aux_gb[273] aux_gb[297] aux_gb[303] aux_gb[327] aux_gb[333] aux_gb[357] aux_gb[363] aux_gb[387] aux_gb[395] aux_gb[397] aux_gb[399] aux_gb[401] aux_gb[403] aux_gb[405] aux_gb[407] aux_gb[409] aux_gb[411] aux_gb[413] aux_gb[415]"> 0..12 </domain>
+      <domain for="aux_gb[64] aux_gb[66] aux_gb[68] aux_gb[70] aux_gb[72] aux_gb[74] aux_gb[76] aux_gb[78] aux_gb[80] aux_gb[82] aux_gb[84] aux_gb[94] aux_gb[114] aux_gb[124] aux_gb[144] aux_gb[154] aux_gb[174] aux_gb[184] aux_gb[204] aux_gb[214] aux_gb[234] aux_gb[244] aux_gb[264] aux_gb[274] aux_gb[294] aux_gb[304] aux_gb[324] aux_gb[334] aux_gb[354] aux_gb[364] aux_gb[366] aux_gb[368] aux_gb[370] aux_gb[372] aux_gb[374] aux_gb[376] aux_gb[378] aux_gb[380] aux_gb[382] aux_gb[384]"> 0..92 </domain>
+      <domain for="aux_gb[65] aux_gb[67] aux_gb[69] aux_gb[71] aux_gb[73] aux_gb[75] aux_gb[77] aux_gb[79] aux_gb[81] aux_gb[83] aux_gb[85] aux_gb[95] aux_gb[97] aux_gb[99] aux_gb[101] aux_gb[103] aux_gb[105] aux_gb[107] aux_gb[109] aux_gb[111] aux_gb[113] aux_gb[115] aux_gb[125] aux_gb[127] aux_gb[129] aux_gb[131] aux_gb[133] aux_gb[135] aux_gb[137] aux_gb[139] aux_gb[141] aux_gb[143] aux_gb[145] aux_gb[155] aux_gb[157] aux_gb[159] aux_gb[161] aux_gb[163] aux_gb[165] aux_gb[167] aux_gb[169] aux_gb[171] aux_gb[173] aux_gb[175] aux_gb[185] aux_gb[187] aux_gb[189] aux_gb[191] aux_gb[193] aux_gb[195] aux_gb[197] aux_gb[199] aux_gb[201] aux_gb[203] aux_gb[205] aux_gb[215] aux_gb[217] aux_gb[219] aux_gb[221] aux_gb[223] aux_gb[225] aux_gb[227] aux_gb[229] aux_gb[231] aux_gb[233] aux_gb[235] aux_gb[245] aux_gb[247] aux_gb[249] aux_gb[251] aux_gb[253] aux_gb[255] aux_gb[257] aux_gb[259] aux_gb[261] aux_gb[263] aux_gb[265] aux_gb[275] aux_gb[277] aux_gb[279] aux_gb[281] aux_gb[283] aux_gb[285] aux_gb[287] aux_gb[289] aux_gb[291] aux_gb[293] aux_gb[295] aux_gb[305] aux_gb[307] aux_gb[309] aux_gb[311] aux_gb[313] aux_gb[315] aux_gb[317] aux_gb[319] aux_gb[321] aux_gb[323] aux_gb[325] aux_gb[335] aux_gb[337] aux_gb[339] aux_gb[341] aux_gb[343] aux_gb[345] aux_gb[347] aux_gb[349] aux_gb[351] aux_gb[353] aux_gb[355] aux_gb[365] aux_gb[367] aux_gb[369] aux_gb[371] aux_gb[373] aux_gb[375] aux_gb[377] aux_gb[379] aux_gb[381] aux_gb[383] aux_gb[385]"> 0..16 </domain>
+      <domain for="aux_gb[96] aux_gb[98] aux_gb[100] aux_gb[102] aux_gb[104] aux_gb[106] aux_gb[108] aux_gb[110] aux_gb[112] aux_gb[126] aux_gb[142] aux_gb[156] aux_gb[172] aux_gb[186] aux_gb[202] aux_gb[216] aux_gb[232] aux_gb[246] aux_gb[262] aux_gb[276] aux_gb[292] aux_gb[306] aux_gb[322] aux_gb[336] aux_gb[338] aux_gb[340] aux_gb[342] aux_gb[344] aux_gb[346] aux_gb[348] aux_gb[350] aux_gb[352]"> 0..96 </domain>
+      <domain for="aux_gb[128] aux_gb[130] aux_gb[132] aux_gb[134] aux_gb[136] aux_gb[138] aux_gb[140] aux_gb[158] aux_gb[170] aux_gb[188] aux_gb[200] aux_gb[218] aux_gb[230] aux_gb[248] aux_gb[260] aux_gb[278] aux_gb[290] aux_gb[308] aux_gb[310] aux_gb[312] aux_gb[314] aux_gb[316] aux_gb[318] aux_gb[320]"> 0..100 </domain>
+      <domain for="aux_gb[160] aux_gb[162] aux_gb[164] aux_gb[166] aux_gb[168] aux_gb[190] aux_gb[198] aux_gb[220] aux_gb[228] aux_gb[250] aux_gb[258] aux_gb[280] aux_gb[282] aux_gb[284] aux_gb[286] aux_gb[288]"> 0..104 </domain>
+      <domain for="aux_gb[192] aux_gb[194] aux_gb[196] aux_gb[222] aux_gb[226] aux_gb[252] aux_gb[254] aux_gb[256]"> 0..108 </domain>
+      <domain for="aux_gb[224]"> 0..112 </domain>
+    </array>
+  </variables>
+  <constraints>
+    <sum note="computing the number of queens">
+      <list> eq(x[0][0],1) eq(x[0][1],1) eq(x[0][2],1) eq(x[0][3],1) eq(x[0][4],1) eq(x[0][5],1) eq(x[0][6],1) eq(x[0][7],1) eq(x[0][8],1) eq(x[0][9],1) eq(x[0][10],1) eq(x[0][11],1) eq(x[0][12],1) eq(x[0][13],1) eq(x[0][14],1) eq(x[1][0],1) eq(x[1][1],1) eq(x[1][2],1) eq(x[1][3],1) eq(x[1][4],1) eq(x[1][5],1) eq(x[1][6],1) eq(x[1][7],1) eq(x[1][8],1) eq(x[1][9],1) eq(x[1][10],1) eq(x[1][11],1) eq(x[1][12],1) eq(x[1][13],1) eq(x[1][14],1) eq(x[2][0],1) eq(x[2][1],1) eq(x[2][2],1) eq(x[2][3],1) eq(x[2][4],1) eq(x[2][5],1) eq(x[2][6],1) eq(x[2][7],1) eq(x[2][8],1) eq(x[2][9],1) eq(x[2][10],1) eq(x[2][11],1) eq(x[2][12],1) eq(x[2][13],1) eq(x[2][14],1) eq(x[3][0],1) eq(x[3][1],1) eq(x[3][2],1) eq(x[3][3],1) eq(x[3][4],1) eq(x[3][5],1) eq(x[3][6],1) eq(x[3][7],1) eq(x[3][8],1) eq(x[3][9],1) eq(x[3][10],1) eq(x[3][11],1) eq(x[3][12],1) eq(x[3][13],1) eq(x[3][14],1) eq(x[4][0],1) eq(x[4][1],1) eq(x[4][2],1) eq(x[4][3],1) eq(x[4][4],1) eq(x[4][5],1) eq(x[4][6],1) eq(x[4][7],1) eq(x[4][8],1) eq(x[4][9],1) eq(x[4][10],1) eq(x[4][11],1) eq(x[4][12],1) eq(x[4][13],1) eq(x[4][14],1) eq(x[5][0],1) eq(x[5][1],1) eq(x[5][2],1) eq(x[5][3],1) eq(x[5][4],1) eq(x[5][5],1) eq(x[5][6],1) eq(x[5][7],1) eq(x[5][8],1) eq(x[5][9],1) eq(x[5][10],1) eq(x[5][11],1) eq(x[5][12],1) eq(x[5][13],1) eq(x[5][14],1) eq(x[6][0],1) eq(x[6][1],1) eq(x[6][2],1) eq(x[6][3],1) eq(x[6][4],1) eq(x[6][5],1) eq(x[6][6],1) eq(x[6][7],1) eq(x[6][8],1) eq(x[6][9],1) eq(x[6][10],1) eq(x[6][11],1) eq(x[6][12],1) eq(x[6][13],1) eq(x[6][14],1) eq(x[7][0],1) eq(x[7][1],1) eq(x[7][2],1) eq(x[7][3],1) eq(x[7][4],1) eq(x[7][5],1) eq(x[7][6],1) eq(x[7][7],1) eq(x[7][8],1) eq(x[7][9],1) eq(x[7][10],1) eq(x[7][11],1) eq(x[7][12],1) eq(x[7][13],1) eq(x[7][14],1) eq(x[8][0],1) eq(x[8][1],1) eq(x[8][2],1) eq(x[8][3],1) eq(x[8][4],1) eq(x[8][5],1) eq(x[8][6],1) eq(x[8][7],1) eq(x[8][8],1) eq(x[8][9],1) eq(x[8][10],1) eq(x[8][11],1) eq(x[8][12],1) eq(x[8][13],1) eq(x[8][14],1) eq(x[9][0],1) eq(x[9][1],1) eq(x[9][2],1) eq(x[9][3],1) eq(x[9][4],1) eq(x[9][5],1) eq(x[9][6],1) eq(x[9][7],1) eq(x[9][8],1) eq(x[9][9],1) eq(x[9][10],1) eq(x[9][11],1) eq(x[9][12],1) eq(x[9][13],1) eq(x[9][14],1) eq(x[10][0],1) eq(x[10][1],1) eq(x[10][2],1) eq(x[10][3],1) eq(x[10][4],1) eq(x[10][5],1) eq(x[10][6],1) eq(x[10][7],1) eq(x[10][8],1) eq(x[10][9],1) eq(x[10][10],1) eq(x[10][11],1) eq(x[10][12],1) eq(x[10][13],1) eq(x[10][14],1) eq(x[11][0],1) eq(x[11][1],1) eq(x[11][2],1) eq(x[11][3],1) eq(x[11][4],1) eq(x[11][5],1) eq(x[11][6],1) eq(x[11][7],1) eq(x[11][8],1) eq(x[11][9],1) eq(x[11][10],1) eq(x[11][11],1) eq(x[11][12],1) eq(x[11][13],1) eq(x[11][14],1) eq(x[12][0],1) eq(x[12][1],1) eq(x[12][2],1) eq(x[12][3],1) eq(x[12][4],1) eq(x[12][5],1) eq(x[12][6],1) eq(x[12][7],1) eq(x[12][8],1) eq(x[12][9],1) eq(x[12][10],1) eq(x[12][11],1) eq(x[12][12],1) eq(x[12][13],1) eq(x[12][14],1) eq(x[13][0],1) eq(x[13][1],1) eq(x[13][2],1) eq(x[13][3],1) eq(x[13][4],1) eq(x[13][5],1) eq(x[13][6],1) eq(x[13][7],1) eq(x[13][8],1) eq(x[13][9],1) eq(x[13][10],1) eq(x[13][11],1) eq(x[13][12],1) eq(x[13][13],1) eq(x[13][14],1) eq(x[14][0],1) eq(x[14][1],1) eq(x[14][2],1) eq(x[14][3],1) eq(x[14][4],1) eq(x[14][5],1) eq(x[14][6],1) eq(x[14][7],1) eq(x[14][8],1) eq(x[14][9],1) eq(x[14][10],1) eq(x[14][11],1) eq(x[14][12],1) eq(x[14][13],1) eq(x[14][14],1) </list>
+      <condition> (eq,q) </condition>
+    </sum>
+    <sum note="computing the number of knights">
+      <list> eq(x[0][0],2) eq(x[0][1],2) eq(x[0][2],2) eq(x[0][3],2) eq(x[0][4],2) eq(x[0][5],2) eq(x[0][6],2) eq(x[0][7],2) eq(x[0][8],2) eq(x[0][9],2) eq(x[0][10],2) eq(x[0][11],2) eq(x[0][12],2) eq(x[0][13],2) eq(x[0][14],2) eq(x[1][0],2) eq(x[1][1],2) eq(x[1][2],2) eq(x[1][3],2) eq(x[1][4],2) eq(x[1][5],2) eq(x[1][6],2) eq(x[1][7],2) eq(x[1][8],2) eq(x[1][9],2) eq(x[1][10],2) eq(x[1][11],2) eq(x[1][12],2) eq(x[1][13],2) eq(x[1][14],2) eq(x[2][0],2) eq(x[2][1],2) eq(x[2][2],2) eq(x[2][3],2) eq(x[2][4],2) eq(x[2][5],2) eq(x[2][6],2) eq(x[2][7],2) eq(x[2][8],2) eq(x[2][9],2) eq(x[2][10],2) eq(x[2][11],2) eq(x[2][12],2) eq(x[2][13],2) eq(x[2][14],2) eq(x[3][0],2) eq(x[3][1],2) eq(x[3][2],2) eq(x[3][3],2) eq(x[3][4],2) eq(x[3][5],2) eq(x[3][6],2) eq(x[3][7],2) eq(x[3][8],2) eq(x[3][9],2) eq(x[3][10],2) eq(x[3][11],2) eq(x[3][12],2) eq(x[3][13],2) eq(x[3][14],2) eq(x[4][0],2) eq(x[4][1],2) eq(x[4][2],2) eq(x[4][3],2) eq(x[4][4],2) eq(x[4][5],2) eq(x[4][6],2) eq(x[4][7],2) eq(x[4][8],2) eq(x[4][9],2) eq(x[4][10],2) eq(x[4][11],2) eq(x[4][12],2) eq(x[4][13],2) eq(x[4][14],2) eq(x[5][0],2) eq(x[5][1],2) eq(x[5][2],2) eq(x[5][3],2) eq(x[5][4],2) eq(x[5][5],2) eq(x[5][6],2) eq(x[5][7],2) eq(x[5][8],2) eq(x[5][9],2) eq(x[5][10],2) eq(x[5][11],2) eq(x[5][12],2) eq(x[5][13],2) eq(x[5][14],2) eq(x[6][0],2) eq(x[6][1],2) eq(x[6][2],2) eq(x[6][3],2) eq(x[6][4],2) eq(x[6][5],2) eq(x[6][6],2) eq(x[6][7],2) eq(x[6][8],2) eq(x[6][9],2) eq(x[6][10],2) eq(x[6][11],2) eq(x[6][12],2) eq(x[6][13],2) eq(x[6][14],2) eq(x[7][0],2) eq(x[7][1],2) eq(x[7][2],2) eq(x[7][3],2) eq(x[7][4],2) eq(x[7][5],2) eq(x[7][6],2) eq(x[7][7],2) eq(x[7][8],2) eq(x[7][9],2) eq(x[7][10],2) eq(x[7][11],2) eq(x[7][12],2) eq(x[7][13],2) eq(x[7][14],2) eq(x[8][0],2) eq(x[8][1],2) eq(x[8][2],2) eq(x[8][3],2) eq(x[8][4],2) eq(x[8][5],2) eq(x[8][6],2) eq(x[8][7],2) eq(x[8][8],2) eq(x[8][9],2) eq(x[8][10],2) eq(x[8][11],2) eq(x[8][12],2) eq(x[8][13],2) eq(x[8][14],2) eq(x[9][0],2) eq(x[9][1],2) eq(x[9][2],2) eq(x[9][3],2) eq(x[9][4],2) eq(x[9][5],2) eq(x[9][6],2) eq(x[9][7],2) eq(x[9][8],2) eq(x[9][9],2) eq(x[9][10],2) eq(x[9][11],2) eq(x[9][12],2) eq(x[9][13],2) eq(x[9][14],2) eq(x[10][0],2) eq(x[10][1],2) eq(x[10][2],2) eq(x[10][3],2) eq(x[10][4],2) eq(x[10][5],2) eq(x[10][6],2) eq(x[10][7],2) eq(x[10][8],2) eq(x[10][9],2) eq(x[10][10],2) eq(x[10][11],2) eq(x[10][12],2) eq(x[10][13],2) eq(x[10][14],2) eq(x[11][0],2) eq(x[11][1],2) eq(x[11][2],2) eq(x[11][3],2) eq(x[11][4],2) eq(x[11][5],2) eq(x[11][6],2) eq(x[11][7],2) eq(x[11][8],2) eq(x[11][9],2) eq(x[11][10],2) eq(x[11][11],2) eq(x[11][12],2) eq(x[11][13],2) eq(x[11][14],2) eq(x[12][0],2) eq(x[12][1],2) eq(x[12][2],2) eq(x[12][3],2) eq(x[12][4],2) eq(x[12][5],2) eq(x[12][6],2) eq(x[12][7],2) eq(x[12][8],2) eq(x[12][9],2) eq(x[12][10],2) eq(x[12][11],2) eq(x[12][12],2) eq(x[12][13],2) eq(x[12][14],2) eq(x[13][0],2) eq(x[13][1],2) eq(x[13][2],2) eq(x[13][3],2) eq(x[13][4],2) eq(x[13][5],2) eq(x[13][6],2) eq(x[13][7],2) eq(x[13][8],2) eq(x[13][9],2) eq(x[13][10],2) eq(x[13][11],2) eq(x[13][12],2) eq(x[13][13],2) eq(x[13][14],2) eq(x[14][0],2) eq(x[14][1],2) eq(x[14][2],2) eq(x[14][3],2) eq(x[14][4],2) eq(x[14][5],2) eq(x[14][6],2) eq(x[14][7],2) eq(x[14][8],2) eq(x[14][9],2) eq(x[14][10],2) eq(x[14][11],2) eq(x[14][12],2) eq(x[14][13],2) eq(x[14][14],2) </list>
+      <condition> (eq,k) </condition>
+    </sum>
+    <group note="ensuring that no two pieces (queens or knights) attack each other">
+      <intension> or(ne(%0,%1),eq(%2,0)) </intension>
+      <args> x[0][0] 1 aux_gb[0] </args>
+      <args> x[0][0] 2 aux_gb[1] </args>
+      <args> x[0][1] 1 aux_gb[2] </args>
+      <args> x[0][1] 2 aux_gb[3] </args>
+      <args> x[0][2] 1 aux_gb[4] </args>
+      <args> x[0][2] 2 aux_gb[5] </args>
+      <args> x[0][3] 1 aux_gb[6] </args>
+      <args> x[0][3] 2 aux_gb[7] </args>
+      <args> x[0][4] 1 aux_gb[8] </args>
+      <args> x[0][4] 2 aux_gb[9] </args>
+      <args> x[0][5] 1 aux_gb[10] </args>
+      <args> x[0][5] 2 aux_gb[11] </args>
+      <args> x[0][6] 1 aux_gb[12] </args>
+      <args> x[0][6] 2 aux_gb[13] </args>
+      <args> x[0][7] 1 aux_gb[14] </args>
+      <args> x[0][7] 2 aux_gb[15] </args>
+      <args> x[0][8] 1 aux_gb[16] </args>
+      <args> x[0][8] 2 aux_gb[17] </args>
+      <args> x[0][9] 1 aux_gb[18] </args>
+      <args> x[0][9] 2 aux_gb[19] </args>
+      <args> x[0][10] 1 aux_gb[20] </args>
+      <args> x[0][10] 2 aux_gb[21] </args>
+      <args> x[0][11] 1 aux_gb[22] </args>
+      <args> x[0][11] 2 aux_gb[23] </args>
+      <args> x[0][12] 1 aux_gb[24] </args>
+      <args> x[0][12] 2 aux_gb[25] </args>
+      <args> x[0][13] 1 aux_gb[26] </args>
+      <args> x[0][13] 2 aux_gb[27] </args>
+      <args> x[0][14] 1 aux_gb[28] </args>
+      <args> x[0][14] 2 aux_gb[29] </args>
+      <args> x[1][0] 1 aux_gb[30] </args>
+      <args> x[1][0] 2 aux_gb[31] </args>
+      <args> x[1][1] 1 aux_gb[32] </args>
+      <args> x[1][1] 2 aux_gb[33] </args>
+      <args> x[1][2] 1 aux_gb[34] </args>
+      <args> x[1][2] 2 aux_gb[35] </args>
+      <args> x[1][3] 1 aux_gb[36] </args>
+      <args> x[1][3] 2 aux_gb[37] </args>
+      <args> x[1][4] 1 aux_gb[38] </args>
+      <args> x[1][4] 2 aux_gb[39] </args>
+      <args> x[1][5] 1 aux_gb[40] </args>
+      <args> x[1][5] 2 aux_gb[41] </args>
+      <args> x[1][6] 1 aux_gb[42] </args>
+      <args> x[1][6] 2 aux_gb[43] </args>
+      <args> x[1][7] 1 aux_gb[44] </args>
+      <args> x[1][7] 2 aux_gb[45] </args>
+      <args> x[1][8] 1 aux_gb[46] </args>
+      <args> x[1][8] 2 aux_gb[47] </args>
+      <args> x[1][9] 1 aux_gb[48] </args>
+      <args> x[1][9] 2 aux_gb[49] </args>
+      <args> x[1][10] 1 aux_gb[50] </args>
+      <args> x[1][10] 2 aux_gb[51] </args>
+      <args> x[1][11] 1 aux_gb[52] </args>
+      <args> x[1][11] 2 aux_gb[53] </args>
+      <args> x[1][12] 1 aux_gb[54] </args>
+      <args> x[1][12] 2 aux_gb[55] </args>
+      <args> x[1][13] 1 aux_gb[56] </args>
+      <args> x[1][13] 2 aux_gb[57] </args>
+      <args> x[1][14] 1 aux_gb[58] </args>
+      <args> x[1][14] 2 aux_gb[59] </args>
+      <args> x[2][0] 1 aux_gb[60] </args>
+      <args> x[2][0] 2 aux_gb[61] </args>
+      <args> x[2][1] 1 aux_gb[62] </args>
+      <args> x[2][1] 2 aux_gb[63] </args>
+      <args> x[2][2] 1 aux_gb[64] </args>
+      <args> x[2][2] 2 aux_gb[65] </args>
+      <args> x[2][3] 1 aux_gb[66] </args>
+      <args> x[2][3] 2 aux_gb[67] </args>
+      <args> x[2][4] 1 aux_gb[68] </args>
+      <args> x[2][4] 2 aux_gb[69] </args>
+      <args> x[2][5] 1 aux_gb[70] </args>
+      <args> x[2][5] 2 aux_gb[71] </args>
+      <args> x[2][6] 1 aux_gb[72] </args>
+      <args> x[2][6] 2 aux_gb[73] </args>
+      <args> x[2][7] 1 aux_gb[74] </args>
+      <args> x[2][7] 2 aux_gb[75] </args>
+      <args> x[2][8] 1 aux_gb[76] </args>
+      <args> x[2][8] 2 aux_gb[77] </args>
+      <args> x[2][9] 1 aux_gb[78] </args>
+      <args> x[2][9] 2 aux_gb[79] </args>
+      <args> x[2][10] 1 aux_gb[80] </args>
+      <args> x[2][10] 2 aux_gb[81] </args>
+      <args> x[2][11] 1 aux_gb[82] </args>
+      <args> x[2][11] 2 aux_gb[83] </args>
+      <args> x[2][12] 1 aux_gb[84] </args>
+      <args> x[2][12] 2 aux_gb[85] </args>
+      <args> x[2][13] 1 aux_gb[86] </args>
+      <args> x[2][13] 2 aux_gb[87] </args>
+      <args> x[2][14] 1 aux_gb[88] </args>
+      <args> x[2][14] 2 aux_gb[89] </args>
+      <args> x[3][0] 1 aux_gb[90] </args>
+      <args> x[3][0] 2 aux_gb[91] </args>
+      <args> x[3][1] 1 aux_gb[92] </args>
+      <args> x[3][1] 2 aux_gb[93] </args>
+      <args> x[3][2] 1 aux_gb[94] </args>
+      <args> x[3][2] 2 aux_gb[95] </args>
+      <args> x[3][3] 1 aux_gb[96] </args>
+      <args> x[3][3] 2 aux_gb[97] </args>
+      <args> x[3][4] 1 aux_gb[98] </args>
+      <args> x[3][4] 2 aux_gb[99] </args>
+      <args> x[3][5] 1 aux_gb[100] </args>
+      <args> x[3][5] 2 aux_gb[101] </args>
+      <args> x[3][6] 1 aux_gb[102] </args>
+      <args> x[3][6] 2 aux_gb[103] </args>
+      <args> x[3][7] 1 aux_gb[104] </args>
+      <args> x[3][7] 2 aux_gb[105] </args>
+      <args> x[3][8] 1 aux_gb[106] </args>
+      <args> x[3][8] 2 aux_gb[107] </args>
+      <args> x[3][9] 1 aux_gb[108] </args>
+      <args> x[3][9] 2 aux_gb[109] </args>
+      <args> x[3][10] 1 aux_gb[110] </args>
+      <args> x[3][10] 2 aux_gb[111] </args>
+      <args> x[3][11] 1 aux_gb[112] </args>
+      <args> x[3][11] 2 aux_gb[113] </args>
+      <args> x[3][12] 1 aux_gb[114] </args>
+      <args> x[3][12] 2 aux_gb[115] </args>
+      <args> x[3][13] 1 aux_gb[116] </args>
+      <args> x[3][13] 2 aux_gb[117] </args>
+      <args> x[3][14] 1 aux_gb[118] </args>
+      <args> x[3][14] 2 aux_gb[119] </args>
+      <args> x[4][0] 1 aux_gb[120] </args>
+      <args> x[4][0] 2 aux_gb[121] </args>
+      <args> x[4][1] 1 aux_gb[122] </args>
+      <args> x[4][1] 2 aux_gb[123] </args>
+      <args> x[4][2] 1 aux_gb[124] </args>
+      <args> x[4][2] 2 aux_gb[125] </args>
+      <args> x[4][3] 1 aux_gb[126] </args>
+      <args> x[4][3] 2 aux_gb[127] </args>
+      <args> x[4][4] 1 aux_gb[128] </args>
+      <args> x[4][4] 2 aux_gb[129] </args>
+      <args> x[4][5] 1 aux_gb[130] </args>
+      <args> x[4][5] 2 aux_gb[131] </args>
+      <args> x[4][6] 1 aux_gb[132] </args>
+      <args> x[4][6] 2 aux_gb[133] </args>
+      <args> x[4][7] 1 aux_gb[134] </args>
+      <args> x[4][7] 2 aux_gb[135] </args>
+      <args> x[4][8] 1 aux_gb[136] </args>
+      <args> x[4][8] 2 aux_gb[137] </args>
+      <args> x[4][9] 1 aux_gb[138] </args>
+      <args> x[4][9] 2 aux_gb[139] </args>
+      <args> x[4][10] 1 aux_gb[140] </args>
+      <args> x[4][10] 2 aux_gb[141] </args>
+      <args> x[4][11] 1 aux_gb[142] </args>
+      <args> x[4][11] 2 aux_gb[143] </args>
+      <args> x[4][12] 1 aux_gb[144] </args>
+      <args> x[4][12] 2 aux_gb[145] </args>
+      <args> x[4][13] 1 aux_gb[146] </args>
+      <args> x[4][13] 2 aux_gb[147] </args>
+      <args> x[4][14] 1 aux_gb[148] </args>
+      <args> x[4][14] 2 aux_gb[149] </args>
+      <args> x[5][0] 1 aux_gb[150] </args>
+      <args> x[5][0] 2 aux_gb[151] </args>
+      <args> x[5][1] 1 aux_gb[152] </args>
+      <args> x[5][1] 2 aux_gb[153] </args>
+      <args> x[5][2] 1 aux_gb[154] </args>
+      <args> x[5][2] 2 aux_gb[155] </args>
+      <args> x[5][3] 1 aux_gb[156] </args>
+      <args> x[5][3] 2 aux_gb[157] </args>
+      <args> x[5][4] 1 aux_gb[158] </args>
+      <args> x[5][4] 2 aux_gb[159] </args>
+      <args> x[5][5] 1 aux_gb[160] </args>
+      <args> x[5][5] 2 aux_gb[161] </args>
+      <args> x[5][6] 1 aux_gb[162] </args>
+      <args> x[5][6] 2 aux_gb[163] </args>
+      <args> x[5][7] 1 aux_gb[164] </args>
+      <args> x[5][7] 2 aux_gb[165] </args>
+      <args> x[5][8] 1 aux_gb[166] </args>
+      <args> x[5][8] 2 aux_gb[167] </args>
+      <args> x[5][9] 1 aux_gb[168] </args>
+      <args> x[5][9] 2 aux_gb[169] </args>
+      <args> x[5][10] 1 aux_gb[170] </args>
+      <args> x[5][10] 2 aux_gb[171] </args>
+      <args> x[5][11] 1 aux_gb[172] </args>
+      <args> x[5][11] 2 aux_gb[173] </args>
+      <args> x[5][12] 1 aux_gb[174] </args>
+      <args> x[5][12] 2 aux_gb[175] </args>
+      <args> x[5][13] 1 aux_gb[176] </args>
+      <args> x[5][13] 2 aux_gb[177] </args>
+      <args> x[5][14] 1 aux_gb[178] </args>
+      <args> x[5][14] 2 aux_gb[179] </args>
+      <args> x[6][0] 1 aux_gb[180] </args>
+      <args> x[6][0] 2 aux_gb[181] </args>
+      <args> x[6][1] 1 aux_gb[182] </args>
+      <args> x[6][1] 2 aux_gb[183] </args>
+      <args> x[6][2] 1 aux_gb[184] </args>
+      <args> x[6][2] 2 aux_gb[185] </args>
+      <args> x[6][3] 1 aux_gb[186] </args>
+      <args> x[6][3] 2 aux_gb[187] </args>
+      <args> x[6][4] 1 aux_gb[188] </args>
+      <args> x[6][4] 2 aux_gb[189] </args>
+      <args> x[6][5] 1 aux_gb[190] </args>
+      <args> x[6][5] 2 aux_gb[191] </args>
+      <args> x[6][6] 1 aux_gb[192] </args>
+      <args> x[6][6] 2 aux_gb[193] </args>
+      <args> x[6][7] 1 aux_gb[194] </args>
+      <args> x[6][7] 2 aux_gb[195] </args>
+      <args> x[6][8] 1 aux_gb[196] </args>
+      <args> x[6][8] 2 aux_gb[197] </args>
+      <args> x[6][9] 1 aux_gb[198] </args>
+      <args> x[6][9] 2 aux_gb[199] </args>
+      <args> x[6][10] 1 aux_gb[200] </args>
+      <args> x[6][10] 2 aux_gb[201] </args>
+      <args> x[6][11] 1 aux_gb[202] </args>
+      <args> x[6][11] 2 aux_gb[203] </args>
+      <args> x[6][12] 1 aux_gb[204] </args>
+      <args> x[6][12] 2 aux_gb[205] </args>
+      <args> x[6][13] 1 aux_gb[206] </args>
+      <args> x[6][13] 2 aux_gb[207] </args>
+      <args> x[6][14] 1 aux_gb[208] </args>
+      <args> x[6][14] 2 aux_gb[209] </args>
+      <args> x[7][0] 1 aux_gb[210] </args>
+      <args> x[7][0] 2 aux_gb[211] </args>
+      <args> x[7][1] 1 aux_gb[212] </args>
+      <args> x[7][1] 2 aux_gb[213] </args>
+      <args> x[7][2] 1 aux_gb[214] </args>
+      <args> x[7][2] 2 aux_gb[215] </args>
+      <args> x[7][3] 1 aux_gb[216] </args>
+      <args> x[7][3] 2 aux_gb[217] </args>
+      <args> x[7][4] 1 aux_gb[218] </args>
+      <args> x[7][4] 2 aux_gb[219] </args>
+      <args> x[7][5] 1 aux_gb[220] </args>
+      <args> x[7][5] 2 aux_gb[221] </args>
+      <args> x[7][6] 1 aux_gb[222] </args>
+      <args> x[7][6] 2 aux_gb[223] </args>
+      <args> x[7][7] 1 aux_gb[224] </args>
+      <args> x[7][7] 2 aux_gb[225] </args>
+      <args> x[7][8] 1 aux_gb[226] </args>
+      <args> x[7][8] 2 aux_gb[227] </args>
+      <args> x[7][9] 1 aux_gb[228] </args>
+      <args> x[7][9] 2 aux_gb[229] </args>
+      <args> x[7][10] 1 aux_gb[230] </args>
+      <args> x[7][10] 2 aux_gb[231] </args>
+      <args> x[7][11] 1 aux_gb[232] </args>
+      <args> x[7][11] 2 aux_gb[233] </args>
+      <args> x[7][12] 1 aux_gb[234] </args>
+      <args> x[7][12] 2 aux_gb[235] </args>
+      <args> x[7][13] 1 aux_gb[236] </args>
+      <args> x[7][13] 2 aux_gb[237] </args>
+      <args> x[7][14] 1 aux_gb[238] </args>
+      <args> x[7][14] 2 aux_gb[239] </args>
+      <args> x[8][0] 1 aux_gb[240] </args>
+      <args> x[8][0] 2 aux_gb[241] </args>
+      <args> x[8][1] 1 aux_gb[242] </args>
+      <args> x[8][1] 2 aux_gb[243] </args>
+      <args> x[8][2] 1 aux_gb[244] </args>
+      <args> x[8][2] 2 aux_gb[245] </args>
+      <args> x[8][3] 1 aux_gb[246] </args>
+      <args> x[8][3] 2 aux_gb[247] </args>
+      <args> x[8][4] 1 aux_gb[248] </args>
+      <args> x[8][4] 2 aux_gb[249] </args>
+      <args> x[8][5] 1 aux_gb[250] </args>
+      <args> x[8][5] 2 aux_gb[251] </args>
+      <args> x[8][6] 1 aux_gb[252] </args>
+      <args> x[8][6] 2 aux_gb[253] </args>
+      <args> x[8][7] 1 aux_gb[254] </args>
+      <args> x[8][7] 2 aux_gb[255] </args>
+      <args> x[8][8] 1 aux_gb[256] </args>
+      <args> x[8][8] 2 aux_gb[257] </args>
+      <args> x[8][9] 1 aux_gb[258] </args>
+      <args> x[8][9] 2 aux_gb[259] </args>
+      <args> x[8][10] 1 aux_gb[260] </args>
+      <args> x[8][10] 2 aux_gb[261] </args>
+      <args> x[8][11] 1 aux_gb[262] </args>
+      <args> x[8][11] 2 aux_gb[263] </args>
+      <args> x[8][12] 1 aux_gb[264] </args>
+      <args> x[8][12] 2 aux_gb[265] </args>
+      <args> x[8][13] 1 aux_gb[266] </args>
+      <args> x[8][13] 2 aux_gb[267] </args>
+      <args> x[8][14] 1 aux_gb[268] </args>
+      <args> x[8][14] 2 aux_gb[269] </args>
+      <args> x[9][0] 1 aux_gb[270] </args>
+      <args> x[9][0] 2 aux_gb[271] </args>
+      <args> x[9][1] 1 aux_gb[272] </args>
+      <args> x[9][1] 2 aux_gb[273] </args>
+      <args> x[9][2] 1 aux_gb[274] </args>
+      <args> x[9][2] 2 aux_gb[275] </args>
+      <args> x[9][3] 1 aux_gb[276] </args>
+      <args> x[9][3] 2 aux_gb[277] </args>
+      <args> x[9][4] 1 aux_gb[278] </args>
+      <args> x[9][4] 2 aux_gb[279] </args>
+      <args> x[9][5] 1 aux_gb[280] </args>
+      <args> x[9][5] 2 aux_gb[281] </args>
+      <args> x[9][6] 1 aux_gb[282] </args>
+      <args> x[9][6] 2 aux_gb[283] </args>
+      <args> x[9][7] 1 aux_gb[284] </args>
+      <args> x[9][7] 2 aux_gb[285] </args>
+      <args> x[9][8] 1 aux_gb[286] </args>
+      <args> x[9][8] 2 aux_gb[287] </args>
+      <args> x[9][9] 1 aux_gb[288] </args>
+      <args> x[9][9] 2 aux_gb[289] </args>
+      <args> x[9][10] 1 aux_gb[290] </args>
+      <args> x[9][10] 2 aux_gb[291] </args>
+      <args> x[9][11] 1 aux_gb[292] </args>
+      <args> x[9][11] 2 aux_gb[293] </args>
+      <args> x[9][12] 1 aux_gb[294] </args>
+      <args> x[9][12] 2 aux_gb[295] </args>
+      <args> x[9][13] 1 aux_gb[296] </args>
+      <args> x[9][13] 2 aux_gb[297] </args>
+      <args> x[9][14] 1 aux_gb[298] </args>
+      <args> x[9][14] 2 aux_gb[299] </args>
+      <args> x[10][0] 1 aux_gb[300] </args>
+      <args> x[10][0] 2 aux_gb[301] </args>
+      <args> x[10][1] 1 aux_gb[302] </args>
+      <args> x[10][1] 2 aux_gb[303] </args>
+      <args> x[10][2] 1 aux_gb[304] </args>
+      <args> x[10][2] 2 aux_gb[305] </args>
+      <args> x[10][3] 1 aux_gb[306] </args>
+      <args> x[10][3] 2 aux_gb[307] </args>
+      <args> x[10][4] 1 aux_gb[308] </args>
+      <args> x[10][4] 2 aux_gb[309] </args>
+      <args> x[10][5] 1 aux_gb[310] </args>
+      <args> x[10][5] 2 aux_gb[311] </args>
+      <args> x[10][6] 1 aux_gb[312] </args>
+      <args> x[10][6] 2 aux_gb[313] </args>
+      <args> x[10][7] 1 aux_gb[314] </args>
+      <args> x[10][7] 2 aux_gb[315] </args>
+      <args> x[10][8] 1 aux_gb[316] </args>
+      <args> x[10][8] 2 aux_gb[317] </args>
+      <args> x[10][9] 1 aux_gb[318] </args>
+      <args> x[10][9] 2 aux_gb[319] </args>
+      <args> x[10][10] 1 aux_gb[320] </args>
+      <args> x[10][10] 2 aux_gb[321] </args>
+      <args> x[10][11] 1 aux_gb[322] </args>
+      <args> x[10][11] 2 aux_gb[323] </args>
+      <args> x[10][12] 1 aux_gb[324] </args>
+      <args> x[10][12] 2 aux_gb[325] </args>
+      <args> x[10][13] 1 aux_gb[326] </args>
+      <args> x[10][13] 2 aux_gb[327] </args>
+      <args> x[10][14] 1 aux_gb[328] </args>
+      <args> x[10][14] 2 aux_gb[329] </args>
+      <args> x[11][0] 1 aux_gb[330] </args>
+      <args> x[11][0] 2 aux_gb[331] </args>
+      <args> x[11][1] 1 aux_gb[332] </args>
+      <args> x[11][1] 2 aux_gb[333] </args>
+      <args> x[11][2] 1 aux_gb[334] </args>
+      <args> x[11][2] 2 aux_gb[335] </args>
+      <args> x[11][3] 1 aux_gb[336] </args>
+      <args> x[11][3] 2 aux_gb[337] </args>
+      <args> x[11][4] 1 aux_gb[338] </args>
+      <args> x[11][4] 2 aux_gb[339] </args>
+      <args> x[11][5] 1 aux_gb[340] </args>
+      <args> x[11][5] 2 aux_gb[341] </args>
+      <args> x[11][6] 1 aux_gb[342] </args>
+      <args> x[11][6] 2 aux_gb[343] </args>
+      <args> x[11][7] 1 aux_gb[344] </args>
+      <args> x[11][7] 2 aux_gb[345] </args>
+      <args> x[11][8] 1 aux_gb[346] </args>
+      <args> x[11][8] 2 aux_gb[347] </args>
+      <args> x[11][9] 1 aux_gb[348] </args>
+      <args> x[11][9] 2 aux_gb[349] </args>
+      <args> x[11][10] 1 aux_gb[350] </args>
+      <args> x[11][10] 2 aux_gb[351] </args>
+      <args> x[11][11] 1 aux_gb[352] </args>
+      <args> x[11][11] 2 aux_gb[353] </args>
+      <args> x[11][12] 1 aux_gb[354] </args>
+      <args> x[11][12] 2 aux_gb[355] </args>
+      <args> x[11][13] 1 aux_gb[356] </args>
+      <args> x[11][13] 2 aux_gb[357] </args>
+      <args> x[11][14] 1 aux_gb[358] </args>
+      <args> x[11][14] 2 aux_gb[359] </args>
+      <args> x[12][0] 1 aux_gb[360] </args>
+      <args> x[12][0] 2 aux_gb[361] </args>
+      <args> x[12][1] 1 aux_gb[362] </args>
+      <args> x[12][1] 2 aux_gb[363] </args>
+      <args> x[12][2] 1 aux_gb[364] </args>
+      <args> x[12][2] 2 aux_gb[365] </args>
+      <args> x[12][3] 1 aux_gb[366] </args>
+      <args> x[12][3] 2 aux_gb[367] </args>
+      <args> x[12][4] 1 aux_gb[368] </args>
+      <args> x[12][4] 2 aux_gb[369] </args>
+      <args> x[12][5] 1 aux_gb[370] </args>
+      <args> x[12][5] 2 aux_gb[371] </args>
+      <args> x[12][6] 1 aux_gb[372] </args>
+      <args> x[12][6] 2 aux_gb[373] </args>
+      <args> x[12][7] 1 aux_gb[374] </args>
+      <args> x[12][7] 2 aux_gb[375] </args>
+      <args> x[12][8] 1 aux_gb[376] </args>
+      <args> x[12][8] 2 aux_gb[377] </args>
+      <args> x[12][9] 1 aux_gb[378] </args>
+      <args> x[12][9] 2 aux_gb[379] </args>
+      <args> x[12][10] 1 aux_gb[380] </args>
+      <args> x[12][10] 2 aux_gb[381] </args>
+      <args> x[12][11] 1 aux_gb[382] </args>
+      <args> x[12][11] 2 aux_gb[383] </args>
+      <args> x[12][12] 1 aux_gb[384] </args>
+      <args> x[12][12] 2 aux_gb[385] </args>
+      <args> x[12][13] 1 aux_gb[386] </args>
+      <args> x[12][13] 2 aux_gb[387] </args>
+      <args> x[12][14] 1 aux_gb[388] </args>
+      <args> x[12][14] 2 aux_gb[389] </args>
+      <args> x[13][0] 1 aux_gb[390] </args>
+      <args> x[13][0] 2 aux_gb[391] </args>
+      <args> x[13][1] 1 aux_gb[392] </args>
+      <args> x[13][1] 2 aux_gb[393] </args>
+      <args> x[13][2] 1 aux_gb[394] </args>
+      <args> x[13][2] 2 aux_gb[395] </args>
+      <args> x[13][3] 1 aux_gb[396] </args>
+      <args> x[13][3] 2 aux_gb[397] </args>
+      <args> x[13][4] 1 aux_gb[398] </args>
+      <args> x[13][4] 2 aux_gb[399] </args>
+      <args> x[13][5] 1 aux_gb[400] </args>
+      <args> x[13][5] 2 aux_gb[401] </args>
+      <args> x[13][6] 1 aux_gb[402] </args>
+      <args> x[13][6] 2 aux_gb[403] </args>
+      <args> x[13][7] 1 aux_gb[404] </args>
+      <args> x[13][7] 2 aux_gb[405] </args>
+      <args> x[13][8] 1 aux_gb[406] </args>
+      <args> x[13][8] 2 aux_gb[407] </args>
+      <args> x[13][9] 1 aux_gb[408] </args>
+      <args> x[13][9] 2 aux_gb[409] </args>
+      <args> x[13][10] 1 aux_gb[410] </args>
+      <args> x[13][10] 2 aux_gb[411] </args>
+      <args> x[13][11] 1 aux_gb[412] </args>
+      <args> x[13][11] 2 aux_gb[413] </args>
+      <args> x[13][12] 1 aux_gb[414] </args>
+      <args> x[13][12] 2 aux_gb[415] </args>
+      <args> x[13][13] 1 aux_gb[416] </args>
+      <args> x[13][13] 2 aux_gb[417] </args>
+      <args> x[13][14] 1 aux_gb[418] </args>
+      <args> x[13][14] 2 aux_gb[419] </args>
+      <args> x[14][0] 1 aux_gb[420] </args>
+      <args> x[14][0] 2 aux_gb[421] </args>
+      <args> x[14][1] 1 aux_gb[422] </args>
+      <args> x[14][1] 2 aux_gb[423] </args>
+      <args> x[14][2] 1 aux_gb[424] </args>
+      <args> x[14][2] 2 aux_gb[425] </args>
+      <args> x[14][3] 1 aux_gb[426] </args>
+      <args> x[14][3] 2 aux_gb[427] </args>
+      <args> x[14][4] 1 aux_gb[428] </args>
+      <args> x[14][4] 2 aux_gb[429] </args>
+      <args> x[14][5] 1 aux_gb[430] </args>
+      <args> x[14][5] 2 aux_gb[431] </args>
+      <args> x[14][6] 1 aux_gb[432] </args>
+      <args> x[14][6] 2 aux_gb[433] </args>
+      <args> x[14][7] 1 aux_gb[434] </args>
+      <args> x[14][7] 2 aux_gb[435] </args>
+      <args> x[14][8] 1 aux_gb[436] </args>
+      <args> x[14][8] 2 aux_gb[437] </args>
+      <args> x[14][9] 1 aux_gb[438] </args>
+      <args> x[14][9] 2 aux_gb[439] </args>
+      <args> x[14][10] 1 aux_gb[440] </args>
+      <args> x[14][10] 2 aux_gb[441] </args>
+      <args> x[14][11] 1 aux_gb[442] </args>
+      <args> x[14][11] 2 aux_gb[443] </args>
+      <args> x[14][12] 1 aux_gb[444] </args>
+      <args> x[14][12] 2 aux_gb[445] </args>
+      <args> x[14][13] 1 aux_gb[446] </args>
+      <args> x[14][13] 2 aux_gb[447] </args>
+      <args> x[14][14] 1 aux_gb[448] </args>
+      <args> x[14][14] 2 aux_gb[449] </args>
+    </group>
+    <group>
+      <sum>
+        <list> %... </list>
+        <condition> (eq,%0) </condition>
+      </sum>
+      <args> aux_gb[0] x[0][1..14] x[1][0..1] x[2][0] x[2][2] x[3][0] x[3][3] x[4][0] x[4][4] x[5][0] x[5][5] x[6][0] x[6][6] x[7][0] x[7][7] x[8][0] x[8][8] x[9][0] x[9][9] x[10][0] x[10][10] x[11][0] x[11][11] x[12][0] x[12][12] x[13][0] x[13][13] x[14][0] x[14][14] </args>
+      <args> aux_gb[1] x[1][2] x[2][1] </args>
+      <args> aux_gb[2] x[0][0] x[0][2..14] x[1][0..2] x[2][1] x[2][3] x[3][1] x[3][4] x[4][1] x[4][5] x[5][1] x[5][6] x[6][1] x[6][7] x[7][1] x[7][8] x[8][1] x[8][9] x[9][1] x[9][10] x[10][1] x[10][11] x[11][1] x[11][12] x[12][1] x[12][13] x[13][1] x[13][14] x[14][1] </args>
+      <args> aux_gb[3] x[1][3] x[2][0] x[2][2] </args>
+      <args> aux_gb[4] x[0][0..1] x[0][3..14] x[1][1..3] x[2][0] x[2][2] x[2][4] x[3][2] x[3][5] x[4][2] x[4][6] x[5][2] x[5][7] x[6][2] x[6][8] x[7][2] x[7][9] x[8][2] x[8][10] x[9][2] x[9][11] x[10][2] x[10][12] x[11][2] x[11][13] x[12][2] x[12][14] x[13..14][2] </args>
+      <args> aux_gb[5] x[1][0] x[1][4] x[2][1] x[2][3] </args>
+      <args> aux_gb[6] x[0][0..2] x[0][4..14] x[1][2..4] x[2][1] x[2][3] x[2][5] x[3][0] x[3][3] x[3][6] x[4][3] x[4][7] x[5][3] x[5][8] x[6][3] x[6][9] x[7][3] x[7][10] x[8][3] x[8][11] x[9][3] x[9][12] x[10][3] x[10][13] x[11][3] x[11][14] x[12..14][3] </args>
+      <args> aux_gb[7] x[1][1] x[1][5] x[2][2] x[2][4] </args>
+      <args> aux_gb[8] x[0][0..3] x[0][5..14] x[1][3..5] x[2][2] x[2][4] x[2][6] x[3][1] x[3][4] x[3][7] x[4][0] x[4][4] x[4][8] x[5][4] x[5][9] x[6][4] x[6][10] x[7][4] x[7][11] x[8][4] x[8][12] x[9][4] x[9][13] x[10][4] x[10][14] x[11..14][4] </args>
+      <args> aux_gb[9] x[1][2] x[1][6] x[2][3] x[2][5] </args>
+      <args> aux_gb[10] x[0][0..4] x[0][6..14] x[1][4..6] x[2][3] x[2][5] x[2][7] x[3][2] x[3][5] x[3][8] x[4][1] x[4][5] x[4][9] x[5][0] x[5][5] x[5][10] x[6][5] x[6][11] x[7][5] x[7][12] x[8][5] x[8][13] x[9][5] x[9][14] x[10..14][5] </args>
+      <args> aux_gb[11] x[1][3] x[1][7] x[2][4] x[2][6] </args>
+      <args> aux_gb[12] x[0][0..5] x[0][7..14] x[1][5..7] x[2][4] x[2][6] x[2][8] x[3][3] x[3][6] x[3][9] x[4][2] x[4][6] x[4][10] x[5][1] x[5][6] x[5][11] x[6][0] x[6][6] x[6][12] x[7][6] x[7][13] x[8][6] x[8][14] x[9..14][6] </args>
+      <args> aux_gb[13] x[1][4] x[1][8] x[2][5] x[2][7] </args>
+      <args> aux_gb[14] x[0][0..6] x[0][8..14] x[1][6..8] x[2][5] x[2][7] x[2][9] x[3][4] x[3][7] x[3][10] x[4][3] x[4][7] x[4][11] x[5][2] x[5][7] x[5][12] x[6][1] x[6][7] x[6][13] x[7][0] x[7][7] x[7][14] x[8..14][7] </args>
+      <args> aux_gb[15] x[1][5] x[1][9] x[2][6] x[2][8] </args>
+      <args> aux_gb[16] x[0][0..7] x[0][9..14] x[1][7..9] x[2][6] x[2][8] x[2][10] x[3][5] x[3][8] x[3][11] x[4][4] x[4][8] x[4][12] x[5][3] x[5][8] x[5][13] x[6][2] x[6][8] x[6][14] x[7][1] x[7][8] x[8][0] x[8..14][8] </args>
+      <args> aux_gb[17] x[1][6] x[1][10] x[2][7] x[2][9] </args>
+      <args> aux_gb[18] x[0][0..8] x[0][10..14] x[1][8..10] x[2][7] x[2][9] x[2][11] x[3][6] x[3][9] x[3][12] x[4][5] x[4][9] x[4][13] x[5][4] x[5][9] x[5][14] x[6][3] x[6][9] x[7][2] x[7][9] x[8][1] x[8][9] x[9][0] x[9..14][9] </args>
+      <args> aux_gb[19] x[1][7] x[1][11] x[2][8] x[2][10] </args>
+      <args> aux_gb[20] x[0][0..9] x[0][11..14] x[1][9..11] x[2][8] x[2][10] x[2][12] x[3][7] x[3][10] x[3][13] x[4][6] x[4][10] x[4][14] x[5][5] x[5][10] x[6][4] x[6][10] x[7][3] x[7][10] x[8][2] x[8][10] x[9][1] x[9][10] x[10][0] x[10..14][10] </args>
+      <args> aux_gb[21] x[1][8] x[1][12] x[2][9] x[2][11] </args>
+      <args> aux_gb[22] x[0][0..10] x[0][12..14] x[1][10..12] x[2][9] x[2][11] x[2][13] x[3][8] x[3][11] x[3][14] x[4][7] x[4][11] x[5][6] x[5][11] x[6][5] x[6][11] x[7][4] x[7][11] x[8][3] x[8][11] x[9][2] x[9][11] x[10][1] x[10][11] x[11][0] x[11..14][11] </args>
+      <args> aux_gb[23] x[1][9] x[1][13] x[2][10] x[2][12] </args>
+      <args> aux_gb[24] x[0][0..11] x[0][13..14] x[1][11..13] x[2][10] x[2][12] x[2][14] x[3][9] x[3][12] x[4][8] x[4][12] x[5][7] x[5][12] x[6][6] x[6][12] x[7][5] x[7][12] x[8][4] x[8][12] x[9][3] x[9][12] x[10][2] x[10][12] x[11][1] x[11][12] x[12][0] x[12..14][12] </args>
+      <args> aux_gb[25] x[1][10] x[1][14] x[2][11] x[2][13] </args>
+      <args> aux_gb[26] x[0][0..12] x[0][14] x[1][12..14] x[2][11] x[2][13] x[3][10] x[3][13] x[4][9] x[4][13] x[5][8] x[5][13] x[6][7] x[6][13] x[7][6] x[7][13] x[8][5] x[8][13] x[9][4] x[9][13] x[10][3] x[10][13] x[11][2] x[11][13] x[12][1] x[12][13] x[13][0] x[13..14][13] </args>
+      <args> aux_gb[27] x[1][11] x[2][12] x[2][14] </args>
+      <args> aux_gb[28] x[0][0..13] x[1][13..14] x[2][12] x[2][14] x[3][11] x[3][14] x[4][10] x[4][14] x[5][9] x[5][14] x[6][8] x[6][14] x[7][7] x[7][14] x[8][6] x[8][14] x[9][5] x[9][14] x[10][4] x[10][14] x[11][3] x[11][14] x[12][2] x[12][14] x[13][1] x[13][14] x[14][0] x[14][14] </args>
+      <args> aux_gb[29] x[1][12] x[2][13] </args>
+      <args> aux_gb[30] x[0][0..1] x[1][1..14] x[2][0..1] x[3][0] x[3][2] x[4][0] x[4][3] x[5][0] x[5][4] x[6][0] x[6][5] x[7][0] x[7][6] x[8][0] x[8][7] x[9][0] x[9][8] x[10][0] x[10][9] x[11][0] x[11][10] x[12][0] x[12][11] x[13][0] x[13][12] x[14][0] x[14][13] </args>
+      <args> aux_gb[31] x[0][2] x[2][2] x[3][1] </args>
+      <args> aux_gb[32] x[0][0..2] x[1][0] x[1][2..14] x[2][0..2] x[3][1] x[3][3] x[4][1] x[4][4] x[5][1] x[5][5] x[6][1] x[6][6] x[7][1] x[7][7] x[8][1] x[8][8] x[9][1] x[9][9] x[10][1] x[10][10] x[11][1] x[11][11] x[12][1] x[12][12] x[13][1] x[13][13] x[14][1] x[14][14] </args>
+      <args> aux_gb[33] x[0][3] x[2][3] x[3][0] x[3][2] </args>
+      <args> aux_gb[34] x[0][1..3] x[1][0..1] x[1][3..14] x[2][1..3] x[3][0] x[3][2] x[3][4] x[4][2] x[4][5] x[5][2] x[5][6] x[6][2] x[6][7] x[7][2] x[7][8] x[8][2] x[8][9] x[9][2] x[9][10] x[10][2] x[10][11] x[11][2] x[11][12] x[12][2] x[12][13] x[13][2] x[13][14] x[14][2] </args>
+      <args> aux_gb[35] x[0][0] x[0][4] x[2][0] x[2][4] x[3][1] x[3][3] </args>
+      <args> aux_gb[36] x[0][2..4] x[1][0..2] x[1][4..14] x[2][2..4] x[3][1] x[3][3] x[3][5] x[4][0] x[4][3] x[4][6] x[5][3] x[5][7] x[6][3] x[6][8] x[7][3] x[7][9] x[8][3] x[8][10] x[9][3] x[9][11] x[10][3] x[10][12] x[11][3] x[11][13] x[12][3] x[12][14] x[13..14][3] </args>
+      <args> aux_gb[37] x[0][1] x[0][5] x[2][1] x[2][5] x[3][2] x[3][4] </args>
+      <args> aux_gb[38] x[0][3..5] x[1][0..3] x[1][5..14] x[2][3..5] x[3][2] x[3][4] x[3][6] x[4][1] x[4][4] x[4][7] x[5][0] x[5][4] x[5][8] x[6][4] x[6][9] x[7][4] x[7][10] x[8][4] x[8][11] x[9][4] x[9][12] x[10][4] x[10][13] x[11][4] x[11][14] x[12..14][4] </args>
+      <args> aux_gb[39] x[0][2] x[0][6] x[2][2] x[2][6] x[3][3] x[3][5] </args>
+      <args> aux_gb[40] x[0][4..6] x[1][0..4] x[1][6..14] x[2][4..6] x[3][3] x[3][5] x[3][7] x[4][2] x[4][5] x[4][8] x[5][1] x[5][5] x[5][9] x[6][0] x[6][5] x[6][10] x[7][5] x[7][11] x[8][5] x[8][12] x[9][5] x[9][13] x[10][5] x[10][14] x[11..14][5] </args>
+      <args> aux_gb[41] x[0][3] x[0][7] x[2][3] x[2][7] x[3][4] x[3][6] </args>
+      <args> aux_gb[42] x[0][5..7] x[1][0..5] x[1][7..14] x[2][5..7] x[3][4] x[3][6] x[3][8] x[4][3] x[4][6] x[4][9] x[5][2] x[5][6] x[5][10] x[6][1] x[6][6] x[6][11] x[7][0] x[7][6] x[7][12] x[8][6] x[8][13] x[9][6] x[9][14] x[10..14][6] </args>
+      <args> aux_gb[43] x[0][4] x[0][8] x[2][4] x[2][8] x[3][5] x[3][7] </args>
+      <args> aux_gb[44] x[0][6..8] x[1][0..6] x[1][8..14] x[2][6..8] x[3][5] x[3][7] x[3][9] x[4][4] x[4][7] x[4][10] x[5][3] x[5][7] x[5][11] x[6][2] x[6][7] x[6][12] x[7][1] x[7][7] x[7][13] x[8][0] x[8][7] x[8][14] x[9..14][7] </args>
+      <args> aux_gb[45] x[0][5] x[0][9] x[2][5] x[2][9] x[3][6] x[3][8] </args>
+      <args> aux_gb[46] x[0][7..9] x[1][0..7] x[1][9..14] x[2][7..9] x[3][6] x[3][8] x[3][10] x[4][5] x[4][8] x[4][11] x[5][4] x[5][8] x[5][12] x[6][3] x[6][8] x[6][13] x[7][2] x[7][8] x[7][14] x[8][1] x[8][8] x[9][0] x[9..14][8] </args>
+      <args> aux_gb[47] x[0][6] x[0][10] x[2][6] x[2][10] x[3][7] x[3][9] </args>
+      <args> aux_gb[48] x[0][8..10] x[1][0..8] x[1][10..14] x[2][8..10] x[3][7] x[3][9] x[3][11] x[4][6] x[4][9] x[4][12] x[5][5] x[5][9] x[5][13] x[6][4] x[6][9] x[6][14] x[7][3] x[7][9] x[8][2] x[8][9] x[9][1] x[9][9] x[10][0] x[10..14][9] </args>
+      <args> aux_gb[49] x[0][7] x[0][11] x[2][7] x[2][11] x[3][8] x[3][10] </args>
+      <args> aux_gb[50] x[0][9..11] x[1][0..9] x[1][11..14] x[2][9..11] x[3][8] x[3][10] x[3][12] x[4][7] x[4][10] x[4][13] x[5][6] x[5][10] x[5][14] x[6][5] x[6][10] x[7][4] x[7][10] x[8][3] x[8][10] x[9][2] x[9][10] x[10][1] x[10][10] x[11][0] x[11..14][10] </args>
+      <args> aux_gb[51] x[0][8] x[0][12] x[2][8] x[2][12] x[3][9] x[3][11] </args>
+      <args> aux_gb[52] x[0][10..12] x[1][0..10] x[1][12..14] x[2][10..12] x[3][9] x[3][11] x[3][13] x[4][8] x[4][11] x[4][14] x[5][7] x[5][11] x[6][6] x[6][11] x[7][5] x[7][11] x[8][4] x[8][11] x[9][3] x[9][11] x[10][2] x[10][11] x[11][1] x[11][11] x[12][0] x[12..14][11] </args>
+      <args> aux_gb[53] x[0][9] x[0][13] x[2][9] x[2][13] x[3][10] x[3][12] </args>
+      <args> aux_gb[54] x[0][11..13] x[1][0..11] x[1][13..14] x[2][11..13] x[3][10] x[3][12] x[3][14] x[4][9] x[4][12] x[5][8] x[5][12] x[6][7] x[6][12] x[7][6] x[7][12] x[8][5] x[8][12] x[9][4] x[9][12] x[10][3] x[10][12] x[11][2] x[11][12] x[12][1] x[12][12] x[13][0] x[13..14][12] </args>
+      <args> aux_gb[55] x[0][10] x[0][14] x[2][10] x[2][14] x[3][11] x[3][13] </args>
+      <args> aux_gb[56] x[0][12..14] x[1][0..12] x[1][14] x[2][12..14] x[3][11] x[3][13] x[4][10] x[4][13] x[5][9] x[5][13] x[6][8] x[6][13] x[7][7] x[7][13] x[8][6] x[8][13] x[9][5] x[9][13] x[10][4] x[10][13] x[11][3] x[11][13] x[12][2] x[12][13] x[13][1] x[13][13] x[14][0] x[14][13] </args>
+      <args> aux_gb[57] x[0][11] x[2][11] x[3][12] x[3][14] </args>
+      <args> aux_gb[58] x[0][13..14] x[1][0..13] x[2][13..14] x[3][12] x[3][14] x[4][11] x[4][14] x[5][10] x[5][14] x[6][9] x[6][14] x[7][8] x[7][14] x[8][7] x[8][14] x[9][6] x[9][14] x[10][5] x[10][14] x[11][4] x[11][14] x[12][3] x[12][14] x[13][2] x[13][14] x[14][1] x[14][14] </args>
+      <args> aux_gb[59] x[0][12] x[2][12] x[3][13] </args>
+      <args> aux_gb[60] x[0][0] x[0][2] x[1][0..1] x[2][1..14] x[3][0..1] x[4][0] x[4][2] x[5][0] x[5][3] x[6][0] x[6][4] x[7][0] x[7][5] x[8][0] x[8][6] x[9][0] x[9][7] x[10][0] x[10][8] x[11][0] x[11][9] x[12][0] x[12][10] x[13][0] x[13][11] x[14][0] x[14][12] </args>
+      <args> aux_gb[61] x[0][1] x[1][2] x[3][2] x[4][1] </args>
+      <args> aux_gb[62] x[0][1] x[0][3] x[1][0..2] x[2][0] x[2][2..14] x[3][0..2] x[4][1] x[4][3] x[5][1] x[5][4] x[6][1] x[6][5] x[7][1] x[7][6] x[8][1] x[8][7] x[9][1] x[9][8] x[10][1] x[10][9] x[11][1] x[11][10] x[12][1] x[12][11] x[13][1] x[13][12] x[14][1] x[14][13] </args>
+      <args> aux_gb[63] x[0][0] x[0][2] x[1][3] x[3][3] x[4][0] x[4][2] </args>
+      <args> aux_gb[64] x[0][0] x[0][2] x[0][4] x[1][1..3] x[2][0..1] x[2][3..14] x[3][1..3] x[4][0] x[4][2] x[4][4] x[5][2] x[5][5] x[6][2] x[6][6] x[7][2] x[7][7] x[8][2] x[8][8] x[9][2] x[9][9] x[10][2] x[10][10] x[11][2] x[11][11] x[12][2] x[12][12] x[13][2] x[13][13] x[14][2] x[14][14] </args>
+      <args> aux_gb[65] x[0][1] x[0][3] x[1][0] x[1][4] x[3][0] x[3][4] x[4][1] x[4][3] </args>
+      <args> aux_gb[66] x[0][1] x[0][3] x[0][5] x[1][2..4] x[2][0..2] x[2][4..14] x[3][2..4] x[4][1] x[4][3] x[4][5] x[5][0] x[5][3] x[5][6] x[6][3] x[6][7] x[7][3] x[7][8] x[8][3] x[8][9] x[9][3] x[9][10] x[10][3] x[10][11] x[11][3] x[11][12] x[12][3] x[12][13] x[13][3] x[13][14] x[14][3] </args>
+      <args> aux_gb[67] x[0][2] x[0][4] x[1][1] x[1][5] x[3][1] x[3][5] x[4][2] x[4][4] </args>
+      <args> aux_gb[68] x[0][2] x[0][4] x[0][6] x[1][3..5] x[2][0..3] x[2][5..14] x[3][3..5] x[4][2] x[4][4] x[4][6] x[5][1] x[5][4] x[5][7] x[6][0] x[6][4] x[6][8] x[7][4] x[7][9] x[8][4] x[8][10] x[9][4] x[9][11] x[10][4] x[10][12] x[11][4] x[11][13] x[12][4] x[12][14] x[13..14][4] </args>
+      <args> aux_gb[69] x[0][3] x[0][5] x[1][2] x[1][6] x[3][2] x[3][6] x[4][3] x[4][5] </args>
+      <args> aux_gb[70] x[0][3] x[0][5] x[0][7] x[1][4..6] x[2][0..4] x[2][6..14] x[3][4..6] x[4][3] x[4][5] x[4][7] x[5][2] x[5][5] x[5][8] x[6][1] x[6][5] x[6][9] x[7][0] x[7][5] x[7][10] x[8][5] x[8][11] x[9][5] x[9][12] x[10][5] x[10][13] x[11][5] x[11][14] x[12..14][5] </args>
+      <args> aux_gb[71] x[0][4] x[0][6] x[1][3] x[1][7] x[3][3] x[3][7] x[4][4] x[4][6] </args>
+      <args> aux_gb[72] x[0][4] x[0][6] x[0][8] x[1][5..7] x[2][0..5] x[2][7..14] x[3][5..7] x[4][4] x[4][6] x[4][8] x[5][3] x[5][6] x[5][9] x[6][2] x[6][6] x[6][10] x[7][1] x[7][6] x[7][11] x[8][0] x[8][6] x[8][12] x[9][6] x[9][13] x[10][6] x[10][14] x[11..14][6] </args>
+      <args> aux_gb[73] x[0][5] x[0][7] x[1][4] x[1][8] x[3][4] x[3][8] x[4][5] x[4][7] </args>
+      <args> aux_gb[74] x[0][5] x[0][7] x[0][9] x[1][6..8] x[2][0..6] x[2][8..14] x[3][6..8] x[4][5] x[4][7] x[4][9] x[5][4] x[5][7] x[5][10] x[6][3] x[6][7] x[6][11] x[7][2] x[7][7] x[7][12] x[8][1] x[8][7] x[8][13] x[9][0] x[9][7] x[9][14] x[10..14][7] </args>
+      <args> aux_gb[75] x[0][6] x[0][8] x[1][5] x[1][9] x[3][5] x[3][9] x[4][6] x[4][8] </args>
+      <args> aux_gb[76] x[0][6] x[0][8] x[0][10] x[1][7..9] x[2][0..7] x[2][9..14] x[3][7..9] x[4][6] x[4][8] x[4][10] x[5][5] x[5][8] x[5][11] x[6][4] x[6][8] x[6][12] x[7][3] x[7][8] x[7][13] x[8][2] x[8][8] x[8][14] x[9][1] x[9][8] x[10][0] x[10..14][8] </args>
+      <args> aux_gb[77] x[0][7] x[0][9] x[1][6] x[1][10] x[3][6] x[3][10] x[4][7] x[4][9] </args>
+      <args> aux_gb[78] x[0][7] x[0][9] x[0][11] x[1][8..10] x[2][0..8] x[2][10..14] x[3][8..10] x[4][7] x[4][9] x[4][11] x[5][6] x[5][9] x[5][12] x[6][5] x[6][9] x[6][13] x[7][4] x[7][9] x[7][14] x[8][3] x[8][9] x[9][2] x[9][9] x[10][1] x[10][9] x[11][0] x[11..14][9] </args>
+      <args> aux_gb[79] x[0][8] x[0][10] x[1][7] x[1][11] x[3][7] x[3][11] x[4][8] x[4][10] </args>
+      <args> aux_gb[80] x[0][8] x[0][10] x[0][12] x[1][9..11] x[2][0..9] x[2][11..14] x[3][9..11] x[4][8] x[4][10] x[4][12] x[5][7] x[5][10] x[5][13] x[6][6] x[6][10] x[6][14] x[7][5] x[7][10] x[8][4] x[8][10] x[9][3] x[9][10] x[10][2] x[10][10] x[11][1] x[11][10] x[12][0] x[12..14][10] </args>
+      <args> aux_gb[81] x[0][9] x[0][11] x[1][8] x[1][12] x[3][8] x[3][12] x[4][9] x[4][11] </args>
+      <args> aux_gb[82] x[0][9] x[0][11] x[0][13] x[1][10..12] x[2][0..10] x[2][12..14] x[3][10..12] x[4][9] x[4][11] x[4][13] x[5][8] x[5][11] x[5][14] x[6][7] x[6][11] x[7][6] x[7][11] x[8][5] x[8][11] x[9][4] x[9][11] x[10][3] x[10][11] x[11][2] x[11][11] x[12][1] x[12][11] x[13][0] x[13..14][11] </args>
+      <args> aux_gb[83] x[0][10] x[0][12] x[1][9] x[1][13] x[3][9] x[3][13] x[4][10] x[4][12] </args>
+      <args> aux_gb[84] x[0][10] x[0][12] x[0][14] x[1][11..13] x[2][0..11] x[2][13..14] x[3][11..13] x[4][10] x[4][12] x[4][14] x[5][9] x[5][12] x[6][8] x[6][12] x[7][7] x[7][12] x[8][6] x[8][12] x[9][5] x[9][12] x[10][4] x[10][12] x[11][3] x[11][12] x[12][2] x[12][12] x[13][1] x[13][12] x[14][0] x[14][12] </args>
+      <args> aux_gb[85] x[0][11] x[0][13] x[1][10] x[1][14] x[3][10] x[3][14] x[4][11] x[4][13] </args>
+      <args> aux_gb[86] x[0][11] x[0][13] x[1][12..14] x[2][0..12] x[2][14] x[3][12..14] x[4][11] x[4][13] x[5][10] x[5][13] x[6][9] x[6][13] x[7][8] x[7][13] x[8][7] x[8][13] x[9][6] x[9][13] x[10][5] x[10][13] x[11][4] x[11][13] x[12][3] x[12][13] x[13][2] x[13][13] x[14][1] x[14][13] </args>
+      <args> aux_gb[87] x[0][12] x[0][14] x[1][11] x[3][11] x[4][12] x[4][14] </args>
+      <args> aux_gb[88] x[0][12] x[0][14] x[1][13..14] x[2][0..13] x[3][13..14] x[4][12] x[4][14] x[5][11] x[5][14] x[6][10] x[6][14] x[7][9] x[7][14] x[8][8] x[8][14] x[9][7] x[9][14] x[10][6] x[10][14] x[11][5] x[11][14] x[12][4] x[12][14] x[13][3] x[13][14] x[14][2] x[14][14] </args>
+      <args> aux_gb[89] x[0][13] x[1][12] x[3][12] x[4][13] </args>
+      <args> aux_gb[90] x[0][0] x[0][3] x[1][0] x[1][2] x[2][0..1] x[3][1..14] x[4][0..1] x[5][0] x[5][2] x[6][0] x[6][3] x[7][0] x[7][4] x[8][0] x[8][5] x[9][0] x[9][6] x[10][0] x[10][7] x[11][0] x[11][8] x[12][0] x[12][9] x[13][0] x[13][10] x[14][0] x[14][11] </args>
+      <args> aux_gb[91] x[1][1] x[2][2] x[4][2] x[5][1] </args>
+      <args> aux_gb[92] x[0][1] x[0][4] x[1][1] x[1][3] x[2][0..2] x[3][0] x[3][2..14] x[4][0..2] x[5][1] x[5][3] x[6][1] x[6][4] x[7][1] x[7][5] x[8][1] x[8][6] x[9][1] x[9][7] x[10][1] x[10][8] x[11][1] x[11][9] x[12][1] x[12][10] x[13][1] x[13][11] x[14][1] x[14][12] </args>
+      <args> aux_gb[93] x[1][0] x[1][2] x[2][3] x[4][3] x[5][0] x[5][2] </args>
+      <args> aux_gb[94] x[0][2] x[0][5] x[1][0] x[1][2] x[1][4] x[2][1..3] x[3][0..1] x[3][3..14] x[4][1..3] x[5][0] x[5][2] x[5][4] x[6][2] x[6][5] x[7][2] x[7][6] x[8][2] x[8][7] x[9][2] x[9][8] x[10][2] x[10][9] x[11][2] x[11][10] x[12][2] x[12][11] x[13][2] x[13][12] x[14][2] x[14][13] </args>
+      <args> aux_gb[95] x[1][1] x[1][3] x[2][0] x[2][4] x[4][0] x[4][4] x[5][1] x[5][3] </args>
+      <args> aux_gb[96] x[0][0] x[0][3] x[0][6] x[1][1] x[1][3] x[1][5] x[2][2..4] x[3][0..2] x[3][4..14] x[4][2..4] x[5][1] x[5][3] x[5][5] x[6][0] x[6][3] x[6][6] x[7][3] x[7][7] x[8][3] x[8][8] x[9][3] x[9][9] x[10][3] x[10][10] x[11][3] x[11][11] x[12][3] x[12][12] x[13][3] x[13][13] x[14][3] x[14][14] </args>
+      <args> aux_gb[97] x[1][2] x[1][4] x[2][1] x[2][5] x[4][1] x[4][5] x[5][2] x[5][4] </args>
+      <args> aux_gb[98] x[0][1] x[0][4] x[0][7] x[1][2] x[1][4] x[1][6] x[2][3..5] x[3][0..3] x[3][5..14] x[4][3..5] x[5][2] x[5][4] x[5][6] x[6][1] x[6][4] x[6][7] x[7][0] x[7][4] x[7][8] x[8][4] x[8][9] x[9][4] x[9][10] x[10][4] x[10][11] x[11][4] x[11][12] x[12][4] x[12][13] x[13][4] x[13][14] x[14][4] </args>
+      <args> aux_gb[99] x[1][3] x[1][5] x[2][2] x[2][6] x[4][2] x[4][6] x[5][3] x[5][5] </args>
+      <args> aux_gb[100] x[0][2] x[0][5] x[0][8] x[1][3] x[1][5] x[1][7] x[2][4..6] x[3][0..4] x[3][6..14] x[4][4..6] x[5][3] x[5][5] x[5][7] x[6][2] x[6][5] x[6][8] x[7][1] x[7][5] x[7][9] x[8][0] x[8][5] x[8][10] x[9][5] x[9][11] x[10][5] x[10][12] x[11][5] x[11][13] x[12][5] x[12][14] x[13..14][5] </args>
+      <args> aux_gb[101] x[1][4] x[1][6] x[2][3] x[2][7] x[4][3] x[4][7] x[5][4] x[5][6] </args>
+      <args> aux_gb[102] x[0][3] x[0][6] x[0][9] x[1][4] x[1][6] x[1][8] x[2][5..7] x[3][0..5] x[3][7..14] x[4][5..7] x[5][4] x[5][6] x[5][8] x[6][3] x[6][6] x[6][9] x[7][2] x[7][6] x[7][10] x[8][1] x[8][6] x[8][11] x[9][0] x[9][6] x[9][12] x[10][6] x[10][13] x[11][6] x[11][14] x[12..14][6] </args>
+      <args> aux_gb[103] x[1][5] x[1][7] x[2][4] x[2][8] x[4][4] x[4][8] x[5][5] x[5][7] </args>
+      <args> aux_gb[104] x[0][4] x[0][7] x[0][10] x[1][5] x[1][7] x[1][9] x[2][6..8] x[3][0..6] x[3][8..14] x[4][6..8] x[5][5] x[5][7] x[5][9] x[6][4] x[6][7] x[6][10] x[7][3] x[7][7] x[7][11] x[8][2] x[8][7] x[8][12] x[9][1] x[9][7] x[9][13] x[10][0] x[10][7] x[10][14] x[11..14][7] </args>
+      <args> aux_gb[105] x[1][6] x[1][8] x[2][5] x[2][9] x[4][5] x[4][9] x[5][6] x[5][8] </args>
+      <args> aux_gb[106] x[0][5] x[0][8] x[0][11] x[1][6] x[1][8] x[1][10] x[2][7..9] x[3][0..7] x[3][9..14] x[4][7..9] x[5][6] x[5][8] x[5][10] x[6][5] x[6][8] x[6][11] x[7][4] x[7][8] x[7][12] x[8][3] x[8][8] x[8][13] x[9][2] x[9][8] x[9][14] x[10][1] x[10][8] x[11][0] x[11..14][8] </args>
+      <args> aux_gb[107] x[1][7] x[1][9] x[2][6] x[2][10] x[4][6] x[4][10] x[5][7] x[5][9] </args>
+      <args> aux_gb[108] x[0][6] x[0][9] x[0][12] x[1][7] x[1][9] x[1][11] x[2][8..10] x[3][0..8] x[3][10..14] x[4][8..10] x[5][7] x[5][9] x[5][11] x[6][6] x[6][9] x[6][12] x[7][5] x[7][9] x[7][13] x[8][4] x[8][9] x[8][14] x[9][3] x[9][9] x[10][2] x[10][9] x[11][1] x[11][9] x[12][0] x[12..14][9] </args>
+      <args> aux_gb[109] x[1][8] x[1][10] x[2][7] x[2][11] x[4][7] x[4][11] x[5][8] x[5][10] </args>
+      <args> aux_gb[110] x[0][7] x[0][10] x[0][13] x[1][8] x[1][10] x[1][12] x[2][9..11] x[3][0..9] x[3][11..14] x[4][9..11] x[5][8] x[5][10] x[5][12] x[6][7] x[6][10] x[6][13] x[7][6] x[7][10] x[7][14] x[8][5] x[8][10] x[9][4] x[9][10] x[10][3] x[10][10] x[11][2] x[11][10] x[12][1] x[12][10] x[13][0] x[13..14][10] </args>
+      <args> aux_gb[111] x[1][9] x[1][11] x[2][8] x[2][12] x[4][8] x[4][12] x[5][9] x[5][11] </args>
+      <args> aux_gb[112] x[0][8] x[0][11] x[0][14] x[1][9] x[1][11] x[1][13] x[2][10..12] x[3][0..10] x[3][12..14] x[4][10..12] x[5][9] x[5][11] x[5][13] x[6][8] x[6][11] x[6][14] x[7][7] x[7][11] x[8][6] x[8][11] x[9][5] x[9][11] x[10][4] x[10][11] x[11][3] x[11][11] x[12][2] x[12][11] x[13][1] x[13][11] x[14][0] x[14][11] </args>
+      <args> aux_gb[113] x[1][10] x[1][12] x[2][9] x[2][13] x[4][9] x[4][13] x[5][10] x[5][12] </args>
+      <args> aux_gb[114] x[0][9] x[0][12] x[1][10] x[1][12] x[1][14] x[2][11..13] x[3][0..11] x[3][13..14] x[4][11..13] x[5][10] x[5][12] x[5][14] x[6][9] x[6][12] x[7][8] x[7][12] x[8][7] x[8][12] x[9][6] x[9][12] x[10][5] x[10][12] x[11][4] x[11][12] x[12][3] x[12][12] x[13][2] x[13][12] x[14][1] x[14][12] </args>
+      <args> aux_gb[115] x[1][11] x[1][13] x[2][10] x[2][14] x[4][10] x[4][14] x[5][11] x[5][13] </args>
+      <args> aux_gb[116] x[0][10] x[0][13] x[1][11] x[1][13] x[2][12..14] x[3][0..12] x[3][14] x[4][12..14] x[5][11] x[5][13] x[6][10] x[6][13] x[7][9] x[7][13] x[8][8] x[8][13] x[9][7] x[9][13] x[10][6] x[10][13] x[11][5] x[11][13] x[12][4] x[12][13] x[13][3] x[13][13] x[14][2] x[14][13] </args>
+      <args> aux_gb[117] x[1][12] x[1][14] x[2][11] x[4][11] x[5][12] x[5][14] </args>
+      <args> aux_gb[118] x[0][11] x[0][14] x[1][12] x[1][14] x[2][13..14] x[3][0..13] x[4][13..14] x[5][12] x[5][14] x[6][11] x[6][14] x[7][10] x[7][14] x[8][9] x[8][14] x[9][8] x[9][14] x[10][7] x[10][14] x[11][6] x[11][14] x[12][5] x[12][14] x[13][4] x[13][14] x[14][3] x[14][14] </args>
+      <args> aux_gb[119] x[1][13] x[2][12] x[4][12] x[5][13] </args>
+      <args> aux_gb[120] x[0][0] x[0][4] x[1][0] x[1][3] x[2][0] x[2][2] x[3][0..1] x[4][1..14] x[5][0..1] x[6][0] x[6][2] x[7][0] x[7][3] x[8][0] x[8][4] x[9][0] x[9][5] x[10][0] x[10][6] x[11][0] x[11][7] x[12][0] x[12][8] x[13][0] x[13][9] x[14][0] x[14][10] </args>
+      <args> aux_gb[121] x[2][1] x[3][2] x[5][2] x[6][1] </args>
+      <args> aux_gb[122] x[0][1] x[0][5] x[1][1] x[1][4] x[2][1] x[2][3] x[3][0..2] x[4][0] x[4][2..14] x[5][0..2] x[6][1] x[6][3] x[7][1] x[7][4] x[8][1] x[8][5] x[9][1] x[9][6] x[10][1] x[10][7] x[11][1] x[11][8] x[12][1] x[12][9] x[13][1] x[13][10] x[14][1] x[14][11] </args>
+      <args> aux_gb[123] x[2][0] x[2][2] x[3][3] x[5][3] x[6][0] x[6][2] </args>
+      <args> aux_gb[124] x[0][2] x[0][6] x[1][2] x[1][5] x[2][0] x[2][2] x[2][4] x[3][1..3] x[4][0..1] x[4][3..14] x[5][1..3] x[6][0] x[6][2] x[6][4] x[7][2] x[7][5] x[8][2] x[8][6] x[9][2] x[9][7] x[10][2] x[10][8] x[11][2] x[11][9] x[12][2] x[12][10] x[13][2] x[13][11] x[14][2] x[14][12] </args>
+      <args> aux_gb[125] x[2][1] x[2][3] x[3][0] x[3][4] x[5][0] x[5][4] x[6][1] x[6][3] </args>
+      <args> aux_gb[126] x[0][3] x[0][7] x[1][0] x[1][3] x[1][6] x[2][1] x[2][3] x[2][5] x[3][2..4] x[4][0..2] x[4][4..14] x[5][2..4] x[6][1] x[6][3] x[6][5] x[7][0] x[7][3] x[7][6] x[8][3] x[8][7] x[9][3] x[9][8] x[10][3] x[10][9] x[11][3] x[11][10] x[12][3] x[12][11] x[13][3] x[13][12] x[14][3] x[14][13] </args>
+      <args> aux_gb[127] x[2][2] x[2][4] x[3][1] x[3][5] x[5][1] x[5][5] x[6][2] x[6][4] </args>
+      <args> aux_gb[128] x[0][0] x[0][4] x[0][8] x[1][1] x[1][4] x[1][7] x[2][2] x[2][4] x[2][6] x[3][3..5] x[4][0..3] x[4][5..14] x[5][3..5] x[6][2] x[6][4] x[6][6] x[7][1] x[7][4] x[7][7] x[8][0] x[8][4] x[8][8] x[9][4] x[9][9] x[10][4] x[10][10] x[11][4] x[11][11] x[12][4] x[12][12] x[13][4] x[13][13] x[14][4] x[14][14] </args>
+      <args> aux_gb[129] x[2][3] x[2][5] x[3][2] x[3][6] x[5][2] x[5][6] x[6][3] x[6][5] </args>
+      <args> aux_gb[130] x[0][1] x[0][5] x[0][9] x[1][2] x[1][5] x[1][8] x[2][3] x[2][5] x[2][7] x[3][4..6] x[4][0..4] x[4][6..14] x[5][4..6] x[6][3] x[6][5] x[6][7] x[7][2] x[7][5] x[7][8] x[8][1] x[8][5] x[8][9] x[9][0] x[9][5] x[9][10] x[10][5] x[10][11] x[11][5] x[11][12] x[12][5] x[12][13] x[13][5] x[13][14] x[14][5] </args>
+      <args> aux_gb[131] x[2][4] x[2][6] x[3][3] x[3][7] x[5][3] x[5][7] x[6][4] x[6][6] </args>
+      <args> aux_gb[132] x[0][2] x[0][6] x[0][10] x[1][3] x[1][6] x[1][9] x[2][4] x[2][6] x[2][8] x[3][5..7] x[4][0..5] x[4][7..14] x[5][5..7] x[6][4] x[6][6] x[6][8] x[7][3] x[7][6] x[7][9] x[8][2] x[8][6] x[8][10] x[9][1] x[9][6] x[9][11] x[10][0] x[10][6] x[10][12] x[11][6] x[11][13] x[12][6] x[12][14] x[13..14][6] </args>
+      <args> aux_gb[133] x[2][5] x[2][7] x[3][4] x[3][8] x[5][4] x[5][8] x[6][5] x[6][7] </args>
+      <args> aux_gb[134] x[0][3] x[0][7] x[0][11] x[1][4] x[1][7] x[1][10] x[2][5] x[2][7] x[2][9] x[3][6..8] x[4][0..6] x[4][8..14] x[5][6..8] x[6][5] x[6][7] x[6][9] x[7][4] x[7][7] x[7][10] x[8][3] x[8][7] x[8][11] x[9][2] x[9][7] x[9][12] x[10][1] x[10][7] x[10][13] x[11][0] x[11][7] x[11][14] x[12..14][7] </args>
+      <args> aux_gb[135] x[2][6] x[2][8] x[3][5] x[3][9] x[5][5] x[5][9] x[6][6] x[6][8] </args>
+      <args> aux_gb[136] x[0][4] x[0][8] x[0][12] x[1][5] x[1][8] x[1][11] x[2][6] x[2][8] x[2][10] x[3][7..9] x[4][0..7] x[4][9..14] x[5][7..9] x[6][6] x[6][8] x[6][10] x[7][5] x[7][8] x[7][11] x[8][4] x[8][8] x[8][12] x[9][3] x[9][8] x[9][13] x[10][2] x[10][8] x[10][14] x[11][1] x[11][8] x[12][0] x[12..14][8] </args>
+      <args> aux_gb[137] x[2][7] x[2][9] x[3][6] x[3][10] x[5][6] x[5][10] x[6][7] x[6][9] </args>
+      <args> aux_gb[138] x[0][5] x[0][9] x[0][13] x[1][6] x[1][9] x[1][12] x[2][7] x[2][9] x[2][11] x[3][8..10] x[4][0..8] x[4][10..14] x[5][8..10] x[6][7] x[6][9] x[6][11] x[7][6] x[7][9] x[7][12] x[8][5] x[8][9] x[8][13] x[9][4] x[9][9] x[9][14] x[10][3] x[10][9] x[11][2] x[11][9] x[12][1] x[12][9] x[13][0] x[13..14][9] </args>
+      <args> aux_gb[139] x[2][8] x[2][10] x[3][7] x[3][11] x[5][7] x[5][11] x[6][8] x[6][10] </args>
+      <args> aux_gb[140] x[0][6] x[0][10] x[0][14] x[1][7] x[1][10] x[1][13] x[2][8] x[2][10] x[2][12] x[3][9..11] x[4][0..9] x[4][11..14] x[5][9..11] x[6][8] x[6][10] x[6][12] x[7][7] x[7][10] x[7][13] x[8][6] x[8][10] x[8][14] x[9][5] x[9][10] x[10][4] x[10][10] x[11][3] x[11][10] x[12][2] x[12][10] x[13][1] x[13][10] x[14][0] x[14][10] </args>
+      <args> aux_gb[141] x[2][9] x[2][11] x[3][8] x[3][12] x[5][8] x[5][12] x[6][9] x[6][11] </args>
+      <args> aux_gb[142] x[0][7] x[0][11] x[1][8] x[1][11] x[1][14] x[2][9] x[2][11] x[2][13] x[3][10..12] x[4][0..10] x[4][12..14] x[5][10..12] x[6][9] x[6][11] x[6][13] x[7][8] x[7][11] x[7][14] x[8][7] x[8][11] x[9][6] x[9][11] x[10][5] x[10][11] x[11][4] x[11][11] x[12][3] x[12][11] x[13][2] x[13][11] x[14][1] x[14][11] </args>
+      <args> aux_gb[143] x[2][10] x[2][12] x[3][9] x[3][13] x[5][9] x[5][13] x[6][10] x[6][12] </args>
+      <args> aux_gb[144] x[0][8] x[0][12] x[1][9] x[1][12] x[2][10] x[2][12] x[2][14] x[3][11..13] x[4][0..11] x[4][13..14] x[5][11..13] x[6][10] x[6][12] x[6][14] x[7][9] x[7][12] x[8][8] x[8][12] x[9][7] x[9][12] x[10][6] x[10][12] x[11][5] x[11][12] x[12][4] x[12][12] x[13][3] x[13][12] x[14][2] x[14][12] </args>
+      <args> aux_gb[145] x[2][11] x[2][13] x[3][10] x[3][14] x[5][10] x[5][14] x[6][11] x[6][13] </args>
+      <args> aux_gb[146] x[0][9] x[0][13] x[1][10] x[1][13] x[2][11] x[2][13] x[3][12..14] x[4][0..12] x[4][14] x[5][12..14] x[6][11] x[6][13] x[7][10] x[7][13] x[8][9] x[8][13] x[9][8] x[9][13] x[10][7] x[10][13] x[11][6] x[11][13] x[12][5] x[12][13] x[13][4] x[13][13] x[14][3] x[14][13] </args>
+      <args> aux_gb[147] x[2][12] x[2][14] x[3][11] x[5][11] x[6][12] x[6][14] </args>
+      <args> aux_gb[148] x[0][10] x[0][14] x[1][11] x[1][14] x[2][12] x[2][14] x[3][13..14] x[4][0..13] x[5][13..14] x[6][12] x[6][14] x[7][11] x[7][14] x[8][10] x[8][14] x[9][9] x[9][14] x[10][8] x[10][14] x[11][7] x[11][14] x[12][6] x[12][14] x[13][5] x[13][14] x[14][4] x[14][14] </args>
+      <args> aux_gb[149] x[2][13] x[3][12] x[5][12] x[6][13] </args>
+      <args> aux_gb[150] x[0][0] x[0][5] x[1][0] x[1][4] x[2][0] x[2][3] x[3][0] x[3][2] x[4][0..1] x[5][1..14] x[6][0..1] x[7][0] x[7][2] x[8][0] x[8][3] x[9][0] x[9][4] x[10][0] x[10][5] x[11][0] x[11][6] x[12][0] x[12][7] x[13][0] x[13][8] x[14][0] x[14][9] </args>
+      <args> aux_gb[151] x[3][1] x[4][2] x[6][2] x[7][1] </args>
+      <args> aux_gb[152] x[0][1] x[0][6] x[1][1] x[1][5] x[2][1] x[2][4] x[3][1] x[3][3] x[4][0..2] x[5][0] x[5][2..14] x[6][0..2] x[7][1] x[7][3] x[8][1] x[8][4] x[9][1] x[9][5] x[10][1] x[10][6] x[11][1] x[11][7] x[12][1] x[12][8] x[13][1] x[13][9] x[14][1] x[14][10] </args>
+      <args> aux_gb[153] x[3][0] x[3][2] x[4][3] x[6][3] x[7][0] x[7][2] </args>
+      <args> aux_gb[154] x[0][2] x[0][7] x[1][2] x[1][6] x[2][2] x[2][5] x[3][0] x[3][2] x[3][4] x[4][1..3] x[5][0..1] x[5][3..14] x[6][1..3] x[7][0] x[7][2] x[7][4] x[8][2] x[8][5] x[9][2] x[9][6] x[10][2] x[10][7] x[11][2] x[11][8] x[12][2] x[12][9] x[13][2] x[13][10] x[14][2] x[14][11] </args>
+      <args> aux_gb[155] x[3][1] x[3][3] x[4][0] x[4][4] x[6][0] x[6][4] x[7][1] x[7][3] </args>
+      <args> aux_gb[156] x[0][3] x[0][8] x[1][3] x[1][7] x[2][0] x[2][3] x[2][6] x[3][1] x[3][3] x[3][5] x[4][2..4] x[5][0..2] x[5][4..14] x[6][2..4] x[7][1] x[7][3] x[7][5] x[8][0] x[8][3] x[8][6] x[9][3] x[9][7] x[10][3] x[10][8] x[11][3] x[11][9] x[12][3] x[12][10] x[13][3] x[13][11] x[14][3] x[14][12] </args>
+      <args> aux_gb[157] x[3][2] x[3][4] x[4][1] x[4][5] x[6][1] x[6][5] x[7][2] x[7][4] </args>
+      <args> aux_gb[158] x[0][4] x[0][9] x[1][0] x[1][4] x[1][8] x[2][1] x[2][4] x[2][7] x[3][2] x[3][4] x[3][6] x[4][3..5] x[5][0..3] x[5][5..14] x[6][3..5] x[7][2] x[7][4] x[7][6] x[8][1] x[8][4] x[8][7] x[9][0] x[9][4] x[9][8] x[10][4] x[10][9] x[11][4] x[11][10] x[12][4] x[12][11] x[13][4] x[13][12] x[14][4] x[14][13] </args>
+      <args> aux_gb[159] x[3][3] x[3][5] x[4][2] x[4][6] x[6][2] x[6][6] x[7][3] x[7][5] </args>
+      <args> aux_gb[160] x[0][0] x[0][5] x[0][10] x[1][1] x[1][5] x[1][9] x[2][2] x[2][5] x[2][8] x[3][3] x[3][5] x[3][7] x[4][4..6] x[5][0..4] x[5][6..14] x[6][4..6] x[7][3] x[7][5] x[7][7] x[8][2] x[8][5] x[8][8] x[9][1] x[9][5] x[9][9] x[10][0] x[10][5] x[10][10] x[11][5] x[11][11] x[12][5] x[12][12] x[13][5] x[13][13] x[14][5] x[14][14] </args>
+      <args> aux_gb[161] x[3][4] x[3][6] x[4][3] x[4][7] x[6][3] x[6][7] x[7][4] x[7][6] </args>
+      <args> aux_gb[162] x[0][1] x[0][6] x[0][11] x[1][2] x[1][6] x[1][10] x[2][3] x[2][6] x[2][9] x[3][4] x[3][6] x[3][8] x[4][5..7] x[5][0..5] x[5][7..14] x[6][5..7] x[7][4] x[7][6] x[7][8] x[8][3] x[8][6] x[8][9] x[9][2] x[9][6] x[9][10] x[10][1] x[10][6] x[10][11] x[11][0] x[11][6] x[11][12] x[12][6] x[12][13] x[13][6] x[13][14] x[14][6] </args>
+      <args> aux_gb[163] x[3][5] x[3][7] x[4][4] x[4][8] x[6][4] x[6][8] x[7][5] x[7][7] </args>
+      <args> aux_gb[164] x[0][2] x[0][7] x[0][12] x[1][3] x[1][7] x[1][11] x[2][4] x[2][7] x[2][10] x[3][5] x[3][7] x[3][9] x[4][6..8] x[5][0..6] x[5][8..14] x[6][6..8] x[7][5] x[7][7] x[7][9] x[8][4] x[8][7] x[8][10] x[9][3] x[9][7] x[9][11] x[10][2] x[10][7] x[10][12] x[11][1] x[11][7] x[11][13] x[12][0] x[12][7] x[12][14] x[13..14][7] </args>
+      <args> aux_gb[165] x[3][6] x[3][8] x[4][5] x[4][9] x[6][5] x[6][9] x[7][6] x[7][8] </args>
+      <args> aux_gb[166] x[0][3] x[0][8] x[0][13] x[1][4] x[1][8] x[1][12] x[2][5] x[2][8] x[2][11] x[3][6] x[3][8] x[3][10] x[4][7..9] x[5][0..7] x[5][9..14] x[6][7..9] x[7][6] x[7][8] x[7][10] x[8][5] x[8][8] x[8][11] x[9][4] x[9][8] x[9][12] x[10][3] x[10][8] x[10][13] x[11][2] x[11][8] x[11][14] x[12][1] x[12][8] x[13][0] x[13..14][8] </args>
+      <args> aux_gb[167] x[3][7] x[3][9] x[4][6] x[4][10] x[6][6] x[6][10] x[7][7] x[7][9] </args>
+      <args> aux_gb[168] x[0][4] x[0][9] x[0][14] x[1][5] x[1][9] x[1][13] x[2][6] x[2][9] x[2][12] x[3][7] x[3][9] x[3][11] x[4][8..10] x[5][0..8] x[5][10..14] x[6][8..10] x[7][7] x[7][9] x[7][11] x[8][6] x[8][9] x[8][12] x[9][5] x[9][9] x[9][13] x[10][4] x[10][9] x[10][14] x[11][3] x[11][9] x[12][2] x[12][9] x[13][1] x[13][9] x[14][0] x[14][9] </args>
+      <args> aux_gb[169] x[3][8] x[3][10] x[4][7] x[4][11] x[6][7] x[6][11] x[7][8] x[7][10] </args>
+      <args> aux_gb[170] x[0][5] x[0][10] x[1][6] x[1][10] x[1][14] x[2][7] x[2][10] x[2][13] x[3][8] x[3][10] x[3][12] x[4][9..11] x[5][0..9] x[5][11..14] x[6][9..11] x[7][8] x[7][10] x[7][12] x[8][7] x[8][10] x[8][13] x[9][6] x[9][10] x[9][14] x[10][5] x[10][10] x[11][4] x[11][10] x[12][3] x[12][10] x[13][2] x[13][10] x[14][1] x[14][10] </args>
+      <args> aux_gb[171] x[3][9] x[3][11] x[4][8] x[4][12] x[6][8] x[6][12] x[7][9] x[7][11] </args>
+      <args> aux_gb[172] x[0][6] x[0][11] x[1][7] x[1][11] x[2][8] x[2][11] x[2][14] x[3][9] x[3][11] x[3][13] x[4][10..12] x[5][0..10] x[5][12..14] x[6][10..12] x[7][9] x[7][11] x[7][13] x[8][8] x[8][11] x[8][14] x[9][7] x[9][11] x[10][6] x[10][11] x[11][5] x[11][11] x[12][4] x[12][11] x[13][3] x[13][11] x[14][2] x[14][11] </args>
+      <args> aux_gb[173] x[3][10] x[3][12] x[4][9] x[4][13] x[6][9] x[6][13] x[7][10] x[7][12] </args>
+      <args> aux_gb[174] x[0][7] x[0][12] x[1][8] x[1][12] x[2][9] x[2][12] x[3][10] x[3][12] x[3][14] x[4][11..13] x[5][0..11] x[5][13..14] x[6][11..13] x[7][10] x[7][12] x[7][14] x[8][9] x[8][12] x[9][8] x[9][12] x[10][7] x[10][12] x[11][6] x[11][12] x[12][5] x[12][12] x[13][4] x[13][12] x[14][3] x[14][12] </args>
+      <args> aux_gb[175] x[3][11] x[3][13] x[4][10] x[4][14] x[6][10] x[6][14] x[7][11] x[7][13] </args>
+      <args> aux_gb[176] x[0][8] x[0][13] x[1][9] x[1][13] x[2][10] x[2][13] x[3][11] x[3][13] x[4][12..14] x[5][0..12] x[5][14] x[6][12..14] x[7][11] x[7][13] x[8][10] x[8][13] x[9][9] x[9][13] x[10][8] x[10][13] x[11][7] x[11][13] x[12][6] x[12][13] x[13][5] x[13][13] x[14][4] x[14][13] </args>
+      <args> aux_gb[177] x[3][12] x[3][14] x[4][11] x[6][11] x[7][12] x[7][14] </args>
+      <args> aux_gb[178] x[0][9] x[0][14] x[1][10] x[1][14] x[2][11] x[2][14] x[3][12] x[3][14] x[4][13..14] x[5][0..13] x[6][13..14] x[7][12] x[7][14] x[8][11] x[8][14] x[9][10] x[9][14] x[10][9] x[10][14] x[11][8] x[11][14] x[12][7] x[12][14] x[13][6] x[13][14] x[14][5] x[14][14] </args>
+      <args> aux_gb[179] x[3][13] x[4][12] x[6][12] x[7][13] </args>
+      <args> aux_gb[180] x[0][0] x[0][6] x[1][0] x[1][5] x[2][0] x[2][4] x[3][0] x[3][3] x[4][0] x[4][2] x[5][0..1] x[6][1..14] x[7][0..1] x[8][0] x[8][2] x[9][0] x[9][3] x[10][0] x[10][4] x[11][0] x[11][5] x[12][0] x[12][6] x[13][0] x[13][7] x[14][0] x[14][8] </args>
+      <args> aux_gb[181] x[4][1] x[5][2] x[7][2] x[8][1] </args>
+      <args> aux_gb[182] x[0][1] x[0][7] x[1][1] x[1][6] x[2][1] x[2][5] x[3][1] x[3][4] x[4][1] x[4][3] x[5][0..2] x[6][0] x[6][2..14] x[7][0..2] x[8][1] x[8][3] x[9][1] x[9][4] x[10][1] x[10][5] x[11][1] x[11][6] x[12][1] x[12][7] x[13][1] x[13][8] x[14][1] x[14][9] </args>
+      <args> aux_gb[183] x[4][0] x[4][2] x[5][3] x[7][3] x[8][0] x[8][2] </args>
+      <args> aux_gb[184] x[0][2] x[0][8] x[1][2] x[1][7] x[2][2] x[2][6] x[3][2] x[3][5] x[4][0] x[4][2] x[4][4] x[5][1..3] x[6][0..1] x[6][3..14] x[7][1..3] x[8][0] x[8][2] x[8][4] x[9][2] x[9][5] x[10][2] x[10][6] x[11][2] x[11][7] x[12][2] x[12][8] x[13][2] x[13][9] x[14][2] x[14][10] </args>
+      <args> aux_gb[185] x[4][1] x[4][3] x[5][0] x[5][4] x[7][0] x[7][4] x[8][1] x[8][3] </args>
+      <args> aux_gb[186] x[0][3] x[0][9] x[1][3] x[1][8] x[2][3] x[2][7] x[3][0] x[3][3] x[3][6] x[4][1] x[4][3] x[4][5] x[5][2..4] x[6][0..2] x[6][4..14] x[7][2..4] x[8][1] x[8][3] x[8][5] x[9][0] x[9][3] x[9][6] x[10][3] x[10][7] x[11][3] x[11][8] x[12][3] x[12][9] x[13][3] x[13][10] x[14][3] x[14][11] </args>
+      <args> aux_gb[187] x[4][2] x[4][4] x[5][1] x[5][5] x[7][1] x[7][5] x[8][2] x[8][4] </args>
+      <args> aux_gb[188] x[0][4] x[0][10] x[1][4] x[1][9] x[2][0] x[2][4] x[2][8] x[3][1] x[3][4] x[3][7] x[4][2] x[4][4] x[4][6] x[5][3..5] x[6][0..3] x[6][5..14] x[7][3..5] x[8][2] x[8][4] x[8][6] x[9][1] x[9][4] x[9][7] x[10][0] x[10][4] x[10][8] x[11][4] x[11][9] x[12][4] x[12][10] x[13][4] x[13][11] x[14][4] x[14][12] </args>
+      <args> aux_gb[189] x[4][3] x[4][5] x[5][2] x[5][6] x[7][2] x[7][6] x[8][3] x[8][5] </args>
+      <args> aux_gb[190] x[0][5] x[0][11] x[1][0] x[1][5] x[1][10] x[2][1] x[2][5] x[2][9] x[3][2] x[3][5] x[3][8] x[4][3] x[4][5] x[4][7] x[5][4..6] x[6][0..4] x[6][6..14] x[7][4..6] x[8][3] x[8][5] x[8][7] x[9][2] x[9][5] x[9][8] x[10][1] x[10][5] x[10][9] x[11][0] x[11][5] x[11][10] x[12][5] x[12][11] x[13][5] x[13][12] x[14][5] x[14][13] </args>
+      <args> aux_gb[191] x[4][4] x[4][6] x[5][3] x[5][7] x[7][3] x[7][7] x[8][4] x[8][6] </args>
+      <args> aux_gb[192] x[0][0] x[0][6] x[0][12] x[1][1] x[1][6] x[1][11] x[2][2] x[2][6] x[2][10] x[3][3] x[3][6] x[3][9] x[4][4] x[4][6] x[4][8] x[5][5..7] x[6][0..5] x[6][7..14] x[7][5..7] x[8][4] x[8][6] x[8][8] x[9][3] x[9][6] x[9][9] x[10][2] x[10][6] x[10][10] x[11][1] x[11][6] x[11][11] x[12][0] x[12][6] x[12][12] x[13][6] x[13][13] x[14][6] x[14][14] </args>
+      <args> aux_gb[193] x[4][5] x[4][7] x[5][4] x[5][8] x[7][4] x[7][8] x[8][5] x[8][7] </args>
+      <args> aux_gb[194] x[0][1] x[0][7] x[0][13] x[1][2] x[1][7] x[1][12] x[2][3] x[2][7] x[2][11] x[3][4] x[3][7] x[3][10] x[4][5] x[4][7] x[4][9] x[5][6..8] x[6][0..6] x[6][8..14] x[7][6..8] x[8][5] x[8][7] x[8][9] x[9][4] x[9][7] x[9][10] x[10][3] x[10][7] x[10][11] x[11][2] x[11][7] x[11][12] x[12][1] x[12][7] x[12][13] x[13][0] x[13][7] x[13][14] x[14][7] </args>
+      <args> aux_gb[195] x[4][6] x[4][8] x[5][5] x[5][9] x[7][5] x[7][9] x[8][6] x[8][8] </args>
+      <args> aux_gb[196] x[0][2] x[0][8] x[0][14] x[1][3] x[1][8] x[1][13] x[2][4] x[2][8] x[2][12] x[3][5] x[3][8] x[3][11] x[4][6] x[4][8] x[4][10] x[5][7..9] x[6][0..7] x[6][9..14] x[7][7..9] x[8][6] x[8][8] x[8][10] x[9][5] x[9][8] x[9][11] x[10][4] x[10][8] x[10][12] x[11][3] x[11][8] x[11][13] x[12][2] x[12][8] x[12][14] x[13][1] x[13][8] x[14][0] x[14][8] </args>
+      <args> aux_gb[197] x[4][7] x[4][9] x[5][6] x[5][10] x[7][6] x[7][10] x[8][7] x[8][9] </args>
+      <args> aux_gb[198] x[0][3] x[0][9] x[1][4] x[1][9] x[1][14] x[2][5] x[2][9] x[2][13] x[3][6] x[3][9] x[3][12] x[4][7] x[4][9] x[4][11] x[5][8..10] x[6][0..8] x[6][10..14] x[7][8..10] x[8][7] x[8][9] x[8][11] x[9][6] x[9][9] x[9][12] x[10][5] x[10][9] x[10][13] x[11][4] x[11][9] x[11][14] x[12][3] x[12][9] x[13][2] x[13][9] x[14][1] x[14][9] </args>
+      <args> aux_gb[199] x[4][8] x[4][10] x[5][7] x[5][11] x[7][7] x[7][11] x[8][8] x[8][10] </args>
+      <args> aux_gb[200] x[0][4] x[0][10] x[1][5] x[1][10] x[2][6] x[2][10] x[2][14] x[3][7] x[3][10] x[3][13] x[4][8] x[4][10] x[4][12] x[5][9..11] x[6][0..9] x[6][11..14] x[7][9..11] x[8][8] x[8][10] x[8][12] x[9][7] x[9][10] x[9][13] x[10][6] x[10][10] x[10][14] x[11][5] x[11][10] x[12][4] x[12][10] x[13][3] x[13][10] x[14][2] x[14][10] </args>
+      <args> aux_gb[201] x[4][9] x[4][11] x[5][8] x[5][12] x[7][8] x[7][12] x[8][9] x[8][11] </args>
+      <args> aux_gb[202] x[0][5] x[0][11] x[1][6] x[1][11] x[2][7] x[2][11] x[3][8] x[3][11] x[3][14] x[4][9] x[4][11] x[4][13] x[5][10..12] x[6][0..10] x[6][12..14] x[7][10..12] x[8][9] x[8][11] x[8][13] x[9][8] x[9][11] x[9][14] x[10][7] x[10][11] x[11][6] x[11][11] x[12][5] x[12][11] x[13][4] x[13][11] x[14][3] x[14][11] </args>
+      <args> aux_gb[203] x[4][10] x[4][12] x[5][9] x[5][13] x[7][9] x[7][13] x[8][10] x[8][12] </args>
+      <args> aux_gb[204] x[0][6] x[0][12] x[1][7] x[1][12] x[2][8] x[2][12] x[3][9] x[3][12] x[4][10] x[4][12] x[4][14] x[5][11..13] x[6][0..11] x[6][13..14] x[7][11..13] x[8][10] x[8][12] x[8][14] x[9][9] x[9][12] x[10][8] x[10][12] x[11][7] x[11][12] x[12][6] x[12][12] x[13][5] x[13][12] x[14][4] x[14][12] </args>
+      <args> aux_gb[205] x[4][11] x[4][13] x[5][10] x[5][14] x[7][10] x[7][14] x[8][11] x[8][13] </args>
+      <args> aux_gb[206] x[0][7] x[0][13] x[1][8] x[1][13] x[2][9] x[2][13] x[3][10] x[3][13] x[4][11] x[4][13] x[5][12..14] x[6][0..12] x[6][14] x[7][12..14] x[8][11] x[8][13] x[9][10] x[9][13] x[10][9] x[10][13] x[11][8] x[11][13] x[12][7] x[12][13] x[13][6] x[13][13] x[14][5] x[14][13] </args>
+      <args> aux_gb[207] x[4][12] x[4][14] x[5][11] x[7][11] x[8][12] x[8][14] </args>
+      <args> aux_gb[208] x[0][8] x[0][14] x[1][9] x[1][14] x[2][10] x[2][14] x[3][11] x[3][14] x[4][12] x[4][14] x[5][13..14] x[6][0..13] x[7][13..14] x[8][12] x[8][14] x[9][11] x[9][14] x[10][10] x[10][14] x[11][9] x[11][14] x[12][8] x[12][14] x[13][7] x[13][14] x[14][6] x[14][14] </args>
+      <args> aux_gb[209] x[4][13] x[5][12] x[7][12] x[8][13] </args>
+      <args> aux_gb[210] x[0][0] x[0][7] x[1][0] x[1][6] x[2][0] x[2][5] x[3][0] x[3][4] x[4][0] x[4][3] x[5][0] x[5][2] x[6][0..1] x[7][1..14] x[8][0..1] x[9][0] x[9][2] x[10][0] x[10][3] x[11][0] x[11][4] x[12][0] x[12][5] x[13][0] x[13][6] x[14][0] x[14][7] </args>
+      <args> aux_gb[211] x[5][1] x[6][2] x[8][2] x[9][1] </args>
+      <args> aux_gb[212] x[0][1] x[0][8] x[1][1] x[1][7] x[2][1] x[2][6] x[3][1] x[3][5] x[4][1] x[4][4] x[5][1] x[5][3] x[6][0..2] x[7][0] x[7][2..14] x[8][0..2] x[9][1] x[9][3] x[10][1] x[10][4] x[11][1] x[11][5] x[12][1] x[12][6] x[13][1] x[13][7] x[14][1] x[14][8] </args>
+      <args> aux_gb[213] x[5][0] x[5][2] x[6][3] x[8][3] x[9][0] x[9][2] </args>
+      <args> aux_gb[214] x[0][2] x[0][9] x[1][2] x[1][8] x[2][2] x[2][7] x[3][2] x[3][6] x[4][2] x[4][5] x[5][0] x[5][2] x[5][4] x[6][1..3] x[7][0..1] x[7][3..14] x[8][1..3] x[9][0] x[9][2] x[9][4] x[10][2] x[10][5] x[11][2] x[11][6] x[12][2] x[12][7] x[13][2] x[13][8] x[14][2] x[14][9] </args>
+      <args> aux_gb[215] x[5][1] x[5][3] x[6][0] x[6][4] x[8][0] x[8][4] x[9][1] x[9][3] </args>
+      <args> aux_gb[216] x[0][3] x[0][10] x[1][3] x[1][9] x[2][3] x[2][8] x[3][3] x[3][7] x[4][0] x[4][3] x[4][6] x[5][1] x[5][3] x[5][5] x[6][2..4] x[7][0..2] x[7][4..14] x[8][2..4] x[9][1] x[9][3] x[9][5] x[10][0] x[10][3] x[10][6] x[11][3] x[11][7] x[12][3] x[12][8] x[13][3] x[13][9] x[14][3] x[14][10] </args>
+      <args> aux_gb[217] x[5][2] x[5][4] x[6][1] x[6][5] x[8][1] x[8][5] x[9][2] x[9][4] </args>
+      <args> aux_gb[218] x[0][4] x[0][11] x[1][4] x[1][10] x[2][4] x[2][9] x[3][0] x[3][4] x[3][8] x[4][1] x[4][4] x[4][7] x[5][2] x[5][4] x[5][6] x[6][3..5] x[7][0..3] x[7][5..14] x[8][3..5] x[9][2] x[9][4] x[9][6] x[10][1] x[10][4] x[10][7] x[11][0] x[11][4] x[11][8] x[12][4] x[12][9] x[13][4] x[13][10] x[14][4] x[14][11] </args>
+      <args> aux_gb[219] x[5][3] x[5][5] x[6][2] x[6][6] x[8][2] x[8][6] x[9][3] x[9][5] </args>
+      <args> aux_gb[220] x[0][5] x[0][12] x[1][5] x[1][11] x[2][0] x[2][5] x[2][10] x[3][1] x[3][5] x[3][9] x[4][2] x[4][5] x[4][8] x[5][3] x[5][5] x[5][7] x[6][4..6] x[7][0..4] x[7][6..14] x[8][4..6] x[9][3] x[9][5] x[9][7] x[10][2] x[10][5] x[10][8] x[11][1] x[11][5] x[11][9] x[12][0] x[12][5] x[12][10] x[13][5] x[13][11] x[14][5] x[14][12] </args>
+      <args> aux_gb[221] x[5][4] x[5][6] x[6][3] x[6][7] x[8][3] x[8][7] x[9][4] x[9][6] </args>
+      <args> aux_gb[222] x[0][6] x[0][13] x[1][0] x[1][6] x[1][12] x[2][1] x[2][6] x[2][11] x[3][2] x[3][6] x[3][10] x[4][3] x[4][6] x[4][9] x[5][4] x[5][6] x[5][8] x[6][5..7] x[7][0..5] x[7][7..14] x[8][5..7] x[9][4] x[9][6] x[9][8] x[10][3] x[10][6] x[10][9] x[11][2] x[11][6] x[11][10] x[12][1] x[12][6] x[12][11] x[13][0] x[13][6] x[13][12] x[14][6] x[14][13] </args>
+      <args> aux_gb[223] x[5][5] x[5][7] x[6][4] x[6][8] x[8][4] x[8][8] x[9][5] x[9][7] </args>
+      <args> aux_gb[224] x[0][0] x[0][7] x[0][14] x[1][1] x[1][7] x[1][13] x[2][2] x[2][7] x[2][12] x[3][3] x[3][7] x[3][11] x[4][4] x[4][7] x[4][10] x[5][5] x[5][7] x[5][9] x[6][6..8] x[7][0..6] x[7][8..14] x[8][6..8] x[9][5] x[9][7] x[9][9] x[10][4] x[10][7] x[10][10] x[11][3] x[11][7] x[11][11] x[12][2] x[12][7] x[12][12] x[13][1] x[13][7] x[13][13] x[14][0] x[14][7] x[14][14] </args>
+      <args> aux_gb[225] x[5][6] x[5][8] x[6][5] x[6][9] x[8][5] x[8][9] x[9][6] x[9][8] </args>
+      <args> aux_gb[226] x[0][1] x[0][8] x[1][2] x[1][8] x[1][14] x[2][3] x[2][8] x[2][13] x[3][4] x[3][8] x[3][12] x[4][5] x[4][8] x[4][11] x[5][6] x[5][8] x[5][10] x[6][7..9] x[7][0..7] x[7][9..14] x[8][7..9] x[9][6] x[9][8] x[9][10] x[10][5] x[10][8] x[10][11] x[11][4] x[11][8] x[11][12] x[12][3] x[12][8] x[12][13] x[13][2] x[13][8] x[13][14] x[14][1] x[14][8] </args>
+      <args> aux_gb[227] x[5][7] x[5][9] x[6][6] x[6][10] x[8][6] x[8][10] x[9][7] x[9][9] </args>
+      <args> aux_gb[228] x[0][2] x[0][9] x[1][3] x[1][9] x[2][4] x[2][9] x[2][14] x[3][5] x[3][9] x[3][13] x[4][6] x[4][9] x[4][12] x[5][7] x[5][9] x[5][11] x[6][8..10] x[7][0..8] x[7][10..14] x[8][8..10] x[9][7] x[9][9] x[9][11] x[10][6] x[10][9] x[10][12] x[11][5] x[11][9] x[11][13] x[12][4] x[12][9] x[12][14] x[13][3] x[13][9] x[14][2] x[14][9] </args>
+      <args> aux_gb[229] x[5][8] x[5][10] x[6][7] x[6][11] x[8][7] x[8][11] x[9][8] x[9][10] </args>
+      <args> aux_gb[230] x[0][3] x[0][10] x[1][4] x[1][10] x[2][5] x[2][10] x[3][6] x[3][10] x[3][14] x[4][7] x[4][10] x[4][13] x[5][8] x[5][10] x[5][12] x[6][9..11] x[7][0..9] x[7][11..14] x[8][9..11] x[9][8] x[9][10] x[9][12] x[10][7] x[10][10] x[10][13] x[11][6] x[11][10] x[11][14] x[12][5] x[12][10] x[13][4] x[13][10] x[14][3] x[14][10] </args>
+      <args> aux_gb[231] x[5][9] x[5][11] x[6][8] x[6][12] x[8][8] x[8][12] x[9][9] x[9][11] </args>
+      <args> aux_gb[232] x[0][4] x[0][11] x[1][5] x[1][11] x[2][6] x[2][11] x[3][7] x[3][11] x[4][8] x[4][11] x[4][14] x[5][9] x[5][11] x[5][13] x[6][10..12] x[7][0..10] x[7][12..14] x[8][10..12] x[9][9] x[9][11] x[9][13] x[10][8] x[10][11] x[10][14] x[11][7] x[11][11] x[12][6] x[12][11] x[13][5] x[13][11] x[14][4] x[14][11] </args>
+      <args> aux_gb[233] x[5][10] x[5][12] x[6][9] x[6][13] x[8][9] x[8][13] x[9][10] x[9][12] </args>
+      <args> aux_gb[234] x[0][5] x[0][12] x[1][6] x[1][12] x[2][7] x[2][12] x[3][8] x[3][12] x[4][9] x[4][12] x[5][10] x[5][12] x[5][14] x[6][11..13] x[7][0..11] x[7][13..14] x[8][11..13] x[9][10] x[9][12] x[9][14] x[10][9] x[10][12] x[11][8] x[11][12] x[12][7] x[12][12] x[13][6] x[13][12] x[14][5] x[14][12] </args>
+      <args> aux_gb[235] x[5][11] x[5][13] x[6][10] x[6][14] x[8][10] x[8][14] x[9][11] x[9][13] </args>
+      <args> aux_gb[236] x[0][6] x[0][13] x[1][7] x[1][13] x[2][8] x[2][13] x[3][9] x[3][13] x[4][10] x[4][13] x[5][11] x[5][13] x[6][12..14] x[7][0..12] x[7][14] x[8][12..14] x[9][11] x[9][13] x[10][10] x[10][13] x[11][9] x[11][13] x[12][8] x[12][13] x[13][7] x[13][13] x[14][6] x[14][13] </args>
+      <args> aux_gb[237] x[5][12] x[5][14] x[6][11] x[8][11] x[9][12] x[9][14] </args>
+      <args> aux_gb[238] x[0][7] x[0][14] x[1][8] x[1][14] x[2][9] x[2][14] x[3][10] x[3][14] x[4][11] x[4][14] x[5][12] x[5][14] x[6][13..14] x[7][0..13] x[8][13..14] x[9][12] x[9][14] x[10][11] x[10][14] x[11][10] x[11][14] x[12][9] x[12][14] x[13][8] x[13][14] x[14][7] x[14][14] </args>
+      <args> aux_gb[239] x[5][13] x[6][12] x[8][12] x[9][13] </args>
+      <args> aux_gb[240] x[0][0] x[0][8] x[1][0] x[1][7] x[2][0] x[2][6] x[3][0] x[3][5] x[4][0] x[4][4] x[5][0] x[5][3] x[6][0] x[6][2] x[7][0..1] x[8][1..14] x[9][0..1] x[10][0] x[10][2] x[11][0] x[11][3] x[12][0] x[12][4] x[13][0] x[13][5] x[14][0] x[14][6] </args>
+      <args> aux_gb[241] x[6][1] x[7][2] x[9][2] x[10][1] </args>
+      <args> aux_gb[242] x[0][1] x[0][9] x[1][1] x[1][8] x[2][1] x[2][7] x[3][1] x[3][6] x[4][1] x[4][5] x[5][1] x[5][4] x[6][1] x[6][3] x[7][0..2] x[8][0] x[8][2..14] x[9][0..2] x[10][1] x[10][3] x[11][1] x[11][4] x[12][1] x[12][5] x[13][1] x[13][6] x[14][1] x[14][7] </args>
+      <args> aux_gb[243] x[6][0] x[6][2] x[7][3] x[9][3] x[10][0] x[10][2] </args>
+      <args> aux_gb[244] x[0][2] x[0][10] x[1][2] x[1][9] x[2][2] x[2][8] x[3][2] x[3][7] x[4][2] x[4][6] x[5][2] x[5][5] x[6][0] x[6][2] x[6][4] x[7][1..3] x[8][0..1] x[8][3..14] x[9][1..3] x[10][0] x[10][2] x[10][4] x[11][2] x[11][5] x[12][2] x[12][6] x[13][2] x[13][7] x[14][2] x[14][8] </args>
+      <args> aux_gb[245] x[6][1] x[6][3] x[7][0] x[7][4] x[9][0] x[9][4] x[10][1] x[10][3] </args>
+      <args> aux_gb[246] x[0][3] x[0][11] x[1][3] x[1][10] x[2][3] x[2][9] x[3][3] x[3][8] x[4][3] x[4][7] x[5][0] x[5][3] x[5][6] x[6][1] x[6][3] x[6][5] x[7][2..4] x[8][0..2] x[8][4..14] x[9][2..4] x[10][1] x[10][3] x[10][5] x[11][0] x[11][3] x[11][6] x[12][3] x[12][7] x[13][3] x[13][8] x[14][3] x[14][9] </args>
+      <args> aux_gb[247] x[6][2] x[6][4] x[7][1] x[7][5] x[9][1] x[9][5] x[10][2] x[10][4] </args>
+      <args> aux_gb[248] x[0][4] x[0][12] x[1][4] x[1][11] x[2][4] x[2][10] x[3][4] x[3][9] x[4][0] x[4][4] x[4][8] x[5][1] x[5][4] x[5][7] x[6][2] x[6][4] x[6][6] x[7][3..5] x[8][0..3] x[8][5..14] x[9][3..5] x[10][2] x[10][4] x[10][6] x[11][1] x[11][4] x[11][7] x[12][0] x[12][4] x[12][8] x[13][4] x[13][9] x[14][4] x[14][10] </args>
+      <args> aux_gb[249] x[6][3] x[6][5] x[7][2] x[7][6] x[9][2] x[9][6] x[10][3] x[10][5] </args>
+      <args> aux_gb[250] x[0][5] x[0][13] x[1][5] x[1][12] x[2][5] x[2][11] x[3][0] x[3][5] x[3][10] x[4][1] x[4][5] x[4][9] x[5][2] x[5][5] x[5][8] x[6][3] x[6][5] x[6][7] x[7][4..6] x[8][0..4] x[8][6..14] x[9][4..6] x[10][3] x[10][5] x[10][7] x[11][2] x[11][5] x[11][8] x[12][1] x[12][5] x[12][9] x[13][0] x[13][5] x[13][10] x[14][5] x[14][11] </args>
+      <args> aux_gb[251] x[6][4] x[6][6] x[7][3] x[7][7] x[9][3] x[9][7] x[10][4] x[10][6] </args>
+      <args> aux_gb[252] x[0][6] x[0][14] x[1][6] x[1][13] x[2][0] x[2][6] x[2][12] x[3][1] x[3][6] x[3][11] x[4][2] x[4][6] x[4][10] x[5][3] x[5][6] x[5][9] x[6][4] x[6][6] x[6][8] x[7][5..7] x[8][0..5] x[8][7..14] x[9][5..7] x[10][4] x[10][6] x[10][8] x[11][3] x[11][6] x[11][9] x[12][2] x[12][6] x[12][10] x[13][1] x[13][6] x[13][11] x[14][0] x[14][6] x[14][12] </args>
+      <args> aux_gb[253] x[6][5] x[6][7] x[7][4] x[7][8] x[9][4] x[9][8] x[10][5] x[10][7] </args>
+      <args> aux_gb[254] x[0][7] x[1][0] x[1][7] x[1][14] x[2][1] x[2][7] x[2][13] x[3][2] x[3][7] x[3][12] x[4][3] x[4][7] x[4][11] x[5][4] x[5][7] x[5][10] x[6][5] x[6][7] x[6][9] x[7][6..8] x[8][0..6] x[8][8..14] x[9][6..8] x[10][5] x[10][7] x[10][9] x[11][4] x[11][7] x[11][10] x[12][3] x[12][7] x[12][11] x[13][2] x[13][7] x[13][12] x[14][1] x[14][7] x[14][13] </args>
+      <args> aux_gb[255] x[6][6] x[6][8] x[7][5] x[7][9] x[9][5] x[9][9] x[10][6] x[10][8] </args>
+      <args> aux_gb[256] x[0][0] x[0][8] x[1][1] x[1][8] x[2][2] x[2][8] x[2][14] x[3][3] x[3][8] x[3][13] x[4][4] x[4][8] x[4][12] x[5][5] x[5][8] x[5][11] x[6][6] x[6][8] x[6][10] x[7][7..9] x[8][0..7] x[8][9..14] x[9][7..9] x[10][6] x[10][8] x[10][10] x[11][5] x[11][8] x[11][11] x[12][4] x[12][8] x[12][12] x[13][3] x[13][8] x[13][13] x[14][2] x[14][8] x[14][14] </args>
+      <args> aux_gb[257] x[6][7] x[6][9] x[7][6] x[7][10] x[9][6] x[9][10] x[10][7] x[10][9] </args>
+      <args> aux_gb[258] x[0][1] x[0][9] x[1][2] x[1][9] x[2][3] x[2][9] x[3][4] x[3][9] x[3][14] x[4][5] x[4][9] x[4][13] x[5][6] x[5][9] x[5][12] x[6][7] x[6][9] x[6][11] x[7][8..10] x[8][0..8] x[8][10..14] x[9][8..10] x[10][7] x[10][9] x[10][11] x[11][6] x[11][9] x[11][12] x[12][5] x[12][9] x[12][13] x[13][4] x[13][9] x[13][14] x[14][3] x[14][9] </args>
+      <args> aux_gb[259] x[6][8] x[6][10] x[7][7] x[7][11] x[9][7] x[9][11] x[10][8] x[10][10] </args>
+      <args> aux_gb[260] x[0][2] x[0][10] x[1][3] x[1][10] x[2][4] x[2][10] x[3][5] x[3][10] x[4][6] x[4][10] x[4][14] x[5][7] x[5][10] x[5][13] x[6][8] x[6][10] x[6][12] x[7][9..11] x[8][0..9] x[8][11..14] x[9][9..11] x[10][8] x[10][10] x[10][12] x[11][7] x[11][10] x[11][13] x[12][6] x[12][10] x[12][14] x[13][5] x[13][10] x[14][4] x[14][10] </args>
+      <args> aux_gb[261] x[6][9] x[6][11] x[7][8] x[7][12] x[9][8] x[9][12] x[10][9] x[10][11] </args>
+      <args> aux_gb[262] x[0][3] x[0][11] x[1][4] x[1][11] x[2][5] x[2][11] x[3][6] x[3][11] x[4][7] x[4][11] x[5][8] x[5][11] x[5][14] x[6][9] x[6][11] x[6][13] x[7][10..12] x[8][0..10] x[8][12..14] x[9][10..12] x[10][9] x[10][11] x[10][13] x[11][8] x[11][11] x[11][14] x[12][7] x[12][11] x[13][6] x[13][11] x[14][5] x[14][11] </args>
+      <args> aux_gb[263] x[6][10] x[6][12] x[7][9] x[7][13] x[9][9] x[9][13] x[10][10] x[10][12] </args>
+      <args> aux_gb[264] x[0][4] x[0][12] x[1][5] x[1][12] x[2][6] x[2][12] x[3][7] x[3][12] x[4][8] x[4][12] x[5][9] x[5][12] x[6][10] x[6][12] x[6][14] x[7][11..13] x[8][0..11] x[8][13..14] x[9][11..13] x[10][10] x[10][12] x[10][14] x[11][9] x[11][12] x[12][8] x[12][12] x[13][7] x[13][12] x[14][6] x[14][12] </args>
+      <args> aux_gb[265] x[6][11] x[6][13] x[7][10] x[7][14] x[9][10] x[9][14] x[10][11] x[10][13] </args>
+      <args> aux_gb[266] x[0][5] x[0][13] x[1][6] x[1][13] x[2][7] x[2][13] x[3][8] x[3][13] x[4][9] x[4][13] x[5][10] x[5][13] x[6][11] x[6][13] x[7][12..14] x[8][0..12] x[8][14] x[9][12..14] x[10][11] x[10][13] x[11][10] x[11][13] x[12][9] x[12][13] x[13][8] x[13][13] x[14][7] x[14][13] </args>
+      <args> aux_gb[267] x[6][12] x[6][14] x[7][11] x[9][11] x[10][12] x[10][14] </args>
+      <args> aux_gb[268] x[0][6] x[0][14] x[1][7] x[1][14] x[2][8] x[2][14] x[3][9] x[3][14] x[4][10] x[4][14] x[5][11] x[5][14] x[6][12] x[6][14] x[7][13..14] x[8][0..13] x[9][13..14] x[10][12] x[10][14] x[11][11] x[11][14] x[12][10] x[12][14] x[13][9] x[13][14] x[14][8] x[14][14] </args>
+      <args> aux_gb[269] x[6][13] x[7][12] x[9][12] x[10][13] </args>
+      <args> aux_gb[270] x[0][0] x[0][9] x[1][0] x[1][8] x[2][0] x[2][7] x[3][0] x[3][6] x[4][0] x[4][5] x[5][0] x[5][4] x[6][0] x[6][3] x[7][0] x[7][2] x[8][0..1] x[9][1..14] x[10][0..1] x[11][0] x[11][2] x[12][0] x[12][3] x[13][0] x[13][4] x[14][0] x[14][5] </args>
+      <args> aux_gb[271] x[7][1] x[8][2] x[10][2] x[11][1] </args>
+      <args> aux_gb[272] x[0][1] x[0][10] x[1][1] x[1][9] x[2][1] x[2][8] x[3][1] x[3][7] x[4][1] x[4][6] x[5][1] x[5][5] x[6][1] x[6][4] x[7][1] x[7][3] x[8][0..2] x[9][0] x[9][2..14] x[10][0..2] x[11][1] x[11][3] x[12][1] x[12][4] x[13][1] x[13][5] x[14][1] x[14][6] </args>
+      <args> aux_gb[273] x[7][0] x[7][2] x[8][3] x[10][3] x[11][0] x[11][2] </args>
+      <args> aux_gb[274] x[0][2] x[0][11] x[1][2] x[1][10] x[2][2] x[2][9] x[3][2] x[3][8] x[4][2] x[4][7] x[5][2] x[5][6] x[6][2] x[6][5] x[7][0] x[7][2] x[7][4] x[8][1..3] x[9][0..1] x[9][3..14] x[10][1..3] x[11][0] x[11][2] x[11][4] x[12][2] x[12][5] x[13][2] x[13][6] x[14][2] x[14][7] </args>
+      <args> aux_gb[275] x[7][1] x[7][3] x[8][0] x[8][4] x[10][0] x[10][4] x[11][1] x[11][3] </args>
+      <args> aux_gb[276] x[0][3] x[0][12] x[1][3] x[1][11] x[2][3] x[2][10] x[3][3] x[3][9] x[4][3] x[4][8] x[5][3] x[5][7] x[6][0] x[6][3] x[6][6] x[7][1] x[7][3] x[7][5] x[8][2..4] x[9][0..2] x[9][4..14] x[10][2..4] x[11][1] x[11][3] x[11][5] x[12][0] x[12][3] x[12][6] x[13][3] x[13][7] x[14][3] x[14][8] </args>
+      <args> aux_gb[277] x[7][2] x[7][4] x[8][1] x[8][5] x[10][1] x[10][5] x[11][2] x[11][4] </args>
+      <args> aux_gb[278] x[0][4] x[0][13] x[1][4] x[1][12] x[2][4] x[2][11] x[3][4] x[3][10] x[4][4] x[4][9] x[5][0] x[5][4] x[5][8] x[6][1] x[6][4] x[6][7] x[7][2] x[7][4] x[7][6] x[8][3..5] x[9][0..3] x[9][5..14] x[10][3..5] x[11][2] x[11][4] x[11][6] x[12][1] x[12][4] x[12][7] x[13][0] x[13][4] x[13][8] x[14][4] x[14][9] </args>
+      <args> aux_gb[279] x[7][3] x[7][5] x[8][2] x[8][6] x[10][2] x[10][6] x[11][3] x[11][5] </args>
+      <args> aux_gb[280] x[0][5] x[0][14] x[1][5] x[1][13] x[2][5] x[2][12] x[3][5] x[3][11] x[4][0] x[4][5] x[4][10] x[5][1] x[5][5] x[5][9] x[6][2] x[6][5] x[6][8] x[7][3] x[7][5] x[7][7] x[8][4..6] x[9][0..4] x[9][6..14] x[10][4..6] x[11][3] x[11][5] x[11][7] x[12][2] x[12][5] x[12][8] x[13][1] x[13][5] x[13][9] x[14][0] x[14][5] x[14][10] </args>
+      <args> aux_gb[281] x[7][4] x[7][6] x[8][3] x[8][7] x[10][3] x[10][7] x[11][4] x[11][6] </args>
+      <args> aux_gb[282] x[0..1][6] x[1][14] x[2][6] x[2][13] x[3][0] x[3][6] x[3][12] x[4][1] x[4][6] x[4][11] x[5][2] x[5][6] x[5][10] x[6][3] x[6][6] x[6][9] x[7][4] x[7][6] x[7][8] x[8][5..7] x[9][0..5] x[9][7..14] x[10][5..7] x[11][4] x[11][6] x[11][8] x[12][3] x[12][6] x[12][9] x[13][2] x[13][6] x[13][10] x[14][1] x[14][6] x[14][11] </args>
+      <args> aux_gb[283] x[7][5] x[7][7] x[8][4] x[8][8] x[10][4] x[10][8] x[11][5] x[11][7] </args>
+      <args> aux_gb[284] x[0..1][7] x[2][0] x[2][7] x[2][14] x[3][1] x[3][7] x[3][13] x[4][2] x[4][7] x[4][12] x[5][3] x[5][7] x[5][11] x[6][4] x[6][7] x[6][10] x[7][5] x[7][7] x[7][9] x[8][6..8] x[9][0..6] x[9][8..14] x[10][6..8] x[11][5] x[11][7] x[11][9] x[12][4] x[12][7] x[12][10] x[13][3] x[13][7] x[13][11] x[14][2] x[14][7] x[14][12] </args>
+      <args> aux_gb[285] x[7][6] x[7][8] x[8][5] x[8][9] x[10][5] x[10][9] x[11][6] x[11][8] </args>
+      <args> aux_gb[286] x[0][8] x[1][0] x[1][8] x[2][1] x[2][8] x[3][2] x[3][8] x[3][14] x[4][3] x[4][8] x[4][13] x[5][4] x[5][8] x[5][12] x[6][5] x[6][8] x[6][11] x[7][6] x[7][8] x[7][10] x[8][7..9] x[9][0..7] x[9][9..14] x[10][7..9] x[11][6] x[11][8] x[11][10] x[12][5] x[12][8] x[12][11] x[13][4] x[13][8] x[13][12] x[14][3] x[14][8] x[14][13] </args>
+      <args> aux_gb[287] x[7][7] x[7][9] x[8][6] x[8][10] x[10][6] x[10][10] x[11][7] x[11][9] </args>
+      <args> aux_gb[288] x[0][0] x[0][9] x[1][1] x[1][9] x[2][2] x[2][9] x[3][3] x[3][9] x[4][4] x[4][9] x[4][14] x[5][5] x[5][9] x[5][13] x[6][6] x[6][9] x[6][12] x[7][7] x[7][9] x[7][11] x[8][8..10] x[9][0..8] x[9][10..14] x[10][8..10] x[11][7] x[11][9] x[11][11] x[12][6] x[12][9] x[12][12] x[13][5] x[13][9] x[13][13] x[14][4] x[14][9] x[14][14] </args>
+      <args> aux_gb[289] x[7][8] x[7][10] x[8][7] x[8][11] x[10][7] x[10][11] x[11][8] x[11][10] </args>
+      <args> aux_gb[290] x[0][1] x[0][10] x[1][2] x[1][10] x[2][3] x[2][10] x[3][4] x[3][10] x[4][5] x[4][10] x[5][6] x[5][10] x[5][14] x[6][7] x[6][10] x[6][13] x[7][8] x[7][10] x[7][12] x[8][9..11] x[9][0..9] x[9][11..14] x[10][9..11] x[11][8] x[11][10] x[11][12] x[12][7] x[12][10] x[12][13] x[13][6] x[13][10] x[13][14] x[14][5] x[14][10] </args>
+      <args> aux_gb[291] x[7][9] x[7][11] x[8][8] x[8][12] x[10][8] x[10][12] x[11][9] x[11][11] </args>
+      <args> aux_gb[292] x[0][2] x[0][11] x[1][3] x[1][11] x[2][4] x[2][11] x[3][5] x[3][11] x[4][6] x[4][11] x[5][7] x[5][11] x[6][8] x[6][11] x[6][14] x[7][9] x[7][11] x[7][13] x[8][10..12] x[9][0..10] x[9][12..14] x[10][10..12] x[11][9] x[11][11] x[11][13] x[12][8] x[12][11] x[12][14] x[13][7] x[13][11] x[14][6] x[14][11] </args>
+      <args> aux_gb[293] x[7][10] x[7][12] x[8][9] x[8][13] x[10][9] x[10][13] x[11][10] x[11][12] </args>
+      <args> aux_gb[294] x[0][3] x[0][12] x[1][4] x[1][12] x[2][5] x[2][12] x[3][6] x[3][12] x[4][7] x[4][12] x[5][8] x[5][12] x[6][9] x[6][12] x[7][10] x[7][12] x[7][14] x[8][11..13] x[9][0..11] x[9][13..14] x[10][11..13] x[11][10] x[11][12] x[11][14] x[12][9] x[12][12] x[13][8] x[13][12] x[14][7] x[14][12] </args>
+      <args> aux_gb[295] x[7][11] x[7][13] x[8][10] x[8][14] x[10][10] x[10][14] x[11][11] x[11][13] </args>
+      <args> aux_gb[296] x[0][4] x[0][13] x[1][5] x[1][13] x[2][6] x[2][13] x[3][7] x[3][13] x[4][8] x[4][13] x[5][9] x[5][13] x[6][10] x[6][13] x[7][11] x[7][13] x[8][12..14] x[9][0..12] x[9][14] x[10][12..14] x[11][11] x[11][13] x[12][10] x[12][13] x[13][9] x[13][13] x[14][8] x[14][13] </args>
+      <args> aux_gb[297] x[7][12] x[7][14] x[8][11] x[10][11] x[11][12] x[11][14] </args>
+      <args> aux_gb[298] x[0][5] x[0][14] x[1][6] x[1][14] x[2][7] x[2][14] x[3][8] x[3][14] x[4][9] x[4][14] x[5][10] x[5][14] x[6][11] x[6][14] x[7][12] x[7][14] x[8][13..14] x[9][0..13] x[10][13..14] x[11][12] x[11][14] x[12][11] x[12][14] x[13][10] x[13][14] x[14][9] x[14][14] </args>
+      <args> aux_gb[299] x[7][13] x[8][12] x[10][12] x[11][13] </args>
+      <args> aux_gb[300] x[0][0] x[0][10] x[1][0] x[1][9] x[2][0] x[2][8] x[3][0] x[3][7] x[4][0] x[4][6] x[5][0] x[5][5] x[6][0] x[6][4] x[7][0] x[7][3] x[8][0] x[8][2] x[9][0..1] x[10][1..14] x[11][0..1] x[12][0] x[12][2] x[13][0] x[13][3] x[14][0] x[14][4] </args>
+      <args> aux_gb[301] x[8][1] x[9][2] x[11][2] x[12][1] </args>
+      <args> aux_gb[302] x[0][1] x[0][11] x[1][1] x[1][10] x[2][1] x[2][9] x[3][1] x[3][8] x[4][1] x[4][7] x[5][1] x[5][6] x[6][1] x[6][5] x[7][1] x[7][4] x[8][1] x[8][3] x[9][0..2] x[10][0] x[10][2..14] x[11][0..2] x[12][1] x[12][3] x[13][1] x[13][4] x[14][1] x[14][5] </args>
+      <args> aux_gb[303] x[8][0] x[8][2] x[9][3] x[11][3] x[12][0] x[12][2] </args>
+      <args> aux_gb[304] x[0][2] x[0][12] x[1][2] x[1][11] x[2][2] x[2][10] x[3][2] x[3][9] x[4][2] x[4][8] x[5][2] x[5][7] x[6][2] x[6][6] x[7][2] x[7][5] x[8][0] x[8][2] x[8][4] x[9][1..3] x[10][0..1] x[10][3..14] x[11][1..3] x[12][0] x[12][2] x[12][4] x[13][2] x[13][5] x[14][2] x[14][6] </args>
+      <args> aux_gb[305] x[8][1] x[8][3] x[9][0] x[9][4] x[11][0] x[11][4] x[12][1] x[12][3] </args>
+      <args> aux_gb[306] x[0][3] x[0][13] x[1][3] x[1][12] x[2][3] x[2][11] x[3][3] x[3][10] x[4][3] x[4][9] x[5][3] x[5][8] x[6][3] x[6][7] x[7][0] x[7][3] x[7][6] x[8][1] x[8][3] x[8][5] x[9][2..4] x[10][0..2] x[10][4..14] x[11][2..4] x[12][1] x[12][3] x[12][5] x[13][0] x[13][3] x[13][6] x[14][3] x[14][7] </args>
+      <args> aux_gb[307] x[8][2] x[8][4] x[9][1] x[9][5] x[11][1] x[11][5] x[12][2] x[12][4] </args>
+      <args> aux_gb[308] x[0][4] x[0][14] x[1][4] x[1][13] x[2][4] x[2][12] x[3][4] x[3][11] x[4][4] x[4][10] x[5][4] x[5][9] x[6][0] x[6][4] x[6][8] x[7][1] x[7][4] x[7][7] x[8][2] x[8][4] x[8][6] x[9][3..5] x[10][0..3] x[10][5..14] x[11][3..5] x[12][2] x[12][4] x[12][6] x[13][1] x[13][4] x[13][7] x[14][0] x[14][4] x[14][8] </args>
+      <args> aux_gb[309] x[8][3] x[8][5] x[9][2] x[9][6] x[11][2] x[11][6] x[12][3] x[12][5] </args>
+      <args> aux_gb[310] x[0..1][5] x[1][14] x[2][5] x[2][13] x[3][5] x[3][12] x[4][5] x[4][11] x[5][0] x[5][5] x[5][10] x[6][1] x[6][5] x[6][9] x[7][2] x[7][5] x[7][8] x[8][3] x[8][5] x[8][7] x[9][4..6] x[10][0..4] x[10][6..14] x[11][4..6] x[12][3] x[12][5] x[12][7] x[13][2] x[13][5] x[13][8] x[14][1] x[14][5] x[14][9] </args>
+      <args> aux_gb[311] x[8][4] x[8][6] x[9][3] x[9][7] x[11][3] x[11][7] x[12][4] x[12][6] </args>
+      <args> aux_gb[312] x[0..2][6] x[2][14] x[3][6] x[3][13] x[4][0] x[4][6] x[4][12] x[5][1] x[5][6] x[5][11] x[6][2] x[6][6] x[6][10] x[7][3] x[7][6] x[7][9] x[8][4] x[8][6] x[8][8] x[9][5..7] x[10][0..5] x[10][7..14] x[11][5..7] x[12][4] x[12][6] x[12][8] x[13][3] x[13][6] x[13][9] x[14][2] x[14][6] x[14][10] </args>
+      <args> aux_gb[313] x[8][5] x[8][7] x[9][4] x[9][8] x[11][4] x[11][8] x[12][5] x[12][7] </args>
+      <args> aux_gb[314] x[0..2][7] x[3][0] x[3][7] x[3][14] x[4][1] x[4][7] x[4][13] x[5][2] x[5][7] x[5][12] x[6][3] x[6][7] x[6][11] x[7][4] x[7][7] x[7][10] x[8][5] x[8][7] x[8][9] x[9][6..8] x[10][0..6] x[10][8..14] x[11][6..8] x[12][5] x[12][7] x[12][9] x[13][4] x[13][7] x[13][10] x[14][3] x[14][7] x[14][11] </args>
+      <args> aux_gb[315] x[8][6] x[8][8] x[9][5] x[9][9] x[11][5] x[11][9] x[12][6] x[12][8] </args>
+      <args> aux_gb[316] x[0..1][8] x[2][0] x[2][8] x[3][1] x[3][8] x[4][2] x[4][8] x[4][14] x[5][3] x[5][8] x[5][13] x[6][4] x[6][8] x[6][12] x[7][5] x[7][8] x[7][11] x[8][6] x[8][8] x[8][10] x[9][7..9] x[10][0..7] x[10][9..14] x[11][7..9] x[12][6] x[12][8] x[12][10] x[13][5] x[13][8] x[13][11] x[14][4] x[14][8] x[14][12] </args>
+      <args> aux_gb[317] x[8][7] x[8][9] x[9][6] x[9][10] x[11][6] x[11][10] x[12][7] x[12][9] </args>
+      <args> aux_gb[318] x[0][9] x[1][0] x[1][9] x[2][1] x[2][9] x[3][2] x[3][9] x[4][3] x[4][9] x[5][4] x[5][9] x[5][14] x[6][5] x[6][9] x[6][13] x[7][6] x[7][9] x[7][12] x[8][7] x[8][9] x[8][11] x[9][8..10] x[10][0..8] x[10][10..14] x[11][8..10] x[12][7] x[12][9] x[12][11] x[13][6] x[13][9] x[13][12] x[14][5] x[14][9] x[14][13] </args>
+      <args> aux_gb[319] x[8][8] x[8][10] x[9][7] x[9][11] x[11][7] x[11][11] x[12][8] x[12][10] </args>
+      <args> aux_gb[320] x[0][0] x[0][10] x[1][1] x[1][10] x[2][2] x[2][10] x[3][3] x[3][10] x[4][4] x[4][10] x[5][5] x[5][10] x[6][6] x[6][10] x[6][14] x[7][7] x[7][10] x[7][13] x[8][8] x[8][10] x[8][12] x[9][9..11] x[10][0..9] x[10][11..14] x[11][9..11] x[12][8] x[12][10] x[12][12] x[13][7] x[13][10] x[13][13] x[14][6] x[14][10] x[14][14] </args>
+      <args> aux_gb[321] x[8][9] x[8][11] x[9][8] x[9][12] x[11][8] x[11][12] x[12][9] x[12][11] </args>
+      <args> aux_gb[322] x[0][1] x[0][11] x[1][2] x[1][11] x[2][3] x[2][11] x[3][4] x[3][11] x[4][5] x[4][11] x[5][6] x[5][11] x[6][7] x[6][11] x[7][8] x[7][11] x[7][14] x[8][9] x[8][11] x[8][13] x[9][10..12] x[10][0..10] x[10][12..14] x[11][10..12] x[12][9] x[12][11] x[12][13] x[13][8] x[13][11] x[13][14] x[14][7] x[14][11] </args>
+      <args> aux_gb[323] x[8][10] x[8][12] x[9][9] x[9][13] x[11][9] x[11][13] x[12][10] x[12][12] </args>
+      <args> aux_gb[324] x[0][2] x[0][12] x[1][3] x[1][12] x[2][4] x[2][12] x[3][5] x[3][12] x[4][6] x[4][12] x[5][7] x[5][12] x[6][8] x[6][12] x[7][9] x[7][12] x[8][10] x[8][12] x[8][14] x[9][11..13] x[10][0..11] x[10][13..14] x[11][11..13] x[12][10] x[12][12] x[12][14] x[13][9] x[13][12] x[14][8] x[14][12] </args>
+      <args> aux_gb[325] x[8][11] x[8][13] x[9][10] x[9][14] x[11][10] x[11][14] x[12][11] x[12][13] </args>
+      <args> aux_gb[326] x[0][3] x[0][13] x[1][4] x[1][13] x[2][5] x[2][13] x[3][6] x[3][13] x[4][7] x[4][13] x[5][8] x[5][13] x[6][9] x[6][13] x[7][10] x[7][13] x[8][11] x[8][13] x[9][12..14] x[10][0..12] x[10][14] x[11][12..14] x[12][11] x[12][13] x[13][10] x[13][13] x[14][9] x[14][13] </args>
+      <args> aux_gb[327] x[8][12] x[8][14] x[9][11] x[11][11] x[12][12] x[12][14] </args>
+      <args> aux_gb[328] x[0][4] x[0][14] x[1][5] x[1][14] x[2][6] x[2][14] x[3][7] x[3][14] x[4][8] x[4][14] x[5][9] x[5][14] x[6][10] x[6][14] x[7][11] x[7][14] x[8][12] x[8][14] x[9][13..14] x[10][0..13] x[11][13..14] x[12][12] x[12][14] x[13][11] x[13][14] x[14][10] x[14][14] </args>
+      <args> aux_gb[329] x[8][13] x[9][12] x[11][12] x[12][13] </args>
+      <args> aux_gb[330] x[0][0] x[0][11] x[1][0] x[1][10] x[2][0] x[2][9] x[3][0] x[3][8] x[4][0] x[4][7] x[5][0] x[5][6] x[6][0] x[6][5] x[7][0] x[7][4] x[8][0] x[8][3] x[9][0] x[9][2] x[10][0..1] x[11][1..14] x[12][0..1] x[13][0] x[13][2] x[14][0] x[14][3] </args>
+      <args> aux_gb[331] x[9][1] x[10][2] x[12][2] x[13][1] </args>
+      <args> aux_gb[332] x[0][1] x[0][12] x[1][1] x[1][11] x[2][1] x[2][10] x[3][1] x[3][9] x[4][1] x[4][8] x[5][1] x[5][7] x[6][1] x[6][6] x[7][1] x[7][5] x[8][1] x[8][4] x[9][1] x[9][3] x[10][0..2] x[11][0] x[11][2..14] x[12][0..2] x[13][1] x[13][3] x[14][1] x[14][4] </args>
+      <args> aux_gb[333] x[9][0] x[9][2] x[10][3] x[12][3] x[13][0] x[13][2] </args>
+      <args> aux_gb[334] x[0][2] x[0][13] x[1][2] x[1][12] x[2][2] x[2][11] x[3][2] x[3][10] x[4][2] x[4][9] x[5][2] x[5][8] x[6][2] x[6][7] x[7][2] x[7][6] x[8][2] x[8][5] x[9][0] x[9][2] x[9][4] x[10][1..3] x[11][0..1] x[11][3..14] x[12][1..3] x[13][0] x[13][2] x[13][4] x[14][2] x[14][5] </args>
+      <args> aux_gb[335] x[9][1] x[9][3] x[10][0] x[10][4] x[12][0] x[12][4] x[13][1] x[13][3] </args>
+      <args> aux_gb[336] x[0][3] x[0][14] x[1][3] x[1][13] x[2][3] x[2][12] x[3][3] x[3][11] x[4][3] x[4][10] x[5][3] x[5][9] x[6][3] x[6][8] x[7][3] x[7][7] x[8][0] x[8][3] x[8][6] x[9][1] x[9][3] x[9][5] x[10][2..4] x[11][0..2] x[11][4..14] x[12][2..4] x[13][1] x[13][3] x[13][5] x[14][0] x[14][3] x[14][6] </args>
+      <args> aux_gb[337] x[9][2] x[9][4] x[10][1] x[10][5] x[12][1] x[12][5] x[13][2] x[13][4] </args>
+      <args> aux_gb[338] x[0..1][4] x[1][14] x[2][4] x[2][13] x[3][4] x[3][12] x[4][4] x[4][11] x[5][4] x[5][10] x[6][4] x[6][9] x[7][0] x[7][4] x[7][8] x[8][1] x[8][4] x[8][7] x[9][2] x[9][4] x[9][6] x[10][3..5] x[11][0..3] x[11][5..14] x[12][3..5] x[13][2] x[13][4] x[13][6] x[14][1] x[14][4] x[14][7] </args>
+      <args> aux_gb[339] x[9][3] x[9][5] x[10][2] x[10][6] x[12][2] x[12][6] x[13][3] x[13][5] </args>
+      <args> aux_gb[340] x[0..2][5] x[2][14] x[3][5] x[3][13] x[4][5] x[4][12] x[5][5] x[5][11] x[6][0] x[6][5] x[6][10] x[7][1] x[7][5] x[7][9] x[8][2] x[8][5] x[8][8] x[9][3] x[9][5] x[9][7] x[10][4..6] x[11][0..4] x[11][6..14] x[12][4..6] x[13][3] x[13][5] x[13][7] x[14][2] x[14][5] x[14][8] </args>
+      <args> aux_gb[341] x[9][4] x[9][6] x[10][3] x[10][7] x[12][3] x[12][7] x[13][4] x[13][6] </args>
+      <args> aux_gb[342] x[0..3][6] x[3][14] x[4][6] x[4][13] x[5][0] x[5][6] x[5][12] x[6][1] x[6][6] x[6][11] x[7][2] x[7][6] x[7][10] x[8][3] x[8][6] x[8][9] x[9][4] x[9][6] x[9][8] x[10][5..7] x[11][0..5] x[11][7..14] x[12][5..7] x[13][4] x[13][6] x[13][8] x[14][3] x[14][6] x[14][9] </args>
+      <args> aux_gb[343] x[9][5] x[9][7] x[10][4] x[10][8] x[12][4] x[12][8] x[13][5] x[13][7] </args>
+      <args> aux_gb[344] x[0..3][7] x[4][0] x[4][7] x[4][14] x[5][1] x[5][7] x[5][13] x[6][2] x[6][7] x[6][12] x[7][3] x[7][7] x[7][11] x[8][4] x[8][7] x[8][10] x[9][5] x[9][7] x[9][9] x[10][6..8] x[11][0..6] x[11][8..14] x[12][6..8] x[13][5] x[13][7] x[13][9] x[14][4] x[14][7] x[14][10] </args>
+      <args> aux_gb[345] x[9][6] x[9][8] x[10][5] x[10][9] x[12][5] x[12][9] x[13][6] x[13][8] </args>
+      <args> aux_gb[346] x[0..2][8] x[3][0] x[3][8] x[4][1] x[4][8] x[5][2] x[5][8] x[5][14] x[6][3] x[6][8] x[6][13] x[7][4] x[7][8] x[7][12] x[8][5] x[8][8] x[8][11] x[9][6] x[9][8] x[9][10] x[10][7..9] x[11][0..7] x[11][9..14] x[12][7..9] x[13][6] x[13][8] x[13][10] x[14][5] x[14][8] x[14][11] </args>
+      <args> aux_gb[347] x[9][7] x[9][9] x[10][6] x[10][10] x[12][6] x[12][10] x[13][7] x[13][9] </args>
+      <args> aux_gb[348] x[0..1][9] x[2][0] x[2][9] x[3][1] x[3][9] x[4][2] x[4][9] x[5][3] x[5][9] x[6][4] x[6][9] x[6][14] x[7][5] x[7][9] x[7][13] x[8][6] x[8][9] x[8][12] x[9][7] x[9][9] x[9][11] x[10][8..10] x[11][0..8] x[11][10..14] x[12][8..10] x[13][7] x[13][9] x[13][11] x[14][6] x[14][9] x[14][12] </args>
+      <args> aux_gb[349] x[9][8] x[9][10] x[10][7] x[10][11] x[12][7] x[12][11] x[13][8] x[13][10] </args>
+      <args> aux_gb[350] x[0][10] x[1][0] x[1][10] x[2][1] x[2][10] x[3][2] x[3][10] x[4][3] x[4][10] x[5][4] x[5][10] x[6][5] x[6][10] x[7][6] x[7][10] x[7][14] x[8][7] x[8][10] x[8][13] x[9][8] x[9][10] x[9][12] x[10][9..11] x[11][0..9] x[11][11..14] x[12][9..11] x[13][8] x[13][10] x[13][12] x[14][7] x[14][10] x[14][13] </args>
+      <args> aux_gb[351] x[9][9] x[9][11] x[10][8] x[10][12] x[12][8] x[12][12] x[13][9] x[13][11] </args>
+      <args> aux_gb[352] x[0][0] x[0][11] x[1][1] x[1][11] x[2][2] x[2][11] x[3][3] x[3][11] x[4][4] x[4][11] x[5][5] x[5][11] x[6][6] x[6][11] x[7][7] x[7][11] x[8][8] x[8][11] x[8][14] x[9][9] x[9][11] x[9][13] x[10][10..12] x[11][0..10] x[11][12..14] x[12][10..12] x[13][9] x[13][11] x[13][13] x[14][8] x[14][11] x[14][14] </args>
+      <args> aux_gb[353] x[9][10] x[9][12] x[10][9] x[10][13] x[12][9] x[12][13] x[13][10] x[13][12] </args>
+      <args> aux_gb[354] x[0][1] x[0][12] x[1][2] x[1][12] x[2][3] x[2][12] x[3][4] x[3][12] x[4][5] x[4][12] x[5][6] x[5][12] x[6][7] x[6][12] x[7][8] x[7][12] x[8][9] x[8][12] x[9][10] x[9][12] x[9][14] x[10][11..13] x[11][0..11] x[11][13..14] x[12][11..13] x[13][10] x[13][12] x[13][14] x[14][9] x[14][12] </args>
+      <args> aux_gb[355] x[9][11] x[9][13] x[10][10] x[10][14] x[12][10] x[12][14] x[13][11] x[13][13] </args>
+      <args> aux_gb[356] x[0][2] x[0][13] x[1][3] x[1][13] x[2][4] x[2][13] x[3][5] x[3][13] x[4][6] x[4][13] x[5][7] x[5][13] x[6][8] x[6][13] x[7][9] x[7][13] x[8][10] x[8][13] x[9][11] x[9][13] x[10][12..14] x[11][0..12] x[11][14] x[12][12..14] x[13][11] x[13][13] x[14][10] x[14][13] </args>
+      <args> aux_gb[357] x[9][12] x[9][14] x[10][11] x[12][11] x[13][12] x[13][14] </args>
+      <args> aux_gb[358] x[0][3] x[0][14] x[1][4] x[1][14] x[2][5] x[2][14] x[3][6] x[3][14] x[4][7] x[4][14] x[5][8] x[5][14] x[6][9] x[6][14] x[7][10] x[7][14] x[8][11] x[8][14] x[9][12] x[9][14] x[10][13..14] x[11][0..13] x[12][13..14] x[13][12] x[13][14] x[14][11] x[14][14] </args>
+      <args> aux_gb[359] x[9][13] x[10][12] x[12][12] x[13][13] </args>
+      <args> aux_gb[360] x[0][0] x[0][12] x[1][0] x[1][11] x[2][0] x[2][10] x[3][0] x[3][9] x[4][0] x[4][8] x[5][0] x[5][7] x[6][0] x[6][6] x[7][0] x[7][5] x[8][0] x[8][4] x[9][0] x[9][3] x[10][0] x[10][2] x[11][0..1] x[12][1..14] x[13][0..1] x[14][0] x[14][2] </args>
+      <args> aux_gb[361] x[10][1] x[11][2] x[13][2] x[14][1] </args>
+      <args> aux_gb[362] x[0][1] x[0][13] x[1][1] x[1][12] x[2][1] x[2][11] x[3][1] x[3][10] x[4][1] x[4][9] x[5][1] x[5][8] x[6][1] x[6][7] x[7][1] x[7][6] x[8][1] x[8][5] x[9][1] x[9][4] x[10][1] x[10][3] x[11][0..2] x[12][0] x[12][2..14] x[13][0..2] x[14][1] x[14][3] </args>
+      <args> aux_gb[363] x[10][0] x[10][2] x[11][3] x[13][3] x[14][0] x[14][2] </args>
+      <args> aux_gb[364] x[0][2] x[0][14] x[1][2] x[1][13] x[2][2] x[2][12] x[3][2] x[3][11] x[4][2] x[4][10] x[5][2] x[5][9] x[6][2] x[6][8] x[7][2] x[7][7] x[8][2] x[8][6] x[9][2] x[9][5] x[10][0] x[10][2] x[10][4] x[11][1..3] x[12][0..1] x[12][3..14] x[13][1..3] x[14][0] x[14][2] x[14][4] </args>
+      <args> aux_gb[365] x[10][1] x[10][3] x[11][0] x[11][4] x[13][0] x[13][4] x[14][1] x[14][3] </args>
+      <args> aux_gb[366] x[0..1][3] x[1][14] x[2][3] x[2][13] x[3][3] x[3][12] x[4][3] x[4][11] x[5][3] x[5][10] x[6][3] x[6][9] x[7][3] x[7][8] x[8][3] x[8][7] x[9][0] x[9][3] x[9][6] x[10][1] x[10][3] x[10][5] x[11][2..4] x[12][0..2] x[12][4..14] x[13][2..4] x[14][1] x[14][3] x[14][5] </args>
+      <args> aux_gb[367] x[10][2] x[10][4] x[11][1] x[11][5] x[13][1] x[13][5] x[14][2] x[14][4] </args>
+      <args> aux_gb[368] x[0..2][4] x[2][14] x[3][4] x[3][13] x[4][4] x[4][12] x[5][4] x[5][11] x[6][4] x[6][10] x[7][4] x[7][9] x[8][0] x[8][4] x[8][8] x[9][1] x[9][4] x[9][7] x[10][2] x[10][4] x[10][6] x[11][3..5] x[12][0..3] x[12][5..14] x[13][3..5] x[14][2] x[14][4] x[14][6] </args>
+      <args> aux_gb[369] x[10][3] x[10][5] x[11][2] x[11][6] x[13][2] x[13][6] x[14][3] x[14][5] </args>
+      <args> aux_gb[370] x[0..3][5] x[3][14] x[4][5] x[4][13] x[5][5] x[5][12] x[6][5] x[6][11] x[7][0] x[7][5] x[7][10] x[8][1] x[8][5] x[8][9] x[9][2] x[9][5] x[9][8] x[10][3] x[10][5] x[10][7] x[11][4..6] x[12][0..4] x[12][6..14] x[13][4..6] x[14][3] x[14][5] x[14][7] </args>
+      <args> aux_gb[371] x[10][4] x[10][6] x[11][3] x[11][7] x[13][3] x[13][7] x[14][4] x[14][6] </args>
+      <args> aux_gb[372] x[0..4][6] x[4][14] x[5][6] x[5][13] x[6][0] x[6][6] x[6][12] x[7][1] x[7][6] x[7][11] x[8][2] x[8][6] x[8][10] x[9][3] x[9][6] x[9][9] x[10][4] x[10][6] x[10][8] x[11][5..7] x[12][0..5] x[12][7..14] x[13][5..7] x[14][4] x[14][6] x[14][8] </args>
+      <args> aux_gb[373] x[10][5] x[10][7] x[11][4] x[11][8] x[13][4] x[13][8] x[14][5] x[14][7] </args>
+      <args> aux_gb[374] x[0..4][7] x[5][0] x[5][7] x[5][14] x[6][1] x[6][7] x[6][13] x[7][2] x[7][7] x[7][12] x[8][3] x[8][7] x[8][11] x[9][4] x[9][7] x[9][10] x[10][5] x[10][7] x[10][9] x[11][6..8] x[12][0..6] x[12][8..14] x[13][6..8] x[14][5] x[14][7] x[14][9] </args>
+      <args> aux_gb[375] x[10][6] x[10][8] x[11][5] x[11][9] x[13][5] x[13][9] x[14][6] x[14][8] </args>
+      <args> aux_gb[376] x[0..3][8] x[4][0] x[4][8] x[5][1] x[5][8] x[6][2] x[6][8] x[6][14] x[7][3] x[7][8] x[7][13] x[8][4] x[8][8] x[8][12] x[9][5] x[9][8] x[9][11] x[10][6] x[10][8] x[10][10] x[11][7..9] x[12][0..7] x[12][9..14] x[13][7..9] x[14][6] x[14][8] x[14][10] </args>
+      <args> aux_gb[377] x[10][7] x[10][9] x[11][6] x[11][10] x[13][6] x[13][10] x[14][7] x[14][9] </args>
+      <args> aux_gb[378] x[0..2][9] x[3][0] x[3][9] x[4][1] x[4][9] x[5][2] x[5][9] x[6][3] x[6][9] x[7][4] x[7][9] x[7][14] x[8][5] x[8][9] x[8][13] x[9][6] x[9][9] x[9][12] x[10][7] x[10][9] x[10][11] x[11][8..10] x[12][0..8] x[12][10..14] x[13][8..10] x[14][7] x[14][9] x[14][11] </args>
+      <args> aux_gb[379] x[10][8] x[10][10] x[11][7] x[11][11] x[13][7] x[13][11] x[14][8] x[14][10] </args>
+      <args> aux_gb[380] x[0..1][10] x[2][0] x[2][10] x[3][1] x[3][10] x[4][2] x[4][10] x[5][3] x[5][10] x[6][4] x[6][10] x[7][5] x[7][10] x[8][6] x[8][10] x[8][14] x[9][7] x[9][10] x[9][13] x[10][8] x[10][10] x[10][12] x[11][9..11] x[12][0..9] x[12][11..14] x[13][9..11] x[14][8] x[14][10] x[14][12] </args>
+      <args> aux_gb[381] x[10][9] x[10][11] x[11][8] x[11][12] x[13][8] x[13][12] x[14][9] x[14][11] </args>
+      <args> aux_gb[382] x[0][11] x[1][0] x[1][11] x[2][1] x[2][11] x[3][2] x[3][11] x[4][3] x[4][11] x[5][4] x[5][11] x[6][5] x[6][11] x[7][6] x[7][11] x[8][7] x[8][11] x[9][8] x[9][11] x[9][14] x[10][9] x[10][11] x[10][13] x[11][10..12] x[12][0..10] x[12][12..14] x[13][10..12] x[14][9] x[14][11] x[14][13] </args>
+      <args> aux_gb[383] x[10][10] x[10][12] x[11][9] x[11][13] x[13][9] x[13][13] x[14][10] x[14][12] </args>
+      <args> aux_gb[384] x[0][0] x[0][12] x[1][1] x[1][12] x[2][2] x[2][12] x[3][3] x[3][12] x[4][4] x[4][12] x[5][5] x[5][12] x[6][6] x[6][12] x[7][7] x[7][12] x[8][8] x[8][12] x[9][9] x[9][12] x[10][10] x[10][12] x[10][14] x[11][11..13] x[12][0..11] x[12][13..14] x[13][11..13] x[14][10] x[14][12] x[14][14] </args>
+      <args> aux_gb[385] x[10][11] x[10][13] x[11][10] x[11][14] x[13][10] x[13][14] x[14][11] x[14][13] </args>
+      <args> aux_gb[386] x[0][1] x[0][13] x[1][2] x[1][13] x[2][3] x[2][13] x[3][4] x[3][13] x[4][5] x[4][13] x[5][6] x[5][13] x[6][7] x[6][13] x[7][8] x[7][13] x[8][9] x[8][13] x[9][10] x[9][13] x[10][11] x[10][13] x[11][12..14] x[12][0..12] x[12][14] x[13][12..14] x[14][11] x[14][13] </args>
+      <args> aux_gb[387] x[10][12] x[10][14] x[11][11] x[13][11] x[14][12] x[14][14] </args>
+      <args> aux_gb[388] x[0][2] x[0][14] x[1][3] x[1][14] x[2][4] x[2][14] x[3][5] x[3][14] x[4][6] x[4][14] x[5][7] x[5][14] x[6][8] x[6][14] x[7][9] x[7][14] x[8][10] x[8][14] x[9][11] x[9][14] x[10][12] x[10][14] x[11][13..14] x[12][0..13] x[13][13..14] x[14][12] x[14][14] </args>
+      <args> aux_gb[389] x[10][13] x[11][12] x[13][12] x[14][13] </args>
+      <args> aux_gb[390] x[0][0] x[0][13] x[1][0] x[1][12] x[2][0] x[2][11] x[3][0] x[3][10] x[4][0] x[4][9] x[5][0] x[5][8] x[6][0] x[6][7] x[7][0] x[7][6] x[8][0] x[8][5] x[9][0] x[9][4] x[10][0] x[10][3] x[11][0] x[11][2] x[12][0..1] x[13][1..14] x[14][0..1] </args>
+      <args> aux_gb[391] x[11][1] x[12][2] x[14][2] </args>
+      <args> aux_gb[392] x[0][1] x[0][14] x[1][1] x[1][13] x[2][1] x[2][12] x[3][1] x[3][11] x[4][1] x[4][10] x[5][1] x[5][9] x[6][1] x[6][8] x[7][1] x[7][7] x[8][1] x[8][6] x[9][1] x[9][5] x[10][1] x[10][4] x[11][1] x[11][3] x[12][0..2] x[13][0] x[13][2..14] x[14][0..2] </args>
+      <args> aux_gb[393] x[11][0] x[11][2] x[12][3] x[14][3] </args>
+      <args> aux_gb[394] x[0..1][2] x[1][14] x[2][2] x[2][13] x[3][2] x[3][12] x[4][2] x[4][11] x[5][2] x[5][10] x[6][2] x[6][9] x[7][2] x[7][8] x[8][2] x[8][7] x[9][2] x[9][6] x[10][2] x[10][5] x[11][0] x[11][2] x[11][4] x[12][1..3] x[13][0..1] x[13][3..14] x[14][1..3] </args>
+      <args> aux_gb[395] x[11][1] x[11][3] x[12][0] x[12][4] x[14][0] x[14][4] </args>
+      <args> aux_gb[396] x[0..2][3] x[2][14] x[3][3] x[3][13] x[4][3] x[4][12] x[5][3] x[5][11] x[6][3] x[6][10] x[7][3] x[7][9] x[8][3] x[8][8] x[9][3] x[9][7] x[10][0] x[10][3] x[10][6] x[11][1] x[11][3] x[11][5] x[12][2..4] x[13][0..2] x[13][4..14] x[14][2..4] </args>
+      <args> aux_gb[397] x[11][2] x[11][4] x[12][1] x[12][5] x[14][1] x[14][5] </args>
+      <args> aux_gb[398] x[0..3][4] x[3][14] x[4][4] x[4][13] x[5][4] x[5][12] x[6][4] x[6][11] x[7][4] x[7][10] x[8][4] x[8][9] x[9][0] x[9][4] x[9][8] x[10][1] x[10][4] x[10][7] x[11][2] x[11][4] x[11][6] x[12][3..5] x[13][0..3] x[13][5..14] x[14][3..5] </args>
+      <args> aux_gb[399] x[11][3] x[11][5] x[12][2] x[12][6] x[14][2] x[14][6] </args>
+      <args> aux_gb[400] x[0..4][5] x[4][14] x[5][5] x[5][13] x[6][5] x[6][12] x[7][5] x[7][11] x[8][0] x[8][5] x[8][10] x[9][1] x[9][5] x[9][9] x[10][2] x[10][5] x[10][8] x[11][3] x[11][5] x[11][7] x[12][4..6] x[13][0..4] x[13][6..14] x[14][4..6] </args>
+      <args> aux_gb[401] x[11][4] x[11][6] x[12][3] x[12][7] x[14][3] x[14][7] </args>
+      <args> aux_gb[402] x[0..5][6] x[5][14] x[6][6] x[6][13] x[7][0] x[7][6] x[7][12] x[8][1] x[8][6] x[8][11] x[9][2] x[9][6] x[9][10] x[10][3] x[10][6] x[10][9] x[11][4] x[11][6] x[11][8] x[12][5..7] x[13][0..5] x[13][7..14] x[14][5..7] </args>
+      <args> aux_gb[403] x[11][5] x[11][7] x[12][4] x[12][8] x[14][4] x[14][8] </args>
+      <args> aux_gb[404] x[0..5][7] x[6][0] x[6][7] x[6][14] x[7][1] x[7][7] x[7][13] x[8][2] x[8][7] x[8][12] x[9][3] x[9][7] x[9][11] x[10][4] x[10][7] x[10][10] x[11][5] x[11][7] x[11][9] x[12][6..8] x[13][0..6] x[13][8..14] x[14][6..8] </args>
+      <args> aux_gb[405] x[11][6] x[11][8] x[12][5] x[12][9] x[14][5] x[14][9] </args>
+      <args> aux_gb[406] x[0..4][8] x[5][0] x[5][8] x[6][1] x[6][8] x[7][2] x[7][8] x[7][14] x[8][3] x[8][8] x[8][13] x[9][4] x[9][8] x[9][12] x[10][5] x[10][8] x[10][11] x[11][6] x[11][8] x[11][10] x[12][7..9] x[13][0..7] x[13][9..14] x[14][7..9] </args>
+      <args> aux_gb[407] x[11][7] x[11][9] x[12][6] x[12][10] x[14][6] x[14][10] </args>
+      <args> aux_gb[408] x[0..3][9] x[4][0] x[4][9] x[5][1] x[5][9] x[6][2] x[6][9] x[7][3] x[7][9] x[8][4] x[8][9] x[8][14] x[9][5] x[9][9] x[9][13] x[10][6] x[10][9] x[10][12] x[11][7] x[11][9] x[11][11] x[12][8..10] x[13][0..8] x[13][10..14] x[14][8..10] </args>
+      <args> aux_gb[409] x[11][8] x[11][10] x[12][7] x[12][11] x[14][7] x[14][11] </args>
+      <args> aux_gb[410] x[0..2][10] x[3][0] x[3][10] x[4][1] x[4][10] x[5][2] x[5][10] x[6][3] x[6][10] x[7][4] x[7][10] x[8][5] x[8][10] x[9][6] x[9][10] x[9][14] x[10][7] x[10][10] x[10][13] x[11][8] x[11][10] x[11][12] x[12][9..11] x[13][0..9] x[13][11..14] x[14][9..11] </args>
+      <args> aux_gb[411] x[11][9] x[11][11] x[12][8] x[12][12] x[14][8] x[14][12] </args>
+      <args> aux_gb[412] x[0..1][11] x[2][0] x[2][11] x[3][1] x[3][11] x[4][2] x[4][11] x[5][3] x[5][11] x[6][4] x[6][11] x[7][5] x[7][11] x[8][6] x[8][11] x[9][7] x[9][11] x[10][8] x[10][11] x[10][14] x[11][9] x[11][11] x[11][13] x[12][10..12] x[13][0..10] x[13][12..14] x[14][10..12] </args>
+      <args> aux_gb[413] x[11][10] x[11][12] x[12][9] x[12][13] x[14][9] x[14][13] </args>
+      <args> aux_gb[414] x[0][12] x[1][0] x[1][12] x[2][1] x[2][12] x[3][2] x[3][12] x[4][3] x[4][12] x[5][4] x[5][12] x[6][5] x[6][12] x[7][6] x[7][12] x[8][7] x[8][12] x[9][8] x[9][12] x[10][9] x[10][12] x[11][10] x[11][12] x[11][14] x[12][11..13] x[13][0..11] x[13][13..14] x[14][11..13] </args>
+      <args> aux_gb[415] x[11][11] x[11][13] x[12][10] x[12][14] x[14][10] x[14][14] </args>
+      <args> aux_gb[416] x[0][0] x[0][13] x[1][1] x[1][13] x[2][2] x[2][13] x[3][3] x[3][13] x[4][4] x[4][13] x[5][5] x[5][13] x[6][6] x[6][13] x[7][7] x[7][13] x[8][8] x[8][13] x[9][9] x[9][13] x[10][10] x[10][13] x[11][11] x[11][13] x[12][12..14] x[13][0..12] x[13][14] x[14][12..14] </args>
+      <args> aux_gb[417] x[11][12] x[11][14] x[12][11] x[14][11] </args>
+      <args> aux_gb[418] x[0][1] x[0][14] x[1][2] x[1][14] x[2][3] x[2][14] x[3][4] x[3][14] x[4][5] x[4][14] x[5][6] x[5][14] x[6][7] x[6][14] x[7][8] x[7][14] x[8][9] x[8][14] x[9][10] x[9][14] x[10][11] x[10][14] x[11][12] x[11][14] x[12][13..14] x[13][0..13] x[14][13..14] </args>
+      <args> aux_gb[419] x[11][13] x[12][12] x[14][12] </args>
+      <args> aux_gb[420] x[0][0] x[0][14] x[1][0] x[1][13] x[2][0] x[2][12] x[3][0] x[3][11] x[4][0] x[4][10] x[5][0] x[5][9] x[6][0] x[6][8] x[7][0] x[7][7] x[8][0] x[8][6] x[9][0] x[9][5] x[10][0] x[10][4] x[11][0] x[11][3] x[12][0] x[12][2] x[13][0..1] x[14][1..14] </args>
+      <args> aux_gb[421] x[12][1] x[13][2] </args>
+      <args> aux_gb[422] x[0..1][1] x[1][14] x[2][1] x[2][13] x[3][1] x[3][12] x[4][1] x[4][11] x[5][1] x[5][10] x[6][1] x[6][9] x[7][1] x[7][8] x[8][1] x[8][7] x[9][1] x[9][6] x[10][1] x[10][5] x[11][1] x[11][4] x[12][1] x[12][3] x[13][0..2] x[14][0] x[14][2..14] </args>
+      <args> aux_gb[423] x[12][0] x[12][2] x[13][3] </args>
+      <args> aux_gb[424] x[0..2][2] x[2][14] x[3][2] x[3][13] x[4][2] x[4][12] x[5][2] x[5][11] x[6][2] x[6][10] x[7][2] x[7][9] x[8][2] x[8][8] x[9][2] x[9][7] x[10][2] x[10][6] x[11][2] x[11][5] x[12][0] x[12][2] x[12][4] x[13][1..3] x[14][0..1] x[14][3..14] </args>
+      <args> aux_gb[425] x[12][1] x[12][3] x[13][0] x[13][4] </args>
+      <args> aux_gb[426] x[0..3][3] x[3][14] x[4][3] x[4][13] x[5][3] x[5][12] x[6][3] x[6][11] x[7][3] x[7][10] x[8][3] x[8][9] x[9][3] x[9][8] x[10][3] x[10][7] x[11][0] x[11][3] x[11][6] x[12][1] x[12][3] x[12][5] x[13][2..4] x[14][0..2] x[14][4..14] </args>
+      <args> aux_gb[427] x[12][2] x[12][4] x[13][1] x[13][5] </args>
+      <args> aux_gb[428] x[0..4][4] x[4][14] x[5][4] x[5][13] x[6][4] x[6][12] x[7][4] x[7][11] x[8][4] x[8][10] x[9][4] x[9][9] x[10][0] x[10][4] x[10][8] x[11][1] x[11][4] x[11][7] x[12][2] x[12][4] x[12][6] x[13][3..5] x[14][0..3] x[14][5..14] </args>
+      <args> aux_gb[429] x[12][3] x[12][5] x[13][2] x[13][6] </args>
+      <args> aux_gb[430] x[0..5][5] x[5][14] x[6][5] x[6][13] x[7][5] x[7][12] x[8][5] x[8][11] x[9][0] x[9][5] x[9][10] x[10][1] x[10][5] x[10][9] x[11][2] x[11][5] x[11][8] x[12][3] x[12][5] x[12][7] x[13][4..6] x[14][0..4] x[14][6..14] </args>
+      <args> aux_gb[431] x[12][4] x[12][6] x[13][3] x[13][7] </args>
+      <args> aux_gb[432] x[0..6][6] x[6][14] x[7][6] x[7][13] x[8][0] x[8][6] x[8][12] x[9][1] x[9][6] x[9][11] x[10][2] x[10][6] x[10][10] x[11][3] x[11][6] x[11][9] x[12][4] x[12][6] x[12][8] x[13][5..7] x[14][0..5] x[14][7..14] </args>
+      <args> aux_gb[433] x[12][5] x[12][7] x[13][4] x[13][8] </args>
+      <args> aux_gb[434] x[0..6][7] x[7][0] x[7][7] x[7][14] x[8][1] x[8][7] x[8][13] x[9][2] x[9][7] x[9][12] x[10][3] x[10][7] x[10][11] x[11][4] x[11][7] x[11][10] x[12][5] x[12][7] x[12][9] x[13][6..8] x[14][0..6] x[14][8..14] </args>
+      <args> aux_gb[435] x[12][6] x[12][8] x[13][5] x[13][9] </args>
+      <args> aux_gb[436] x[0..5][8] x[6][0] x[6][8] x[7][1] x[7][8] x[8][2] x[8][8] x[8][14] x[9][3] x[9][8] x[9][13] x[10][4] x[10][8] x[10][12] x[11][5] x[11][8] x[11][11] x[12][6] x[12][8] x[12][10] x[13][7..9] x[14][0..7] x[14][9..14] </args>
+      <args> aux_gb[437] x[12][7] x[12][9] x[13][6] x[13][10] </args>
+      <args> aux_gb[438] x[0..4][9] x[5][0] x[5][9] x[6][1] x[6][9] x[7][2] x[7][9] x[8][3] x[8][9] x[9][4] x[9][9] x[9][14] x[10][5] x[10][9] x[10][13] x[11][6] x[11][9] x[11][12] x[12][7] x[12][9] x[12][11] x[13][8..10] x[14][0..8] x[14][10..14] </args>
+      <args> aux_gb[439] x[12][8] x[12][10] x[13][7] x[13][11] </args>
+      <args> aux_gb[440] x[0..3][10] x[4][0] x[4][10] x[5][1] x[5][10] x[6][2] x[6][10] x[7][3] x[7][10] x[8][4] x[8][10] x[9][5] x[9][10] x[10][6] x[10][10] x[10][14] x[11][7] x[11][10] x[11][13] x[12][8] x[12][10] x[12][12] x[13][9..11] x[14][0..9] x[14][11..14] </args>
+      <args> aux_gb[441] x[12][9] x[12][11] x[13][8] x[13][12] </args>
+      <args> aux_gb[442] x[0..2][11] x[3][0] x[3][11] x[4][1] x[4][11] x[5][2] x[5][11] x[6][3] x[6][11] x[7][4] x[7][11] x[8][5] x[8][11] x[9][6] x[9][11] x[10][7] x[10][11] x[11][8] x[11][11] x[11][14] x[12][9] x[12][11] x[12][13] x[13][10..12] x[14][0..10] x[14][12..14] </args>
+      <args> aux_gb[443] x[12][10] x[12][12] x[13][9] x[13][13] </args>
+      <args> aux_gb[444] x[0..1][12] x[2][0] x[2][12] x[3][1] x[3][12] x[4][2] x[4][12] x[5][3] x[5][12] x[6][4] x[6][12] x[7][5] x[7][12] x[8][6] x[8][12] x[9][7] x[9][12] x[10][8] x[10][12] x[11][9] x[11][12] x[12][10] x[12][12] x[12][14] x[13][11..13] x[14][0..11] x[14][13..14] </args>
+      <args> aux_gb[445] x[12][11] x[12][13] x[13][10] x[13][14] </args>
+      <args> aux_gb[446] x[0][13] x[1][0] x[1][13] x[2][1] x[2][13] x[3][2] x[3][13] x[4][3] x[4][13] x[5][4] x[5][13] x[6][5] x[6][13] x[7][6] x[7][13] x[8][7] x[8][13] x[9][8] x[9][13] x[10][9] x[10][13] x[11][10] x[11][13] x[12][11] x[12][13] x[13][12..14] x[14][0..12] x[14][14] </args>
+      <args> aux_gb[447] x[12][12] x[12][14] x[13][11] </args>
+      <args> aux_gb[448] x[0][0] x[0][14] x[1][1] x[1][14] x[2][2] x[2][14] x[3][3] x[3][14] x[4][4] x[4][14] x[5][5] x[5][14] x[6][6] x[6][14] x[7][7] x[7][14] x[8][8] x[8][14] x[9][9] x[9][14] x[10][10] x[10][14] x[11][11] x[11][14] x[12][12] x[12][14] x[13][13..14] x[14][0..13] </args>
+      <args> aux_gb[449] x[12][13] x[13][12] </args>
+    </group>
+  </constraints>
+  <objectives>
+    <maximize> add(q,k) </maximize>
+  </objectives>
+</instance>

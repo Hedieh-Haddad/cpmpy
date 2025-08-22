@@ -1,13 +1,12 @@
 {
   "tunable_params": {
     "varh": ["RunRobin", "Impact", "Activity", "Wdeg", "Memory", "PickOnDom", "Rand", "Lexico", "WdegOnDom", "FrbaOnDom"],
-    "valh": ["Vals", "OccsR", "Bivs3", "Median", "Rand", "First", "Last", "RunRobin", "FlrsE", "Conflicts"],
-    "sb": ["NO", "SB_LE", "SB_LEX"],
+    "valh": ["Vals", "OccsR", "Median", "Rand", "First", "Last", "RunRobin", "Conflicts"],
     "saf": [false, true],
     "pc1": [false, true],
     "bdc": [1, 10, 100, 1000],
     "toh": [false, true],
-    "p": ["AP", "SAC3", "FC", "GIC", "GT", "BT", "AC"],
+    "p": ["AP", "SAC3", "GT", "BT", "AC"],
     "ng": ["NO", "RST"],
     "lc": [0, 1, 2, 5, 10],
     "negative": ["V", "VA", "STR0", "STR1", "STR2", "STR3", "STR1N", "STR2N", "CT", "CMDDO", "CMDDS"],
@@ -18,7 +17,6 @@
   "default_params": {
     "varh": "Wdeg",
     "valh": "First",
-    "sb": "NO",
     "saf": false,
     "pc1": true,
     "bdc": 1,

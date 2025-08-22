@@ -1,0 +1,10 @@
+round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
+1,1,probing,4.044024041999364,5099,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
+2,2,probing,4.016819750002469,,ExitStatus.UNKNOWN,1,False,1,CMDDS,RST,BT,True,True,MDD,TableHybrid,False,Rand,Lexico
+3,3,probing,4.0545745420095045,5873,ExitStatus.FEASIBLE,1,False,2,CMDDS,NO,AC,False,False,Bits,Matrix3D,False,First,Impact
+4,4,probing,9.01720895798644,6137,ExitStatus.FEASIBLE,100,True,10,STR3,RST,SAC3,True,True,Tries,TableHybrid,True,First,Lexico
+5,5,probing,4.046208790998207,5099,ExitStatus.FEASIBLE,1,True,2,STR3,NO,AC,False,True,Table,MDD,True,Vals,FrbaOnDom
+6,6,probing,4.017767333993106,,ExitStatus.UNKNOWN,1,True,0,CMDDS,NO,GT,False,True,Bits,Bits,True,Conflicts,WdegOnDom
+7,7,probing,9.040712917005294,5241,ExitStatus.FEASIBLE,100,False,0,VA,RST,AP,True,False,Table,Tries,False,Rand,Activity
+8,8,probing,19.017363499995554,,ExitStatus.UNKNOWN,1,False,1,CMDDO,NO,GT,False,True,MDD,TableHybrid,False,Median,Impact
+No Round,No Stagnation Round,solving,4.724682915999438,5099,ExitStatus.OPTIMAL,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg

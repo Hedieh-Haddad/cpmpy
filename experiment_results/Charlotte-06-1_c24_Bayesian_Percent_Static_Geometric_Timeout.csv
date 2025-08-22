@@ -1,0 +1,9 @@
+round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
+1,1,probing,4.0260574580024695,5099,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
+2,2,probing,5.05218841599708,5791,ExitStatus.FEASIBLE,1000,True,5,STR2N,RST,AC,False,False,MDD,Matrix3D,False,Last,Impact
+3,3,probing,6.014081332992646,,ExitStatus.UNKNOWN,1000,False,10,CT,RST,BT,True,False,Matrix2D,Matrix2D,False,Last,Impact
+4,4,probing,7.020133166006417,6060,ExitStatus.FEASIBLE,1000,True,5,STR1,NO,AC,True,False,MDD,TableHybrid,False,Vals,Wdeg
+5,5,probing,9.01674770801037,,ExitStatus.UNKNOWN,100,False,5,STR2,RST,GT,False,True,MDD,Matrix3D,True,Rand,Activity
+6,6,probing,11.014920708999853,6089,ExitStatus.FEASIBLE,1000,True,10,STR2,NO,SAC3,True,False,MDD,MDD,False,Last,Impact
+7,7,probing,13.093917249992955,,ExitStatus.UNKNOWN,1000,False,1,STR0,NO,BT,False,True,Tries,Bits,True,Last,Rand
+No Round,No Stagnation Round,solving,5.985248209006386,5099,ExitStatus.OPTIMAL,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg

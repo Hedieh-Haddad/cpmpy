@@ -8,24 +8,26 @@ from cpmpy import SolverLookup
 from cpmpy.solvers import param_combinations
 from cpmpy.solvers.solver_interface import ExitStatus
 from cpmpy.tools import ParameterTuner
-from cpmpy.tools.psa.enum import TimeoutEvolution, TimeType, RoundTimeType, HPOType
+from cpmpy.tools.psa.enum import TimeoutEvolution, TimeType, RoundTimeType, HPOType, StopCondition
 from cpmpy.tools.psa.hpo_strategies import HPOStrategy, BayesianOptimizationStrategy
 from cpmpy.tools.psa.log import log
 from cpmpy.tools.psa.time_strategies import TimeoutEvolutionStrategy, TuningGlobalTimeoutStrategy, RoundTimeStrategy, \
     TimeStrategyFactory
 from timeit import default_timer as timer
 
+
 class PSATuner(ParameterTuner):
-    def __init__(self, hpo_strategy: HPOStrategy, solver_name: str, model: cpmpy.Model, all_params=None, defaults=None):
+    def __init__(self, hpo_strategy: HPOStrategy, solver_name: str, model: cpmpy.Model, all_params=None,
+                 defaults=None):
         super().__init__(solver_name, model, all_params, defaults)
         self.hpo_strategy: HPOStrategy = hpo_strategy
 
     def tune(self, time_limit=None, max_tries=None, fix_params=None):
         if fix_params is None:
             fix_params = {}
-        log(str(time_limit),"debug")
-        log("Init hpo strategy...","info")
-        self.hpo_strategy.initialize(time_limit,max_tries)
+        log(str(time_limit), "debug")
+        log("Init hpo strategy...", "info")
+        self.hpo_strategy.initialize(time_limit, max_tries)
         while self.hpo_strategy.probing_should_continue():
             log("Probing phase...", "info")
             self.hpo_strategy.probing_phase()
@@ -54,8 +56,6 @@ class HammingTunner(ParameterTuner):
         self._combos_np = self._params_to_np(combos)
         np.random.shuffle(self._combos_np)
 
-
-
     def tune(self, time_limit=None, max_tries=None, fix_params=None):
         if fix_params is None:
             fix_params = {}
@@ -68,7 +68,7 @@ class HammingTunner(ParameterTuner):
 
         # Initial run with defaults
         s = SolverLookup.get(self.solvername, self.model, **init_kwargs)
-        self._run_solver(s, self._defaults,time_limit=int(time_limit))
+        self._run_solver(s, self._defaults, time_limit=int(time_limit))
 
         if s.status().exitstatus in (ExitStatus.OPTIMAL, ExitStatus.FEASIBLE):
             self.best_runtime = s.status().runtime
@@ -94,11 +94,11 @@ class HammingTunner(ParameterTuner):
             full_params_dict.update(params_to_test)
 
             solver = SolverLookup.get(self.solvername, self.model, **init_kwargs)
-            self._run_solver(solver, full_params_dict,time_limit=int(current_timeout))
+            self._run_solver(solver, full_params_dict, time_limit=int(current_timeout))
 
             # Update best if improved
             if solver.status().exitstatus in (
-            ExitStatus.OPTIMAL, ExitStatus.FEASIBLE) and solver.status().runtime < self.best_runtime:
+                    ExitStatus.OPTIMAL, ExitStatus.FEASIBLE) and solver.status().runtime < self.best_runtime:
                 self.best_runtime = solver.status().runtime
                 self.best_params.update(params_to_test)
                 self._best_config_np = params_np
@@ -124,13 +124,12 @@ class HammingTunner(ParameterTuner):
         params_dict = {key: val for key, val in zip(self._param_order, params_np)}
         return params_dict, params_np
 
-    def _run_solver(self, solver, solve_kwargs,time_limit=5):
+    def _run_solver(self, solver, solve_kwargs, time_limit=5):
         return solver.solve(time_limit=time_limit, **solve_kwargs)
 
     def _params_to_np(self, combos):
         arr = [[params[key] for key in self._param_order] for params in combos]
         return np.array(arr)
-
 
 
 class TunerBuilder:
@@ -144,16 +143,20 @@ class TunerBuilder:
         self._defaults = dict()
         self._hpo_strategy = None
         self._xml_path = xml_path
-        self._hamming=False
+        self._hamming = False
+        self._stop_condition = StopCondition.TIMEOUT
+        self._stagnation_limit = 10
 
     def build_timeout_evolution_strategy(self, timeout_evolution_type: TimeoutEvolution):
-        self._timeout_evolution_strategy = TimeStrategyFactory.create_timeout_evolution_strategy(timeout_evolution_type)
+        self._timeout_evolution_strategy = TimeStrategyFactory.create_timeout_evolution_strategy(
+            timeout_evolution_type)
         return self
 
     def build_round_time_splitting_strategy(self, round_time_splitting_strategy: RoundTimeType):
         self._init_strategy = TimeStrategyFactory.create_round_time_splitting_strategy(round_time_splitting_strategy,
                                                                                        SolverLookup.get(self._solver,
-                                                                                                        self._cpm_model, xpath=self._xml_path),
+                                                                                                        self._cpm_model,
+                                                                                                        xpath=self._xml_path),
                                                                                        self._defaults)
         return self
 
@@ -163,20 +166,29 @@ class TunerBuilder:
             global_timeout, percent)
         return self
 
-    def build_hpo_strategy(self,hpo:HPOType):
+    def build_hpo_strategy(self, hpo: HPOType):
         if hpo == HPOType.BAYESIAN_SEARCH:
             self._hpo_strategy = BayesianOptimizationStrategy(self._solver, self._cpm_model, 22, self._init_strategy,
-                                                          self._tuning_strategy, self._timeout_evolution_strategy,
-                                                          self._all_params, self._defaults,xpath=self._xml_path)
+                                                              self._tuning_strategy,
+                                                              self._timeout_evolution_strategy,
+                                                              self._all_params, self._defaults, xpath=self._xml_path,
+                                                              stop_condition=self._stop_condition,
+                                                              stagnation_limit=self._stagnation_limit)
         else:
             log(f"Unsupported HPO type: {hpo}", "error")
             raise ValueError(f"Unsupported HPO type: {hpo}")
         return self
+
     def build_tuning_parameters_from_file(self, tuning_file):
         with open(tuning_file) as f:
             parameters = json.load(f)
             self._all_params = parameters.get("tunable_params")
             self._defaults = parameters.get("default_params")
+        return self
+
+    def with_stop_condition(self, stop_condition: StopCondition, stagnation_limit: int):
+        self._stop_condition = stop_condition
+        self._stagnation_limit = stagnation_limit
         return self
 
     def build(self) -> PSATuner:
@@ -191,7 +203,7 @@ class PSAFactory:
                 parameters = json.load(f)
                 all_params = parameters.get("tunable_params")
                 defaults = parameters.get("default_params")
-                return HammingTunner(args.solver,cpm_model,all_params,defaults,args.input)
+                return HammingTunner(args.solver, cpm_model, all_params, defaults, args.input)
 
         builder = TunerBuilder(args.solver, cpm_model, args.input)
         if args.time_evolution != TimeoutEvolution.STATIC and args.round_time_strategy == RoundTimeType.FIRST_RUNTIME:
@@ -202,5 +214,6 @@ class PSAFactory:
             args.time_evolution).build_global_time_splitting_strategy(args.global_time_strategy,
                                                                       args.global_time_limit,
                                                                       args.percent).build_tuning_parameters_from_file(
-            args.tuning_file).build_hpo_strategy(args.hpo)
+            args.tuning_file).with_stop_condition(args.stop_strategy,
+                                                  args.stagnation_limit).build_hpo_strategy(args.hpo)
         return builder.build()

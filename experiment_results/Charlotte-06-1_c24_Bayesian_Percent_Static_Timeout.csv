@@ -1,0 +1,16 @@
+round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
+1,1,probing,4.038344542001141,5099,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
+2,2,probing,4.011588666995522,5881,ExitStatus.FEASIBLE,1,False,0,STR0,NO,SAC3,False,True,Tries,Matrix3D,True,RunRobin,Wdeg
+3,3,probing,4.0425430000032065,5099,ExitStatus.FEASIBLE,1,True,2,CMDDS,NO,AP,False,False,Matrix3D,Matrix2D,True,Median,RunRobin
+4,4,probing,4.016822457997478,,ExitStatus.UNKNOWN,10,False,1,V,RST,BT,False,False,TableHybrid,Matrix3D,False,OccsR,Activity
+5,5,probing,3.6695485829986865,5611,ExitStatus.FEASIBLE,1000,True,10,CMDDS,NO,BT,False,False,Matrix2D,Tries,True,Last,FrbaOnDom
+6,6,probing,4.026544833992375,,ExitStatus.UNKNOWN,1,False,10,STR1,NO,AC,False,False,Matrix3D,Matrix2D,True,Conflicts,RunRobin
+7,7,probing,4.015021333005279,,ExitStatus.UNKNOWN,1,True,10,STR1,NO,GT,True,True,Matrix2D,Bits,True,OccsR,Rand
+8,8,probing,4.015462415991351,6131,ExitStatus.FEASIBLE,10,False,5,CMDDO,NO,SAC3,True,False,Matrix2D,TableHybrid,False,OccsR,Activity
+9,9,probing,4.028020334008033,,ExitStatus.UNKNOWN,10,True,10,STR3,NO,AC,False,False,Tries,Tries,True,Conflicts,Wdeg
+10,10,probing,4.014922417001799,5834,ExitStatus.FEASIBLE,1000,False,5,STR2,NO,SAC3,True,False,MDD,Matrix3D,True,Last,Memory
+11,11,probing,4.011871166992933,,ExitStatus.UNKNOWN,100,True,10,V,NO,BT,True,True,Matrix3D,Matrix3D,True,Vals,Memory
+12,12,probing,4.016445417000796,,ExitStatus.UNKNOWN,10,False,10,STR1N,NO,GT,True,True,MDD,Matrix3D,False,RunRobin,Lexico
+13,13,probing,3.1593942499894183,5100,ExitStatus.OPTIMAL,100,True,10,CMDDS,RST,AC,False,False,Bits,Bits,False,RunRobin,Wdeg
+14,14,probing,4.0369661250006175,6137,ExitStatus.FEASIBLE,1000,False,10,CMDDS,RST,AC,True,True,MDD,Matrix2D,True,RunRobin,Impact
+No Round,No Stagnation Round,solving,5.055271416000323,5099,ExitStatus.OPTIMAL,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg

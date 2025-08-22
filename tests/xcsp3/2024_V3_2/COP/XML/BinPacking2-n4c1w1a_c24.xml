@@ -1,0 +1,129 @@
+<instance format="XCSP3" type="COP">
+  <variables>
+    <array id="x" note="x[i] is the bin (number) where is put the ith item" size="[500]"> 0..305 </array>
+    <var id="z" note="z is the number of used bins"> 240..306 </var>
+  </variables>
+  <constraints>
+    <binPacking note="ensuring that the capacity of each bin is not exceeded">
+      <list> x[] </list>
+      <sizes> 1x6 2x5 3x3 4x6 5x3 6 6 7x6 8x3 9x5 10x8 11x9 12x3 13x9 14x4 15x8 16 16 17x7 18x5 19x8 20x6 21x4 22x6 23x5 24x7 25x4 26x7 27x8 28x7 29x5 30x4 31x9 32x5 33x5 34x4 35x6 36x6 37x8 38x6 39x4 40x4 41x5 42x10 43x7 44x4 45x4 46x6 47x3 48x6 49x3 50x5 51x4 52x3 53x5 54x7 55 55 56x5 57x5 58x6 59x3 60x6 61x3 62x7 63x6 64x4 65x3 66x3 67x5 68 68 69x4 70x9 71x5 72x4 73x7 74x4 75x6 76x5 77x3 78x6 79x3 80x5 81x4 82x4 83x6 84 84 85x3 86x6 87x6 88x4 89x5 90x3 91x4 92x3 93x3 94x4 95x5 96x7 97x7 98x4 99x4 100 </sizes>
+      <condition> (le,100) </condition>
+    </binPacking>
+    <nValues note="ensuring a minimum number of bins">
+      <list> x[] </list>
+      <condition> (eq,z) </condition>
+    </nValues>
+    <group class="symmetry-breaking">
+      <ordered>
+        <list> %... </list>
+        <operator> le </operator>
+      </ordered>
+      <args> x[0..5] </args>
+      <args> x[6..10] </args>
+      <args> x[11..13] </args>
+      <args> x[14..19] </args>
+      <args> x[20..22] </args>
+      <args> x[23] x[24] </args>
+      <args> x[25..30] </args>
+      <args> x[31..33] </args>
+      <args> x[34..38] </args>
+      <args> x[39..46] </args>
+      <args> x[47..55] </args>
+      <args> x[56..58] </args>
+      <args> x[59..67] </args>
+      <args> x[68..71] </args>
+      <args> x[72..79] </args>
+      <args> x[80] x[81] </args>
+      <args> x[82..88] </args>
+      <args> x[89..93] </args>
+      <args> x[94..101] </args>
+      <args> x[102..107] </args>
+      <args> x[108..111] </args>
+      <args> x[112..117] </args>
+      <args> x[118..122] </args>
+      <args> x[123..129] </args>
+      <args> x[130..133] </args>
+      <args> x[134..140] </args>
+      <args> x[141..148] </args>
+      <args> x[149..155] </args>
+      <args> x[156..160] </args>
+      <args> x[161..164] </args>
+      <args> x[165..173] </args>
+      <args> x[174..178] </args>
+      <args> x[179..183] </args>
+      <args> x[184..187] </args>
+      <args> x[188..193] </args>
+      <args> x[194..199] </args>
+      <args> x[200..207] </args>
+      <args> x[208..213] </args>
+      <args> x[214..217] </args>
+      <args> x[218..221] </args>
+      <args> x[222..226] </args>
+      <args> x[227..236] </args>
+      <args> x[237..243] </args>
+      <args> x[244..247] </args>
+      <args> x[248..251] </args>
+      <args> x[252..257] </args>
+      <args> x[258..260] </args>
+      <args> x[261..266] </args>
+      <args> x[267..269] </args>
+      <args> x[270..274] </args>
+      <args> x[275..278] </args>
+      <args> x[279..281] </args>
+      <args> x[282..286] </args>
+      <args> x[287..293] </args>
+      <args> x[294] x[295] </args>
+      <args> x[296..300] </args>
+      <args> x[301..305] </args>
+      <args> x[306..311] </args>
+      <args> x[312..314] </args>
+      <args> x[315..320] </args>
+      <args> x[321..323] </args>
+      <args> x[324..330] </args>
+      <args> x[331..336] </args>
+      <args> x[337..340] </args>
+      <args> x[341..343] </args>
+      <args> x[344..346] </args>
+      <args> x[347..351] </args>
+      <args> x[352] x[353] </args>
+      <args> x[354..357] </args>
+      <args> x[358..366] </args>
+      <args> x[367..371] </args>
+      <args> x[372..375] </args>
+      <args> x[376..382] </args>
+      <args> x[383..386] </args>
+      <args> x[387..392] </args>
+      <args> x[393..397] </args>
+      <args> x[398..400] </args>
+      <args> x[401..406] </args>
+      <args> x[407..409] </args>
+      <args> x[410..414] </args>
+      <args> x[415..418] </args>
+      <args> x[419..422] </args>
+      <args> x[423..428] </args>
+      <args> x[429] x[430] </args>
+      <args> x[431..433] </args>
+      <args> x[434..439] </args>
+      <args> x[440..445] </args>
+      <args> x[446..449] </args>
+      <args> x[450..454] </args>
+      <args> x[455..457] </args>
+      <args> x[458..461] </args>
+      <args> x[462..464] </args>
+      <args> x[465..467] </args>
+      <args> x[468..471] </args>
+      <args> x[472..476] </args>
+      <args> x[477..483] </args>
+      <args> x[484..490] </args>
+      <args> x[491..494] </args>
+      <args> x[495..498] </args>
+    </group>
+    <instantiation class="symmetry-breaking">
+      <list> x[275..499] </list>
+      <values> 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 </values>
+    </instantiation>
+  </constraints>
+  <objectives>
+    <minimize note="minimizing the number of used bins"> z </minimize>
+  </objectives>
+</instance>

@@ -1,0 +1,677 @@
+<instance format="XCSP3" type="COP">
+  <variables>
+    <array id="r_st" note="r_st[i] is the rounded stacking start time of the ith stockpile" size="[56]"> 0..56 </array>
+    <array id="st" note="st[i] is the precise stacking start time of the ith stockpile" size="[56]"> 0..82000 </array>
+    <array id="y" note="y[i] is the rounded position of the ith stockpile" size="[56]"> 0..1800 </array>
+    <array id="rt" note="rt[i] is the reclaiming start time of the ith stockpile" size="[56]"> 0..82000 </array>
+    <array id="r_dt" note="r_dt[i] is the rounded total duration time of processing the ith stockpile" size="[56]"> 0..56 </array>
+    <array id="dt" note="dt[i] is the precise total duration time of processing the ith stockpile" size="[56]"> 0..82000 </array>
+    <array id="ft" note="ft[i] is the finishing time, when the ith vessel is ready to leave" size="[40]"> 0..82000 </array>
+    <array id="y2" size="[56]">
+      <domain for="y2[0]"> 262 </domain>
+      <domain for="y2[1]"> 99 </domain>
+      <domain for="y2[2]"> 260 </domain>
+      <domain for="y2[3]"> 94 </domain>
+      <domain for="y2[4]"> 294 </domain>
+      <domain for="y2[5]"> 210 </domain>
+      <domain for="y2[6] y2[42]"> 109 </domain>
+      <domain for="y2[7]"> 240 </domain>
+      <domain for="y2[8]"> 151 </domain>
+      <domain for="y2[9]"> 42 </domain>
+      <domain for="y2[10]"> 134 </domain>
+      <domain for="y2[11]"> 130 </domain>
+      <domain for="y2[12]"> 114 </domain>
+      <domain for="y2[13]"> 67 </domain>
+      <domain for="y2[14]"> 314 </domain>
+      <domain for="y2[15]"> 299 </domain>
+      <domain for="y2[16]"> 68 </domain>
+      <domain for="y2[17]"> 129 </domain>
+      <domain for="y2[18]"> 142 </domain>
+      <domain for="y2[19]"> 236 </domain>
+      <domain for="y2[20]"> 244 </domain>
+      <domain for="y2[21]"> 79 </domain>
+      <domain for="y2[22]"> 153 </domain>
+      <domain for="y2[23]"> 198 </domain>
+      <domain for="y2[24] y2[41]"> 154 </domain>
+      <domain for="y2[25]"> 168 </domain>
+      <domain for="y2[26]"> 131 </domain>
+      <domain for="y2[27]"> 170 </domain>
+      <domain for="y2[28]"> 169 </domain>
+      <domain for="y2[29]"> 120 </domain>
+      <domain for="y2[30] y2[51]"> 93 </domain>
+      <domain for="y2[31]"> 95 </domain>
+      <domain for="y2[32]"> 187 </domain>
+      <domain for="y2[33]"> 321 </domain>
+      <domain for="y2[34]"> 157 </domain>
+      <domain for="y2[35]"> 145 </domain>
+      <domain for="y2[36]"> 195 </domain>
+      <domain for="y2[37]"> 234 </domain>
+      <domain for="y2[38]"> 50 </domain>
+      <domain for="y2[39]"> 315 </domain>
+      <domain for="y2[40]"> 246 </domain>
+      <domain for="y2[43]"> 328 </domain>
+      <domain for="y2[44]"> 189 </domain>
+      <domain for="y2[45]"> 87 </domain>
+      <domain for="y2[46]"> 292 </domain>
+      <domain for="y2[47]"> 226 </domain>
+      <domain for="y2[48]"> 185 </domain>
+      <domain for="y2[49]"> 98 </domain>
+      <domain for="y2[50]"> 126 </domain>
+      <domain for="y2[52]"> 146 </domain>
+      <domain for="y2[53]"> 248 </domain>
+      <domain for="y2[54]"> 259 </domain>
+      <domain for="y2[55]"> 268 </domain>
+    </array>
+  </variables>
+  <constraints>
+    <group note="linking precise and rounded stacking start times">
+      <intension> eq(%0,mul(%1,1440)) </intension>
+      <args> st[0] r_st[0] </args>
+      <args> st[1] r_st[1] </args>
+      <args> st[2] r_st[2] </args>
+      <args> st[3] r_st[3] </args>
+      <args> st[4] r_st[4] </args>
+      <args> st[5] r_st[5] </args>
+      <args> st[6] r_st[6] </args>
+      <args> st[7] r_st[7] </args>
+      <args> st[8] r_st[8] </args>
+      <args> st[9] r_st[9] </args>
+      <args> st[10] r_st[10] </args>
+      <args> st[11] r_st[11] </args>
+      <args> st[12] r_st[12] </args>
+      <args> st[13] r_st[13] </args>
+      <args> st[14] r_st[14] </args>
+      <args> st[15] r_st[15] </args>
+      <args> st[16] r_st[16] </args>
+      <args> st[17] r_st[17] </args>
+      <args> st[18] r_st[18] </args>
+      <args> st[19] r_st[19] </args>
+      <args> st[20] r_st[20] </args>
+      <args> st[21] r_st[21] </args>
+      <args> st[22] r_st[22] </args>
+      <args> st[23] r_st[23] </args>
+      <args> st[24] r_st[24] </args>
+      <args> st[25] r_st[25] </args>
+      <args> st[26] r_st[26] </args>
+      <args> st[27] r_st[27] </args>
+      <args> st[28] r_st[28] </args>
+      <args> st[29] r_st[29] </args>
+      <args> st[30] r_st[30] </args>
+      <args> st[31] r_st[31] </args>
+      <args> st[32] r_st[32] </args>
+      <args> st[33] r_st[33] </args>
+      <args> st[34] r_st[34] </args>
+      <args> st[35] r_st[35] </args>
+      <args> st[36] r_st[36] </args>
+      <args> st[37] r_st[37] </args>
+      <args> st[38] r_st[38] </args>
+      <args> st[39] r_st[39] </args>
+      <args> st[40] r_st[40] </args>
+      <args> st[41] r_st[41] </args>
+      <args> st[42] r_st[42] </args>
+      <args> st[43] r_st[43] </args>
+      <args> st[44] r_st[44] </args>
+      <args> st[45] r_st[45] </args>
+      <args> st[46] r_st[46] </args>
+      <args> st[47] r_st[47] </args>
+      <args> st[48] r_st[48] </args>
+      <args> st[49] r_st[49] </args>
+      <args> st[50] r_st[50] </args>
+      <args> st[51] r_st[51] </args>
+      <args> st[52] r_st[52] </args>
+      <args> st[53] r_st[53] </args>
+      <args> st[54] r_st[54] </args>
+      <args> st[55] r_st[55] </args>
+    </group>
+    <group note="linking precise and rounded total processing times">
+      <intension> eq(%0,mul(%1,1440)) </intension>
+      <args> dt[0] r_dt[0] </args>
+      <args> dt[1] r_dt[1] </args>
+      <args> dt[2] r_dt[2] </args>
+      <args> dt[3] r_dt[3] </args>
+      <args> dt[4] r_dt[4] </args>
+      <args> dt[5] r_dt[5] </args>
+      <args> dt[6] r_dt[6] </args>
+      <args> dt[7] r_dt[7] </args>
+      <args> dt[8] r_dt[8] </args>
+      <args> dt[9] r_dt[9] </args>
+      <args> dt[10] r_dt[10] </args>
+      <args> dt[11] r_dt[11] </args>
+      <args> dt[12] r_dt[12] </args>
+      <args> dt[13] r_dt[13] </args>
+      <args> dt[14] r_dt[14] </args>
+      <args> dt[15] r_dt[15] </args>
+      <args> dt[16] r_dt[16] </args>
+      <args> dt[17] r_dt[17] </args>
+      <args> dt[18] r_dt[18] </args>
+      <args> dt[19] r_dt[19] </args>
+      <args> dt[20] r_dt[20] </args>
+      <args> dt[21] r_dt[21] </args>
+      <args> dt[22] r_dt[22] </args>
+      <args> dt[23] r_dt[23] </args>
+      <args> dt[24] r_dt[24] </args>
+      <args> dt[25] r_dt[25] </args>
+      <args> dt[26] r_dt[26] </args>
+      <args> dt[27] r_dt[27] </args>
+      <args> dt[28] r_dt[28] </args>
+      <args> dt[29] r_dt[29] </args>
+      <args> dt[30] r_dt[30] </args>
+      <args> dt[31] r_dt[31] </args>
+      <args> dt[32] r_dt[32] </args>
+      <args> dt[33] r_dt[33] </args>
+      <args> dt[34] r_dt[34] </args>
+      <args> dt[35] r_dt[35] </args>
+      <args> dt[36] r_dt[36] </args>
+      <args> dt[37] r_dt[37] </args>
+      <args> dt[38] r_dt[38] </args>
+      <args> dt[39] r_dt[39] </args>
+      <args> dt[40] r_dt[40] </args>
+      <args> dt[41] r_dt[41] </args>
+      <args> dt[42] r_dt[42] </args>
+      <args> dt[43] r_dt[43] </args>
+      <args> dt[44] r_dt[44] </args>
+      <args> dt[45] r_dt[45] </args>
+      <args> dt[46] r_dt[46] </args>
+      <args> dt[47] r_dt[47] </args>
+      <args> dt[48] r_dt[48] </args>
+      <args> dt[49] r_dt[49] </args>
+      <args> dt[50] r_dt[50] </args>
+      <args> dt[51] r_dt[51] </args>
+      <args> dt[52] r_dt[52] </args>
+      <args> dt[53] r_dt[53] </args>
+      <args> dt[54] r_dt[54] </args>
+      <args> dt[55] r_dt[55] </args>
+    </group>
+    <group note="making vessels ready when reclaiming is finished">
+      <intension> eq(%0,add(%1,%2)) </intension>
+      <args> ft[0] rt[2] 975 </args>
+      <args> ft[1] rt[4] 1104 </args>
+      <args> ft[2] rt[6] 409 </args>
+      <args> ft[3] rt[7] 903 </args>
+      <args> ft[4] rt[8] 568 </args>
+      <args> ft[5] rt[9] 161 </args>
+      <args> ft[6] rt[10] 506 </args>
+      <args> ft[7] rt[11] 488 </args>
+      <args> ft[8] rt[12] 429 </args>
+      <args> ft[9] rt[14] 1179 </args>
+      <args> ft[10] rt[15] 1123 </args>
+      <args> ft[11] rt[16] 258 </args>
+      <args> ft[12] rt[17] 484 </args>
+      <args> ft[13] rt[18] 535 </args>
+      <args> ft[14] rt[19] 885 </args>
+      <args> ft[15] rt[22] 575 </args>
+      <args> ft[16] rt[23] 743 </args>
+      <args> ft[17] rt[24] 578 </args>
+      <args> ft[18] rt[25] 630 </args>
+      <args> ft[19] rt[27] 641 </args>
+      <args> ft[20] rt[28] 634 </args>
+      <args> ft[21] rt[29] 450 </args>
+      <args> ft[22] rt[31] 357 </args>
+      <args> ft[23] rt[32] 702 </args>
+      <args> ft[24] rt[34] 592 </args>
+      <args> ft[25] rt[35] 547 </args>
+      <args> ft[26] rt[36] 733 </args>
+      <args> ft[27] rt[37] 881 </args>
+      <args> ft[28] rt[38] 191 </args>
+      <args> ft[29] rt[41] 578 </args>
+      <args> ft[30] rt[42] 410 </args>
+      <args> ft[31] rt[45] 329 </args>
+      <args> ft[32] rt[46] 1095 </args>
+      <args> ft[33] rt[48] 694 </args>
+      <args> ft[34] rt[49] 371 </args>
+      <args> ft[35] rt[50] 476 </args>
+      <args> ft[36] rt[51] 351 </args>
+      <args> ft[37] rt[52] 549 </args>
+      <args> ft[38] rt[54] 974 </args>
+      <args> ft[39] rt[55] 1007 </args>
+    </group>
+    <group note="computing total processing times">
+      <intension> ge(%0,sub(add(%1,%2),%3)) </intension>
+      <args> dt[0] rt[0] 983 st[0] </args>
+      <args> dt[1] rt[1] 372 st[1] </args>
+      <args> dt[2] rt[2] 975 st[2] </args>
+      <args> dt[3] rt[3] 354 st[3] </args>
+      <args> dt[4] rt[4] 1104 st[4] </args>
+      <args> dt[5] rt[5] 788 st[5] </args>
+      <args> dt[6] rt[6] 409 st[6] </args>
+      <args> dt[7] rt[7] 903 st[7] </args>
+      <args> dt[8] rt[8] 568 st[8] </args>
+      <args> dt[9] rt[9] 161 st[9] </args>
+      <args> dt[10] rt[10] 506 st[10] </args>
+      <args> dt[11] rt[11] 488 st[11] </args>
+      <args> dt[12] rt[12] 429 st[12] </args>
+      <args> dt[13] rt[13] 253 st[13] </args>
+      <args> dt[14] rt[14] 1179 st[14] </args>
+      <args> dt[15] rt[15] 1123 st[15] </args>
+      <args> dt[16] rt[16] 258 st[16] </args>
+      <args> dt[17] rt[17] 484 st[17] </args>
+      <args> dt[18] rt[18] 535 st[18] </args>
+      <args> dt[19] rt[19] 885 st[19] </args>
+      <args> dt[20] rt[20] 917 st[20] </args>
+      <args> dt[21] rt[21] 297 st[21] </args>
+      <args> dt[22] rt[22] 575 st[22] </args>
+      <args> dt[23] rt[23] 743 st[23] </args>
+      <args> dt[24] rt[24] 578 st[24] </args>
+      <args> dt[25] rt[25] 630 st[25] </args>
+      <args> dt[26] rt[26] 494 st[26] </args>
+      <args> dt[27] rt[27] 641 st[27] </args>
+      <args> dt[28] rt[28] 634 st[28] </args>
+      <args> dt[29] rt[29] 450 st[29] </args>
+      <args> dt[30] rt[30] 349 st[30] </args>
+      <args> dt[31] rt[31] 357 st[31] </args>
+      <args> dt[32] rt[32] 702 st[32] </args>
+      <args> dt[33] rt[33] 1205 st[33] </args>
+      <args> dt[34] rt[34] 592 st[34] </args>
+      <args> dt[35] rt[35] 547 st[35] </args>
+      <args> dt[36] rt[36] 733 st[36] </args>
+      <args> dt[37] rt[37] 881 st[37] </args>
+      <args> dt[38] rt[38] 191 st[38] </args>
+      <args> dt[39] rt[39] 1182 st[39] </args>
+      <args> dt[40] rt[40] 923 st[40] </args>
+      <args> dt[41] rt[41] 578 st[41] </args>
+      <args> dt[42] rt[42] 410 st[42] </args>
+      <args> dt[43] rt[43] 1232 st[43] </args>
+      <args> dt[44] rt[44] 711 st[44] </args>
+      <args> dt[45] rt[45] 329 st[45] </args>
+      <args> dt[46] rt[46] 1095 st[46] </args>
+      <args> dt[47] rt[47] 850 st[47] </args>
+      <args> dt[48] rt[48] 694 st[48] </args>
+      <args> dt[49] rt[49] 371 st[49] </args>
+      <args> dt[50] rt[50] 476 st[50] </args>
+      <args> dt[51] rt[51] 351 st[51] </args>
+      <args> dt[52] rt[52] 549 st[52] </args>
+      <args> dt[53] rt[53] 931 st[53] </args>
+      <args> dt[54] rt[54] 974 st[54] </args>
+      <args> dt[55] rt[55] 1007 st[55] </args>
+    </group>
+    <group note="finishing in time">
+      <intension> le(add(%0,%1),57) </intension>
+      <args> r_st[2] r_dt[2] </args>
+      <args> r_st[4] r_dt[4] </args>
+      <args> r_st[6] r_dt[6] </args>
+      <args> r_st[7] r_dt[7] </args>
+      <args> r_st[8] r_dt[8] </args>
+      <args> r_st[9] r_dt[9] </args>
+      <args> r_st[10] r_dt[10] </args>
+      <args> r_st[11] r_dt[11] </args>
+      <args> r_st[12] r_dt[12] </args>
+      <args> r_st[14] r_dt[14] </args>
+      <args> r_st[15] r_dt[15] </args>
+      <args> r_st[16] r_dt[16] </args>
+      <args> r_st[17] r_dt[17] </args>
+      <args> r_st[18] r_dt[18] </args>
+      <args> r_st[19] r_dt[19] </args>
+      <args> r_st[22] r_dt[22] </args>
+      <args> r_st[23] r_dt[23] </args>
+      <args> r_st[24] r_dt[24] </args>
+      <args> r_st[25] r_dt[25] </args>
+      <args> r_st[27] r_dt[27] </args>
+      <args> r_st[28] r_dt[28] </args>
+      <args> r_st[29] r_dt[29] </args>
+      <args> r_st[31] r_dt[31] </args>
+      <args> r_st[32] r_dt[32] </args>
+      <args> r_st[34] r_dt[34] </args>
+      <args> r_st[35] r_dt[35] </args>
+      <args> r_st[36] r_dt[36] </args>
+      <args> r_st[37] r_dt[37] </args>
+      <args> r_st[38] r_dt[38] </args>
+      <args> r_st[41] r_dt[41] </args>
+      <args> r_st[42] r_dt[42] </args>
+      <args> r_st[45] r_dt[45] </args>
+      <args> r_st[46] r_dt[46] </args>
+      <args> r_st[48] r_dt[48] </args>
+      <args> r_st[49] r_dt[49] </args>
+      <args> r_st[50] r_dt[50] </args>
+      <args> r_st[51] r_dt[51] </args>
+      <args> r_st[52] r_dt[52] </args>
+      <args> r_st[54] r_dt[54] </args>
+      <args> r_st[55] r_dt[55] </args>
+    </group>
+    <group note="reclaiming of a stockpile cannot start before the ETA of its vessel">
+      <intension> ge(%0,%1) </intension>
+      <args> rt[0] 14686 </args>
+      <args> rt[1] 14686 </args>
+      <args> rt[2] 14686 </args>
+      <args> rt[3] 16743 </args>
+      <args> rt[4] 16743 </args>
+      <args> rt[5] 20373 </args>
+      <args> rt[6] 20373 </args>
+      <args> rt[7] 20550 </args>
+      <args> rt[8] 23004 </args>
+      <args> rt[9] 23131 </args>
+      <args> rt[10] 23242 </args>
+      <args> rt[11] 25399 </args>
+      <args> rt[12] 25799 </args>
+      <args> rt[13] 27069 </args>
+      <args> rt[14] 27069 </args>
+      <args> rt[15] 29323 </args>
+      <args> rt[16] 30020 </args>
+      <args> rt[17] 32614 </args>
+      <args> rt[18] 36178 </args>
+      <args> rt[19] 36358 </args>
+      <args> rt[20] 36511 </args>
+      <args> rt[21] 36511 </args>
+      <args> rt[22] 36511 </args>
+      <args> rt[23] 37146 </args>
+      <args> rt[24] 40929 </args>
+      <args> rt[25] 43565 </args>
+      <args> rt[26] 43853 </args>
+      <args> rt[27] 43853 </args>
+      <args> rt[28] 45600 </args>
+      <args> rt[29] 46062 </args>
+      <args> rt[30] 47265 </args>
+      <args> rt[31] 47265 </args>
+      <args> rt[32] 47911 </args>
+      <args> rt[33] 50098 </args>
+      <args> rt[34] 50098 </args>
+      <args> rt[35] 51040 </args>
+      <args> rt[36] 52213 </args>
+      <args> rt[37] 52441 </args>
+      <args> rt[38] 52527 </args>
+      <args> rt[39] 53614 </args>
+      <args> rt[40] 53614 </args>
+      <args> rt[41] 53614 </args>
+      <args> rt[42] 53702 </args>
+      <args> rt[43] 54442 </args>
+      <args> rt[44] 54442 </args>
+      <args> rt[45] 54442 </args>
+      <args> rt[46] 54619 </args>
+      <args> rt[47] 55028 </args>
+      <args> rt[48] 55028 </args>
+      <args> rt[49] 56919 </args>
+      <args> rt[50] 59587 </args>
+      <args> rt[51] 59779 </args>
+      <args> rt[52] 60802 </args>
+      <args> rt[53] 61585 </args>
+      <args> rt[54] 61585 </args>
+      <args> rt[55] 62470 </args>
+    </group>
+    <group note="stacking of a stockpile starts when possible">
+      <intension> ge(%0,%1) </intension>
+      <args> st[0] 286 </args>
+      <args> st[1] 286 </args>
+      <args> st[2] 286 </args>
+      <args> st[3] 2343 </args>
+      <args> st[4] 2343 </args>
+      <args> st[5] 5973 </args>
+      <args> st[6] 5973 </args>
+      <args> st[7] 6150 </args>
+      <args> st[8] 8604 </args>
+      <args> st[9] 8731 </args>
+      <args> st[10] 8842 </args>
+      <args> st[11] 10999 </args>
+      <args> st[12] 11399 </args>
+      <args> st[13] 12669 </args>
+      <args> st[14] 12669 </args>
+      <args> st[15] 14923 </args>
+      <args> st[16] 15620 </args>
+      <args> st[17] 18214 </args>
+      <args> st[18] 21778 </args>
+      <args> st[19] 21958 </args>
+      <args> st[20] 22111 </args>
+      <args> st[21] 22111 </args>
+      <args> st[22] 22111 </args>
+      <args> st[23] 22746 </args>
+      <args> st[24] 26529 </args>
+      <args> st[25] 29165 </args>
+      <args> st[26] 29453 </args>
+      <args> st[27] 29453 </args>
+      <args> st[28] 31200 </args>
+      <args> st[29] 31662 </args>
+      <args> st[30] 32865 </args>
+      <args> st[31] 32865 </args>
+      <args> st[32] 33511 </args>
+      <args> st[33] 35698 </args>
+      <args> st[34] 35698 </args>
+      <args> st[35] 36640 </args>
+      <args> st[36] 37813 </args>
+      <args> st[37] 38041 </args>
+      <args> st[38] 38127 </args>
+      <args> st[39] 39214 </args>
+      <args> st[40] 39214 </args>
+      <args> st[41] 39214 </args>
+      <args> st[42] 39302 </args>
+      <args> st[43] 40042 </args>
+      <args> st[44] 40042 </args>
+      <args> st[45] 40042 </args>
+      <args> st[46] 40219 </args>
+      <args> st[47] 40628 </args>
+      <args> st[48] 40628 </args>
+      <args> st[49] 42519 </args>
+      <args> st[50] 45187 </args>
+      <args> st[51] 45379 </args>
+      <args> st[52] 46402 </args>
+      <args> st[53] 47185 </args>
+      <args> st[54] 47185 </args>
+      <args> st[55] 48070 </args>
+    </group>
+    <group note="respecting the continuous reclaim time limit (e.g., 5 hours)">
+      <intension> le(%0,add(%1,%2)) </intension>
+      <args> rt[1] rt[0] 1283 </args>
+      <args> rt[2] rt[1] 672 </args>
+      <args> rt[4] rt[3] 654 </args>
+      <args> rt[6] rt[5] 1088 </args>
+      <args> rt[14] rt[13] 553 </args>
+      <args> rt[21] rt[20] 1217 </args>
+      <args> rt[22] rt[21] 597 </args>
+      <args> rt[27] rt[26] 794 </args>
+      <args> rt[31] rt[30] 649 </args>
+      <args> rt[34] rt[33] 1505 </args>
+      <args> rt[40] rt[39] 1482 </args>
+      <args> rt[41] rt[40] 1223 </args>
+      <args> rt[44] rt[43] 1532 </args>
+      <args> rt[45] rt[44] 1011 </args>
+      <args> rt[48] rt[47] 1150 </args>
+      <args> rt[54] rt[53] 1231 </args>
+    </group>
+    <group note="stacking of a stockpile has to complete before reclaiming can start">
+      <intension> le(add(%0,%1),div(%2,1440)) </intension>
+      <args> r_st[0] 3 rt[0] </args>
+      <args> r_st[1] 3 rt[1] </args>
+      <args> r_st[2] 3 rt[2] </args>
+      <args> r_st[3] 5 rt[3] </args>
+      <args> r_st[4] 5 rt[4] </args>
+      <args> r_st[5] 5 rt[5] </args>
+      <args> r_st[6] 5 rt[6] </args>
+      <args> r_st[7] 7 rt[7] </args>
+      <args> r_st[8] 5 rt[8] </args>
+      <args> r_st[9] 3 rt[9] </args>
+      <args> r_st[10] 5 rt[10] </args>
+      <args> r_st[11] 7 rt[11] </args>
+      <args> r_st[12] 7 rt[12] </args>
+      <args> r_st[13] 5 rt[13] </args>
+      <args> r_st[14] 7 rt[14] </args>
+      <args> r_st[15] 5 rt[15] </args>
+      <args> r_st[16] 5 rt[16] </args>
+      <args> r_st[17] 3 rt[17] </args>
+      <args> r_st[18] 5 rt[18] </args>
+      <args> r_st[19] 3 rt[19] </args>
+      <args> r_st[20] 5 rt[20] </args>
+      <args> r_st[21] 5 rt[21] </args>
+      <args> r_st[22] 7 rt[22] </args>
+      <args> r_st[23] 5 rt[23] </args>
+      <args> r_st[24] 5 rt[24] </args>
+      <args> r_st[25] 3 rt[25] </args>
+      <args> r_st[26] 3 rt[26] </args>
+      <args> r_st[27] 3 rt[27] </args>
+      <args> r_st[28] 7 rt[28] </args>
+      <args> r_st[29] 5 rt[29] </args>
+      <args> r_st[30] 5 rt[30] </args>
+      <args> r_st[31] 3 rt[31] </args>
+      <args> r_st[32] 5 rt[32] </args>
+      <args> r_st[33] 3 rt[33] </args>
+      <args> r_st[34] 5 rt[34] </args>
+      <args> r_st[35] 3 rt[35] </args>
+      <args> r_st[36] 5 rt[36] </args>
+      <args> r_st[37] 5 rt[37] </args>
+      <args> r_st[38] 3 rt[38] </args>
+      <args> r_st[39] 7 rt[39] </args>
+      <args> r_st[40] 5 rt[40] </args>
+      <args> r_st[41] 5 rt[41] </args>
+      <args> r_st[42] 5 rt[42] </args>
+      <args> r_st[43] 5 rt[43] </args>
+      <args> r_st[44] 5 rt[44] </args>
+      <args> r_st[45] 5 rt[45] </args>
+      <args> r_st[46] 3 rt[46] </args>
+      <args> r_st[47] 5 rt[47] </args>
+      <args> r_st[48] 5 rt[48] </args>
+      <args> r_st[49] 5 rt[49] </args>
+      <args> r_st[50] 5 rt[50] </args>
+      <args> r_st[51] 3 rt[51] </args>
+      <args> r_st[52] 5 rt[52] </args>
+      <args> r_st[53] 5 rt[53] </args>
+      <args> r_st[54] 7 rt[54] </args>
+      <args> r_st[55] 7 rt[55] </args>
+    </group>
+    <group note="ensuring stockpiles fit on their pads">
+      <intension> le(add(%0,%1),1800) </intension>
+      <args> y[0] 262 </args>
+      <args> y[1] 99 </args>
+      <args> y[2] 260 </args>
+      <args> y[3] 94 </args>
+      <args> y[4] 294 </args>
+      <args> y[5] 210 </args>
+      <args> y[6] 109 </args>
+      <args> y[7] 240 </args>
+      <args> y[8] 151 </args>
+      <args> y[9] 42 </args>
+      <args> y[10] 134 </args>
+      <args> y[11] 130 </args>
+      <args> y[12] 114 </args>
+      <args> y[13] 67 </args>
+      <args> y[14] 314 </args>
+      <args> y[15] 299 </args>
+      <args> y[16] 68 </args>
+      <args> y[17] 129 </args>
+      <args> y[18] 142 </args>
+      <args> y[19] 236 </args>
+      <args> y[20] 244 </args>
+      <args> y[21] 79 </args>
+      <args> y[22] 153 </args>
+      <args> y[23] 198 </args>
+      <args> y[24] 154 </args>
+      <args> y[25] 168 </args>
+      <args> y[26] 131 </args>
+      <args> y[27] 170 </args>
+      <args> y[28] 169 </args>
+      <args> y[29] 120 </args>
+      <args> y[30] 93 </args>
+      <args> y[31] 95 </args>
+      <args> y[32] 187 </args>
+      <args> y[33] 321 </args>
+      <args> y[34] 157 </args>
+      <args> y[35] 145 </args>
+      <args> y[36] 195 </args>
+      <args> y[37] 234 </args>
+      <args> y[38] 50 </args>
+      <args> y[39] 315 </args>
+      <args> y[40] 246 </args>
+      <args> y[41] 154 </args>
+      <args> y[42] 109 </args>
+      <args> y[43] 328 </args>
+      <args> y[44] 189 </args>
+      <args> y[45] 87 </args>
+      <args> y[46] 292 </args>
+      <args> y[47] 226 </args>
+      <args> y[48] 185 </args>
+      <args> y[49] 98 </args>
+      <args> y[50] 126 </args>
+      <args> y[51] 93 </args>
+      <args> y[52] 146 </args>
+      <args> y[53] 248 </args>
+      <args> y[54] 259 </args>
+      <args> y[55] 268 </args>
+    </group>
+    <group note="respecting the reclaim order of the stockpiles of a vessel">
+      <intension> le(add(%0,%1),%2) </intension>
+      <args> rt[0] 983 rt[1] </args>
+      <args> rt[1] 372 rt[2] </args>
+      <args> rt[3] 354 rt[4] </args>
+      <args> rt[5] 788 rt[6] </args>
+      <args> rt[13] 253 rt[14] </args>
+      <args> rt[20] 917 rt[21] </args>
+      <args> rt[21] 297 rt[22] </args>
+      <args> rt[26] 494 rt[27] </args>
+      <args> rt[30] 349 rt[31] </args>
+      <args> rt[33] 1205 rt[34] </args>
+      <args> rt[39] 1182 rt[40] </args>
+      <args> rt[40] 923 rt[41] </args>
+      <args> rt[43] 1232 rt[44] </args>
+      <args> rt[44] 711 rt[45] </args>
+      <args> rt[47] 850 rt[48] </args>
+      <args> rt[53] 931 rt[54] </args>
+    </group>
+    <sum note="computing the sum of vessel delays">
+      <list> sub(ft[0],17016) sub(ft[1],18201) sub(ft[2],21570) sub(ft[3],21453) sub(ft[4],23572) sub(ft[5],23292) sub(ft[6],23748) sub(ft[7],25887) sub(ft[8],26228) sub(ft[9],28501) sub(ft[10],30446) sub(ft[11],30278) sub(ft[12],33098) sub(ft[13],36713) sub(ft[14],37243) sub(ft[15],38300) sub(ft[16],37889) sub(ft[17],41507) sub(ft[18],44195) sub(ft[19],44988) sub(ft[20],46234) sub(ft[21],46512) sub(ft[22],47971) sub(ft[23],48613) sub(ft[24],51895) sub(ft[25],51587) sub(ft[26],52946) sub(ft[27],53322) sub(ft[28],52718) sub(ft[29],56297) sub(ft[30],54112) sub(ft[31],56714) sub(ft[32],55714) sub(ft[33],56572) sub(ft[34],57290) sub(ft[35],60063) sub(ft[36],60130) sub(ft[37],61351) sub(ft[38],63490) sub(ft[39],63477) </list>
+      <condition> (le,930000) </condition>
+    </sum>
+    <group note="not exceeding a maximum delay">
+      <intension> le(sub(%0,%1),19200) </intension>
+      <args> ft[0] 17016 </args>
+      <args> ft[1] 18201 </args>
+      <args> ft[2] 21570 </args>
+      <args> ft[3] 21453 </args>
+      <args> ft[4] 23572 </args>
+      <args> ft[5] 23292 </args>
+      <args> ft[6] 23748 </args>
+      <args> ft[7] 25887 </args>
+      <args> ft[8] 26228 </args>
+      <args> ft[9] 28501 </args>
+      <args> ft[10] 30446 </args>
+      <args> ft[11] 30278 </args>
+      <args> ft[12] 33098 </args>
+      <args> ft[13] 36713 </args>
+      <args> ft[14] 37243 </args>
+      <args> ft[15] 38300 </args>
+      <args> ft[16] 37889 </args>
+      <args> ft[17] 41507 </args>
+      <args> ft[18] 44195 </args>
+      <args> ft[19] 44988 </args>
+      <args> ft[20] 46234 </args>
+      <args> ft[21] 46512 </args>
+      <args> ft[22] 47971 </args>
+      <args> ft[23] 48613 </args>
+      <args> ft[24] 51895 </args>
+      <args> ft[25] 51587 </args>
+      <args> ft[26] 52946 </args>
+      <args> ft[27] 53322 </args>
+      <args> ft[28] 52718 </args>
+      <args> ft[29] 56297 </args>
+      <args> ft[30] 54112 </args>
+      <args> ft[31] 56714 </args>
+      <args> ft[32] 55714 </args>
+      <args> ft[33] 56572 </args>
+      <args> ft[34] 57290 </args>
+      <args> ft[35] 60063 </args>
+      <args> ft[36] 60130 </args>
+      <args> ft[37] 61351 </args>
+      <args> ft[38] 63490 </args>
+      <args> ft[39] 63477 </args>
+    </group>
+    <noOverlap note="not overlapping stockpiles in space and time">
+      <origins> (r_st[0],y[0])(r_st[1],y[1])(r_st[2],y[2])(r_st[3],y[3])(r_st[4],y[4])(r_st[5],y[5])(r_st[6],y[6])(r_st[7],y[7])(r_st[8],y[8])(r_st[9],y[9])(r_st[10],y[10])(r_st[11],y[11])(r_st[12],y[12])(r_st[13],y[13])(r_st[14],y[14])(r_st[15],y[15])(r_st[16],y[16])(r_st[17],y[17])(r_st[18],y[18])(r_st[19],y[19])(r_st[20],y[20])(r_st[21],y[21])(r_st[22],y[22])(r_st[23],y[23])(r_st[24],y[24])(r_st[25],y[25])(r_st[26],y[26])(r_st[27],y[27])(r_st[28],y[28])(r_st[29],y[29])(r_st[30],y[30])(r_st[31],y[31])(r_st[32],y[32])(r_st[33],y[33])(r_st[34],y[34])(r_st[35],y[35])(r_st[36],y[36])(r_st[37],y[37])(r_st[38],y[38])(r_st[39],y[39])(r_st[40],y[40])(r_st[41],y[41])(r_st[42],y[42])(r_st[43],y[43])(r_st[44],y[44])(r_st[45],y[45])(r_st[46],y[46])(r_st[47],y[47])(r_st[48],y[48])(r_st[49],y[49])(r_st[50],y[50])(r_st[51],y[51])(r_st[52],y[52])(r_st[53],y[53])(r_st[54],y[54])(r_st[55],y[55]) </origins>
+      <lengths> (r_dt[0],y2[0])(r_dt[1],y2[1])(r_dt[2],y2[2])(r_dt[3],y2[3])(r_dt[4],y2[4])(r_dt[5],y2[5])(r_dt[6],y2[6])(r_dt[7],y2[7])(r_dt[8],y2[8])(r_dt[9],y2[9])(r_dt[10],y2[10])(r_dt[11],y2[11])(r_dt[12],y2[12])(r_dt[13],y2[13])(r_dt[14],y2[14])(r_dt[15],y2[15])(r_dt[16],y2[16])(r_dt[17],y2[17])(r_dt[18],y2[18])(r_dt[19],y2[19])(r_dt[20],y2[20])(r_dt[21],y2[21])(r_dt[22],y2[22])(r_dt[23],y2[23])(r_dt[24],y2[24])(r_dt[25],y2[25])(r_dt[26],y2[26])(r_dt[27],y2[27])(r_dt[28],y2[28])(r_dt[29],y2[29])(r_dt[30],y2[30])(r_dt[31],y2[31])(r_dt[32],y2[32])(r_dt[33],y2[33])(r_dt[34],y2[34])(r_dt[35],y2[35])(r_dt[36],y2[36])(r_dt[37],y2[37])(r_dt[38],y2[38])(r_dt[39],y2[39])(r_dt[40],y2[40])(r_dt[41],y2[41])(r_dt[42],y2[42])(r_dt[43],y2[43])(r_dt[44],y2[44])(r_dt[45],y2[45])(r_dt[46],y2[46])(r_dt[47],y2[47])(r_dt[48],y2[48])(r_dt[49],y2[49])(r_dt[50],y2[50])(r_dt[51],y2[51])(r_dt[52],y2[52])(r_dt[53],y2[53])(r_dt[54],y2[54])(r_dt[55],y2[55]) </lengths>
+    </noOverlap>
+    <cumulative note="not exceeding the pad lengths">
+      <origins> r_st[] </origins>
+      <lengths> r_dt[] </lengths>
+      <heights> 262 99 260 94 294 210 109 240 151 42 134 130 114 67 314 299 68 129 142 236 244 79 153 198 154 168 131 170 169 120 93 95 187 321 157 145 195 234 50 315 246 154 109 328 189 87 292 226 185 98 126 93 146 248 259 268 </heights>
+      <condition> (le,1800) </condition>
+    </cumulative>
+    <cumulative note="not exceeding the daily stacking capacity">
+      <origins> r_st[] </origins>
+      <lengths> 3x3 5x4 7 5 3 5 7 7 5 7 5 5 3 5 3 5 5 7 5 5 3x3 7 5 5 3 5 3 5 3 5 5 3 7 5x6 3 5x4 3 5 5 7 7 </lengths>
+      <heights> 227 86 225 49 153 109 56 89 78 37 70 48 42 35 116 155 35 112 74 204 127 41 57 103 80 145 114 148 62 62 48 82 97 278 82 126 101 122 44 117 128 80 56 171 98 45 253 118 96 51 66 81 76 129 96 99 </heights>
+      <condition> (le,950) </condition>
+    </cumulative>
+    <cumulative note="ensuring that there are always enough reclaimers">
+      <origins> rt[] </origins>
+      <lengths> 983 372 975 354 1104 788 409 903 568 161 506 488 429 253 1179 1123 258 484 535 885 917 297 575 743 578 630 494 641 634 450 349 357 702 1205 592 547 733 881 191 1182 923 578 410 1232 711 329 1095 850 694 371 476 351 549 931 974 1007 </lengths>
+      <heights> 1x56 </heights>
+      <condition> (le,2) </condition>
+    </cumulative>
+  </constraints>
+  <objectives>
+    <minimize type="sum"> sub(ft[4],23572) sub(ft[5],23292) sub(ft[6],23748) sub(ft[7],25887) sub(ft[8],26228) sub(ft[9],28501) sub(ft[10],30446) sub(ft[11],30278) sub(ft[12],33098) sub(ft[13],36713) sub(ft[14],37243) sub(ft[15],38300) sub(ft[16],37889) sub(ft[17],41507) sub(ft[18],44195) sub(ft[19],44988) sub(ft[20],46234) sub(ft[21],46512) sub(ft[22],47971) sub(ft[23],48613) sub(ft[24],51895) sub(ft[25],51587) sub(ft[26],52946) sub(ft[27],53322) sub(ft[28],52718) sub(ft[29],56297) sub(ft[30],54112) sub(ft[31],56714) sub(ft[32],55714) sub(ft[33],56572) sub(ft[34],57290) </minimize>
+  </objectives>
+</instance>
