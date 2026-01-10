@@ -321,6 +321,8 @@ class CPM_xcsp(SolverInterface):
 
         start = timer()
         options = []
+        if "CHOCO" in self.name.upper() and kwargs:
+            options.append('-f')
         for key, value in kwargs.items():
             if key == "check":
                 continue

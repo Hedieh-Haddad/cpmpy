@@ -1,7 +1,0 @@
-round,stagnation_round,phase,runtime,objective,status,bdc,generic2,lc,negative,ng,p,pc1,saf,sc2,sc3,toh,valh,varh
-1,1,probing,4.0442397500009974,5099,ExitStatus.FEASIBLE,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg
-2,2,probing,4.039431874989532,5437,ExitStatus.FEASIBLE,1,False,1,STR1N,NO,AP,False,False,TableHybrid,Bits,True,Last,RunRobin
-3,3,probing,4.0415201670111855,5441,ExitStatus.FEASIBLE,100,False,2,STR1,NO,AC,True,True,Bits,Table,True,Rand,PickOnDom
-4,4,probing,9.009815415993216,6136,ExitStatus.FEASIBLE,1000,True,5,V,NO,SAC3,True,False,Table,Matrix2D,True,Rand,Impact
-5,5,probing,1.0661076250107726,5526,ExitStatus.FEASIBLE,1,False,0,STR2N,RST,BT,False,True,TableHybrid,MDD,False,Median,PickOnDom
-No Round,No Stagnation Round,solving,4.762076833998435,5099,ExitStatus.OPTIMAL,1,True,2,V,RST,AC,True,False,Bits,Matrix3D,False,First,Wdeg

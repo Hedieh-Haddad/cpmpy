@@ -9,11 +9,12 @@ from cpmpy.solvers import param_combinations
 from cpmpy.solvers.solver_interface import ExitStatus
 from cpmpy.tools import ParameterTuner
 from cpmpy.tools.psa.enum import TimeoutEvolution, TimeType, RoundTimeType, HPOType, StopCondition
-from cpmpy.tools.psa.hpo_strategies import HPOStrategy, BayesianOptimizationStrategy
+from cpmpy.tools.psa.hpo_strategies import HPOStrategy, BayesianOptimizationStrategy, HammingStrategy
 from cpmpy.tools.psa.log import log
 from cpmpy.tools.psa.time_strategies import TimeoutEvolutionStrategy, TuningGlobalTimeoutStrategy, RoundTimeStrategy, \
     TimeStrategyFactory
 from timeit import default_timer as timer
+from cpmpy.tools.psa import csv_logger
 
 
 class PSATuner(ParameterTuner):
@@ -37,101 +38,6 @@ class PSATuner(ParameterTuner):
         return self.hpo_strategy.finalize()
 
 
-class HammingTunner(ParameterTuner):
-    def __init__(self, solver_name, cpm_model, all_params, defaults, xpath=None):
-        super().__init__(solver_name, cpm_model, all_params, defaults)
-        self._xpath = xpath
-        self._defaults = defaults
-        # Internal state
-        self.best_params = self._defaults.copy()
-        self.best_runtime = float('inf')
-        self.best_obj = None
-
-        self.final_status = ExitStatus.UNKNOWN
-        self.final_runtime = 0.0
-        self.final_objective = None
-
-        self._best_config_np = self._params_to_np([self._defaults])[0]
-        combos = list(param_combinations(self.all_params))
-        self._combos_np = self._params_to_np(combos)
-        np.random.shuffle(self._combos_np)
-
-    def tune(self, time_limit=None, max_tries=None, fix_params=None):
-        if fix_params is None:
-            fix_params = {}
-        start_time = timer()
-        log("Hamming Tuner: Running with default config to get base runtime...", "info")
-
-        init_kwargs = {}
-        if "xcsp" in self.solvername:
-            init_kwargs["xpath"] = self._xpath
-
-        # Initial run with defaults
-        s = SolverLookup.get(self.solvername, self.model, **init_kwargs)
-        self._run_solver(s, self._defaults, time_limit=int(time_limit))
-
-        if s.status().exitstatus in (ExitStatus.OPTIMAL, ExitStatus.FEASIBLE):
-            self.best_runtime = s.status().runtime
-            self.best_obj = s.objective_value()
-            log(f"  Base runtime: {self.best_runtime}s, Base Obj: {self.best_obj}", "info")
-        else:
-            log(f"  Default run failed. Using full time_limit ({time_limit}s) as initial best_runtime.", "warning")
-            self.best_runtime = time_limit
-
-        # Main tuning loop
-        i = 0
-        while len(self._combos_np) and i < max_tries:
-            time_left = time_limit - (timer() - start_time)
-            if time_left <= 1:  # Not enough time for another run
-                break
-
-            # Adaptive capping: timeout for this run is the best runtime so far
-            current_timeout = min(self.best_runtime, time_left)
-
-            # Select and run next configuration
-            params_to_test, params_np = self._select_next_config()
-            full_params_dict = self._defaults.copy()
-            full_params_dict.update(params_to_test)
-
-            solver = SolverLookup.get(self.solvername, self.model, **init_kwargs)
-            self._run_solver(solver, full_params_dict, time_limit=int(current_timeout))
-
-            # Update best if improved
-            if solver.status().exitstatus in (
-                    ExitStatus.OPTIMAL, ExitStatus.FEASIBLE) and solver.status().runtime < self.best_runtime:
-                self.best_runtime = solver.status().runtime
-                self.best_params.update(params_to_test)
-                self._best_config_np = params_np
-                self.best_obj = solver.objective_value()
-                log(f"  Hamming: New best runtime found ({self.best_runtime}s), updating surrogate and adaptive cap.",
-                    "info")
-
-            i += 1
-
-        # Set final results for logging
-        self.final_runtime = self.best_runtime
-        self.final_objective = self.best_obj
-        self.final_status = ExitStatus.OPTIMAL if self.best_obj is not None else ExitStatus.UNKNOWN
-
-        log(f"Hamming Tuning Finished. Best runtime: {self.final_runtime}, Best Obj: {self.final_objective}", "info")
-        return self.best_params
-
-    def _select_next_config(self):
-        scores = np.count_nonzero(self._combos_np != self._best_config_np, axis=1)
-        best_score_idx = np.argmin(scores)
-        params_np = self._combos_np[best_score_idx]
-        self._combos_np = np.delete(self._combos_np, best_score_idx, axis=0)
-        params_dict = {key: val for key, val in zip(self._param_order, params_np)}
-        return params_dict, params_np
-
-    def _run_solver(self, solver, solve_kwargs, time_limit=5):
-        return solver.solve(time_limit=time_limit, **solve_kwargs)
-
-    def _params_to_np(self, combos):
-        arr = [[params[key] for key in self._param_order] for params in combos]
-        return np.array(arr)
-
-
 class TunerBuilder:
     def __init__(self, solver_name, cpm_model, xml_path=None):
         self._solver = solver_name
@@ -143,9 +49,13 @@ class TunerBuilder:
         self._defaults = dict()
         self._hpo_strategy = None
         self._xml_path = xml_path
-        self._hamming = False
         self._stop_condition = StopCondition.TIMEOUT
         self._stagnation_limit = 10
+        self._seed = 0
+
+    def with_seed(self, seed: int):
+        self._seed = seed
+        return self
 
     def build_timeout_evolution_strategy(self, timeout_evolution_type: TimeoutEvolution):
         self._timeout_evolution_strategy = TimeStrategyFactory.create_timeout_evolution_strategy(
@@ -167,13 +77,26 @@ class TunerBuilder:
         return self
 
     def build_hpo_strategy(self, hpo: HPOType):
+        # Common strategy arguments
+        strategy_kwargs = {
+            'solver_name': self._solver,
+            'cpm_model': self._cpm_model,
+            'max_tries': 1000,
+            'round_type_strategy': self._init_strategy,
+            'global_time_splitting_strategy': self._tuning_strategy,
+            'timeout_evolution_strategy': self._timeout_evolution_strategy,
+            'all_configs': self._all_params,
+            'defaults': self._defaults,
+            'xpath': self._xml_path,
+            'stop_condition': self._stop_condition,
+            'stagnation_limit': self._stagnation_limit,
+            'seed': self._seed
+        }
+
         if hpo == HPOType.BAYESIAN_SEARCH:
-            self._hpo_strategy = BayesianOptimizationStrategy(self._solver, self._cpm_model, 22, self._init_strategy,
-                                                              self._tuning_strategy,
-                                                              self._timeout_evolution_strategy,
-                                                              self._all_params, self._defaults, xpath=self._xml_path,
-                                                              stop_condition=self._stop_condition,
-                                                              stagnation_limit=self._stagnation_limit)
+            self._hpo_strategy = BayesianOptimizationStrategy(**strategy_kwargs)
+        elif hpo == HPOType.HAMMING_SEARCH:
+            self._hpo_strategy = HammingStrategy(**strategy_kwargs)
         else:
             log(f"Unsupported HPO type: {hpo}", "error")
             raise ValueError(f"Unsupported HPO type: {hpo}")
@@ -198,22 +121,20 @@ class TunerBuilder:
 class PSAFactory:
     @staticmethod
     def create_psa_from_cli(args: Namespace, cpm_model) -> ParameterTuner:
-        if args.hpo == HPOType.HAMMING_SEARCH:
-            with open(args.tuning_file) as f:
-                parameters = json.load(f)
-                all_params = parameters.get("tunable_params")
-                defaults = parameters.get("default_params")
-                return HammingTunner(args.solver, cpm_model, all_params, defaults, args.input)
-
         builder = TunerBuilder(args.solver, cpm_model, args.input)
+
         if args.time_evolution != TimeoutEvolution.STATIC and args.round_time_strategy == RoundTimeType.FIRST_RUNTIME:
             log(f"First Runtime strategy is not compatible with dynamic timeout evolution", "error")
             raise ValueError("First Runtime strategy is not compatible with dynamic timeout evolution")
 
-        builder.build_round_time_splitting_strategy(args.round_time_strategy).build_timeout_evolution_strategy(
-            args.time_evolution).build_global_time_splitting_strategy(args.global_time_strategy,
-                                                                      args.global_time_limit,
-                                                                      args.percent).build_tuning_parameters_from_file(
-            args.tuning_file).with_stop_condition(args.stop_strategy,
-                                                  args.stagnation_limit).build_hpo_strategy(args.hpo)
+        builder.build_round_time_splitting_strategy(args.round_time_strategy) \
+            .build_timeout_evolution_strategy(args.time_evolution) \
+            .build_global_time_splitting_strategy(args.global_time_strategy,
+                                                  args.global_time_limit,
+                                                  args.percent) \
+            .build_tuning_parameters_from_file(args.tuning_file) \
+            .with_stop_condition(args.stop_strategy, args.stagnation_limit) \
+            .with_seed(getattr(args, "seed", 0)) \
+            .build_hpo_strategy(args.hpo)
+
         return builder.build()

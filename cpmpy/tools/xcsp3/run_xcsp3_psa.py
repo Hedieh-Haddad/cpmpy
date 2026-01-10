@@ -46,6 +46,8 @@ if __name__ == "__main__":
 
     parser.add_argument("--tuning-file", required=False, help="A json file with the hyperparameters.")
 
+    parser.add_argument("--seed", type=int, default=0, help="Random seed for PSA/BO and solver")
+
     args = parser.parse_args()
     start_time = timer()
 

@@ -1,0 +1,30 @@
+name: "Choco"
+id: "org.chocosolver"
+description: "Choco-solver is an open-source Java library for Constraint Programming."
+website: "https://choco-solver.org/"
+git: "https://github.com/chocoteam/choco-solver"
+
+language: "java"
+tags: ["cp", "cop", "integer"]
+system: all
+
+build:
+  mode: manual
+  default_steps:
+    - cmd: "mvn clean package -DskipTests"
+      cwd: "{{SOLVER_DIR}}"
+
+command:
+  prefix: "{{java}} -XX:+UseSerialGC -server -Xss128M -cp"
+  template: "{{executable}} org.chocosolver.parser.xcsp.ChocoXCSP {{instance}} {{options}}"
+  always_include_options: ""
+  options:
+    time: "-limit=[{{value}}s]"
+    seed: "-seed {{value}}"
+    all_solutions: "-a"
+
+versions:
+  - version: "4.10.18"
+    git_tag: "v4.10.18"
+    executable: "parsers/target/choco-parsers-4.10.18-jar-with-dependencies.jar"
+    alias: ["stable", "latest"]

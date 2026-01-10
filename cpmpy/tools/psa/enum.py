@@ -1,6 +1,5 @@
 import enum
 
-
 class HPOType(enum.Enum):
     """Hyperparameter optimization types."""
     GRID_SEARCH = "Grid"

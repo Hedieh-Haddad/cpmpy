@@ -1,0 +1,33 @@
+{
+  "tunable_params": {
+    "lc": [0, 1],
+    "restarts": [
+      "[LUBY,32,0,true]",
+      "[LUBY,32,0,false]",
+      "[LUBY,32,50000,true]",
+      "[LUBY,32,50000,false]",
+      "[LUBY,128,0,true]",
+      "[LUBY,128,50000,true]",
+      "[GEOMETRIC,10,1.5,0,true]",
+      "[GEOMETRIC,10,1.5,0,false]",
+      "[GEOMETRIC,10,1.5,50000,true]",
+      "[GEOMETRIC,100,1.2,0,true]",
+      "[GEOMETRIC,100,1.2,50000,true]",
+      "[NONE,0,0,false]"
+    ],
+    "valh": [
+      "MIN", "MAX", "MED", "MIDFLOOR", "MIDCEIL", "RAND"
+    ],
+    "varh": [
+      "ACTIVITY", "CHS", "DOM", "FIRST_FAIL", "DOMWDEG", "DOMWDEG_CACD", "FLBA", "FRBA", "INPUT", "PICKONDOM0", "PICKONDOM1", "PICKONDOM2", "PICKONDOM3", "PICKONFIL0", "PICKONFIL1", "PICKONFIL2", "PICKONFIL3", "RAND", "ROUND_ROBIN"
+    ],
+    "flush": [8, 16, 32, 64, 128]
+  },
+  "default_params": {
+    "lc": 1,
+    "restarts": "[LUBY,32,50000,true]",
+    "valh": "MIN",
+    "varh": "DOMWDEG_CACD",
+    "flush": 32
+  }
+}
